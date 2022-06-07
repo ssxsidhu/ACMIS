@@ -4,7 +4,9 @@ public class Airplane {
 
     private String planeName, mealType;
     private int seats,range;
+    private float speed;
     private boolean accessibility;
+
 
     //default constructor
     public Airplane(){
@@ -12,6 +14,7 @@ public class Airplane {
         mealType="";
         seats = 0;
         range = 0;
+        speed = 0;
         accessibility = false;
     }
 
@@ -24,5 +27,40 @@ public class Airplane {
         mealType = typeOfMeal;
     }
 
+    public String getPlaneName() {
+        return planeName;
+    }
+
+    public String getMealType() {
+        return mealType;
+    }
+
+    public int getSeats() {
+        return seats;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+    public boolean isAccessibility() {
+        return accessibility;
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    @Override
+    public String toString() {
+        return "Airplane{" +
+                "planeName='" + planeName + '\'' +
+                ", mealType='" + mealType + '\'' +
+                ", seats=" + seats +
+                ", range=" + range +
+                ", speed=" + speed +
+                ", accessibility=" + accessibility +
+                '}';
+    }
 }
 
