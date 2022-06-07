@@ -4,11 +4,11 @@ Comp 3350 - Prof John Braico - Summer 2022 :)
 
 Group members
 -------------
-Bileski Malcolm, Braden
-Asif, Mahamud Hasan
-Iyer, Prahalad
-Patel, Vrushil Kiritkumar
-Sidhu, Sahilpreet Singh
+Bileski Malcolm, Braden  
+Asif, Mahamud Hasan  
+Iyer, Prahalad  
+Patel, Vrushil Kiritkumar  
+Sidhu, Sahilpreet Singh  
 
 Project name: Airline and Client Management Information System (ACMIS)
 ----------------------------------------------------------------------
