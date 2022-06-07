@@ -1,10 +1,14 @@
 package comp3350.acmis.objects;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.time.*;
 
 public class Flight{
 
     // STATIC VARIABLE
-    private static int flight_ID = 0;;
+    private static int flight_ID = 0;
 
     // Instance Variables
     private int flightSerial;
@@ -37,6 +41,7 @@ public class Flight{
     {cost = newPrice;}
 
     // Assign an Aircraft for this flight. Perform Checks before accepting.
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void assignPlane(Airplane newPlane){
 
         // Perform check on newPlane for range. Do something only if plane can travel that far.
@@ -50,6 +55,7 @@ public class Flight{
     }
 
     // Change the depart time just because. We will also change arrivalTime
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void setDepartTime(LocalDateTime newTime)
     {
         departureTime = newTime;
@@ -57,6 +63,7 @@ public class Flight{
     }
 
     // RETURN FLIGHT. CREATE NEW OBJECT AND RETURN.
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Flight createReturn(int returnAfter){                    // PARAMS. RETURN AFTER THESE MANY HOURS if returnAfter = 3, then plane departs 3 hours after its arrival time.
 
         Flight returnFlight = new Flight(endDestination, startDestination, distance, cost);
@@ -69,13 +76,14 @@ public class Flight{
     }
     
     // LINK FLIGHT. IMPORTANT FOR MULTI ROUTES AND RETURN BOOKINGS OR EDITS. I FEEL THIS WILL BE NEEDED ANYWAY
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void linkFlight(Flight linkThis, LocalDateTime linkThisDepartTime){
 
         if(this.endDestination.equals(linkThis.startDestination)){                         // Do Something only if arrival dest of flight 1 is same as depart dest of flight 2          
 
             if(linkThisDepartTime.isAfter(estimatedTime))                                   // Do Something only if Depart Time for flight 2 is AFTER arrival time of flight 1
             {
-                        // NEED TO THINK.
+                        System.out.println();/* NEED TO THINK. API wont allow to Commit unless I write something here*/
             }
             else
             System.out.println("ERROR. Second Flight CANNOT leave BEFORE ARRIVAL of Current Flight !\n");
