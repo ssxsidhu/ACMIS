@@ -1,4 +1,4 @@
-package comp3350.objects
+package comp3350.acmis.objects;
 import java.time.*;
 
 public class Flight{
