@@ -1,3 +1,4 @@
+package comp3350.objects
 import java.time.*;
 
 public class Flight{
