@@ -1,0 +1,15 @@
+Data / Time / Meeting Ajenda / People who attented the meeting
+
+1st June 2022: 6.30 PM-7.30pm -> Meeting to discuss user story implementation, General Structure of ACMIS and Developer Tasks
+
+
+2nd June 2022: 12.00 PM-1.30 PM -> Developer tasks assigned to all the teammates, members present include: Braden,Sahilpreet,Prahlad and Vrushil.
+                                -> Discussion was on creation of objects, implementing a stub database and getting ideas for the presentation.
+                                     1. Sahil - Airplanes class + gui
+                                     2. Vrushil - Airlines class + gui
+                                     3. Prahlad - Flights and Client classes
+                                     4. Asif - Gui/ presentation
+                                     5. Braden - stub database + gui
+                                     * Individuals making the specified classes can go ahead and think about the logic and the unit tests.
+
+2nd June 2022: 2.33 pm -> Initialized the readMe file. Added information about the Group project, project name, the members of the group, and how the application is supposed to work.
