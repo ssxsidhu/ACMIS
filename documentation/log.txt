@@ -13,3 +13,12 @@ Data / Time / Meeting Ajenda / People who attented the meeting
                                      * Individuals making the specified classes can go ahead and think about the logic and the unit tests.
 
 2nd June 2022: 2.33 pm -> Initialized the readMe file. Added information about the Group project, project name, the members of the group, and how the application is supposed to work.
+
+7th June 2022: 2.40pm -> Setup Skeletal Project on Github and setup README, Asgn DEV tasks as above
+
+9th June 2022: 1.05pm -> Reevaluated Project Goals and Reassigned DEV tasks. Project will now focus on booking flights for Users rather than managing airlines as well.
+                         DEV TASKS : 1) Braden & Sahilpreet --> User Class and Stub Database.
+                                     2) Vrushil & Prahalad --> Flight Class and Logic/Processing.
+                                     3) Asif --> GUI (considering User end as primary now)
+
+                                     MEETING ATTENDANCE: ALL PRESENT. OBJECTIVE - FINISH IMPLEMENTATION Before June 12th 11.59pm
