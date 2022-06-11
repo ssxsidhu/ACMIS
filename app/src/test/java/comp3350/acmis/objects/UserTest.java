@@ -16,7 +16,7 @@ public class UserTest {
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("Last name cannot be null");
 
-        User testUser1 = new User("foo", null, "Male", "fb", "fbp", "fb@gmail.com", "1111111111");
+        User testUser1 = new User("foo", null,User.Gender.MALE , "fb", "fbp", "fb@gmail.com", "1111111111");
         assertEquals("foo",testUser1.getFirstName());
     }
 }

@@ -27,13 +27,16 @@ public class Flight{
         flightSerial = flight_ID;
         startDestination = newStart;
         endDestination = newEnd;
-        distance = newDistance;         // Value must be supplied from Data base. 
+        distance = newDistance;         // Value must be supplied from Data base.
         cost = newCost;                 // Value supplied from Airline
 
         flight_ID+=2;                   // FLights going to are EVEN. Flights Coming from are ODD. If NO odd exists there is no return flight.
     }
 
-    
+    public int getFlightSerial() {
+        return flightSerial;
+    }
+
     // Setters()
     private void setFlightID()          // Decrement so that new flight ID becomes ODD. This METHOD IS CALLED ONLY AND ONLY WHEN RETURNFLIGHT() IS CALLED
     {flightSerial--;}
@@ -47,11 +50,11 @@ public class Flight{
         // Perform check on newPlane for range. Do something only if plane can travel that far.
         if(newPlane.getRange()>distance){
 
-            assigned = newPlane;        
+            assigned = newPlane;
             estimatedTime = departureTime.plusHours((int)(distance/assigned.getSpeed()));           // Calculate Estimated Time based on plane attributes.
         }
         else
-            System.out.println("ERROR. PLANE RANGE LESSER THAN FLIGHT DISTANCE.\n");        
+            System.out.println("ERROR. PLANE RANGE LESSER THAN FLIGHT DISTANCE.\n");
     }
 
     // Change the depart time just because. We will also change arrivalTime
@@ -74,12 +77,12 @@ public class Flight{
 
         return returnFlight;
     }
-    
+
     // LINK FLIGHT. IMPORTANT FOR MULTI ROUTES AND RETURN BOOKINGS OR EDITS. I FEEL THIS WILL BE NEEDED ANYWAY
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void linkFlight(Flight linkThis, LocalDateTime linkThisDepartTime){
 
-        if(this.endDestination.equals(linkThis.startDestination)){                         // Do Something only if arrival dest of flight 1 is same as depart dest of flight 2          
+        if(this.endDestination.equals(linkThis.startDestination)){                         // Do Something only if arrival dest of flight 1 is same as depart dest of flight 2
 
             if(linkThisDepartTime.isAfter(estimatedTime))                                   // Do Something only if Depart Time for flight 2 is AFTER arrival time of flight 1
             {
@@ -91,7 +94,7 @@ public class Flight{
         else
         {System.out.println("ERROR. CANNOT LINK FLIGHT. Destination of Current is NOT same AS DEPARTURE for Flight Entered in Params\n");}
     }
-    
+
     public String getFlightDetails()            // Can also rename to toString()
     {
         return ("Flight ID: "+flightSerial+" \n"+startDestination+" ----> "+endDestination+"\n"+"Departure :"+departureTime+" ----> "+estimatedTime+" \n"+"Distance: "+distance+" km.");
@@ -107,3 +110,4 @@ class Airplane{
         return 0;
     }
 }
+

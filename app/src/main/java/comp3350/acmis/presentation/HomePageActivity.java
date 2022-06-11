@@ -18,6 +18,7 @@ public class HomePageActivity extends Activity {
             @Override
             public void run() {
                 startActivity(new Intent(HomePageActivity.this,bottom_tab_activity.class));
+                
             }
         }, 3000);
     }
