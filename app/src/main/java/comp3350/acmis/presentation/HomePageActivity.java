@@ -17,7 +17,7 @@ public class HomePageActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(HomePageActivity.this,bottom_tab_activity.class));
+                startActivity(new Intent(HomePageActivity.this, BottomTabActivity.class));
                 
             }
         }, 3000);

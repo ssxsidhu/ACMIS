@@ -13,10 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ACMIS"
         tools:targetApi="31">
+
         <activity
-            android:name=".presentation.bottom_tab_activity"
+            android:name=".presentation.BottomTabActivity"
             android:exported="false"
-            android:label="@string/title_activity_bottom_tab"
+            android:label="@string/title_BottomTabbedActivity"
             android:theme="@style/Theme.ACMIS" />
         <!-- below is the code for default activity which is Main Activity -->
         <activity

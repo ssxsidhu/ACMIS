@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">ACMIS</string>
-    <string name="title_activity_bottom_tab">bottom_tab_activity</string>
-    <string name="tab_text_1">Book flight</string>
-    <string name="tab_text_2">Manage flights</string>
+    <string name="title_BottomTabbedActivity">BottomTabbedActivity</string>
+    <string name="tab_1">Book flight</string>
+    <string name="tab_2">Manage flight</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
