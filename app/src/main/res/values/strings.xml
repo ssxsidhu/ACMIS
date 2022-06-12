@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ACMIS</string>
+    <string name="title_BottomTabbedActivity">BottomTabbedActivity</string>
+    <string name="tab_1">Book flight</string>
+    <string name="tab_2">Manage flight</string>
+    <string name="choose_departure">Choose Departure</string>
+    <string name="choose_destination">Choose Destination</string>
+    <string name="fatalError">Fatal Error</string>
+    <string name="warning">Warning!</string>
 </resources>
