@@ -1,14 +1,23 @@
 package comp3350.acmis.presentation;
 
+import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.MenuPopupWindow;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import comp3350.acmis.R;
+import comp3350.acmis.business.AccessLocations;
+import comp3350.acmis.objects.Location;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +34,9 @@ public class BookFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private AccessLocations accessLocations;
+    private ArrayList<Location> locationList;
+//    private ArrayAdapter<Location> locationArrayAdapter;
 
     public BookFragment() {
         // Required empty public constructor
@@ -55,12 +67,39 @@ public class BookFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book, container, false);
+
+        View rootView = inflater.inflate(R.layout.fragment_book, container, false);
+
+
+        accessLocations = new AccessLocations();
+        locationList = new ArrayList<Location>();
+
+        String result = accessLocations.getLocations(locationList);
+
+        //since we are using a Object arrayList
+        ArrayAdapter<Location> adapter = new ArrayAdapter<Location>(getActivity(), R.layout.list_item, R.id.list_textView, locationList)
+        {
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                return super.getDropDownView(position, convertView, parent);
+            }
+        };
+        //for dropDown menus
+        AutoCompleteTextView ddDeparture = (AutoCompleteTextView) rootView.findViewById(R.id.auto_departure);
+        ddDeparture.setThreshold(1);
+        ddDeparture.setAdapter(adapter);
+
+        AutoCompleteTextView ddDestination = (AutoCompleteTextView) rootView.findViewById(R.id.auto_destination);
+        ddDestination.setThreshold(1);
+        ddDestination.setAdapter(adapter);
+
+
+        return rootView;
     }
 }
