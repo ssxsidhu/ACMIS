@@ -22,4 +22,9 @@ public class Location {
     public String getAirport() {
         return airport;
     }
+
+    @Override
+    public String toString() {
+        return city +", "+country;
+    }
 }

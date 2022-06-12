@@ -41,7 +41,7 @@ public class DataAccessStub {
         allLocations = new ArrayList<Location>();
         Location winnipeg = new Location("Winnipeg","Canada","YWG");
         allLocations.add(winnipeg);
-        Location newYork = new Location("NewYork","USA","JFK");
+        Location newYork = new Location("New York","USA","JFK");
         allLocations.add(newYork);
         Location toronto = new Location("Toronto","Canada","YYZ");
         allLocations.add(toronto);
