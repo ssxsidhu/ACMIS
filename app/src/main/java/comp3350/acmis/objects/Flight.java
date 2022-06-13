@@ -17,14 +17,13 @@ public class Flight{
     private int flightID;
     private Location depart;
     private Location arrive;
-    private LocalDateTime departure;
+    private LocalDateTime departure ;
     private LocalDateTime arrival;
 
     private ArrayList<User> flightList;                 // Store all users on this flight in a list.
 
     // Constructor()
-    public Flight(Location newDepart, Location newArrive, LocalDateTime newDeparture, LocalDateTime newArrival)
-    {
+    public Flight(Location newDepart, Location newArrive, LocalDateTime newDeparture, LocalDateTime newArrival) {
         flightID = flightSequence;
         depart = newDepart;
         departure = newDeparture;
@@ -36,10 +35,15 @@ public class Flight{
     }
 
     // Getters()
-    public int getFlightID()
-    {return flightID;}
-    public ArrayList<User> getPassengerList()
-    {return flightList;}
+    public int getFlightID() {
+        return flightID;
+    }
+
+    public ArrayList<User> getPassengerList() {
+        return flightList;
+    }
+
+
     public String toString(){
 
         String temp = "Flight Details: Departure -------> Destination";
