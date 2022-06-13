@@ -20,7 +20,4 @@ public class AccessLocations {
         locations.clear();
         return dataAccess.getLocations(locations);
     }
-
-
-
 }

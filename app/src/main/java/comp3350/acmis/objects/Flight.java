@@ -1,113 +1,63 @@
+// THIS WHOLE CLASS ASSUMES THAT FLIGHTS RUN DAILY. WE NEED TO CONSIDER IF SOME FLIGHTS RUN ONLY ON CERTAIN DAYS OR TIME RANGES
+
 package comp3350.acmis.objects;
 import android.os.Build;
-
+import java.util.*;
 import androidx.annotation.RequiresApi;
 
 import java.time.*;
+import java.util.ArrayList;
 
 public class Flight{
 
     // STATIC VARIABLE
-    private static int flight_ID = 0;
+    private static int flightSequence;
 
     // Instance Variables
-    private int flightSerial;
-    private String startDestination;
-    private String endDestination;
-    private double distance;                    // This needs to be pulled from data base.
-    private double cost;                        // Airline will assign this value in constructor. Airline decides ticket prices.
+    private int flightID;
+    private Location depart;
+    private Location arrive;
+    private LocalDateTime departure;
+    private LocalDateTime arrival;
 
-    private Airplane assigned;                  // Assigned Airplane to this flight. Important for performing checks and what not.
-    private LocalDateTime departureTime;        // Store the departure time of the flight in a DateTime Format.
-    private LocalDateTime estimatedTime;        // Same as above except for arrivals
+    private ArrayList<User> flightList;                 // Store all users on this flight in a list.
 
-    // Constructor
-    public Flight(String newStart, String newEnd, double newDistance, double newCost){
+    // Constructor()
+    public Flight(Location newDepart, Location newArrive, LocalDateTime newDeparture, LocalDateTime newArrival)
+    {
+        flightID = flightSequence;
+        depart = newDepart;
+        departure = newDeparture;
+        arrival = newArrival;
+        arrive = newArrive;
 
-        flightSerial = flight_ID;
-        startDestination = newStart;
-        endDestination = newEnd;
-        distance = newDistance;         // Value must be supplied from Data base.
-        cost = newCost;                 // Value supplied from Airline
-
-        flight_ID+=2;                   // FLights going to are EVEN. Flights Coming from are ODD. If NO odd exists there is no return flight.
+        flightList = new ArrayList<>();
+        flightSequence++;
     }
 
-    public int getFlightSerial() {
-        return flightSerial;
+    // Getters()
+    public int getFlightID()
+    {return flightID;}
+    public ArrayList<User> getPassengerList()
+    {return flightList;}
+    public String toString(){
+
+        String temp = "Flight Details: Departure -------> Destination";
+        temp+="\n"+depart+" \t "+arrive;
+        temp+="\n"+flightID;
+
+        return temp;
     }
+
 
     // Setters()
-    private void setFlightID()          // Decrement so that new flight ID becomes ODD. This METHOD IS CALLED ONLY AND ONLY WHEN RETURNFLIGHT() IS CALLED
-    {flightSerial--;}
-    public void setPrice(double newPrice)   // Duh.
-    {cost = newPrice;}
-
-    // Assign an Aircraft for this flight. Perform Checks before accepting.
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void assignPlane(Airplane newPlane){
-
-        // Perform check on newPlane for range. Do something only if plane can travel that far.
-        if(newPlane.getRange()>distance){
-
-            assigned = newPlane;
-            estimatedTime = departureTime.plusHours((int)(distance/assigned.getSpeed()));           // Calculate Estimated Time based on plane attributes.
-        }
-        else
-            System.out.println("ERROR. PLANE RANGE LESSER THAN FLIGHT DISTANCE.\n");
-    }
-
-    // Change the depart time just because. We will also change arrivalTime
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void setDepartTime(LocalDateTime newTime)
-    {
-        departureTime = newTime;
-        estimatedTime = departureTime.plusHours((int)(distance/assigned.getSpeed()));       // Change arrival time accordingly based on distance and plane speed.
-    }
-
-    // RETURN FLIGHT. CREATE NEW OBJECT AND RETURN.
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public Flight createReturn(int returnAfter){                    // PARAMS. RETURN AFTER THESE MANY HOURS if returnAfter = 3, then plane departs 3 hours after its arrival time.
-
-        Flight returnFlight = new Flight(endDestination, startDestination, distance, cost);
-        returnFlight.assignPlane(assigned);
-
-        returnFlight.setDepartTime(estimatedTime.plusHours(returnAfter));
-        returnFlight.setFlightID();
-
-        return returnFlight;
-    }
-
-    // LINK FLIGHT. IMPORTANT FOR MULTI ROUTES AND RETURN BOOKINGS OR EDITS. I FEEL THIS WILL BE NEEDED ANYWAY
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void linkFlight(Flight linkThis, LocalDateTime linkThisDepartTime){
-
-        if(this.endDestination.equals(linkThis.startDestination)){                         // Do Something only if arrival dest of flight 1 is same as depart dest of flight 2
-
-            if(linkThisDepartTime.isAfter(estimatedTime))                                   // Do Something only if Depart Time for flight 2 is AFTER arrival time of flight 1
-            {
-                        System.out.println();/* NEED TO THINK. API wont allow to Commit unless I write something here*/
-            }
-            else
-            System.out.println("ERROR. Second Flight CANNOT leave BEFORE ARRIVAL of Current Flight !\n");
-        }
-        else
-        {System.out.println("ERROR. CANNOT LINK FLIGHT. Destination of Current is NOT same AS DEPARTURE for Flight Entered in Params\n");}
-    }
-
-    public String getFlightDetails()            // Can also rename to toString()
-    {
-        return ("Flight ID: "+flightSerial+" \n"+startDestination+" ----> "+endDestination+"\n"+"Departure :"+departureTime+" ----> "+estimatedTime+" \n"+"Distance: "+distance+" km.");
-    }
+    public void addUser(User addThis)
+    {flightList.add(addThis);}
+    public boolean removeUser(User removeThisUser)
+    {return(flightList.remove(removeThisUser));}
+    public void newDepart(Location newDepart)
+    {depart = newDepart;}
+    public void newArrival(Location newArrive)
+    {arrive = newArrive;}
 
 }
-
-class Airplane{
-    public int getRange(){
-        return 0;
-    }
-    public int getSpeed(){
-        return 0;
-    }
-}
-
