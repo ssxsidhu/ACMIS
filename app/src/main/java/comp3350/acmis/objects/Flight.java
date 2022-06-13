@@ -2,7 +2,7 @@
 
 package comp3350.acmis.objects;
 import android.os.Build;
-
+import java.util.*;
 import androidx.annotation.RequiresApi;
 
 import java.time.*;
@@ -17,20 +17,27 @@ public class Flight{
     private int flightID;
     private Location depart;
     private Location arrive;
+    private LocalDateTime departure;
+    private LocalDateTime arrival;
 
     private ArrayList<User> flightList;                 // Store all users on this flight in a list.
 
     // Constructor()
-    public Flight(Location newDepart, Location newArrive)
+    public Flight(Location newDepart, Location newArrive, LocalDateTime newDeparture, LocalDateTime newArrival)
     {
         flightID = flightSequence;
         depart = newDepart;
+        departure = newDeparture;
+        arrival = newArrival;
         arrive = newArrive;
 
+        flightList = new ArrayList<>();
         flightSequence++;
     }
 
     // Getters()
+    public int getFlightID()
+    {return flightID;}
     public ArrayList<User> getPassengerList()
     {return flightList;}
     public String toString(){
