@@ -1,9 +1,7 @@
 package comp3350.acmis.presentation;
 
-import android.app.Activity;
 import android.os.Bundle;
 
-import androidx.appcompat.widget.MenuPopupWindow;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -83,7 +80,7 @@ public class BookFragment extends Fragment {
         String result = accessLocations.getLocations(locationList);
 
         //since we are using a Object arrayList
-        ArrayAdapter<Location> adapter = new ArrayAdapter<Location>(getActivity(), R.layout.list_item, R.id.list_textView, locationList)
+        ArrayAdapter<Location> adapter = new ArrayAdapter<Location>(getActivity(), R.layout.menu_item, R.id.menu_text_view, locationList)
         {
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {

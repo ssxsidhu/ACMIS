@@ -4,18 +4,19 @@ import java.util.ArrayList;
 
 
 public class Booking {
-    private static int BookingSeq;
+    private static int bookingSeq;
 
     private User booker;
     private ArrayList<Flight> route;
-    private int BookingId;
+    private int bookingId;
 
     public Booking(User booker, ArrayList<Flight> route) {
         this.booker = booker;
         this.route = route;
-        BookingId = BookingSeq;
-        BookingId++;
+        bookingId = bookingSeq;
+        bookingSeq++;
     }
+
 
 
     //getter and setters
@@ -33,7 +34,7 @@ public class Booking {
 
 
     public int getBookingId() {
-        return BookingId;
+        return bookingId;
     }
 
 

@@ -59,7 +59,7 @@ public class BookingManager {
         booker.addBooking(newBooking);
 
         //adding the booking to the master booking.
-        //data.addBooking(newBooking);
+        data.addBooking(newBooking);
 
     }
 

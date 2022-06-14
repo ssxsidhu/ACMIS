@@ -24,10 +24,10 @@ public class Location {
     }
 
 //    if not needed, can be removed
-//    @Override
-//    public String toString() {
-//        return city +", "+country;
-//    }
+    @Override
+    public String toString() {
+        return city +", "+country;
+    }
 //
 //    public String toString()        //  update this according to format and then call in Flight Class.
 //    {return null;}

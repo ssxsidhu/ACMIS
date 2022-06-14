@@ -1,5 +1,6 @@
 package comp3350.acmis.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acmis.application.Main;
@@ -17,7 +18,7 @@ public class AccessFlights {
         dataAccess= Services.getDataAccess(Main.dbName);
     }
 
-    public String getFlights(List<Flight> flights){
+    public String getFlights(ArrayList<Flight> flights){
         flights.clear();
         return dataAccess.getAllFlights(flights);
     }

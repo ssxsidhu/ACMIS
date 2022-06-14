@@ -12,7 +12,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import comp3350.acmis.R;
-import comp3350.acmis.business.AccessUserFlights;
+import comp3350.acmis.business.AccessBookings;
+import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Flight;
 
 /**
@@ -30,8 +31,8 @@ public class ManageFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private ArrayList<Flight> userFlightList;
-    private AccessUserFlights accessUserFlights;
+    private ArrayList<Booking> myBookingList;
+    private AccessBookings accessBookings;
 
     public ManageFragment() {
         // Required empty public constructor
@@ -68,30 +69,13 @@ public class ManageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_manage, container, false);
-        userFlightList = new ArrayList<Flight>();
-        accessUserFlights = new AccessUserFlights("default");
+        myBookingList = new ArrayList<Booking>();
+        accessBookings = new AccessBookings("default");
 
-        accessUserFlights.getUserFlights(userFlightList);
+        accessBookings.getMybBookings(myBookingList);
 
-//        ArrayAdapter<Flight> ArrayAdapter = new ArrayAdapter<Flight>(this.getActivity(), android.R.layout.simple_list_item_activated_2, android.R.id.text1, userFlightList) {
-//            @Override
-//            public View getView(int position, View convertView, ViewGroup parent) {
-//                View view = super.getView(position, convertView, parent);
-//
-//                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-//                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
-//
-//                text1.setText(String.format("%s    ---->    %s", userFlightList.get(position).getDepart().getCity(), userFlightList.get(position).getArrive().getCity()));
-////                text2.setText(userFlightList.get(position).getFlightID());
-//
-//                return view;
-//            }
-//        };
-        String[] textString = {"Item1","Item2"};
-        int[] drawableIds = {R.drawable.airplane_symbol,R.drawable.airplane_symbol};
-
-        CustomAdapter adapter = new CustomAdapter(this, textString , drawableIds);
-
+        System.out.println(myBookingList.get(0).getRoute().get(0).getSource().getCity());
+        CustomAdapter adapter = new CustomAdapter(this, myBookingList);
 
         final ListView listView = (ListView) rootView.findViewById(R.id.menuList);
         listView.setAdapter(adapter);

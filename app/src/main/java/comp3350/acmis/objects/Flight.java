@@ -18,17 +18,13 @@ public class Flight{
     private int flightID;
     private Location source;
     private Location destination;
-    private LocalDateTime departure ;
-    private LocalDateTime arrival;
 
     private ArrayList<User> flightList;                 // Store all users on this flight in a list.
 
     // Constructor()
-    public Flight(Location newSrc, Location newDest, LocalDateTime newDeparture, LocalDateTime newArrival) {
+    public Flight(Location newSrc, Location newDest) {
         flightID = flightSequence;
         source = newSrc;
-        departure = newDeparture;
-        arrival = newArrival;
         destination = newDest;
 
         flightList = new ArrayList<>();
@@ -50,8 +46,6 @@ public class Flight{
                 "flightID=" + flightID +
                 ", source=" + source +
                 ", destination=" + destination +
-                ", departure=" + departure +
-                ", arrival=" + arrival +
                 ", flightList=" + flightList +
                 '}';
     }

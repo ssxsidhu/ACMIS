@@ -1,5 +1,6 @@
 package comp3350.acmis.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acmis.application.Main;
@@ -16,7 +17,7 @@ public class AccessLocations {
         dataAccess=Services.getDataAccess(Main.dbName);
     }
 
-    public String getLocations(List<Location> locations){
+    public String getLocations(ArrayList<Location> locations){
         locations.clear();
         return dataAccess.getLocations(locations);
     }

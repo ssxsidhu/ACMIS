@@ -1,6 +1,7 @@
 package comp3350.acmis.objects;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class User {
@@ -51,21 +52,20 @@ public class User {
 
 
 
+    public String getMyBookings(ArrayList<Booking> myBookings){
+        myBookings.addAll(bookings);
+        return null;
+    }
+
     public String getFirstName() {
         return firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
 
     public String getUsername() {
         return username;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
     public enum Gender{
         MALE,
