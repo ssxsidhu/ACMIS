@@ -12,13 +12,24 @@ Data / Time / Meeting Ajenda / People who attented the meeting
                                      5. Braden - stub database + gui
                                      * Individuals making the specified classes can go ahead and think about the logic and the unit tests.
 
-2nd June 2022: 2.33 pm -> Initialized the readMe file. Added information about the Group project, project name, the members of the group, and how the application is supposed to work.
+2nd June 2022: 2.33 pm -> Initialized the readMe file. Added information about the Group project, project name, the members of the group, and how the application is supposed to work. - Vrushil 
 
-7th June 2022: 2.40pm -> Setup Skeletal Project on Github and setup README, Asgn DEV tasks as above
+7th June 2022: 2.40pm -> Setup Skeletal Project on Github and setup README, Assign DEV tasks as above
 
-9th June 2022: 1.05pm -> Reevaluated Project Goals and Reassigned DEV tasks. Project will now focus on booking flights for Users rather than managing airlines as well.
+9th June 2022: 1.05pm -> Re-evaluated Project Goals and Re-assigned DEV tasks. Project will now focus on booking flights for Users rather than managing airlines as well.
                          DEV TASKS : 1) Braden & Sahilpreet --> User Class and Stub Database.
                                      2) Vrushil & Prahalad --> Flight Class and Logic/Processing.
                                      3) Asif --> GUI (considering User end as primary now)
 
                                      MEETING ATTENDANCE: ALL PRESENT. OBJECTIVE - FINISH IMPLEMENTATION Before June 12th 11.59pm
+
+
+12th June 2022: 6pm - 7pm -> Teams updating other teams about the progress in specific tasks. Talked mainly about the graphical representation of the application. Talked about the different ideas of how to create an adaptive user interface. 
+Meeting attendance: All present
+
+13th June 2022: 12pm-4pm -> Vrushil and Prahalad worked on Flight class and Added Booking class. Implemented the BookingManager in the business package that deals with all kinds of user requests including searching, booking, cancelling flights. 
+Added 
+
+13th June 2022: 6pm-7pm -> Group meeting, updating the teams on the new updates, requesting for the required functionality in appropriate classes, decided to start the testing process. Meeting attendance Braden,Prahlad,Sahil,Vrushil.
+
+
