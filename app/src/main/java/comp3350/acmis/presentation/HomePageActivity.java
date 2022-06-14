@@ -21,6 +21,13 @@ public class HomePageActivity extends Activity {
             public void run() {
                 startActivity(new Intent(HomePageActivity.this, BottomTabActivity.class));
             }
-        }, 2800);
+        }, 3000);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Main.shutDown();
     }
 }

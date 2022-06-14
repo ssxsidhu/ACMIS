@@ -14,14 +14,13 @@ import java.util.ArrayList;
 import comp3350.acmis.R;
 import comp3350.acmis.business.AccessBookings;
 import comp3350.acmis.objects.Booking;
-import comp3350.acmis.objects.Flight;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ManageFragment#newInstance} factory method to
+ * Use the {@link FragmentManage#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ManageFragment extends Fragment {
+public class FragmentManage extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +33,7 @@ public class ManageFragment extends Fragment {
     private ArrayList<Booking> myBookingList;
     private AccessBookings accessBookings;
 
-    public ManageFragment() {
+    public FragmentManage() {
         // Required empty public constructor
     }
 
@@ -47,8 +46,8 @@ public class ManageFragment extends Fragment {
      * @return A new instance of fragment ManageFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ManageFragment newInstance(String param1, String param2) {
-        ManageFragment fragment = new ManageFragment();
+    public static FragmentManage newInstance(String param1, String param2) {
+        FragmentManage fragment = new FragmentManage();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

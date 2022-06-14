@@ -23,7 +23,7 @@ public class Location {
         return airport;
     }
 
-//    if not needed, can be removed
+
     @Override
     public String toString() {
         return city +", "+country;

@@ -15,11 +15,11 @@ import comp3350.acmis.objects.Booking;
 
 public class CustomAdapter extends BaseAdapter {
 
-    private ManageFragment mContext;
+    private FragmentManage mContext;
     private ArrayList<Booking> myBookings;
 
 
-    public CustomAdapter(ManageFragment context, ArrayList<Booking> userBookings) {
+    public CustomAdapter(FragmentManage context, ArrayList<Booking> userBookings) {
         mContext = context;
         myBookings = userBookings;
     }
@@ -46,13 +46,24 @@ public class CustomAdapter extends BaseAdapter {
         LayoutInflater inflater = mContext.getLayoutInflater();
         View row;
         row = inflater.inflate(R.layout.row, parent, false);
-        TextView title1,title2;
+        TextView titleTopLeft,titleTopRight,titleMiddleLeft,titleMiddleRight,titleBottomLeft,titleBottomRight;
         ImageView i1;
-        i1 = (ImageView) row.findViewById(R.id.imgIcon);
-        title1 = (TextView) row.findViewById(R.id.txtTitle1);
-        title2 = (TextView) row.findViewById(R.id.txtTitle2);
-        title1.setText(myBookings.get(position).getRoute().get(0).getSource().getCity());
-        title2.setText(myBookings.get(position).getRoute().get(0).getDestination().getCity());
+        i1 = (ImageView) row.findViewById(R.id.list_icon);
+        titleTopLeft = (TextView) row.findViewById(R.id.list_top_text_left);
+        titleTopRight = (TextView) row.findViewById(R.id.list_top_text_right);
+        titleMiddleLeft = (TextView) row.findViewById(R.id.list_middle_text_left);
+        titleMiddleRight = (TextView) row.findViewById(R.id.list_middle_text_right);
+        titleBottomLeft = (TextView) row.findViewById(R.id.list_bottom_text_left);
+        titleBottomRight = (TextView) row.findViewById(R.id.list_bottom_text_right);
+
+        //top is temporary
+        titleTopLeft.setText("12:00");
+        titleTopRight.setText("15:00");
+        titleMiddleLeft.setText(myBookings.get(position).getRoute().get(0).getSource().getCity());
+        titleMiddleRight.setText(myBookings.get(position).getRoute().get(0).getDestination().getCity());
+        //bottom Left is temporary
+        titleBottomLeft.setText("June 15");
+        titleBottomRight.setText(String.format("FlightID: #%d", myBookings.get(position).getRoute().get(0).getFlightID()));
         i1.setImageResource(R.drawable.airplane_symbol);
 
         return (row);
