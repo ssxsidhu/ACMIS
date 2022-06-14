@@ -5,30 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
-    android:minHeight="?attr/minTouchTargetSize"
-    android:orientation="horizontal">
-
+    android:minHeight="?attr/minTouchTargetSize">
 
 
     <TextView
-        android:id="@+id/txtTitle1"
+        android:id="@+id/time_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_gravity="center_vertical"
-        android:textStyle="bold"
-        android:paddingEnd="16dp"
-        android:maxLines="1"
         android:layout_weight="0.33"
+        android:gravity="start"
+        android:maxLines="1"
+        android:paddingEnd="16dp"
         android:textAppearance="?attr/textAppearanceSubtitle1"
         android:textColor="@color/mtrl_list_item_tint"
+        android:textStyle="bold"
         tools:ignore="RtlSymmetry" />
 
     <ImageView
         android:id="@+id/imgIcon"
         android:layout_width="0dp"
-        android:layout_weight="0.33"
         android:layout_height="match_parent"
+        android:layout_weight="0.33"
         android:paddingStart="16dp"
         android:paddingTop="8dp"
         android:paddingEnd="16dp"
@@ -38,14 +35,14 @@
         android:id="@+id/txtTitle2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_gravity="center_vertical"
-        android:textStyle="bold"
-        android:paddingEnd="16dp"
-        android:maxLines="1"
         android:layout_weight="0.33"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingEnd="16dp"
         android:textAppearance="?attr/textAppearanceSubtitle1"
         android:textColor="@color/mtrl_list_item_tint"
+        android:textStyle="bold"
         tools:ignore="RtlSymmetry" />
 
 </LinearLayout>
