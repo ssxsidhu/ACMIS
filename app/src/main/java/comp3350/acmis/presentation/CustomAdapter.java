@@ -57,12 +57,13 @@ public class CustomAdapter extends BaseAdapter {
         titleBottomRight = (TextView) row.findViewById(R.id.list_bottom_text_right);
 
         //top is temporary
-        titleTopLeft.setText("12:00");
-        titleTopRight.setText("15:00");
+        titleTopLeft.setText(myBookings.get(position).getRoute().get(0).getDepartureTime());
+        System.out.println(myBookings.get(position).getRoute().get(0).getDepartureTime());
+        titleTopRight.setText(myBookings.get(position).getRoute().get(0).getArrivalTime());
         titleMiddleLeft.setText(myBookings.get(position).getRoute().get(0).getSource().getCity());
         titleMiddleRight.setText(myBookings.get(position).getRoute().get(0).getDestination().getCity());
         //bottom Left is temporary
-        titleBottomLeft.setText("June 15");
+        titleBottomLeft.setText(myBookings.get(position).getRoute().get(0).getDepartureDate());
         titleBottomRight.setText(String.format("FlightID: #%d", myBookings.get(position).getRoute().get(0).getFlightID()));
         i1.setImageResource(R.drawable.airplane_symbol);
 

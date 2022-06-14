@@ -9,7 +9,7 @@ import androidx.annotation.RequiresApi;
 import java.time.*;
 import java.util.ArrayList;
 
-public class Flight{
+public class Flight {
 
     // STATIC VARIABLE
     private static int flightSequence;
@@ -18,22 +18,31 @@ public class Flight{
     private int flightID;
     private Location source;
     private Location destination;
-//    private LocalDateTime departure ;
-//    private LocalDateTime arrival;
 
-    private ArrayList<User> flightList;                 // Store all users on this flight in a list.
+    //date format yyyy-mm-dd
+    //time format hh-mm
+    private String departureDate;
+    private String departureTime;
 
-    // Constructor()//modified constructor to avoid LocalDateTime
-    public Flight(Location newSrc, Location newDest) {
-        flightID = flightSequence;
-        source = newSrc;
-//        departure = newDeparture;
-//        arrival = newArrival;
-        destination = newDest;
+    private String arrivalDate;
+    private String arrivalTime;
 
-        flightList = new ArrayList<>();
+
+    // Store all users on this flight in a list.
+    private ArrayList<User> flightList;
+
+    public Flight(Location source, Location destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime) {
+        this.flightID = flightID;
+        this.source = source;
+        this.destination = destination;
+        this.departureDate = departureDate;
+        this.departureTime = departureTime;
+        this.arrivalDate = arrivalDate;
+        this.arrivalTime = arrivalTime;
+        this.flightList = new ArrayList<>();
         flightSequence++;
     }
+
 
     // Getters()
     public int getFlightID() {
@@ -50,8 +59,6 @@ public class Flight{
                 "flightID=" + flightID +
                 ", source=" + source +
                 ", destination=" + destination +
-//                ", departure=" + departure +
-//                ", arrival=" + arrival +
                 ", flightList=" + flightList +
                 '}';
     }
@@ -60,12 +67,15 @@ public class Flight{
     public void addUser(User addThis) {
         flightList.add(addThis);
     }
+
     public boolean removeUser(User removeThisUser) {
-        return(flightList.remove(removeThisUser));
+        return (flightList.remove(removeThisUser));
     }
+
     public void newDepart(Location newDepart) {
         source = newDepart;
     }
+
     public void newArrival(Location newArrive) {
         destination = newArrive;
     }
@@ -80,5 +90,22 @@ public class Flight{
 
     public Location getDestination() {
         return destination;
+    }
+
+
+    public String getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public String getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public String getDepartureDate() {
+        return departureDate;
+    }
+
+    public String getDepartureTime() {
+        return departureTime;
     }
 }
