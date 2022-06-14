@@ -3,11 +3,15 @@
 
 package comp3350.acmis.objects;
 import android.os.Build;
+
+import java.sql.Date;
 import java.util.*;
 import androidx.annotation.RequiresApi;
 
 import java.time.*;
 import java.util.ArrayList;
+
+import comp3350.acmis.business.DateFormatter;
 
 public class Flight {
 
@@ -94,7 +98,9 @@ public class Flight {
 
 
     public String getArrivalDate() {
-        return arrivalDate;
+        DateFormatter date = new DateFormatter(departureDate);
+        System.out.println(date.format());
+        return date.format();
     }
 
     public String getArrivalTime() {
@@ -102,7 +108,9 @@ public class Flight {
     }
 
     public String getDepartureDate() {
-        return departureDate;
+        DateFormatter date = new DateFormatter(departureDate);
+        System.out.println(date.format());
+        return date.format();
     }
 
     public String getDepartureTime() {
