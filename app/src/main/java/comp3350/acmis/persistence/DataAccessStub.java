@@ -19,7 +19,6 @@ import comp3350.acmis.objects.UserFlight;
 public class DataAccessStub {
     private String dbName;
     private String dbType =  "stub";
-
     private ArrayList<User> allUsers;
     private ArrayList<Flight> allFlights;
     private ArrayList<Location> allLocations;//tp store city,country,airport and other rdata later
