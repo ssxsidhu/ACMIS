@@ -23,12 +23,9 @@ public class Location {
         return airport;
     }
 
-
     @Override
     public String toString() {
-        return city +", "+country;
+        return city +", "+country+", "+airport;
     }
-//
-//    public String toString()        //  update this according to format and then call in Flight Class.
-//    {return null;}
+
 }

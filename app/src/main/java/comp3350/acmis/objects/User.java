@@ -18,9 +18,6 @@ public class User {
     private ArrayList<Booking> bookings;
 
     //constructor
-    //I have made all the variables require non-null values
-    // TODO: I have to ask prof If I can do that and test it using a different method as shown in testClass
-
     public User(String firstName, String lastName, Gender whichGender, String username, String password, String email, String phoneNumber) {
 
         this.firstName = Objects.requireNonNull(firstName, "First name cannot be null");
@@ -49,9 +46,6 @@ public class User {
         }
     }
 
-
-
-
     public String getMyBookings(ArrayList<Booking> myBookings){
         myBookings.addAll(bookings);
         return null;
@@ -61,14 +55,13 @@ public class User {
         return firstName;
     }
 
-
     public String getUsername() {
         return username;
     }
-
 
     public enum Gender{
         MALE,
         FEMALE
     }
+
 }

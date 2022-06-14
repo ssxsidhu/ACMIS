@@ -33,7 +33,8 @@ public class BookingManager {
 
         //base case
         for(int i=0; i <allDBFlights.size();i++){
-            if(allDBFlights.get(i).getSource().equals(srcCity)&&allDBFlights.get(i).getDestination().equals(destCity)){
+            if(allDBFlights.get(i).getSource().getCity().equals(srcCity)
+                    &&allDBFlights.get(i).getDestination().getCity().equals(destCity)){
                 validFLights.add(allDBFlights.get(i));
             }
         }

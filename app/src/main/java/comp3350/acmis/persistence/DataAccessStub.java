@@ -4,7 +4,6 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,17 +19,12 @@ import comp3350.acmis.objects.User;
 
 public class DataAccessStub {
     private String dbName;
-    private String dbType =  "stub";
+    private String dbType = "stub";
     private ArrayList<User> allUsers;
     private ArrayList<Flight> allFlights;
     private ArrayList<Location> allLocations;//tp store city,country,airport and other rdata later
     private ArrayList<Booking> allBookings;
     private BookingManager bookingManager;
-
-    //add all the functionality just as for the UserFlights but for booking instead.
-    //can remove UserFlight class
-    //need for bookings, master record for all the bookings created since the start of the application
-    private ArrayList<Booking> bookingList;
 
     public DataAccessStub(String dbName)
     {
@@ -44,7 +38,7 @@ public class DataAccessStub {
 
     public void open(String dbName){
         User user,defaultUser;
-        Flight flight1,flight2;
+
         bookingManager = new BookingManager();
 
         allUsers = new ArrayList<User>();
@@ -64,17 +58,25 @@ public class DataAccessStub {
         allLocations.add(vancouver);
 
         allFlights =  new ArrayList<Flight>();
-        flight1 = new Flight(winnipeg,newYork);
-        allFlights.add(flight1);
-        flight2 = new Flight(toronto,vancouver);
-        allFlights.add(flight2);
+        Flight winToNy = new Flight(winnipeg,newYork,"2022-06-14","10:30","2022-06-15","4:30");
+        allFlights.add(winToNy);
+        Flight torToVan = new Flight(toronto,vancouver,"2022-06-19","16:30","2022-06-20","1:30");
+        allFlights.add(torToVan);
+        Flight winToTor = new Flight(winnipeg,toronto,"2022-07-04","14:30","2022-07-04","17:30");
+        allFlights.add(winToTor);
+        Flight winToVan = new Flight(winnipeg,vancouver,"2022-10-26","17:10","2022-10-27","2:30");
+        allFlights.add(winToVan);
+        Flight torToNy = new Flight(toronto,newYork,"2022-11-30","10:30","2022-30-15","15:30");
+        allFlights.add(torToNy);
 
 
         allBookings = new ArrayList<Booking>();
 
-        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(flight1)));
-        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(flight2)));
-
+        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(winToNy)));
+        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(torToVan)));
+        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(winToTor)));
+        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(winToVan)));
+        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(torToNy)));
 
         System.out.println("Opened " +dbType +" database " +dbName);
     }
@@ -155,8 +157,6 @@ public class DataAccessStub {
         return result;
     }
 
-
-
     //method for getting a specific booking from the db using the booking id
     public Booking getBooking(int bookingId){
         for(int i=0; i<allBookings.size(); i++){
@@ -166,14 +166,4 @@ public class DataAccessStub {
         }
         return  null;
     }
-
-
-
-
-
-
-
-
-
-
 }
