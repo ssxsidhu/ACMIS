@@ -1,19 +1,21 @@
 package comp3350.acmis.presentation;
 
-import android.app.Activity;
 import android.os.Bundle;
 
-import androidx.appcompat.widget.MenuPopupWindow;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 import comp3350.acmis.R;
 import comp3350.acmis.business.AccessLocations;
@@ -21,10 +23,10 @@ import comp3350.acmis.objects.Location;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link BookFragment#newInstance} factory method to
+ * Use the {@link FragmentBook#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BookFragment extends Fragment {
+public class FragmentBook extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,7 +40,7 @@ public class BookFragment extends Fragment {
     private ArrayList<Location> locationList;
 //    private ArrayAdapter<Location> locationArrayAdapter;
 
-    public BookFragment() {
+    public FragmentBook() {
         // Required empty public constructor
     }
 
@@ -51,8 +53,8 @@ public class BookFragment extends Fragment {
      * @return A new instance of fragment BookFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BookFragment newInstance(String param1, String param2) {
-        BookFragment fragment = new BookFragment();
+    public static FragmentBook newInstance(String param1, String param2) {
+        FragmentBook fragment = new FragmentBook();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -83,21 +85,49 @@ public class BookFragment extends Fragment {
         String result = accessLocations.getLocations(locationList);
 
         //since we are using a Object arrayList
-        ArrayAdapter<Location> adapter = new ArrayAdapter<Location>(getActivity(), R.layout.list_item, R.id.list_textView, locationList)
-        {
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                return super.getDropDownView(position, convertView, parent);
-            }
-        };
+        ArrayAdapter<Location> adapter = new ArrayAdapter<Location>(getActivity(),R.layout.menu_item,R.id.menu_text_view, locationList);
+
         //for dropDown menus
         AutoCompleteTextView ddDeparture = (AutoCompleteTextView) rootView.findViewById(R.id.auto_departure);
         ddDeparture.setThreshold(1);
         ddDeparture.setAdapter(adapter);
 
+        //to check which location user has selected
+        Location[] temp_departure = new Location[1];
+
+        TextInputLayout textInputLayout_departure = rootView.findViewById(R.id.menu_departure);
+        ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_departure.getEditText())).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                if(temp_departure[0]!=null) {
+                    adapter.add(temp_departure[0]);
+                }
+                temp_departure[0] = adapter.getItem(position);
+                adapter.remove(adapter.getItem(position));
+            }
+        });
+
+
         AutoCompleteTextView ddDestination = (AutoCompleteTextView) rootView.findViewById(R.id.auto_destination);
         ddDestination.setThreshold(1);
         ddDestination.setAdapter(adapter);
+
+        Location[] temp_destination = new Location[1];
+
+        TextInputLayout textInputLayout_destination = rootView.findViewById(R.id.menu_destination);
+        ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_destination.getEditText())).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                if(temp_destination[0]!=null) {
+                    adapter.add(temp_destination[0]);
+                }
+                temp_destination[0]=adapter.getItem(position);
+                adapter.remove(adapter.getItem(position));
+
+            }
+        });
+
+
 
 
         return rootView;

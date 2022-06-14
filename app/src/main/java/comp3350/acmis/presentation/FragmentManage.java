@@ -7,15 +7,20 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import comp3350.acmis.R;
+import comp3350.acmis.business.AccessBookings;
+import comp3350.acmis.objects.Booking;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ManageFragment#newInstance} factory method to
+ * Use the {@link FragmentManage#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ManageFragment extends Fragment {
+public class FragmentManage extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,8 +30,10 @@ public class ManageFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ArrayList<Booking> myBookingList;
+    private AccessBookings accessBookings;
 
-    public ManageFragment() {
+    public FragmentManage() {
         // Required empty public constructor
     }
 
@@ -39,8 +46,8 @@ public class ManageFragment extends Fragment {
      * @return A new instance of fragment ManageFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ManageFragment newInstance(String param1, String param2) {
-        ManageFragment fragment = new ManageFragment();
+    public static FragmentManage newInstance(String param1, String param2) {
+        FragmentManage fragment = new FragmentManage();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,7 +67,17 @@ public class ManageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_manage, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_manage, container, false);
+        myBookingList = new ArrayList<Booking>();
+        accessBookings = new AccessBookings("default");
+
+        accessBookings.getMybBookings(myBookingList);
+
+        System.out.println(myBookingList.get(0).getRoute().get(0).getSource().getCity());
+        CustomAdapter adapter = new CustomAdapter(this, myBookingList);
+
+        final ListView listView = (ListView) rootView.findViewById(R.id.menuList);
+        listView.setAdapter(adapter);
+        return rootView;
     }
 }
