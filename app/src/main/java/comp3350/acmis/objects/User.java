@@ -1,5 +1,7 @@
 package comp3350.acmis.objects;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class User {
@@ -11,6 +13,9 @@ public class User {
     private String password;
     private String email;
     private long phoneNumber;
+
+    //need this one for BOOKINGs
+    private ArrayList<Booking> bookings;
 
     //constructor
     //I have made all the variables require non-null values
@@ -30,23 +35,37 @@ public class User {
         else{
             this.phoneNumber = Long.parseLong(Objects.requireNonNull(phoneNumber,"Phone number should not be null"));
         }
+        bookings = new ArrayList<>();
+    }
+
+    public void addBooking(Booking newBook){
+        bookings.add(newBook);
+    }
+
+    public void removeBooking(int bookingID){
+        Booking removal = bookings.get(bookingID);
+        if(removal!= null){
+            bookings.remove(removal);
+        }
+    }
+
+
+
+
+    public String getMyBookings(ArrayList<Booking> myBookings){
+        myBookings.addAll(bookings);
+        return null;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
 
     public String getUsername() {
         return username;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
     public enum Gender{
         MALE,
