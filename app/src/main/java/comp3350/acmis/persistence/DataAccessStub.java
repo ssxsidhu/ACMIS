@@ -1,5 +1,10 @@
 package comp3350.acmis.persistence;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -26,19 +31,24 @@ public class DataAccessStub {
 
     public DataAccessStub() {
         this(Main.dbName);
+
     }
 
-    public void open(String dbName){
-        User user;
-        Flight flight;
 
+    public void open(String dbName){
+        User user,defaultUser;
+        Flight flight;
         allUsers = new ArrayList<User>();
-        user = new User("Johnny","victor", User.Gender.MALE,"johnnyv","jOhnNNyVi12","johnny.victor@gmail.com","2045558999");
-        allUsers.add(user);
+        allLocations = new ArrayList<Location>();
+        allFlights =  new ArrayList<Flight>();
+        allUserFlights = new ArrayList<UserFlight>();
+
+        defaultUser = new User("default","default", User.Gender.MALE,"default","default","default","1111111111");
+        allUsers.add(defaultUser);
         user = new User("Julie","smith", User.Gender.FEMALE,"jsmith","j&smith$","jmith@gmail.com","2048889999");
         allUsers.add(user);
 
-        allLocations = new ArrayList<Location>();
+
         Location winnipeg = new Location("Winnipeg","Canada","YWG");
         allLocations.add(winnipeg);
         Location newYork = new Location("New York","USA","JFK");
@@ -48,11 +58,17 @@ public class DataAccessStub {
         Location vancouver = new Location("Vancouver","Canada","YVR");
         allLocations.add(vancouver);
 
-        allFlights =  new ArrayList<Flight>();
-        flight = new Flight(winnipeg.getCity(),newYork.getCity(),2064.97,941);
+
+        flight = new Flight(winnipeg,newYork);
         allFlights.add(flight);
-        flight = new Flight(toronto.getCity(),vancouver.getCity(),3361,846);
+        flight = new Flight(toronto,vancouver);
         allFlights.add(flight);
+
+        //booking flights for default for testing UI
+        UserFlight userFlight =  new UserFlight(defaultUser,flight);
+        System.out.println(userFlight.getFlight().getFlightID());
+        flight.addUser(defaultUser);
+        allUserFlights.add(userFlight);
 
         System.out.println("Opened " +dbType +" database " +dbName);
     }
@@ -120,7 +136,7 @@ public class DataAccessStub {
     public Flight getFlightObject(int flightNumber){
         Flight result = null;
         for(int i=0; i<allFlights.size(); i++){
-            if(allFlights.get(i).getFlightSerial() == flightNumber){
+            if(allFlights.get(i).getFlightID() == flightNumber){
                 result = allFlights.get(i);
             }
         }

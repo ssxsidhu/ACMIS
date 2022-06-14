@@ -88,8 +88,12 @@ public class BookFragment extends Fragment {
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 return super.getDropDownView(position, convertView, parent);
+
+
             }
         };
+
+
         //for dropDown menus
         AutoCompleteTextView ddDeparture = (AutoCompleteTextView) rootView.findViewById(R.id.auto_departure);
         ddDeparture.setThreshold(1);

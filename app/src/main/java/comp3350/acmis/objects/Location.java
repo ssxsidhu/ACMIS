@@ -28,6 +28,5 @@ public class Location {
         return city +", "+country;
     }
 
-    public String toString()        //  update this according to format and then call in Flight Class.
-    {return null;}
+
 }

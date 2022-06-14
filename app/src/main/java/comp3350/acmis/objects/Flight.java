@@ -17,18 +17,14 @@ public class Flight{
     private int flightID;
     private Location depart;
     private Location arrive;
-    private LocalDateTime departure;
-    private LocalDateTime arrival;
 
     private ArrayList<User> flightList;                 // Store all users on this flight in a list.
 
     // Constructor()
-    public Flight(Location newDepart, Location newArrive, LocalDateTime newDeparture, LocalDateTime newArrival)
+    public Flight(Location newDepart, Location newArrive)
     {
         flightID = flightSequence;
         depart = newDepart;
-        departure = newDeparture;
-        arrival = newArrival;
         arrive = newArrive;
 
         flightList = new ArrayList<>();
@@ -53,11 +49,21 @@ public class Flight{
     // Setters()
     public void addUser(User addThis)
     {flightList.add(addThis);}
+
     public boolean removeUser(User removeThisUser)
     {return(flightList.remove(removeThisUser));}
+
     public void newDepart(Location newDepart)
     {depart = newDepart;}
+
     public void newArrival(Location newArrive)
     {arrive = newArrive;}
 
+    public Location getDepart() {
+        return depart;
+    }
+
+    public Location getArrive() {
+        return arrive;
+    }
 }
