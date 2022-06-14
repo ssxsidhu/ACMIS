@@ -1,3 +1,5 @@
+//this class can be removed.
+
 package comp3350.acmis.objects;
 
 public class UserFlight {

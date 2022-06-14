@@ -23,10 +23,12 @@ public class Location {
         return airport;
     }
 
-    @Override
-    public String toString() {
-        return city +", "+country;
-    }
-
-
+//    if not needed, can be removed
+//    @Override
+//    public String toString() {
+//        return city +", "+country;
+//    }
+//
+//    public String toString()        //  update this according to format and then call in Flight Class.
+//    {return null;}
 }

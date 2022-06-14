@@ -4,12 +4,13 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import comp3350.acmis.application.Main;
+import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.User;
@@ -18,11 +19,17 @@ import comp3350.acmis.objects.UserFlight;
 public class DataAccessStub {
     private String dbName;
     private String dbType =  "stub";
-
     private ArrayList<User> allUsers;
     private ArrayList<Flight> allFlights;
     private ArrayList<Location> allLocations;//tp store city,country,airport and other rdata later
+
+    //remove this
     private ArrayList<UserFlight> allUserFlights;
+
+    //add all the functionality just as for the userflights but for booking instead.
+    //can remove uesrflight class
+    //need for bookings, master record for all the bookings created since the start of the application
+    private ArrayList<Booking> bookingList;
 
     public DataAccessStub(String dbName)
     {
@@ -31,24 +38,20 @@ public class DataAccessStub {
 
     public DataAccessStub() {
         this(Main.dbName);
-
     }
 
-
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void open(String dbName){
-        User user,defaultUser;
+        User user;
         Flight flight;
-        allUsers = new ArrayList<User>();
-        allLocations = new ArrayList<Location>();
-        allFlights =  new ArrayList<Flight>();
-        allUserFlights = new ArrayList<UserFlight>();
 
-        defaultUser = new User("default","default", User.Gender.MALE,"default","default","default","1111111111");
-        allUsers.add(defaultUser);
+        allUsers = new ArrayList<User>();
+        user = new User("Johnny","victor", User.Gender.MALE,"johnnyv","jOhnNNyVi12","johnny.victor@gmail.com","2045558999");
+        allUsers.add(user);
         user = new User("Julie","smith", User.Gender.FEMALE,"jsmith","j&smith$","jmith@gmail.com","2048889999");
         allUsers.add(user);
 
-
+        allLocations = new ArrayList<Location>();
         Location winnipeg = new Location("Winnipeg","Canada","YWG");
         allLocations.add(winnipeg);
         Location newYork = new Location("New York","USA","JFK");
@@ -58,17 +61,16 @@ public class DataAccessStub {
         Location vancouver = new Location("Vancouver","Canada","YVR");
         allLocations.add(vancouver);
 
+        allFlights =  new ArrayList<Flight>();
+        LocalDateTime depDandT1 = LocalDateTime.of(2022, 6,12,10, 2);
+        LocalDateTime arvDandT1 = LocalDateTime.of(2022, 6,14,12, 22);
+        LocalDateTime depDandT2 = LocalDateTime.of(2022, 6,15,1, 7);
+        LocalDateTime arvDandT2 = LocalDateTime.of(2022, 6,18,10, 19);
 
-        flight = new Flight(winnipeg,newYork);
+        flight = new Flight(winnipeg,newYork,depDandT1,arvDandT1);
         allFlights.add(flight);
-        flight = new Flight(toronto,vancouver);
+        flight = new Flight(toronto,vancouver,depDandT2,arvDandT2);
         allFlights.add(flight);
-
-        //booking flights for default for testing UI
-        UserFlight userFlight =  new UserFlight(defaultUser,flight);
-        System.out.println(userFlight.getFlight().getFlightID());
-        flight.addUser(defaultUser);
-        allUserFlights.add(userFlight);
 
         System.out.println("Opened " +dbType +" database " +dbName);
     }
@@ -140,7 +142,7 @@ public class DataAccessStub {
                 result = allFlights.get(i);
             }
         }
-        return  result;
+        return result;
     }
 
 
@@ -157,8 +159,8 @@ public class DataAccessStub {
 
 
 
-
-
+    //method for adding the booking in the bookinglist db
+    //method for gettting a specific booking from the db using the booking id
 
 
 
