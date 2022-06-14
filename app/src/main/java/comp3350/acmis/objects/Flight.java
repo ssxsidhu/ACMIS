@@ -1,4 +1,5 @@
-// THIS WHOLE CLASS ASSUMES THAT FLIGHTS RUN DAILY. WE NEED TO CONSIDER IF SOME FLIGHTS RUN ONLY ON CERTAIN DAYS OR TIME RANGES
+// THIS WHOLE CLASS ASSUMES THAT FLIGHTS RUN DAILY.
+// WE NEED TO CONSIDER IF SOME FLIGHTS RUN ONLY ON CERTAIN DAYS OR TIME RANGES
 
 package comp3350.acmis.objects;
 import android.os.Build;
@@ -15,49 +16,69 @@ public class Flight{
 
     // Instance Variables
     private int flightID;
-    private Location depart;
-    private Location arrive;
-    private LocalDateTime departure;
+    private Location source;
+    private Location destination;
+    private LocalDateTime departure ;
     private LocalDateTime arrival;
 
     private ArrayList<User> flightList;                 // Store all users on this flight in a list.
 
     // Constructor()
-    public Flight(Location newDepart, Location newArrive, LocalDateTime newDeparture, LocalDateTime newArrival)
-    {
+    public Flight(Location newSrc, Location newDest, LocalDateTime newDeparture, LocalDateTime newArrival) {
         flightID = flightSequence;
-        depart = newDepart;
+        source = newSrc;
         departure = newDeparture;
         arrival = newArrival;
-        arrive = newArrive;
+        destination = newDest;
 
         flightList = new ArrayList<>();
         flightSequence++;
     }
 
     // Getters()
-    public int getFlightID()
-    {return flightID;}
-    public ArrayList<User> getPassengerList()
-    {return flightList;}
-    public String toString(){
-
-        String temp = "Flight Details: Departure -------> Destination";
-        temp+="\n"+depart+" \t "+arrive;
-        temp+="\n"+flightID;
-
-        return temp;
+    public int getFlightID() {
+        return flightID;
     }
 
+    public ArrayList<User> getPassengerList() {
+        return flightList;
+    }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "flightID=" + flightID +
+                ", source=" + source +
+                ", destination=" + destination +
+                ", departure=" + departure +
+                ", arrival=" + arrival +
+                ", flightList=" + flightList +
+                '}';
+    }
 
     // Setters()
-    public void addUser(User addThis)
-    {flightList.add(addThis);}
-    public boolean removeUser(User removeThisUser)
-    {return(flightList.remove(removeThisUser));}
-    public void newDepart(Location newDepart)
-    {depart = newDepart;}
-    public void newArrival(Location newArrive)
-    {arrive = newArrive;}
+    public void addUser(User addThis) {
+        flightList.add(addThis);
+    }
+    public boolean removeUser(User removeThisUser) {
+        return(flightList.remove(removeThisUser));
+    }
+    public void newDepart(Location newDepart) {
+        source = newDepart;
+    }
+    public void newArrival(Location newArrive) {
+        destination = newArrive;
+    }
 
+    public static int getFlightSequence() {
+        return flightSequence;
+    }
+
+    public Location getSource() {
+        return source;
+    }
+
+    public Location getDestination() {
+        return destination;
+    }
 }

@@ -1,10 +1,16 @@
 package comp3350.acmis.persistence;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import comp3350.acmis.application.Main;
+import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.User;
@@ -13,11 +19,17 @@ import comp3350.acmis.objects.UserFlight;
 public class DataAccessStub {
     private String dbName;
     private String dbType =  "stub";
-
     private ArrayList<User> allUsers;
     private ArrayList<Flight> allFlights;
     private ArrayList<Location> allLocations;//tp store city,country,airport and other rdata later
+
+    //remove this
     private ArrayList<UserFlight> allUserFlights;
+
+    //add all the functionality just as for the userflights but for booking instead.
+    //can remove uesrflight class
+    //need for bookings, master record for all the bookings created since the start of the application
+    private ArrayList<Booking> bookingList;
 
     public DataAccessStub(String dbName)
     {
@@ -28,6 +40,7 @@ public class DataAccessStub {
         this(Main.dbName);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void open(String dbName){
         User user;
         Flight flight;
@@ -49,9 +62,14 @@ public class DataAccessStub {
         allLocations.add(vancouver);
 
         allFlights =  new ArrayList<Flight>();
-        flight = new Flight(winnipeg.getCity(),newYork.getCity(),2064.97,941);
+        LocalDateTime depDandT1 = LocalDateTime.of(2022, 6,12,10, 2);
+        LocalDateTime arvDandT1 = LocalDateTime.of(2022, 6,14,12, 22);
+        LocalDateTime depDandT2 = LocalDateTime.of(2022, 6,15,1, 7);
+        LocalDateTime arvDandT2 = LocalDateTime.of(2022, 6,18,10, 19);
+
+        flight = new Flight(winnipeg,newYork,depDandT1,arvDandT1);
         allFlights.add(flight);
-        flight = new Flight(toronto.getCity(),vancouver.getCity(),3361,846);
+        flight = new Flight(toronto,vancouver,depDandT2,arvDandT2);
         allFlights.add(flight);
 
         System.out.println("Opened " +dbType +" database " +dbName);
@@ -120,11 +138,11 @@ public class DataAccessStub {
     public Flight getFlightObject(int flightNumber){
         Flight result = null;
         for(int i=0; i<allFlights.size(); i++){
-            if(allFlights.get(i).getFlightSerial() == flightNumber){
+            if(allFlights.get(i).getFlightID() == flightNumber){
                 result = allFlights.get(i);
             }
         }
-        return  result;
+        return result;
     }
 
 
@@ -141,8 +159,8 @@ public class DataAccessStub {
 
 
 
-
-
+    //method for adding the booking in the bookinglist db
+    //method for gettting a specific booking from the db using the booking id
 
 
 
