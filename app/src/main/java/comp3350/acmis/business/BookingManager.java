@@ -48,6 +48,7 @@ public class BookingManager {
         return validFLights;
     }
 
+    //add a method that will select one of the valid flights according to the user's preference.
 
 
     //creating booking
@@ -63,7 +64,8 @@ public class BookingManager {
     }
 
     public void cancelBooking(int bookingId){
-        Booking temp = data.getBooking(bookingId);
+        //need this method in the stud database.
+       Booking temp = data.getBooking(bookingId);
         User canceller = temp.getBooker();
         canceller.removeBooking(bookingId);
     }

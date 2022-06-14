@@ -27,6 +27,8 @@ public class DataAccessStub {
     //remove this
     private ArrayList<UserFlight> allUserFlights;
 
+    //add all the functionality just as for the userflights but for booking instead.
+    //can remove uesrflight class
     //need for bookings, master record for all the bookings created since the start of the application
     private ArrayList<Booking> bookingList;
 
@@ -159,6 +161,8 @@ public class DataAccessStub {
 
 
     //method for adding the booking in the bookinglist db
+    //method for gettting a specific booking from the db using the booking id
+
 
 
 }
