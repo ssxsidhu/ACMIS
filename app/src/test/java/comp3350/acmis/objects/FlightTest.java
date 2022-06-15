@@ -15,14 +15,14 @@ public class FlightTest {
 
     @Test
     //this method is used to test if every flight has a unique id. The id is sequential
-    public void testgetFlightID() {
-
+    public void testgetFlightSeq() {
+        assertEquals(0,Flight.getFlightSequence());
         Location location1 = new Location("Toronto", "Canada", "YYZ");
         Location location2 = new Location("Vancouver", "Canada", "YVR");
-        Flight test1 = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15","4:30");
-        assertEquals(1,test1.getFlightID());
-        Flight test2 = new Flight(location2,location1,"2022-11-14","07:30","2022-11-15","10:30");
-        assertEquals(2,test2.getFlightID());
+        Flight testY = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15","4:30");
+        assertEquals(1,Flight.getFlightSequence());
+        Flight testZ = new Flight(location2,location1,"2022-11-14","07:30","2022-11-15","10:30");
+        assertEquals(2,Flight.getFlightSequence());
 
     }
 
@@ -97,5 +97,59 @@ public class FlightTest {
         assertEquals("2022-06-14", test1.getRawDepartureDate());
     }
 
+    //testing the constructor parameters
+    @Test
+    public void testErrors(){
+
+        //testing for null source location
+        try{
+            Location location1 = new Location("Toronto", "Canada", "YYZ");
+            Location location2 = new Location("Vancouver", "Canada", "YVR");
+            Flight testY = new Flight(null,location2,"2022-06-14","10:30","2022-06-15","4:30");
+            fail("Expected a null pointer exception");
+        }catch(NullPointerException unused){}
+
+        //testing for null destination location
+        try{
+            Location location1 = new Location("Toronto", "Canada", "YYZ");
+            Location location2 = new Location("Vancouver", "Canada", "YVR");
+            Flight testY = new Flight(location1,null,"2022-06-14","10:30","2022-06-15","4:30");
+            fail("Expected a null pointer exception");
+        }catch(NullPointerException unused){}
+
+        //testing for null departure date
+        try{
+            Location location1 = new Location("Toronto", "Canada", "YYZ");
+            Location location2 = new Location("Vancouver", "Canada", "YVR");
+            Flight testY = new Flight(location1,location2,null,"10:30","2022-06-15","4:30");
+            fail("Expected a null pointer exception");
+        }catch(NullPointerException unused){}
+
+        //testing for null departure time
+        try{
+            Location location1 = new Location("Toronto", "Canada", "YYZ");
+            Location location2 = new Location("Vancouver", "Canada", "YVR");
+            Flight testY = new Flight(location1,location2,"2022-06-14",null,"2022-06-15","4:30");
+            fail("Expected a null pointer exception");
+        }catch(NullPointerException unused){}
+
+        //testing for null arrival date
+        try{
+            Location location1 = new Location("Toronto", "Canada", "YYZ");
+            Location location2 = new Location("Vancouver", "Canada", "YVR");
+            Flight testY = new Flight(location1,location2,"2022-06-14","10:30",null,"4:30");
+            fail("Expected a null pointer exception");
+        }catch(NullPointerException unused){}
+
+        //testing for null arrival time
+        try{
+            Location location1 = new Location("Toronto", "Canada", "YYZ");
+            Location location2 = new Location("Vancouver", "Canada", "YVR");
+            Flight testY = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15",null);
+            fail("Expected a null pointer exception");
+        }catch(NullPointerException unused){}
+
+
+    }
 
 }

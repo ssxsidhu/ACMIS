@@ -10,6 +10,8 @@ The Flight also has a list of passengers who booked the flight.
 package comp3350.acmis.objects;
 
 import java.util.ArrayList;
+import java.util.Objects;
+
 import comp3350.acmis.business.DateFormatter;
 
 public class Flight {
@@ -30,21 +32,18 @@ public class Flight {
     private String arrivalDate;
     private String arrivalTime;
 
-    // Store all users on this flight in a list.
-    private ArrayList<User> flightList;
+    //
 
     //constructor
     public Flight(Location source, Location destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime) {
-        assert(source != null && destination != null);
 
         this.flightID = flightSequence;
-        this.source = source;
-        this.destination = destination;
-        this.departureDate = departureDate;
-        this.departureTime = departureTime;
-        this.arrivalDate = arrivalDate;
-        this.arrivalTime = arrivalTime;
-        this.flightList = new ArrayList<>();
+        this.source = Objects.requireNonNull(source,"Source cannot be null");
+        this.destination = Objects.requireNonNull(destination,"Destination cannot be null");
+        this.departureDate = Objects.requireNonNull(departureDate,"Departure date cannot be null");
+        this.departureTime = Objects.requireNonNull(departureTime,"Departure time cannot be null");;
+        this.arrivalDate = Objects.requireNonNull(arrivalDate,"Arrival date cannot be null");;
+        this.arrivalTime = Objects.requireNonNull(arrivalTime,"Arrival time cannot be null");;
         flightSequence++;
     }
 
@@ -61,9 +60,6 @@ public class Flight {
     }
     public Location getDestination() {
         return destination;
-    }
-    public ArrayList<User> getPassengerList() {
-        return flightList;
     }
     public String getDepartureTime() {
         return departureTime;
@@ -89,7 +85,7 @@ public class Flight {
                 "flightID=" + flightID +
                 ", source=" + source +
                 ", destination=" + destination +
-                ", flightList=" + flightList +
+                ", flightList="+
                 '}';
     }
 
