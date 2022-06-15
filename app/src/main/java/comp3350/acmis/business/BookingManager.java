@@ -22,8 +22,9 @@ public class BookingManager {
     }
 
     // Return List of Routes
-    public ArrayList<Route> searchRoute(Location srcCity, Location destCity){
+    public String searchRoute(Location srcCity, Location destCity, ArrayList<Route> returnRoutes){
 
+        returnRoutes.clear();
         ArrayList<Route> validRoutes = new ArrayList<>();
 
         //find route using an algo
@@ -74,42 +75,46 @@ public class BookingManager {
             }
         }
 
-        return validRoutes;
+        returnRoutes.addAll(validRoutes);
+        if(validRoutes.size()>0){
+            return null;
+        }
+        else{
+            return "no_flights_found";
+        }
     }       // validRoutes List should have stopOver FLights in the beginning and Direct Flights towards the end.
 
 
 
 
     //creating booking
-    public void createBooking(String username, Route route){
+    public String createBooking(String username, Route route){
         User bookerObject = data.getUserObject(username);
         ArrayList<Booking> userBookings = new ArrayList<>();
         Booking newBooking;
-        boolean flag=true;
 
         if(bookerObject != null && route !=null) {
             bookerObject.getMyBookings(userBookings);
 
-            for(int i=0;i<userBookings.size() && flag;i++){
+            for(int i=0;i<userBookings.size();i++){
                 if(route.getRoute().get(0).getFlightID() == userBookings.get(i).getRoute().getRoute().get(0).getFlightID()){
-                    userBookings.get(i).incrementPassengers();
-                    flag = false;
+                    return "You have already booked this flight for your account";
                 }
             }
 
-            if(flag) {
                 newBooking = new Booking(bookerObject, route);
                 //adding to the users all the booking.
                 bookerObject.addBooking(newBooking);
-
+                //adding to
+                route.getRoute().get(0).addUser(bookerObject);
                 //adding the booking to the master booking.
                 data.addBooking(newBooking);
-            }
         }
         else{
             System.out.println("no object found");
         }
 
+        return null;
 
     }
 

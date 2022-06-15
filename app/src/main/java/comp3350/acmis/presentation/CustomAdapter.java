@@ -2,30 +2,23 @@ package comp3350.acmis.presentation;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
-
 import java.util.ArrayList;
-import java.util.Objects;
-
 import comp3350.acmis.R;
 import comp3350.acmis.objects.Booking;
-import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Route;
 
 public class CustomAdapter extends BaseAdapter {
 
     private Fragment mContext = null;
     private Activity activity;
-    private ArrayList<Route> displayList;
-    private ArrayList<Booking> userBookings;
+    private final ArrayList<Route> displayList;
 
 
     public CustomAdapter(FragmentManage context, ArrayList<Booking> userBookings) {
@@ -34,7 +27,6 @@ public class CustomAdapter extends BaseAdapter {
         for (int i = 0; i < userBookings.size(); i++) {
             displayList.add(userBookings.get(i).getRoute());
         }
-        this.userBookings=userBookings;
 
     }
 
@@ -90,9 +82,7 @@ public class CustomAdapter extends BaseAdapter {
             titleMiddleRight.setText(displayList.get(position).getRoute().get(0).getDestination().getCity());
             titleBottomLeft.setText(displayList.get(position).getRoute().get(0).getDepartureDate());
             titleBottomRight.setText(String.format("FlightID: #%d", displayList.get(position).getRoute().get(0).getFlightID()));
-            if(userBookings!=null) {
-                titleExtraLeft.setText(String.format("Passengers: %d", userBookings.get(position).getNumPassengers()));
-            }
+            titleExtraLeft.setText(String.format("Total Passengers: %d", displayList.get(position).getRoute().get(0).getPassengerList().size()));
             i1.setImageResource(R.drawable.airplane_symbol);
         }
 

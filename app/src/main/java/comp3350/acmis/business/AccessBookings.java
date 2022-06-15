@@ -12,7 +12,6 @@ import java.util.List;
 import comp3350.acmis.application.Main;
 import comp3350.acmis.application.Services;
 import comp3350.acmis.objects.Booking;
-import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.User;
 import comp3350.acmis.persistence.DataAccessStub;
 
