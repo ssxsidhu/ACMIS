@@ -3,8 +3,6 @@ package comp3350.acmis.objects;
 import java.util.ArrayList;
 import java.util.List;
 
-import comp3350.acmis.R;
-
 public class Route {
 
     // What makes up a route for now ? Either a direct flight or a one stop over flight
@@ -22,14 +20,15 @@ public class Route {
     }
 
     // Constructor 2 --> Soft Copy
-    public Route(ArrayList<Flight> flights) {
+    public Route(ArrayList<Flight> flights){
         route = flights;
     }
 
     // Constructor 3 --> Single or Direct Flight
     public Route(Flight directFlight)    {
         route = new ArrayList<>();
-        route.add(directFlight);}
+        route.add(directFlight);
+    }
 
     // SETTERS
     public String addToRoute(Flight flight){

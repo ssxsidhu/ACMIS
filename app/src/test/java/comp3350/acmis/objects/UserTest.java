@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class UserTest {
     @Test
     public void testFirstName() {
@@ -11,26 +13,26 @@ public class UserTest {
 
         //null firstname
         try {
-            user = new User(null, "bar", User.Gender.MALE , "myUsername", "fbp", "fb@gmail.com", "1111111111");
+            user = new User(null, "bar", User.Gender.OTHER , "myUsername", "fbp", "fb@gmail.com", "1111111111");
             fail("Expected a NullPointerException");
         } catch (NullPointerException unused) {}
 
         //empty firstname
         try {
-            user = new User("", "bar", User.Gender.MALE , "myUsername", "fbp", "fb@gmail.com", "1111111111");
+            user = new User("", "bar", User.Gender.OTHER , "myUsername", "fbp", "fb@gmail.com", "1111111111");
             fail("Expected a IllegalArgumentException");
         } catch (IllegalArgumentException unused) {}
 
         //check only spaces
         try {
-            user = new User("      ", "bar", User.Gender.MALE , "myUsername", "fbp", "fb@gmail.com", "1111111111");
+            user = new User("      ", "bar", User.Gender.OTHER , "myUsername", "fbp", "fb@gmail.com", "1111111111");
             fail("Expected a IllegalArgumentException");
         } catch (IllegalArgumentException unused) {}
 
-        user = new User("foo", "bar", User.Gender.MALE , "myUsername", "fbp", "fb@gmail.com", "1111111111");
+        user = new User("foo", "bar", User.Gender.OTHER , "myUsername", "fbp", "fb@gmail.com", "1111111111");
         assertEquals("foo", user.getFirstName());
 
-        user = new User("    foo     ", "bar", User.Gender.MALE , "myUsername", "fbp", "fb@gmail.com", "1111111111");
+        user = new User("    foo     ", "bar", User.Gender.OTHER , "myUsername", "fbp", "fb@gmail.com", "1111111111");
         assertEquals("foo", user.getFirstName());
     }
 
@@ -132,8 +134,26 @@ public class UserTest {
 
 
 
-//    @Test
-//    public void testBookings() {
-//        User user = new User("foo", "bar", User.Gender.FEMALE , "myUsername", "fbp", "fb@gmail.com", "1234567890");
-//    }
+    @Test
+    public void testBookings() {
+        User user = new User("foo", "bar", User.Gender.FEMALE , "myUsername", "fbp", "fb@gmail.com", "1234567890");
+        Route route = setupRoute();
+        Booking booking = new Booking(user, route);
+        user.addBooking(booking);
+
+        ArrayList<Route> listOfRoutes = new ArrayList<Route>();
+        listOfRoutes.add(route);
+
+//        assertEquals(user.getMyBookings());
+
+
+
+    }
+
+    private Route setupRoute() {
+        Location loc1 = new Location("Winnipeg", "Canada", "YWG");
+        Location loc2 = new Location("Vancouver", "Canada", "YVR");
+
+        return new Route(new Flight(loc1, loc2, "2022-06-15", "08:00", "2022-06-15", "11:00"));
+    }
 }
