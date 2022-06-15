@@ -12,6 +12,7 @@ public class Booking {
     private User booker;                    // Person Booking the flight
     private Route route;                    // The Route being taken for reaching from A->B
     private int bookingId;
+    private int numPassengers;
 
     // Constructor()
     public Booking(User booker, Route route) {
@@ -22,6 +23,9 @@ public class Booking {
     }
 
 
+    public void incrementPassengers(){
+        numPassengers++;
+    }
 
     // GETTERS
     public User getBooker() {
@@ -30,6 +34,10 @@ public class Booking {
     public int getBookingId() {return bookingId;}
     public Route getRoute() {
         return route;
+    }
+
+    public int getNumPassengers() {
+        return numPassengers;
     }
 
     // SETTER

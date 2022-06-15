@@ -1,9 +1,6 @@
 package comp3350.acmis.business;
 
-import androidx.annotation.ArrayRes;
-
 import java.util.ArrayList;
-import java.util.Date;
 
 import comp3350.acmis.application.Main;
 import comp3350.acmis.application.Services;
@@ -86,14 +83,28 @@ public class BookingManager {
     //creating booking
     public void createBooking(String username, Route route){
         User bookerObject = data.getUserObject(username);
+        ArrayList<Booking> userBookings = new ArrayList<>();
+        Booking newBooking;
+        boolean flag=true;
 
         if(bookerObject != null && route !=null) {
-            Booking newBooking = new Booking(bookerObject, route);
-            //adding to the users all the booking.
-            bookerObject.addBooking(newBooking);
+            bookerObject.getMyBookings(userBookings);
 
-            //adding the booking to the master booking.
-            data.addBooking(newBooking);
+            for(int i=0;i<userBookings.size() && flag;i++){
+                if(route.getRoute().get(0).getFlightID() == userBookings.get(i).getRoute().getRoute().get(0).getFlightID()){
+                    userBookings.get(i).incrementPassengers();
+                    flag = false;
+                }
+            }
+
+            if(flag) {
+                newBooking = new Booking(bookerObject, route);
+                //adding to the users all the booking.
+                bookerObject.addBooking(newBooking);
+
+                //adding the booking to the master booking.
+                data.addBooking(newBooking);
+            }
         }
         else{
             System.out.println("no object found");

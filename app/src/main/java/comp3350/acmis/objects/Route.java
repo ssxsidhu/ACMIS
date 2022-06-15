@@ -27,7 +27,9 @@ public class Route {
     }
 
     // Constructor 3 --> Single or Direct Flight
-    public Route(Flight directFlight)    {route.add(directFlight);}
+    public Route(Flight directFlight)    {
+        route = new ArrayList<>();
+        route.add(directFlight);}
 
     // SETTERS
     public String addToRoute(Flight flight){

@@ -2,13 +2,7 @@
 // WE NEED TO CONSIDER IF SOME FLIGHTS RUN ONLY ON CERTAIN DAYS OR TIME RANGES
 
 package comp3350.acmis.objects;
-import android.os.Build;
 
-import java.sql.Date;
-import java.util.*;
-import androidx.annotation.RequiresApi;
-
-import java.time.*;
 import java.util.ArrayList;
 
 import comp3350.acmis.business.DateFormatter;
@@ -73,14 +67,18 @@ public class Flight {
 
     public String getArrivalDate() {
         DateFormatter date = new DateFormatter(departureDate);
-        System.out.println(date.format());
         return date.format();
     }
     public String getDepartureDate() {
         DateFormatter date = new DateFormatter(departureDate);
-        System.out.println(date.format());
         return date.format();
     }
+
+    public String getRawDepartureDate(){
+        return departureDate;
+    }
+
+
 
     @Override
     public String toString() {

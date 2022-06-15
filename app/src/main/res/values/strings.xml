@@ -10,4 +10,6 @@
     <string name="no_flights_found">No Flights found</string>
     <string name="search_results">Search Results</string>
     <string name="book_flight">Book Flight</string>
+    <string name="search_flights">Search Flights</string>
+    <string name="upcoming_flights">Upcoming Flights</string>
 </resources>

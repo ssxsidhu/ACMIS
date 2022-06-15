@@ -71,25 +71,22 @@ public class FragmentManage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_manage, container, false);
-        myBookingList = new ArrayList<Booking>();
-        accessBookings = new AccessBookings("default");
-
-        accessBookings.getMybBookings(myBookingList);
-
-        CustomAdapter adapter = new CustomAdapter(this,myBookingList);
-
-        final ListView listView = (ListView) rootView.findViewById(R.id.list_items_manage_tab);
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
         return rootView;
     }
 
-    public void refreshFragmentUI(Fragment fragment) {
-        getParentFragmentManager()
-                .beginTransaction()
-                .detach(fragment)
-                .attach(fragment)
-                .commit();
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState){
+        myBookingList = new ArrayList<Booking>();
+        accessBookings = new AccessBookings("default");
+
+        accessBookings.getMyBookings(myBookingList);
+
+        CustomAdapter adapter = new CustomAdapter(this,myBookingList);
+
+        final ListView listView = (ListView) view.findViewById(R.id.list_items_manage_tab);
+        listView.setAdapter(adapter);
+
     }
+
 
 }
