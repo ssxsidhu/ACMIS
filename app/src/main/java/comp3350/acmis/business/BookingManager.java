@@ -25,7 +25,7 @@ public class BookingManager {
     }
 
     // Return List of Routes
-    public Route searchRoute(Location srcCity, Location destCity){
+    public ArrayList<Route> searchRoute(Location srcCity, Location destCity){
 
         ArrayList<Route> validRoutes = new ArrayList<>();
 
@@ -50,25 +50,37 @@ public class BookingManager {
             if(allDBFlights.get(i).getSource().getCity().equals(srcCity.getCity()))   {tempSrc.add(allDBFlights.get(i));}
         }
 
-        // Check for Direct Routes...
+        // Check for StopOvers.
         for(int i=0;i<tempSrc.size();i++)
         {
             for(int j=0;j<tempDest.size();j++)
             {
-                if(tempSrc.get(i).getSource().getCity().equals(srcCity.getCity())
-                && tempDest.get(j).getDestination().getCity().equals(destCity.getCity()))
+                // Get Flights with Stop Overs.
+                if(tempSrc.get(i).getDestination().getCity().equals(tempDest.get(j).getSource().getCity()))
                 {
+                    stopOver.add(tempSrc.get(i));
+                    stopOver.add(tempDest.get(j));
 
+                    validRoutes.add(new Route(stopOver));
+                    stopOver.clear();
                 }
             }
         }
 
+        // Check For Direct Routes.
+        for(int i=0;i<allDBFlights.size();i++)
+        {
+            if(allDBFlights.get(i).getSource().getCity().equals(srcCity.getCity()) &&
+            allDBFlights.get(i).getDestination().getCity().equals(destCity.getCity()))
+            {
+                validRoutes.add(new Route(allDBFlights.get(i)));
+            }
+        }
 
-        //has to return an arraylist unless the route dsnt exist
-        return validFLights;
-    }
+        return validRoutes;
+    }       // validRoutes List should have stopOver FLights in the beginning and Direct Flights towards the end.
 
-    //add a method that will select one of the valid flights according to the user's preference.
+
 
 
     //creating booking
