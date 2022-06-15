@@ -1,6 +1,8 @@
 package comp3350.acmis.presentation;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +22,13 @@ import comp3350.acmis.objects.Route;
 
 public class CustomAdapter extends BaseAdapter {
 
-    private Fragment mContext;
+    private Fragment mContext = null;
+    private Activity activity;
     private ArrayList<Route> displayList;
 
 
     public CustomAdapter(FragmentManage context, ArrayList<Booking> userBookings) {
+        super();
         mContext = context;
         displayList = new ArrayList<>();
         for (int i = 0; i < userBookings.size(); i++) {
@@ -34,7 +38,13 @@ public class CustomAdapter extends BaseAdapter {
     }
 
     public CustomAdapter(FragmentBook context, ArrayList<Route> flightsAvailable) {
+        super();
         mContext = context;
+        displayList = flightsAvailable;
+    }
+
+    public CustomAdapter(Activity activity, ArrayList<Route> flightsAvailable) {
+        this.activity = activity;
         displayList = flightsAvailable;
     }
 
@@ -57,7 +67,13 @@ public class CustomAdapter extends BaseAdapter {
     @SuppressLint({"ViewHolder", "DefaultLocale"})
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        LayoutInflater inflater = mContext.getLayoutInflater();
+        LayoutInflater inflater;
+        if(mContext != null) {
+            inflater = mContext.getLayoutInflater();
+        }else{
+            inflater=activity.getLayoutInflater();
+        }
+
         View row;
         row = inflater.inflate(R.layout.row, parent, false);
         TextView titleTopLeft, titleTopRight, titleMiddleLeft, titleMiddleRight, titleBottomLeft, titleBottomRight;

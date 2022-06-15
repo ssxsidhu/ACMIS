@@ -1,7 +1,9 @@
 package comp3350.acmis.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ListView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -21,7 +22,6 @@ import java.util.Objects;
 import comp3350.acmis.R;
 import comp3350.acmis.business.AccessLocations;
 import comp3350.acmis.business.BookingManager;
-import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
 
@@ -42,6 +42,7 @@ public class FragmentBook extends Fragment {
     private ArrayList<Route> selectedRoutes;
     private Location selectedDeparture,selectedDestination;
     BookingManager bookingManager = new BookingManager();
+    ArrayList<Route> flightsAvailable = new ArrayList<>();
 
     public FragmentBook() {
         // Required empty public constructor
@@ -68,6 +69,7 @@ public class FragmentBook extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -82,6 +84,69 @@ public class FragmentBook extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_book, container, false);
 
 
+
+
+//        CustomAdapter customAdapter = new CustomAdapter(this,flightsAvailable);
+//        final ListView listView = (ListView) rootView.findViewById(R.id.list_items_book_tab);
+//        listView.setAdapter(customAdapter);
+//
+//        listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                selectedRoutes.add(customAdapter.getItem(i));
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
+
+//        System.out.println(selectedRoutes.get(0).getRoute().get(0).getFlightID());
+//        bookRoutes(rootView);
+
+
+        return rootView;
+    }
+
+
+
+//    public String bookRoutes(View rootView){
+//        Button book = rootView.findViewById(R.id.book_button);
+//        book.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                for(int i=0;i<selectedRoutes.size();i++){
+//                    bookingManager.createBooking("default",selectedRoutes.get(i));
+//                }
+//            }
+//        });
+//        return null;
+//    }
+
+
+    public String search(View rootView){
+        Button search = rootView.findViewById(R.id.search_button);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(selectedDeparture!=null && selectedDestination!=null) {
+                    sendData();
+//                    flightsAvailable.add(bookingManager.searchRoute(selectedDeparture, selectedDestination));
+                }
+            }
+        });
+
+
+
+        return null;
+    }
+
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
         accessLocations = new AccessLocations();
         locationList = new ArrayList<Location>();
         selectedRoutes = new ArrayList<>();
@@ -92,11 +157,11 @@ public class FragmentBook extends Fragment {
         ArrayAdapter<Location> adapter = new ArrayAdapter<Location>(getActivity(),R.layout.menu_item,R.id.menu_text_view, locationList);
 
         //for dropDown menus
-        AutoCompleteTextView ddDeparture = (AutoCompleteTextView) rootView.findViewById(R.id.auto_departure);
+        AutoCompleteTextView ddDeparture = (AutoCompleteTextView) view.findViewById(R.id.auto_departure);
         ddDeparture.setThreshold(1);
         ddDeparture.setAdapter(adapter);
 
-        TextInputLayout textInputLayout_departure = rootView.findViewById(R.id.menu_departure);
+        TextInputLayout textInputLayout_departure = view.findViewById(R.id.menu_departure);
         ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_departure.getEditText())).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -109,12 +174,12 @@ public class FragmentBook extends Fragment {
         });
 
 
-        AutoCompleteTextView ddDestination = (AutoCompleteTextView) rootView.findViewById(R.id.auto_destination);
+        AutoCompleteTextView ddDestination = (AutoCompleteTextView) view.findViewById(R.id.auto_destination);
         ddDestination.setThreshold(1);
         ddDestination.setAdapter(adapter);
 
 
-        TextInputLayout textInputLayout_destination = rootView.findViewById(R.id.menu_destination);
+        TextInputLayout textInputLayout_destination = view.findViewById(R.id.menu_destination);
         ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_destination.getEditText())).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -127,58 +192,15 @@ public class FragmentBook extends Fragment {
             }
         });
 
-        search(rootView);
-//        System.out.println(selectedRoutes.get(0).getRoute().get(0).getFlightID());
-        bookRoutes(rootView);
+        search(view);
 
-
-        return rootView;
     }
+    private void sendData(){
+        Intent i = new Intent(getActivity().getBaseContext(),SearchResults.class);
+        i.putExtra("selectedDeparture", selectedDeparture);
+        i.putExtra("selectedDestination",selectedDestination);
+        getActivity().startActivity(i);
 
-
-    public String bookRoutes(View rootView){
-        Button book = rootView.findViewById(R.id.book_button);
-        book.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                for(int i=0;i<selectedRoutes.size();i++){
-                    bookingManager.createBooking("default",selectedRoutes.get(i));
-                }
-            }
-        });
-        return null;
-    }
-
-
-    public String search(View rootView){
-
-        FragmentBook context = this;
-        Button search = rootView.findViewById(R.id.search_button);
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ArrayList<Route> flightsAvailable = new ArrayList<>();
-
-                if(selectedDeparture!=null && selectedDestination!=null) {
-                    flightsAvailable.add(bookingManager.searchRoute(selectedDeparture, selectedDestination));
-                    CustomAdapter customAdapter = new CustomAdapter(context,flightsAvailable);
-                    final ListView listView = (ListView) rootView.findViewById(R.id.list_items_book_tab);
-                    listView.setAdapter(customAdapter);
-                    listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            selectedRoutes.add(customAdapter.getItem(i));
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-                }
-            }
-        });
-        return null;
     }
 
 

@@ -62,7 +62,10 @@ public class FragmentManage extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,6 +80,16 @@ public class FragmentManage extends Fragment {
 
         final ListView listView = (ListView) rootView.findViewById(R.id.list_items_manage_tab);
         listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
         return rootView;
     }
+
+    public void refreshFragmentUI(Fragment fragment) {
+        getParentFragmentManager()
+                .beginTransaction()
+                .detach(fragment)
+                .attach(fragment)
+                .commit();
+    }
+
 }

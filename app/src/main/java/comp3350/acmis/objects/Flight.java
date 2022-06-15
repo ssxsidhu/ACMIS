@@ -36,7 +36,7 @@ public class Flight {
     private ArrayList<User> flightList;
 
     public Flight(Location source, Location destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime) {
-        this.flightID = flightID;
+        this.flightID = flightSequence;
         this.source = source;
         this.destination = destination;
         this.departureDate = departureDate;
