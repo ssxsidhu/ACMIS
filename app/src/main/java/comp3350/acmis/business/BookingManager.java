@@ -10,6 +10,7 @@ import comp3350.acmis.application.Services;
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
+import comp3350.acmis.objects.Route;
 import comp3350.acmis.objects.User;
 import comp3350.acmis.persistence.DataAccessStub;
 
@@ -21,21 +22,21 @@ public class BookingManager {
         data = Services.getDataAccess(Main.dbName);
     }
 
-    public ArrayList<Flight> searchRoute(String srcCity, String destCity){
+    public Route searchRoute(Location srcCity, Location destCity){
         //find route using an algo
         ArrayList<Flight> allDBFlights = new ArrayList<>();
         data.getAllFlights(allDBFlights);
         ArrayList<Location> allDBLocations = new ArrayList<>();
         data.getLocations(allDBLocations);
 
-        ArrayList<Flight>  validFLights = new ArrayList<>();
+        Route validFLights = new Route();
 
 
         //base case
         for(int i=0; i <allDBFlights.size();i++){
-            if(allDBFlights.get(i).getSource().getCity().equals(srcCity)
-                    &&allDBFlights.get(i).getDestination().getCity().equals(destCity)){
-                validFLights.add(allDBFlights.get(i));
+            if(allDBFlights.get(i).getSource().getCity().equals(srcCity.getCity())
+                    &&allDBFlights.get(i).getDestination().getCity().equals(destCity.getCity())){
+                validFLights.addToRoute(allDBFlights.get(i));
             }
         }
 
@@ -53,14 +54,21 @@ public class BookingManager {
 
 
     //creating booking
-    public void createBooking(User booker, ArrayList<Flight> route){
-        Booking newBooking = new Booking(booker,route);
+    public void createBooking(String username, Route route){
+        User bookerObject = data.getUserObject(username);
 
-        //adding to the users all the booking.
-        booker.addBooking(newBooking);
+        if(bookerObject != null && route !=null) {
+            Booking newBooking = new Booking(bookerObject, route);
+            //adding to the users all the booking.
+            bookerObject.addBooking(newBooking);
 
-        //adding the booking to the master booking.
-        data.addBooking(newBooking);
+            //adding the booking to the master booking.
+            data.addBooking(newBooking);
+        }
+        else{
+            System.out.println("no object found");
+        }
+
 
     }
 

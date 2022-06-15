@@ -73,10 +73,9 @@ public class FragmentManage extends Fragment {
 
         accessBookings.getMybBookings(myBookingList);
 
-        System.out.println(myBookingList.get(0).getRoute().get(0).getSource().getCity());
-        CustomAdapter adapter = new CustomAdapter(this, myBookingList);
+        CustomAdapter adapter = new CustomAdapter(this,myBookingList);
 
-        final ListView listView = (ListView) rootView.findViewById(R.id.menuList);
+        final ListView listView = (ListView) rootView.findViewById(R.id.list_items_manage_tab);
         listView.setAdapter(adapter);
         return rootView;
     }

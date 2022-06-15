@@ -7,10 +7,10 @@ public class Booking {
     private static int bookingSeq;
 
     private User booker;
-    private ArrayList<Flight> route;
+    private Route route;
     private int bookingId;
 
-    public Booking(User booker, ArrayList<Flight> route) {
+    public Booking(User booker, Route route) {
         this.booker = booker;
         this.route = route;
         bookingId = bookingSeq;
@@ -24,7 +24,7 @@ public class Booking {
         return booker;
     }
 
-    public ArrayList<Flight> getRoute() {
+    public Route getRoute() {
         return route;
     }
 

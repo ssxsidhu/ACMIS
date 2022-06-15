@@ -15,6 +15,7 @@ import comp3350.acmis.business.BookingManager;
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
+import comp3350.acmis.objects.Route;
 import comp3350.acmis.objects.User;
 
 public class DataAccessStub {
@@ -60,6 +61,7 @@ public class DataAccessStub {
         allLocations.add(calgary);
         Location regina = new Location("Regina","Canada","YQR");
         allLocations.add(regina);
+
 
 
 
@@ -118,11 +120,10 @@ public class DataAccessStub {
 
         allBookings = new ArrayList<Booking>();
 
-        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(winToMn)));
-        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(torToVan)));
-        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(winToTor)));
-        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(winToVan)));
-        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(torToMn)));
+        bookingManager.createBooking("default",new Route(Collections.singletonList(winToMn)));
+        bookingManager.createBooking("default",new Route(Collections.singletonList(torToVan)));
+        bookingManager.createBooking("default",new Route(Collections.singletonList(winToTor)));
+
 
         System.out.println("Opened " +dbType +" database " +dbName);
     }
@@ -172,20 +173,6 @@ public class DataAccessStub {
         return null;
     }
 
-    //puts a new booking into booking database
-    public String bookFlight(String username,int flightNumber ){
-        User userObject = getUserObject(username);
-        ArrayList<Flight> route = new ArrayList<Flight>();
-        route.add(getFlightObject(flightNumber));
-
-        if(userObject != null && flightNumber > 0) {
-            bookingManager.createBooking(userObject,route);
-        }
-        else{
-            System.out.println("no object found");
-        }
-        return  null;
-    }
 
     //to get object of User from username
     public User getUserObject(String username){
