@@ -3,9 +3,7 @@ package comp3350.acmis.business;
 import androidx.annotation.ArrayRes;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 import comp3350.acmis.application.Main;
 import comp3350.acmis.application.Services;
@@ -45,37 +43,37 @@ public class BookingManager {
         ArrayList <Flight> stopOver = new ArrayList<>();
 
         // Check for StopOvers and Direct Routes. But First Populate both lists.
-//        for(int i=0;i<allDBFlights.size();i++)
-//        {
-//            // Fill up both lists. At the moment tempSrc has all Flights that begin at srcCity and tempDest has all flights that end at destCity
-//            if(allDBFlights.get(i).getDestination().getCity().equals(destCity.getCity()))   {tempDest.add(allDBFlights.get(i));}
-//            if(allDBFlights.get(i).getSource().getCity().equals(srcCity.getCity()))   {tempSrc.add(allDBFlights.get(i));}
-//        }
+        for(int i=0;i<allDBFlights.size();i++)
+        {
+            // Fill up both lists. At the moment tempSrc has all Flights that begin at srcCity and tempDest has all flights that end at destCity
+            if(allDBFlights.get(i).getDestination().getCity().equals(destCity.getCity()))   {tempDest.add(allDBFlights.get(i));}
+            if(allDBFlights.get(i).getSource().getCity().equals(srcCity.getCity()))   {tempSrc.add(allDBFlights.get(i));}
+        }
 
         // Check for StopOvers.
-//        for(int i=0;i<tempSrc.size();i++)
-//        {
-//            for(int j=0;j<tempDest.size();j++)
-//            {
-//                // Get Flights with Stop Overs.
-//                if(tempSrc.get(i).getDestination().getCity().equals(tempDest.get(j).getSource().getCity()))
-//                {
-//                    stopOver.add(tempSrc.get(i));
-//                    stopOver.add(tempDest.get(j));
-//
-//                    validRoutes.add(new Route(stopOver));
-//                    stopOver.clear();
-//                }
-//            }
-//        }
+        for(int i=0;i<tempSrc.size();i++)
+        {
+            for(int j=0;j<tempDest.size();j++)
+            {
+                // Get Flights with Stop Overs.
+                if(tempSrc.get(i).getDestination().getCity().equals(tempDest.get(j).getSource().getCity()))
+                {
+                    stopOver.add(tempSrc.get(i));
+                    stopOver.add(tempDest.get(j));
+
+                    validRoutes.add(new Route(stopOver));
+                    stopOver.clear();
+                }
+            }
+        }
 
         // Check For Direct Routes.
         for(int i=0;i<allDBFlights.size();i++)
         {
             if(allDBFlights.get(i).getSource().getCity().equals(srcCity.getCity()) &&
-                    allDBFlights.get(i).getDestination().getCity().equals(destCity.getCity()))
+            allDBFlights.get(i).getDestination().getCity().equals(destCity.getCity()))
             {
-                validRoutes.add(new Route(Collections.singletonList(allDBFlights.get(i))));
+                validRoutes.add(new Route(allDBFlights.get(i)));
             }
         }
 
@@ -106,7 +104,7 @@ public class BookingManager {
 
     public void cancelBooking(int bookingId){
         //need this method in the stud database.
-        Booking temp = data.getBooking(bookingId);
+       Booking temp = data.getBooking(bookingId);
         User canceller = temp.getBooker();
         canceller.removeBooking(bookingId);
     }

@@ -48,13 +48,38 @@ public class Flight {
     }
 
 
-    // Getters()
+    // GETTERS
     public int getFlightID() {
         return flightID;
     }
-
+    public static int getFlightSequence() {
+        return flightSequence;
+    }
+    public Location getSource() {
+        return source;
+    }
+    public Location getDestination() {
+        return destination;
+    }
     public ArrayList<User> getPassengerList() {
         return flightList;
+    }
+    public String getDepartureTime() {
+        return departureTime;
+    }
+    public String getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public String getArrivalDate() {
+        DateFormatter date = new DateFormatter(departureDate);
+        System.out.println(date.format());
+        return date.format();
+    }
+    public String getDepartureDate() {
+        DateFormatter date = new DateFormatter(departureDate);
+        System.out.println(date.format());
+        return date.format();
     }
 
     @Override
@@ -67,53 +92,18 @@ public class Flight {
                 '}';
     }
 
-    // Setters()
+    // SETTERS
     public void addUser(User addThis) {
         flightList.add(addThis);
     }
-
     public boolean removeUser(User removeThisUser) {
         return (flightList.remove(removeThisUser));
     }
-
     public void newDepart(Location newDepart) {
         source = newDepart;
     }
-
     public void newArrival(Location newArrive) {
         destination = newArrive;
     }
 
-    public static int getFlightSequence() {
-        return flightSequence;
-    }
-
-    public Location getSource() {
-        return source;
-    }
-
-    public Location getDestination() {
-        return destination;
-    }
-
-
-    public String getArrivalDate() {
-        DateFormatter date = new DateFormatter(departureDate);
-        System.out.println(date.format());
-        return date.format();
-    }
-
-    public String getArrivalTime() {
-        return arrivalTime;
-    }
-
-    public String getDepartureDate() {
-        DateFormatter date = new DateFormatter(departureDate);
-        System.out.println(date.format());
-        return date.format();
-    }
-
-    public String getDepartureTime() {
-        return departureTime;
-    }
 }
