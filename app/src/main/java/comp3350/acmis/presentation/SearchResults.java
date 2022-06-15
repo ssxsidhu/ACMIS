@@ -1,7 +1,6 @@
 package comp3350.acmis.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,14 +16,10 @@ import comp3350.acmis.R;
 import comp3350.acmis.business.BookingManager;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
-import comp3350.acmis.presentation.BottomTabActivity;
-import comp3350.acmis.presentation.CustomAdapter;
 
 public class SearchResults extends AppCompatActivity {
 
-
-    private ArrayList<Route> selectedRoutes = new ArrayList<>();
-    private Location selectedDeparture,selectedDestination;
+    private Location selectedDeparture, selectedDestination;
     BookingManager bookingManager = new BookingManager();
     ArrayList<Route> flightsAvailable = new ArrayList<>();
 
@@ -35,8 +30,11 @@ public class SearchResults extends AppCompatActivity {
 
         receiveData();
 
-        flightsAvailable = bookingManager.searchRoute(selectedDeparture,selectedDestination);
-        if(flightsAvailable.size() > 0) {
+        String checkFlights= bookingManager.searchRoute(selectedDeparture, selectedDestination,flightsAvailable );
+        if(checkFlights!=null){
+            Messages.noFlightsMessage(this);
+        }
+        else {
             CustomAdapter customAdapter = new CustomAdapter(this, flightsAvailable);
             final ListView listView = (ListView) this.findViewById(R.id.list_items_book_tab);
             final Button book = this.findViewById(R.id.book_button);
@@ -49,38 +47,22 @@ public class SearchResults extends AppCompatActivity {
                     book.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                                bookingManager.createBooking("default",customAdapter.getItem(i));
-                                Intent i = new Intent(thisActivity.getBaseContext(), BottomTabActivity.class);
+                            String result = bookingManager.createBooking("default", customAdapter.getItem(i));
+                            if(result!=null){
+                                Messages.snackBar(view,result);
+                            }
+                            else {
+                                Intent i = new Intent(thisActivity.getBaseContext(), MainActivity.class);
                                 thisActivity.startActivity(i);
+                            }
                         }
                     });
                 }
             });
 
         }
-        else{
-            this.findViewById(R.id.no_results_found).setVisibility(View.VISIBLE);
-            this.findViewById(R.id.header_title_book_tab).setVisibility(View.INVISIBLE);
-        }
-
-
-
 
     }
-
-        private String bookRoutes(int position){
-        Button book = this.findViewById(R.id.book_button);
-        book.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                for(int i=0;i<selectedRoutes.size();i++){
-                    bookingManager.createBooking("default",selectedRoutes.get(i));
-                }
-            }
-        });
-        return null;
-    }
-
 
     private void receiveData()
     {

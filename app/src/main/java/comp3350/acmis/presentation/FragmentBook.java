@@ -21,9 +21,7 @@ import java.util.Objects;
 
 import comp3350.acmis.R;
 import comp3350.acmis.business.AccessLocations;
-import comp3350.acmis.business.BookingManager;
 import comp3350.acmis.objects.Location;
-import comp3350.acmis.objects.Route;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,14 +33,7 @@ public class FragmentBook extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private String mParam1;
-    private String mParam2;
-    private AccessLocations accessLocations;
-    private ArrayList<Location> locationList;
-    private ArrayList<Route> selectedRoutes;
     private Location selectedDeparture,selectedDestination;
-    BookingManager bookingManager = new BookingManager();
-    ArrayList<Route> flightsAvailable = new ArrayList<>();
 
     public FragmentBook() {
         // Required empty public constructor
@@ -55,8 +46,7 @@ public class FragmentBook extends Fragment {
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
      * @return A new instance of fragment BookFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+  */
     public static FragmentBook newInstance(String param1, String param2) {
         FragmentBook fragment = new FragmentBook();
         Bundle args = new Bundle();
@@ -71,8 +61,8 @@ public class FragmentBook extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
     }
@@ -81,80 +71,17 @@ public class FragmentBook extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_book, container, false);
-
-
-
-
-//        CustomAdapter customAdapter = new CustomAdapter(this,flightsAvailable);
-//        final ListView listView = (ListView) rootView.findViewById(R.id.list_items_book_tab);
-//        listView.setAdapter(customAdapter);
-//
-//        listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//
-//                selectedRoutes.add(customAdapter.getItem(i));
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
-
-//        System.out.println(selectedRoutes.get(0).getRoute().get(0).getFlightID());
-//        bookRoutes(rootView);
-
-
-        return rootView;
+        return inflater.inflate(R.layout.fragment_book, container, false);
     }
-
-
-
-//    public String bookRoutes(View rootView){
-//        Button book = rootView.findViewById(R.id.book_button);
-//        book.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for(int i=0;i<selectedRoutes.size();i++){
-//                    bookingManager.createBooking("default",selectedRoutes.get(i));
-//                }
-//            }
-//        });
-//        return null;
-//    }
-
-
-    public String search(View rootView){
-        Button search = rootView.findViewById(R.id.search_button);
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(selectedDeparture!=null && selectedDestination!=null) {
-                    sendData();
-//                    flightsAvailable.add(bookingManager.searchRoute(selectedDeparture, selectedDestination));
-                }
-            }
-        });
-
-
-
-        return null;
-    }
-
-
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
-        accessLocations = new AccessLocations();
-        locationList = new ArrayList<Location>();
-        selectedRoutes = new ArrayList<>();
+        AccessLocations accessLocations = new AccessLocations();
+        ArrayList<Location> locationList = new ArrayList<>();
 
-        String result = accessLocations.getLocations(locationList);
+        accessLocations.getLocations(locationList);
 
-        //since we are using a Object arrayList
-        ArrayAdapter<Location> adapter = new ArrayAdapter<Location>(getActivity(),R.layout.menu_item,R.id.menu_text_view, locationList);
+        ArrayAdapter<Location> adapter = new ArrayAdapter<>(getActivity(), R.layout.menu_item, R.id.menu_text_view, locationList);
 
         //for dropDown menus
         AutoCompleteTextView ddDeparture = (AutoCompleteTextView) view.findViewById(R.id.auto_departure);
@@ -162,15 +89,12 @@ public class FragmentBook extends Fragment {
         ddDeparture.setAdapter(adapter);
 
         TextInputLayout textInputLayout_departure = view.findViewById(R.id.menu_departure);
-        ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_departure.getEditText())).setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                if(selectedDeparture!=null) {
-                    adapter.add(selectedDeparture);
-                }
-                selectedDeparture = adapter.getItem(position);
-                adapter.remove(adapter.getItem(position));
+        ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_departure.getEditText())).setOnItemClickListener((adapterView, view1, position, id) -> {
+            if(selectedDeparture!=null) {
+                adapter.add(selectedDeparture);
             }
+            selectedDeparture = adapter.getItem(position);
+            adapter.remove(adapter.getItem(position));
         });
 
 
@@ -180,21 +104,30 @@ public class FragmentBook extends Fragment {
 
 
         TextInputLayout textInputLayout_destination = view.findViewById(R.id.menu_destination);
-        ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_destination.getEditText())).setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                if(selectedDestination!=null) {
-                    adapter.add(selectedDestination);
-                }
-                selectedDestination=adapter.getItem(position);
-                adapter.remove(adapter.getItem(position));
-
+        ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_destination.getEditText())).setOnItemClickListener((adapterView, view12, position, id) -> {
+            if(selectedDestination!=null) {
+                adapter.add(selectedDestination);
             }
+            selectedDestination=adapter.getItem(position);
+            adapter.remove(adapter.getItem(position));
+
         });
 
         search(view);
 
     }
+
+    public void search(View rootView){
+        Button search = rootView.findViewById(R.id.search_button);
+        search.setOnClickListener(view -> {
+            if(selectedDeparture!=null && selectedDestination!=null) {
+                sendData();
+            }
+        });
+
+
+    }
+
     private void sendData(){
         Intent i = new Intent(getActivity().getBaseContext(),SearchResults.class);
         i.putExtra("selectedDeparture", selectedDeparture);
