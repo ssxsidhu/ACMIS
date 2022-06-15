@@ -1,11 +1,17 @@
 package comp3350.acmis.objects;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
 public class User {
 
+    // Instance Variables
     private String firstName;
     private String lastName;
     private Gender gender;
@@ -35,10 +41,10 @@ public class User {
         bookings = new ArrayList<>();
     }
 
+    // SETTERS
     public void addBooking(Booking newBook){
         bookings.add(newBook);
     }
-
     public void removeBooking(int bookingID){
         Booking removal = bookings.get(bookingID);
         if(removal!= null){
@@ -46,17 +52,14 @@ public class User {
         }
     }
 
+    // GETTERS
+
+    public String getFirstName() {return firstName;}
+    public String getUsername() {return username;}
+
     public String getMyBookings(ArrayList<Booking> myBookings){
         myBookings.addAll(bookings);
         return null;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     public enum Gender{

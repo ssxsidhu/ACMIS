@@ -1,10 +1,13 @@
 package comp3350.acmis.presentation;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
@@ -35,17 +38,18 @@ public class BottomTabActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager2.setCurrentItem(tab.getPosition());
+
             }
 
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
 
+
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
 
@@ -56,7 +60,11 @@ public class BottomTabActivity extends AppCompatActivity {
             }
         });
 
+
+
+
     }
+
 
     @Override
     public void onBackPressed() {

@@ -1,9 +1,10 @@
 
 package comp3350.acmis.objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Location {
+public class Location  implements Serializable {
     private String city;
     private String country;
     private String airport;

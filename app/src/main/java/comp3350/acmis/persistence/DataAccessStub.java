@@ -15,6 +15,7 @@ import comp3350.acmis.business.BookingManager;
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
+import comp3350.acmis.objects.Route;
 import comp3350.acmis.objects.User;
 
 public class DataAccessStub {
@@ -60,6 +61,7 @@ public class DataAccessStub {
         allLocations.add(calgary);
         Location regina = new Location("Regina","Canada","YQR");
         allLocations.add(regina);
+
 
 
 
@@ -113,16 +115,55 @@ public class DataAccessStub {
         Flight calToTor = new Flight(calgary,toronto,"2022-12-31","10:30","2022-12-31","18:45");
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
-        allFlights.add(vanToCal);
+        allFlights.add(calToTor);
+        Flight calToTor1 = new Flight(calgary,toronto,"2022-01-31","10:30","2022-12-31","18:45");
+        calgary.addLocationOutgoing(toronto);
+        toronto.addLocationIncoming(calgary);
+        allFlights.add(calToTor1);
+        Flight calToTor2 = new Flight(calgary,toronto,"2022-02-31","10:30","2022-12-31","18:45");
+        calgary.addLocationOutgoing(toronto);
+        toronto.addLocationIncoming(calgary);
+        allFlights.add(calToTor2);
+        Flight calToTor3 = new Flight(calgary,toronto,"2022-03-31","10:30","2022-12-31","18:45");
+        calgary.addLocationOutgoing(toronto);
+        toronto.addLocationIncoming(calgary);
+        allFlights.add(calToTor3);
+        Flight calToTor4 = new Flight(calgary,toronto,"2022-04-31","10:30","2022-12-31","18:45");
+        calgary.addLocationOutgoing(toronto);
+        toronto.addLocationIncoming(calgary);
+        allFlights.add(calToTor4);
+        Flight calToTor5 = new Flight(calgary,toronto,"2022-05-31","10:30","2022-12-31","18:45");
+        calgary.addLocationOutgoing(toronto);
+        toronto.addLocationIncoming(calgary);
+        allFlights.add(calToTor5);
+        Flight calToTor6 = new Flight(calgary,toronto,"2022-06-31","10:30","2022-12-31","18:45");
+        calgary.addLocationOutgoing(toronto);
+        toronto.addLocationIncoming(calgary);
+        allFlights.add(calToTor6);
+        Flight calToTor7 = new Flight(calgary,toronto,"2022-07-31","10:30","2022-12-31","18:45");
+        calgary.addLocationOutgoing(toronto);
+        toronto.addLocationIncoming(calgary);
+        allFlights.add(calToTor7);
+        Flight calToTor8 = new Flight(calgary,toronto,"2022-08-31","10:30","2022-12-31","18:45");
+        calgary.addLocationOutgoing(toronto);
+        toronto.addLocationIncoming(calgary);
+        allFlights.add(calToTor8);
+        Flight calToTor9 = new Flight(calgary,toronto,"2022-09-31","10:30","2022-12-31","18:45");
+        calgary.addLocationOutgoing(toronto);
+        toronto.addLocationIncoming(calgary);
+        allFlights.add(calToTor9);
+        Flight calToTor10 = new Flight(calgary,toronto,"2022-10-31","10:30","2022-12-31","18:45");
+        calgary.addLocationOutgoing(toronto);
+        toronto.addLocationIncoming(calgary);
+        allFlights.add(calToTor10);
 
 
         allBookings = new ArrayList<Booking>();
 
-        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(winToMn)));
-        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(torToVan)));
-        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(winToTor)));
-        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(winToVan)));
-        bookingManager.createBooking(defaultUser,new ArrayList<Flight>(Collections.singletonList(torToMn)));
+        bookingManager.createBooking("default",new Route(Collections.singletonList(winToMn)));
+        bookingManager.createBooking("default",new Route(Collections.singletonList(torToVan)));
+        bookingManager.createBooking("default",new Route(Collections.singletonList(winToTor)));
+
 
         System.out.println("Opened " +dbType +" database " +dbName);
     }
@@ -172,20 +213,6 @@ public class DataAccessStub {
         return null;
     }
 
-    //puts a new booking into booking database
-    public String bookFlight(String username,int flightNumber ){
-        User userObject = getUserObject(username);
-        ArrayList<Flight> route = new ArrayList<Flight>();
-        route.add(getFlightObject(flightNumber));
-
-        if(userObject != null && flightNumber > 0) {
-            bookingManager.createBooking(userObject,route);
-        }
-        else{
-            System.out.println("no object found");
-        }
-        return  null;
-    }
 
     //to get object of User from username
     public User getUserObject(String username){
