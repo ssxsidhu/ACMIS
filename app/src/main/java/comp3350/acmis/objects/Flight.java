@@ -2,13 +2,7 @@
 // WE NEED TO CONSIDER IF SOME FLIGHTS RUN ONLY ON CERTAIN DAYS OR TIME RANGES
 
 package comp3350.acmis.objects;
-import android.os.Build;
 
-import java.sql.Date;
-import java.util.*;
-import androidx.annotation.RequiresApi;
-
-import java.time.*;
 import java.util.ArrayList;
 
 import comp3350.acmis.business.DateFormatter;
@@ -36,7 +30,7 @@ public class Flight {
     private ArrayList<User> flightList;
 
     public Flight(Location source, Location destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime) {
-        this.flightID = flightID;
+        this.flightID = flightSequence;
         this.source = source;
         this.destination = destination;
         this.departureDate = departureDate;
@@ -48,14 +42,43 @@ public class Flight {
     }
 
 
-    // Getters()
+    // GETTERS
     public int getFlightID() {
         return flightID;
     }
-
+    public static int getFlightSequence() {
+        return flightSequence;
+    }
+    public Location getSource() {
+        return source;
+    }
+    public Location getDestination() {
+        return destination;
+    }
     public ArrayList<User> getPassengerList() {
         return flightList;
     }
+    public String getDepartureTime() {
+        return departureTime;
+    }
+    public String getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public String getArrivalDate() {
+        DateFormatter date = new DateFormatter(departureDate);
+        return date.format();
+    }
+    public String getDepartureDate() {
+        DateFormatter date = new DateFormatter(departureDate);
+        return date.format();
+    }
+
+    public String getRawDepartureDate(){
+        return departureDate;
+    }
+
+
 
     @Override
     public String toString() {
@@ -67,53 +90,18 @@ public class Flight {
                 '}';
     }
 
-    // Setters()
+    // SETTERS
     public void addUser(User addThis) {
         flightList.add(addThis);
     }
-
     public boolean removeUser(User removeThisUser) {
         return (flightList.remove(removeThisUser));
     }
-
     public void newDepart(Location newDepart) {
         source = newDepart;
     }
-
     public void newArrival(Location newArrive) {
         destination = newArrive;
     }
 
-    public static int getFlightSequence() {
-        return flightSequence;
-    }
-
-    public Location getSource() {
-        return source;
-    }
-
-    public Location getDestination() {
-        return destination;
-    }
-
-
-    public String getArrivalDate() {
-        DateFormatter date = new DateFormatter(departureDate);
-        System.out.println(date.format());
-        return date.format();
-    }
-
-    public String getArrivalTime() {
-        return arrivalTime;
-    }
-
-    public String getDepartureDate() {
-        DateFormatter date = new DateFormatter(departureDate);
-        System.out.println(date.format());
-        return date.format();
-    }
-
-    public String getDepartureTime() {
-        return departureTime;
-    }
 }
