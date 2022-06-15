@@ -17,7 +17,7 @@ import comp3350.acmis.business.DateFormatter;
 public class Flight {
 
     // STATIC VARIABLE
-    private static int flightSequence=0;
+    private static int flightSequence=1;
 
     // Instance Variables
     private int flightID;
@@ -33,6 +33,8 @@ public class Flight {
     private String arrivalTime;
 
     //
+    // Store all users on this flight in a list.
+    private ArrayList<User> passengerList;
 
     //constructor
     public Flight(Location source, Location destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime) {
@@ -41,12 +43,18 @@ public class Flight {
         this.source = Objects.requireNonNull(source,"Source cannot be null");
         this.destination = Objects.requireNonNull(destination,"Destination cannot be null");
         this.departureDate = Objects.requireNonNull(departureDate,"Departure date cannot be null");
-        this.departureTime = Objects.requireNonNull(departureTime,"Departure time cannot be null");;
-        this.arrivalDate = Objects.requireNonNull(arrivalDate,"Arrival date cannot be null");;
-        this.arrivalTime = Objects.requireNonNull(arrivalTime,"Arrival time cannot be null");;
+        this.departureTime = Objects.requireNonNull(departureTime,"Departure time cannot be null");
+        this.arrivalDate = Objects.requireNonNull(arrivalDate,"Arrival date cannot be null");
+        this.arrivalTime = Objects.requireNonNull(arrivalTime,"Arrival time cannot be null");
+        passengerList =  new ArrayList<>();
         flightSequence++;
     }
 
+
+    //to add passenger to flight
+    public void addUser(User addThis) {
+        passengerList.add(addThis);
+    }
 
     // GETTERS
     public int getFlightID() {
@@ -77,6 +85,9 @@ public class Flight {
     }
     public String getRawDepartureDate(){
         return departureDate;
+    }
+    public ArrayList<User> getPassengerList() {
+        return passengerList;
     }
 
     @Override
