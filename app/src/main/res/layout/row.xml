@@ -80,7 +80,7 @@
         android:layout_toEndOf="@+id/list_icon"
         android:layout_gravity="center_vertical"
         android:gravity="end"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:maxLines="1"
         android:paddingTop="16dp"
         android:paddingEnd="16dp"

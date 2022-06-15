@@ -61,7 +61,7 @@ public class BookingManager {
                     stopOver.add(tempSrc.get(i));
                     stopOver.add(tempDest.get(j));
 
-                    validRoutes.add(new Route(stopOver));
+//                    validRoutes.add(new Route(stopOver));
                     stopOver.clear();
                 }
             }
