@@ -26,12 +26,6 @@ public class Booking {
         bookingSeq++;
     }
 
-
-    public void incrementPassengers(){
-        numPassengers++;
-    }
-
-
     // GETTERS
     public User getBooker() {
         return booker;
@@ -39,10 +33,6 @@ public class Booking {
     public int getBookingId() {return bookingId;}
     public Route getRoute() {
         return route;
-    }
-
-    public int getNumPassengers() {
-        return numPassengers;
     }
 
 
