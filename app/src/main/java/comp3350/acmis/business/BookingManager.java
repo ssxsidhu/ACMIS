@@ -13,7 +13,6 @@ import comp3350.acmis.persistence.DataAccessStub;
 
 public class BookingManager {
 
-    // Which Data base to perform ops on ?
     private DataAccessStub data;
 
     // Constructor
