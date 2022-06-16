@@ -6,10 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".presentation.FragmentManage">
 
     <TextView
@@ -18,8 +14,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="25dp"
-        android:text="Upcoming Flights"/>
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"        android:textSize="25dp"
+        android:text="@string/upcoming_flights"/>
 
     <View
         android:layout_width="match_parent"
@@ -34,7 +32,7 @@
         android:layout_height="0dp"
         android:layout_gravity="top"
         android:layout_weight="1"
-        android:choiceMode="singleChoice"
+        android:choiceMode="none"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_title_manage_tab"/>

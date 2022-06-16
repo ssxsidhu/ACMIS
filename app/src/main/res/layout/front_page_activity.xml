@@ -6,7 +6,7 @@
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/homepage_airplane_gif"
+        android:src="@drawable/front_airplane_gif"
         android:scaleType="centerCrop"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

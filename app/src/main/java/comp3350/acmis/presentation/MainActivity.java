@@ -1,36 +1,40 @@
 package comp3350.acmis.presentation;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
-
 import com.google.android.material.tabs.TabLayout;
-
 import comp3350.acmis.R;
 
-public class BottomTabActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     private FragmentAdapter adapter;
+    private static boolean prevStarted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.bottom_tab_activity);
 
+        super.onCreate(savedInstanceState);
+        if(!prevStarted) {
+            launchFrontPage();
+            prevStarted = true;
+        }
+
+        setContentView(R.layout.main_activity);
         tabLayout = findViewById(R.id.tabLayout);
         viewPager2 = findViewById(R.id.view_pager2);
 
         tabLayout.addTab(tabLayout.newTab().setText("Book flight"));
         tabLayout.addTab(tabLayout.newTab().setText("Manage flights"));
 
+        //creates tabs and sets the listener
         FragmentManager fragmentManager = getSupportFragmentManager();
-        adapter = new FragmentAdapter(fragmentManager,getLifecycle());
+        adapter = new FragmentAdapter(fragmentManager, getLifecycle());
         viewPager2.setAdapter(adapter);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -39,15 +43,12 @@ public class BottomTabActivity extends AppCompatActivity {
                 viewPager2.setCurrentItem(tab.getPosition());
             }
 
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
 
@@ -60,6 +61,19 @@ public class BottomTabActivity extends AppCompatActivity {
 
     }
 
+    private void launchFrontPage(){
+        Intent i = new Intent(this, FrontPageActivity.class);
+
+        //starts and track an activity for result
+        ActivityResultLauncher<Intent> firstPageActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {//do Nothing
+                });
+
+        firstPageActivityResultLauncher.launch(i);
+    }
+
+    //exit the after pressing the back button at this activity
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -67,4 +81,5 @@ public class BottomTabActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
 }

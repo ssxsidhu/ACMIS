@@ -1,27 +1,24 @@
 package comp3350.acmis.presentation;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
-
 import java.util.ArrayList;
-import java.util.Objects;
-
 import comp3350.acmis.R;
 import comp3350.acmis.objects.Booking;
-import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Route;
 
 public class CustomAdapter extends BaseAdapter {
 
-    private Fragment mContext;
-    private ArrayList<Route> displayList;
+    private Fragment mContext = null;
+    private Activity activity;
+    private final ArrayList<Route> displayList;
 
 
     public CustomAdapter(FragmentManage context, ArrayList<Booking> userBookings) {
@@ -33,8 +30,8 @@ public class CustomAdapter extends BaseAdapter {
 
     }
 
-    public CustomAdapter(FragmentBook context, ArrayList<Route> flightsAvailable) {
-        mContext = context;
+    public CustomAdapter(Activity activity, ArrayList<Route> flightsAvailable) {
+        this.activity = activity;
         displayList = flightsAvailable;
     }
 
@@ -57,10 +54,16 @@ public class CustomAdapter extends BaseAdapter {
     @SuppressLint({"ViewHolder", "DefaultLocale"})
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        LayoutInflater inflater = mContext.getLayoutInflater();
+        LayoutInflater inflater;
+        if(mContext != null) {
+            inflater = mContext.getLayoutInflater();
+        }else{
+            inflater=activity.getLayoutInflater();
+        }
+
         View row;
         row = inflater.inflate(R.layout.row, parent, false);
-        TextView titleTopLeft, titleTopRight, titleMiddleLeft, titleMiddleRight, titleBottomLeft, titleBottomRight;
+        TextView titleTopLeft, titleTopRight, titleMiddleLeft, titleMiddleRight, titleBottomLeft, titleBottomRight,titleExtraLeft,titleExtraRight;
         ImageView i1;
         i1 = (ImageView) row.findViewById(R.id.list_icon);
         titleTopLeft = (TextView) row.findViewById(R.id.list_top_text_left);
@@ -69,6 +72,8 @@ public class CustomAdapter extends BaseAdapter {
         titleMiddleRight = (TextView) row.findViewById(R.id.list_middle_text_right);
         titleBottomLeft = (TextView) row.findViewById(R.id.list_bottom_text_left);
         titleBottomRight = (TextView) row.findViewById(R.id.list_bottom_text_right);
+        titleExtraLeft = (TextView) row.findViewById(R.id.list_extra_text_left);
+        titleExtraRight = (TextView) row.findViewById(R.id.list_extra_text_right);
 
         if(displayList!=null && displayList.size()>0 && displayList.get(position).getRoute().size()>0){
             titleTopLeft.setText(displayList.get(position).getRoute().get(0).getDepartureTime());
@@ -77,6 +82,7 @@ public class CustomAdapter extends BaseAdapter {
             titleMiddleRight.setText(displayList.get(position).getRoute().get(0).getDestination().getCity());
             titleBottomLeft.setText(displayList.get(position).getRoute().get(0).getDepartureDate());
             titleBottomRight.setText(String.format("FlightID: #%d", displayList.get(position).getRoute().get(0).getFlightID()));
+            titleExtraLeft.setText(String.format("Total Passengers: %d", displayList.get(position).getRoute().get(0).getPassengerList().size()));
             i1.setImageResource(R.drawable.airplane_symbol);
         }
 

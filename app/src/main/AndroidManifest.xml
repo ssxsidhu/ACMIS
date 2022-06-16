@@ -13,17 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ACMIS"
         tools:targetApi="31">
-
-
         <activity
-            android:name=".presentation.BottomTabActivity"
-            android:exported="false"
-            android:label="@string/title_BottomTabbedActivity"
-            android:theme="@style/Theme.ACMIS" />
-        <!-- below is the code for default activity which is Main Activity -->
+            android:name=".presentation.SearchResults"
+            android:exported="false" />
         <activity
-            android:name=".presentation.HomePageActivity"
-            android:exported="true">
+            android:name=".presentation.FrontPageActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".presentation.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ACMIS" > <!-- below is the code for default activity which is Main Activity -->
 
             <!--
                 Inside this activity you should be having below code for
