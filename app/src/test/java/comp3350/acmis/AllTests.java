@@ -6,6 +6,7 @@ import junit.framework.TestSuite;
 import comp3350.acmis.business.DateFormatterTest;
 import comp3350.acmis.business.BookingManagerTest;
 import comp3350.acmis.objects.FlightTest;
+import comp3350.acmis.objects.RouteTest;
 import comp3350.acmis.objects.UserTest;
 import comp3350.acmis.objects.LocationTest;
 import comp3350.acmis.objects.BookingTest;
@@ -27,6 +28,7 @@ public class AllTests extends TestCase {
         suite.addTestSuite(LocationTest.class);
         suite.addTestSuite(BookingTest.class);
         suite.addTestSuite(FlightTest.class);
+        suite.addTestSuite(RouteTest.class);
     }
 
     private static void tBusiness() {
