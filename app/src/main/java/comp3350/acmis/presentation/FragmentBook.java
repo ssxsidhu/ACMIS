@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -46,7 +45,7 @@ public class FragmentBook extends Fragment {
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
      * @return A new instance of fragment BookFragment.
-  */
+     */
     public static FragmentBook newInstance(String param1, String param2) {
         FragmentBook fragment = new FragmentBook();
         Bundle args = new Bundle();
@@ -74,44 +73,7 @@ public class FragmentBook extends Fragment {
         return inflater.inflate(R.layout.fragment_book, container, false);
     }
 
-
-
-//    public String bookRoutes(View rootView){
-//        Button book = rootView.findViewById(R.id.book_button);
-//        book.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for(int i=0;i<selectedRoutes.size();i++){
-//                    bookingManager.createBooking("default",selectedRoutes.get(i));
-//                }
-//            }
-//        });
-//        return null;
-//    }
-
-
-    public String search(View rootView) {
-        Button search = rootView.findViewById(R.id.search_button);
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(selectedDeparture!=null && selectedDestination!=null) {
-                    sendData();
-//                    flightsAvailable.add(bookingManager.searchRoute(selectedDeparture, selectedDestination));
-                }
-            }
-        });
-
-        return null;
-    }
-
-
-
     @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        accessLocations = new AccessLocations();
-        locationList = new ArrayList<Location>();
-        selectedRoutes = new ArrayList<>();
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
         AccessLocations accessLocations = new AccessLocations();
         ArrayList<Location> locationList = new ArrayList<>();
@@ -153,7 +115,6 @@ public class FragmentBook extends Fragment {
         search(view);
 
     }
-    private void sendData() {
 
     public void search(View rootView){
         Button search = rootView.findViewById(R.id.search_button);
@@ -171,5 +132,8 @@ public class FragmentBook extends Fragment {
         i.putExtra("selectedDeparture", selectedDeparture);
         i.putExtra("selectedDestination",selectedDestination);
         getActivity().startActivity(i);
+
     }
+
+
 }

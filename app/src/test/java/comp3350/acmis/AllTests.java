@@ -4,10 +4,13 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import comp3350.acmis.business.BookingManagerTest;
 import comp3350.acmis.business.DateFormatterTest;
+import comp3350.acmis.objects.FlightTest;
 import comp3350.acmis.objects.UserTest;
 import comp3350.acmis.objects.LocationTest;
 import comp3350.acmis.objects.BookingTest;
+import comp3350.acmis.persistence.DataAccessStubTest;
 
 
 public class AllTests extends TestCase {
@@ -25,9 +28,11 @@ public class AllTests extends TestCase {
         suite.addTestSuite(UserTest.class);
         suite.addTestSuite(LocationTest.class);
         suite.addTestSuite(BookingTest.class);
+        suite.addTestSuite(FlightTest.class);
     }
 
     private static void tBusiness() {
         suite.addTestSuite(DateFormatterTest.class);
+//        suite.addTestSuite(BookingManagerTest.class);
     }
 }

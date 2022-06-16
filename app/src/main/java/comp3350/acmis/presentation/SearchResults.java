@@ -30,8 +30,6 @@ public class SearchResults extends AppCompatActivity {
 
         receiveData();
 
-        flightsAvailable = bookingManager.searchRoute(selectedDeparture,selectedDestination);
-        if (flightsAvailable.size() > 0) {
         String checkFlights= bookingManager.searchRoute(selectedDeparture, selectedDestination,flightsAvailable );
         if(checkFlights!=null){
             Messages.noFlightsMessage(this);
@@ -49,29 +47,6 @@ public class SearchResults extends AppCompatActivity {
                     book.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                                bookingManager.createBooking("default",customAdapter.getItem(i));
-                                Intent i = new Intent(thisActivity.getBaseContext(), BottomTabActivity.class);
-                                thisActivity.startActivity(i);
-                        }
-                    });
-                }
-            });
-
-        }
-        else {
-            this.findViewById(R.id.no_results_found).setVisibility(View.VISIBLE);
-            this.findViewById(R.id.header_title_book_tab).setVisibility(View.INVISIBLE);
-        }
-    }
-
-
-    private String bookRoutes(int position) {
-        Button book = this.findViewById(R.id.book_button);
-        book.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                for (int i = 0; i < selectedRoutes.size(); i++) {
-                    bookingManager.createBooking("default",selectedRoutes.get(i));
                             String result = bookingManager.createBooking("default", customAdapter.getItem(i));
                             if(result!=null){
                                 Messages.snackBar(view,result);
@@ -89,11 +64,13 @@ public class SearchResults extends AppCompatActivity {
 
     }
 
-    private void receiveData() {
+    private void receiveData()
+    {
         //RECEIVE DATA VIA INTENT
         Intent i = getIntent();
         selectedDeparture =(Location) i.getSerializableExtra("selectedDeparture");
         selectedDestination =(Location) i.getSerializableExtra("selectedDestination");
         //SET DATA TO TEXTVIEWS
     }
+
 }

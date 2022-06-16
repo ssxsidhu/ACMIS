@@ -10,7 +10,7 @@ public class UserTest extends TestCase {
     public void testFirstName() {
         System.out.println("Starting testUser: firstname");
 
-        User user = null;
+        User user;
 
         //null firstname
         try {
@@ -43,7 +43,7 @@ public class UserTest extends TestCase {
     public void testLastName() {
         System.out.println("Starting testUser: lastname");
 
-        User user = null;
+        User user;
 
         //null lastname
         try {
@@ -76,7 +76,7 @@ public class UserTest extends TestCase {
     public void testGender() {
         System.out.println("Starting testUser: gender");
 
-        User user = null;
+        User user;
 
         //null gender
         try {
@@ -94,7 +94,7 @@ public class UserTest extends TestCase {
     public void testUsername() {
         System.out.println("Starting testUser: username");
 
-        User user = null;
+        User user;
 
         //null username
         try {
@@ -130,7 +130,7 @@ public class UserTest extends TestCase {
     public void testPhoneNumber(){
         System.out.println("Starting testUser: phone number");
 
-        User user = null;
+        User user;
 
         //null phone number
         try {
