@@ -1,7 +1,6 @@
 package comp3350.acmis.objects;
 
-import java.util.ArrayList;
-
+import java.util.Objects;
 
 public class Booking {
 
@@ -16,15 +15,24 @@ public class Booking {
 
     // Constructor()
     public Booking(User booker, Route route) {
-        this.booker = booker;
-        this.route = route;
+        this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
+        this.route = Objects.requireNonNull(route, "Route cannot be null");
+        numPassengers = 1;
         bookingId = bookingSeq;
         bookingSeq++;
     }
 
 
-    public void incrementPassengers(){
-        numPassengers++;
+    public boolean incrementPassengers(){
+        double checkPassengers = (double)numPassengers + 1;
+        boolean ret = false;
+
+        if (checkPassengers <= Integer.MAX_VALUE) {
+            numPassengers++;
+            ret = true;
+        }
+
+        return ret;
     }
 
     // GETTERS

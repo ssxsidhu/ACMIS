@@ -62,11 +62,6 @@ public class User {
             }
         }
         return found;
-
-//        Booking removal = bookings.get(bookingID);
-//        if(removal != null && found){
-//            bookings.remove(removal);
-//        }
     }
 
 

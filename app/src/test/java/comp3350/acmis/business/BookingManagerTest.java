@@ -1,4 +1,4 @@
-package comp3350.acmis.objects;
+package comp3350.acmis.business;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import comp3350.acmis.business.BookingManager;
+import comp3350.acmis.objects.Location;
 
 public class BookingManagerTest {
 
