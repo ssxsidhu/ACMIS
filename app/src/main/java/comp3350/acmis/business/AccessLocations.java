@@ -17,9 +17,8 @@ public class AccessLocations {
         dataAccess=Services.getDataAccess(Main.dbName);
     }
 
-    public String getLocations(ArrayList<Location> locations){
+    public String getLocations (ArrayList<Location> locations) {
         locations.clear();
         return dataAccess.getLocations(locations);
     }
-
 }

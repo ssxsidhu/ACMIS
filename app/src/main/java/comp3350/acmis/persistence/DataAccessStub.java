@@ -1,8 +1,10 @@
 package comp3350.acmis.persistence;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
+
 import comp3350.acmis.application.Main;
 import comp3350.acmis.business.BookingManager;
 import comp3350.acmis.objects.Booking;
@@ -30,7 +32,7 @@ public class DataAccessStub {
     }
 
 
-    public void open(String dbName){
+    public void open(String dbName) {
         User user,defaultUser;
 
         bookingManager = new BookingManager();
@@ -58,7 +60,7 @@ public class DataAccessStub {
 
 
 
-        allFlights = new ArrayList<>();
+        allFlights =  new ArrayList<Flight>();
         Flight winToMn = new Flight(winnipeg,montreal,"2022-06-14","10:30","2022-06-15","4:30");
         winnipeg.addLocationOutgoing(montreal);
         montreal.addLocationIncoming(winnipeg);
@@ -109,42 +111,52 @@ public class DataAccessStub {
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor);
+
         Flight calToTor1 = new Flight(calgary,toronto,"2022-01-31","10:30","2022-12-31","18:45");
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor1);
-        Flight calToTor2 = new Flight(calgary,toronto,"2022-02-31","10:30","2022-12-31","18:45");
+
+        Flight calToTor2 = new Flight(calgary,toronto,"2022-02-28","10:30","2022-12-31","18:45");
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor2);
+
         Flight calToTor3 = new Flight(calgary,toronto,"2022-03-31","10:30","2022-12-31","18:45");
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor3);
-        Flight calToTor4 = new Flight(calgary,toronto,"2022-04-31","10:30","2022-12-31","18:45");
+
+        Flight calToTor4 = new Flight(calgary,toronto,"2022-04-30","10:30","2022-12-31","18:45");
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor4);
+
         Flight calToTor5 = new Flight(calgary,toronto,"2022-05-31","10:30","2022-12-31","18:45");
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor5);
-        Flight calToTor6 = new Flight(calgary,toronto,"2022-06-31","10:30","2022-12-31","18:45");
+
+        Flight calToTor6 = new Flight(calgary,toronto,"2022-06-30","10:30","2022-12-31","18:45");
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor6);
+
         Flight calToTor7 = new Flight(calgary,toronto,"2022-07-31","10:30","2022-12-31","18:45");
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor7);
+
         Flight calToTor8 = new Flight(calgary,toronto,"2022-08-31","10:30","2022-12-31","18:45");
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor8);
-        Flight calToTor9 = new Flight(calgary,toronto,"2022-09-31","10:30","2022-12-31","18:45");
+
+        Flight calToTor9 = new Flight(calgary,toronto,"2022-09-30","10:30","2022-12-31","18:45");
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor9);
+
         Flight calToTor10 = new Flight(calgary,toronto,"2022-10-31","10:30","2022-12-31","18:45");
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
@@ -164,22 +176,22 @@ public class DataAccessStub {
         System.out.println("Closed " +dbType +" database " +dbName);
     }
 
-    public String getAllUsers(ArrayList<User> resultList){
+    public String getAllUsers(ArrayList<User> resultList) {
         resultList.addAll(allUsers);
         return null;
     }
 
-    public String insertUser(User newUser){
+    public String insertUser(User newUser) {
         allUsers.add(newUser);
         return null;
     }
 
-    public String getAllFlights(ArrayList<Flight> resultList){
+    public String getAllFlights(ArrayList<Flight> resultList) {
         resultList.addAll(allFlights);
         return null;
     }
 
-    public String insertFlight(Flight newFlight){
+    public String insertFlight(Flight newFlight) {
         Location dest = newFlight.getDestination();
         Location source = newFlight.getSource();
 
@@ -190,27 +202,28 @@ public class DataAccessStub {
         return null;
     }
 
-    public String insertLocation(Location newLocation){
+    public String insertLocation(Location newLocation) {
         allLocations.add(newLocation);
         return  null;
     }
+
     //returns the locations
-    public String getLocations(ArrayList<Location> resultList){
+    public String getLocations(ArrayList<Location> resultList) {
         resultList.addAll(allLocations);
         return null;
     }
 
-    public String addBooking(Booking newBooking){
+    public String addBooking(Booking newBooking) {
         allBookings.add(newBooking);
         return null;
     }
 
 
     //to get object of User from username
-    public User getUserObject(String username){
+    public User getUserObject(String username) {
         User result = null;
-        for(int i=0; i<allUsers.size(); i++){
-            if(Objects.equals(allUsers.get(i).getUsername(), username)){
+        for (int i = 0; i < allUsers.size(); i++) {
+            if(Objects.equals(allUsers.get(i).getUsername(), username)) {
                 result = allUsers.get(i);
             }
         }
@@ -218,10 +231,10 @@ public class DataAccessStub {
     }
 
     //to get object of Flight from flightNumber
-    public Flight getFlightObject(int flightNumber){
+    public Flight getFlightObject(int flightNumber) {
         Flight result = null;
-        for(int i=0; i<allFlights.size(); i++){
-            if(allFlights.get(i).getFlightID() == flightNumber){
+        for (int i = 0; i < allFlights.size(); i++) {
+            if(allFlights.get(i).getFlightID() == flightNumber) {
                 result = allFlights.get(i);
             }
         }
@@ -229,9 +242,9 @@ public class DataAccessStub {
     }
 
     //method for getting a specific booking from the db using the booking id
-    public Booking getBooking(int bookingId){
-        for(int i=0; i<allBookings.size(); i++){
-            if(allBookings.get(i).getBookingId() == bookingId){
+    public Booking getBooking(int bookingId) {
+        for(int i = 0; i < allBookings.size(); i++){
+            if(allBookings.get(i).getBookingId() == bookingId) {
                 return allBookings.get(i);
             }
         }

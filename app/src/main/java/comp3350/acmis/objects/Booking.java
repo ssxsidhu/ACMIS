@@ -1,11 +1,5 @@
-/*
-This class is used to book flights as the user requests.
-The booking object has a user who is booking the flight, the route (direct flight/ connecting flight),
-booking id and the number of passengers.
- */
 package comp3350.acmis.objects;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class Booking {
@@ -17,13 +11,27 @@ public class Booking {
     private User booker;                    // Person Booking the flight
     private Route route;                    // The Route being taken for reaching from A->B
     private int bookingId;
+    private int numPassengers;
 
     // Constructor()
     public Booking(User booker, Route route) {
-        this.booker = Objects.requireNonNull(booker,"User cannot be null");
-        this.route = Objects.requireNonNull(route,"route cannot be null");
+        this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
+        this.route = Objects.requireNonNull(route, "Route cannot be null");
+        numPassengers = 1;
         bookingId = bookingSeq;
         bookingSeq++;
+    }
+
+
+    public boolean incrementPassengers() {
+        double checkPassengers = (double)numPassengers + 1;
+        boolean ret = false;
+
+        if (checkPassengers <= Integer.MAX_VALUE) {
+            numPassengers++;
+            ret = true;
+        }
+        return ret;
     }
 
     // GETTERS
@@ -34,15 +42,13 @@ public class Booking {
     public Route getRoute() {
         return route;
     }
-
+    public int getNumPassengers() {
+        return numPassengers;
+    }
 
     // SETTER
     public void setNewUser (User newUser){
         booker = newUser;
     }
-
-
-
-
 
 }

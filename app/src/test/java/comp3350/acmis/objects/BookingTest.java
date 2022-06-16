@@ -1,58 +1,91 @@
 package comp3350.acmis.objects;
 
-import static org.junit.Assert.*;
 
+import junit.framework.TestCase;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-public class BookingTest {
+public class BookingTest extends TestCase {
+    private User user;
+    private User user2;
+    private Route route;
+    private Booking booking1;
+    private Booking booking2;
 
-
-    //normal test to get the user who booked
-    @Test
-    public void TestgetBooker() {
-        Location location1 = new Location("Toronto", "Canada", "YYZ");
-        Location location2 = new Location("Vancouver", "Canada", "YVR");
-        Flight test1Flight = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15","4:30");
-        User user = new User("Julie","smith", User.Gender.FEMALE,"jsmith","j&smith$","jmith@gmail.com","2048889999");
-        Route testRoute = new Route(test1Flight);
-        Booking firstBooking = new Booking(user,testRoute);
-
-        assertEquals(user,firstBooking.getBooker());
-
+    @Before
+    private void setup() {
+        user = new User("foo", "bar", User.Gender.FEMALE, "myUsername", "fbp", "fb@gmail.com", "1234567890");
+        user2 = new User("John", "Braico", User.Gender.MALE, "username", "abc", "email@example.com", "2222222222");
+        route = new Route();
+        booking1 = new Booking(user, route);
+        booking2 = new Booking(user, route);
     }
 
-    //normal test to get the route booked
-    @Test
-    public void getRoute() {
-        Location location1 = new Location("Toronto", "Canada", "YYZ");
-        Location location2 = new Location("Vancouver", "Canada", "YVR");
-        Flight test1Flight = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15","4:30");
-        User user = new User("Julie","smith", User.Gender.FEMALE,"jsmith","j&smith$","jmith@gmail.com","2048889999");
-        Route testRoute = new Route(test1Flight);
-        Booking firstBooking = new Booking(user,testRoute);
-
-        assertEquals(testRoute,firstBooking.getRoute());
+    @After
+    private void teardown() {
+        user = null;
+        user2 = null;
+        route = null;
+        booking1 = null;
+        booking2 = null;
     }
 
-    //checking for the errors when creating a booking
+
     @Test
-    public void testErrors(){
-        Location location1 = new Location("Toronto", "Canada", "YYZ");
-        Location location2 = new Location("Vancouver", "Canada", "YVR");
-        Flight test1Flight = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15","4:30");
-        User user = new User("Julie","smith", User.Gender.FEMALE,"jsmith","j&smith$","jmith@gmail.com","2048889999");
-        Route testRoute = new Route(test1Flight);
+    public void testBooking() {
+        System.out.println("Starting testBooking: booking");
 
-        //when a null is passed instead of a user instance
-        try{
-            Booking firstBooking = new Booking(null,testRoute);
-            fail("Expected a null pointer exception");
-        }catch(NullPointerException unused){}
-        //when null is passed instead of a route instance
-        try{
-            Booking firstBooking = new Booking(user,null);
-            fail("Expected a null pointer exception");
-        }catch(NullPointerException unused){}
+        setup();
 
+        assertTrue( booking1.getBookingId() != booking2.getBookingId());
+
+        assertEquals(user, booking1.getBooker());
+        assertEquals(route, booking1.getRoute());
+
+        booking1.setNewUser(user2);
+        assertEquals(user2, booking1.getBooker());
+
+        teardown();
+        System.out.println("Finished testBooking: booking");
+    }
+
+    @Test
+    public void testNullObjects() {
+        System.out.println("Starting testBooking: null objects");
+
+        setup();
+
+        try {
+            booking1 = new Booking(null, route);
+            fail("Expected a NullPointerException");
+        }catch (NullPointerException unused){}
+        try {
+            booking1 = new Booking(user, null);
+            fail("Expected a NullPointerException");
+        }catch (NullPointerException unused){}
+
+        teardown();
+        System.out.println("Finished testBooking: null objects");
+    }
+
+    @Test
+    public void testIncrementPassenger() {
+        System.out.println("Starting testBooking: increment passenger");
+        setup();
+
+        assertEquals(1, booking1.getNumPassengers());
+        for (int i = 0; i < Integer.MAX_VALUE-1; i++) {
+            assertTrue(booking1.incrementPassengers());
+        }
+        assertEquals(Integer.MAX_VALUE, booking1.getNumPassengers());
+
+        //add one more passenger, too big for int
+        assertFalse(booking1.incrementPassengers());
+        assertEquals(Integer.MAX_VALUE, booking1.getNumPassengers());
+
+        teardown();
+        System.out.println("Finished testBooking: increment passenger");
     }
 }
