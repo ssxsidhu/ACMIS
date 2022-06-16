@@ -2,23 +2,17 @@ package comp3350.acmis.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-
 import com.google.android.material.textfield.TextInputLayout;
-
 import java.util.ArrayList;
 import java.util.Objects;
-
 import comp3350.acmis.R;
 import comp3350.acmis.business.AccessLocations;
 import comp3350.acmis.objects.Location;
@@ -71,7 +65,6 @@ public class FragmentBook extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_book, container, false);
     }
 
@@ -89,6 +82,7 @@ public class FragmentBook extends Fragment {
         ddDeparture.setThreshold(1);
         ddDeparture.setAdapter(adapter);
 
+        //departure menu
         TextInputLayout textInputLayout_departure = view.findViewById(R.id.menu_departure);
         ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_departure.getEditText())).setOnItemClickListener((adapterView, view1, position, id) -> {
             if(selectedDeparture!=null) {
@@ -99,6 +93,7 @@ public class FragmentBook extends Fragment {
         });
 
 
+        //destination menu
         AutoCompleteTextView ddDestination = (AutoCompleteTextView) view.findViewById(R.id.auto_destination);
         ddDestination.setThreshold(1);
         ddDestination.setAdapter(adapter);
@@ -118,11 +113,20 @@ public class FragmentBook extends Fragment {
 
     }
 
+    //search button implementation
     public void search(View rootView){
         Button search = rootView.findViewById(R.id.search_button);
         search.setOnClickListener(view -> {
             if(selectedDeparture!=null && selectedDestination!=null) {
                 sendData();
+            }
+            else{
+                if(selectedDeparture == null){
+                    Messages.snackBar(view,"Please select departure");
+                }
+                else {
+                    Messages.snackBar(view,"Please select destination");
+                }
             }
         });
 

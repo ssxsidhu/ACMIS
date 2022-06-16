@@ -9,6 +9,7 @@ import comp3350.acmis.application.Main;
 
 public class FrontPageActivity extends Activity {
 
+    //it shows the front-page gif and finishes the activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

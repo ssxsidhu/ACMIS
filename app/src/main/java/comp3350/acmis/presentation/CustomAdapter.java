@@ -10,11 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
-
 import comp3350.acmis.R;
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Route;
 
+//used to display lists
 public class CustomAdapter extends BaseAdapter {
 
     private Fragment mContext = null;

@@ -25,6 +25,7 @@ public class SearchResults extends AppCompatActivity {
 
         receiveData();
 
+        //checks if there are flights available
         String checkFlights= bookingManager.searchRoute(selectedDeparture, selectedDestination,flightsAvailable );
         if(checkFlights!=null){
             Messages.noFlightsMessage(this);
@@ -35,9 +36,11 @@ public class SearchResults extends AppCompatActivity {
             final Button book = this.findViewById(R.id.book_button);
             Activity thisActivity = this;
             listView.setAdapter(customAdapter);
+            //if the user clicks on a list item
             listView.setOnItemClickListener((adapterView, view, i, l) -> {
                 book.setEnabled(true);
                 book.setOnClickListener(view1 -> {
+                    //if the user clicks on the book button
                     String result = bookingManager.createBooking("default", customAdapter.getItem(i));
                     if(result!=null){
                         Messages.snackBar(view1,result);
@@ -53,6 +56,7 @@ public class SearchResults extends AppCompatActivity {
 
     }
 
+    // receive data from previous activity
     private void receiveData()
     {
         //RECEIVE DATA VIA INTENT

@@ -69,6 +69,7 @@ public class FragmentManage extends Fragment {
         return inflater.inflate(R.layout.fragment_manage, container, false);
     }
 
+    //it shows the upcoming flights in the manage tab
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         myBookingList = new ArrayList<>();
