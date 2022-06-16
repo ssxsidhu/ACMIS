@@ -111,8 +111,11 @@ public class FragmentBook extends Fragment {
             }
             selectedDestination=adapter.getItem(position);
             adapter.remove(adapter.getItem(position));
+
         });
+
         search(view);
+
     }
 
     public void search(View rootView){
@@ -122,6 +125,8 @@ public class FragmentBook extends Fragment {
                 sendData();
             }
         });
+
+
     }
 
     private void sendData(){

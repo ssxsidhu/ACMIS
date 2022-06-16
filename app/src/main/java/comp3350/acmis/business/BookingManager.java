@@ -40,21 +40,18 @@ public class BookingManager {
         ArrayList <Flight> stopOver = new ArrayList<>();
 
         // Check for StopOvers and Direct Routes. But First Populate both lists.
-        for(int i=0;i<allDBFlights.size();i++)
-        {
+        for (int i = 0; i < allDBFlights.size(); i++) {
             // Fill up both lists. At the moment tempSrc has all Flights that begin at srcCity and tempDest has all flights that end at destCity
             if(allDBFlights.get(i).getDestination().getCity().equals(destCity.getCity()))   {tempDest.add(allDBFlights.get(i));}
             if(allDBFlights.get(i).getSource().getCity().equals(srcCity.getCity()))   {tempSrc.add(allDBFlights.get(i));}
         }
 
         // Check for StopOvers.
-        for(int i=0;i<tempSrc.size();i++)
-        {
-            for(int j=0;j<tempDest.size();j++)
-            {
+        for (int i = 0; i < tempSrc.size(); i++) {
+            for (int j = 0; j < tempDest.size(); j++) {
+
                 // Get Flights with Stop Overs.
-                if(tempSrc.get(i).getDestination().getCity().equals(tempDest.get(j).getSource().getCity()))
-                {
+                if(tempSrc.get(i).getDestination().getCity().equals(tempDest.get(j).getSource().getCity())) {
                     stopOver.add(tempSrc.get(i));
                     stopOver.add(tempDest.get(j));
 
@@ -65,12 +62,11 @@ public class BookingManager {
         }
 
         // Check For Direct Routes.
-        for(int i=0;i<allDBFlights.size();i++)
-        {
+        for (int i = 0; i < allDBFlights.size(); i++) {
+
             if(allDBFlights.get(i).getSource().getCity().equals(srcCity.getCity()) &&
-            allDBFlights.get(i).getDestination().getCity().equals(destCity.getCity()))
-            {
-                validRoutes.add(new Route(allDBFlights.get(i)));
+               allDBFlights.get(i).getDestination().getCity().equals(destCity.getCity())) {
+                    validRoutes.add(new Route(allDBFlights.get(i)));
             }
         }
 
@@ -87,43 +83,42 @@ public class BookingManager {
 
 
     //creating booking
-    public String createBooking(String username, Route route){
+    public String createBooking(String username, Route route) {
         User bookerObject = data.getUserObject(username);
         ArrayList<Booking> userBookings = new ArrayList<>();
         Booking newBooking;
+        boolean flag = true;
 
-        if(bookerObject != null && route !=null) {
+        if (bookerObject != null && route != null) {
             bookerObject.getMyBookings(userBookings);
+            for (int i = 0; i < userBookings.size() && flag; i++) {
+                        if (route.getRoute().get(0).getFlightID() == userBookings.get(i).getRoute().getRoute().get(0).getFlightID()) {
+                            return "You have already booked this flight for your account";
+                        }
+                    }
 
-            for(int i=0;i<userBookings.size();i++){
-                if(route.getRoute().get(0).getFlightID() == userBookings.get(i).getRoute().getRoute().get(0).getFlightID()){
-                    return "You have already booked this flight for your account";
-                }
+                        newBooking = new Booking(bookerObject, route);
+                        //adding to the users all the booking.
+                        bookerObject.addBooking(newBooking);
+                        //adding to
+                        route.getRoute().get(0).addUser(bookerObject);
+                        //adding the booking to the master booking.
+                        data.addBooking(newBooking);
+                    } else {
+                        System.out.println("no object found");
+                    }
+
+                    return null;
+
+
             }
 
-                newBooking = new Booking(bookerObject, route);
-                //adding to the users all the booking.
-                bookerObject.addBooking(newBooking);
-                //adding to
-                route.getRoute().get(0).addUser(bookerObject);
-                //adding the booking to the master booking.
-                data.addBooking(newBooking);
-        }
-        else{
-            System.out.println("no object found");
-        }
 
-        return null;
 
-    }
-
-    public void cancelBooking(int bookingId){
+    public void cancelBooking(int bookingId) {
         //need this method in the stud database.
-       Booking temp = data.getBooking(bookingId);
+        Booking temp = data.getBooking(bookingId);
         User canceller = temp.getBooker();
         canceller.removeBooking(bookingId);
     }
-
-
-
 }

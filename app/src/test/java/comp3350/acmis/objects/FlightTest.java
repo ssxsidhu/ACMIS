@@ -4,14 +4,12 @@ This class is used to test the functionality of the flight class.
  */
 package comp3350.acmis.objects;
 
-import static org.junit.Assert.*;
 
-import androidx.annotation.DisplayContext;
-import androidx.appcompat.app.ActionBar;
+import junit.framework.TestCase;
 
 import org.junit.Test;
 
-public class FlightTest {
+public class FlightTest extends TestCase {
 
     @Test
     //this method is used to test if every flight has a unique id. The id is sequential

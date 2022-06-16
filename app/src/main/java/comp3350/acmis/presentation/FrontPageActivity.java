@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 
-
 import comp3350.acmis.R;
 import comp3350.acmis.application.Main;
 

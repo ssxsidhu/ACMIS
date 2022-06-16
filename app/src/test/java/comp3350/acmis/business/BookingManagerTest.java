@@ -6,10 +6,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import comp3350.acmis.application.Main;
-import comp3350.acmis.business.BookingManager;
-
-public class BookingManagerTest {
+public class BookingManagerTest extends TestCase {
 
     @Test
     public void testSetup()
@@ -24,7 +21,6 @@ public class BookingManagerTest {
     @Test
     public void testConstructor() {
 
-        Main.startUp();
         BookingManager test = new BookingManager();     // Name of DB is intrinsically Supplied
         assertNotEquals(null,test);
 
