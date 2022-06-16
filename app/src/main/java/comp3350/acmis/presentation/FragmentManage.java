@@ -22,12 +22,11 @@ import comp3350.acmis.objects.Booking;
  */
 public class FragmentManage extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+   //future use
     private String mParam1;
     private String mParam2;
     private ArrayList<Booking> myBookingList;
@@ -45,7 +44,6 @@ public class FragmentManage extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment ManageFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static FragmentManage newInstance(String param1, String param2) {
         FragmentManage fragment = new FragmentManage();
         Bundle args = new Bundle();
@@ -65,8 +63,6 @@ public class FragmentManage extends Fragment {
 
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -75,17 +71,11 @@ public class FragmentManage extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
-        myBookingList = new ArrayList<Booking>();
+        myBookingList = new ArrayList<>();
         accessBookings = new AccessBookings("default");
-
         accessBookings.getMyBookings(myBookingList);
-
         CustomAdapter adapter = new CustomAdapter(this,myBookingList);
-
         final ListView listView = (ListView) view.findViewById(R.id.list_items_manage_tab);
         listView.setAdapter(adapter);
-
     }
-
-
 }
