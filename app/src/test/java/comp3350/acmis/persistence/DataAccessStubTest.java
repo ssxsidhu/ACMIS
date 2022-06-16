@@ -1,11 +1,8 @@
 package comp3350.acmis.persistence;
 
-import static org.junit.Assert.*;
 
 import org.junit.Test;
-
 import java.util.ArrayList;
-
 import comp3350.acmis.application.Main;
 import comp3350.acmis.objects.Location;
 
