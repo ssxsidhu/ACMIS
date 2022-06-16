@@ -35,7 +35,6 @@ public class CustomAdapter extends BaseAdapter {
         displayList = flightsAvailable;
     }
 
-
     @Override
     public int getCount() {
         return displayList.size();
@@ -73,6 +72,7 @@ public class CustomAdapter extends BaseAdapter {
         titleBottomLeft = (TextView) row.findViewById(R.id.list_bottom_text_left);
         titleBottomRight = (TextView) row.findViewById(R.id.list_bottom_text_right);
         titleExtraLeft = (TextView) row.findViewById(R.id.list_extra_text_left);
+        //for future use
         titleExtraRight = (TextView) row.findViewById(R.id.list_extra_text_right);
 
         if(displayList!=null && displayList.size()>0 && displayList.get(position).getRoute().size()>0){

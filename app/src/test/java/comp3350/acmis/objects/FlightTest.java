@@ -16,13 +16,13 @@ public class FlightTest {
     @Test
     //this method is used to test if every flight has a unique id. The id is sequential
     public void testgetFlightSeq() {
-        assertEquals(0,Flight.getFlightSequence());
+        assertEquals(1,Flight.getFlightSequence());
         Location location1 = new Location("Toronto", "Canada", "YYZ");
         Location location2 = new Location("Vancouver", "Canada", "YVR");
         Flight testY = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15","4:30");
-        assertEquals(1,Flight.getFlightSequence());
-        Flight testZ = new Flight(location2,location1,"2022-11-14","07:30","2022-11-15","10:30");
         assertEquals(2,Flight.getFlightSequence());
+        Flight testZ = new Flight(location2,location1,"2022-11-14","07:30","2022-11-15","10:30");
+        assertEquals(3,Flight.getFlightSequence());
 
     }
 
