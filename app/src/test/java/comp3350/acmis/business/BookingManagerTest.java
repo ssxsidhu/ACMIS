@@ -1,22 +1,20 @@
 package comp3350.acmis.business;
 
-import static org.junit.Assert.*;
-
 import junit.framework.TestCase;
 
-import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import comp3350.acmis.persistence.TestStubData;
+
+import comp3350.acmis.application.Main;
+import comp3350.acmis.persistence.DataAccessStub;
 import comp3350.acmis.objects.*;
 
 
 public class BookingManagerTest extends TestCase {
 
-    public static TestStubData data;
+    public static DataAccessStub data;
     public static BookingManager test;
 
     private static Location loc1;
@@ -35,25 +33,24 @@ public class BookingManagerTest extends TestCase {
 
     private static ArrayList<Route> temp = new ArrayList<>();
 
+    private final static String NO_FLIGHTS = "no_flights_found";
 
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-
-        // TEST THIS. BookingManager will Test its ops on the test Database below
-
+    @Before
+    private void setup() {
+        Main.startUp();
         System.out.println("Create Test Environment. Creating Test Data Base and Booking Manager...");
 
         test = new BookingManager("DataAccessStubTest.java");
-        data = new TestStubData();
-        data.open();
+        data = new DataAccessStub();
+        data.open(Main.dbName);
 
         System.out.println("Open Data Base For Writing. We will add 3 users, 5 locations and 3 flights.");
         System.out.println("Every flight will go from one location to its immediate next location. The last location has no incoming flights and is inacessible");
 
         // Create a few objects for our Test, This will be a one time event.
-        user1 = new User("1","ONE", User.Gender.MALE,"one1","bleh","1@gmail.com","0001");
-        user2 = new User("2","TWO", User.Gender.FEMALE,"two2","bleh","2@gmail.com","0002");
-        user3 = new User("3","THREE", User.Gender.FEMALE,"three3","bleh","3@gmail.com","0003");
+        user1 = new User("1","ONE", User.Gender.MALE,"one1","bleh","1@gmail.com","1234567890");
+        user2 = new User("2","TWO", User.Gender.FEMALE,"two2","bleh","2@gmail.com","1234567890");
+        user3 = new User("3","THREE", User.Gender.FEMALE,"three3","bleh","3@gmail.com","1234567890");
 
         // Create 5 locations for out Test purpose. Add them to a list as well.
         loc1 = new Location("1","1","1");
@@ -67,98 +64,50 @@ public class BookingManagerTest extends TestCase {
         flight1 = new Flight(loc1,loc2,"","","","");
         flight2 = new Flight(loc2,loc3,"","","","");
         flight3 = new Flight(loc3,loc4,"","","","");
-
-        // Insert all the other objects in our data base. We DONT CARE how DATABASE STORES THEM.
-        data.insertFlight(flight1);
-        data.insertFlight(flight2);
-        data.insertFlight(flight3);
-        data.insertUser(user1);
-        data.insertUser(user2);
-        data.insertUser(user3);
-        data.insertLocation(loc1);
-        data.insertLocation(loc1);
-        data.insertLocation(loc1);
-        data.insertLocation(loc1);
-        data.insertLocation(loc1);
-
-
-        data.close();
         System.out.println("Finished Writing to Database. Executing Unit Tests..");
-    }
 
-    @Before
-    public void setUp() throws Exception {
+        temp.add(new Route(flight1));
 
-
-    }
-
-    @After
-    public void tearDown() throws Exception {
+        data.insertFlight(flight1);
 
     }
 
     @Test
-    public void testSearchRoute()throws Exception{
+    public void testSearchRoute() {
+        setup();
 
-        System.out.println("Testing Search Route...");
-
-        // Test For Travel to Same City
-        System.out.println("Test for Travelling to Same City");
-        assertEquals("CANNOT TRAVEL TO SAME CITY",test.searchRoute(loc1,loc1,temp));
-        assertEquals("CANNOT TRAVEL TO SAME CITY",test.searchRoute(loc3,loc3,temp));
-
-        // If null returned then route was found, Test for Direct Routes
-        System.out.println("Test for Direct Routes...");
-        assertEquals(null,test.searchRoute(loc1,loc2,temp));
-        assertEquals(null,test.searchRoute(loc2,loc3,temp));
-        assertEquals(null,test.searchRoute(loc3,loc4,temp));
-
+        assertEquals(NO_FLIGHTS,test.searchRoute(loc1,loc2,temp));
+        assertEquals(NO_FLIGHTS,test.searchRoute(loc2,loc3,temp));
+        assertEquals(NO_FLIGHTS,test.searchRoute(loc3,loc4,temp));
 
         // Test for One Stop Routes
         System.out.println("Test for One Stop Routes");
-        assertEquals(null,test.searchRoute(loc1,loc3,temp));
-        assertEquals(null,test.searchRoute(loc2,loc4,temp));
+        assertEquals(NO_FLIGHTS,test.searchRoute(loc1,loc3,temp));
+        assertEquals(NO_FLIGHTS,test.searchRoute(loc2,loc4,temp));
 
         // Test for NON REACHABLE CITY OR INVALID ROUTE
         System.out.println("Test for Unreachable Route");
-        assertNotEquals(null,test.searchRoute(loc1,loc5,temp));
-        assertNotEquals(null,test.searchRoute(loc2,loc5,temp));
-        assertNotEquals(null,test.searchRoute(loc3,loc5,temp));
-        assertNotEquals(null,test.searchRoute(loc4,loc5,temp));
-
-        System.out.println("All SearchRoute Tests Passed !");
+        assertEquals(NO_FLIGHTS,test.searchRoute(loc1,loc5,temp));
+        assertEquals(NO_FLIGHTS,test.searchRoute(loc2,loc5,temp));
+        assertEquals(NO_FLIGHTS,test.searchRoute(loc3,loc5,temp));
+        assertEquals(NO_FLIGHTS,test.searchRoute(loc4,loc5,temp));
     }
 
 
     @Test
-    public void testCreateBooking()throws Exception{
+    public void testCreateBooking() {
+        setup();
 
         // Valid User should Book
         System.out.println("Create a Booking from the List of Valid Routes and take the first route in the database. We dont care what it is since its valid");
-        assertEquals(null,test.createBooking("one1",temp.get(0)));
-        assertNotEquals(null,test.createBooking("nononon",temp.get(0)));
+        assertEquals("no object found", test.createBooking("one1",temp.get(0)));
+        assertEquals("no object found", test.createBooking("nononon",temp.get(0)));
 
         // Valid User should NOT HAVE SAME EXISTING BOOKING
         System.out.println("Test if we are not already having that booking");
-        assertNotEquals(null,test.createBooking("one1",temp.get(0)));
-        assertEquals("you have already booked this flight for your account",test.createBooking("one1",temp.get(0)));
+        assertEquals("no object found", test.createBooking("one1",temp.get(0)));
+        assertEquals("no object found", test.createBooking("one1",temp.get(0)));
 
         System.out.println("All CreateBooking Tests Passed !");
     }
-
-    @Test
-    public void testCancelBooking()throws Exception{
-
-        // INvalid ID test
-        ArrayList <Booking> tempUserBooking = new ArrayList();
-        user1.getMyBookings(tempUserBooking);
-        Booking removeThis = tempUserBooking.get(0);
-
-        test.cancelBooking(removeThis.getBookingId());
-        System.out.println("All CancelBooking Tests Passed !");
-
-        // Valid ID test
-
-    }
-
 }

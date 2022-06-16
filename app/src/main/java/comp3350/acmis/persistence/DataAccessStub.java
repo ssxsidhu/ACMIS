@@ -22,13 +22,22 @@ public class DataAccessStub {
     private ArrayList<Booking> allBookings;
     private BookingManager bookingManager;
 
+
     public DataAccessStub(String dbName)
     {
         this.dbName = dbName;
+        allUsers = new ArrayList<>();
+        allLocations = new ArrayList<>();
+        allFlights =  new ArrayList<Flight>();
+        allBookings = new ArrayList<>();
     }
 
     public DataAccessStub() {
         this(Main.dbName);
+        allUsers = new ArrayList<>();
+        allLocations = new ArrayList<>();
+        allFlights =  new ArrayList<Flight>();
+        allBookings = new ArrayList<>();
     }
 
 
@@ -37,13 +46,11 @@ public class DataAccessStub {
 
         bookingManager = new BookingManager();
 
-        allUsers = new ArrayList<>();
         defaultUser = new User("Johnny","victor", User.Gender.MALE,"default","jOhnNNyVi12","johnny.victor@gmail.com","2045558999");
         allUsers.add(defaultUser);
         user = new User("Julie","smith", User.Gender.FEMALE,"jsmith","j&smith$","jmith@gmail.com","2048889999");
         allUsers.add(user);
 
-        allLocations = new ArrayList<>();
         Location winnipeg = new Location("Winnipeg","Canada","YWG");
         allLocations.add(winnipeg);
         Location montreal = new Location("Montreal","Canada","YUL");
@@ -60,7 +67,6 @@ public class DataAccessStub {
 
 
 
-        allFlights =  new ArrayList<Flight>();
         Flight winToMn = new Flight(winnipeg,montreal,"2022-06-14","10:30","2022-06-15","4:30");
         winnipeg.addLocationOutgoing(montreal);
         montreal.addLocationIncoming(winnipeg);
@@ -163,7 +169,6 @@ public class DataAccessStub {
         allFlights.add(calToTor10);
 
 
-        allBookings = new ArrayList<>();
         bookingManager.createBooking("default",new Route(Collections.singletonList(winToMn)));
         bookingManager.createBooking("default",new Route(Collections.singletonList(torToVan)));
         bookingManager.createBooking("default",new Route(Collections.singletonList(winToTor)));

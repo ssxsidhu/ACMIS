@@ -91,31 +91,28 @@ public class BookingManager {
         User bookerObject = data.getUserObject(username);
         ArrayList<Booking> userBookings = new ArrayList<>();
         Booking newBooking;
-        boolean flag = true;
 
         if (bookerObject != null && route != null) {
             bookerObject.getMyBookings(userBookings);
-            for (int i = 0; i < userBookings.size() && flag; i++) {
-                        if (route.getRoute().get(0).getFlightID() == userBookings.get(i).getRoute().getRoute().get(0).getFlightID()) {
-                            return "You have already booked this flight for your account";
-                        }
-                    }
-
-                        newBooking = new Booking(bookerObject, route);
-                        //adding to the users all the booking.
-                        bookerObject.addBooking(newBooking);
-                        //adding to
-                        route.getRoute().get(0).addUser(bookerObject);
-                        //adding the booking to the master booking.
-                        data.addBooking(newBooking);
-                    } else {
-                        System.out.println("no object found");
-                    }
-
-                    return null;
-
-
+            for (int i = 0; i < userBookings.size(); i++) {
+                if (route.getRoute().get(0).getFlightID() == userBookings.get(i).getRoute().getRoute().get(0).getFlightID()) {
+                    return "You have already booked this flight for your account";
+                }
             }
+
+            newBooking = new Booking(bookerObject, route);
+            //adding to the users all the booking.
+            bookerObject.addBooking(newBooking);
+            //adding to
+            route.getRoute().get(0).addUser(bookerObject);
+            //adding the booking to the master booking.
+            data.addBooking(newBooking);
+        }
+        else {
+            return "no object found";
+        }
+        return null;
+    }
 
 
 
