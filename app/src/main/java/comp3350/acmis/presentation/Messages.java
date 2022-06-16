@@ -11,28 +11,6 @@ import com.google.android.material.snackbar.Snackbar;
 import comp3350.acmis.R;
 
 public class Messages {
-    public static void fatalError(final Activity owner, String message) {
-        AlertDialog alertDialog = new AlertDialog.Builder(owner).create();
-
-        alertDialog.setTitle(owner.getString(R.string.fatalError));
-        alertDialog.setMessage(message);
-        alertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            public void onCancel(DialogInterface dialog) {
-                owner.finish();
-            }
-        });
-
-        alertDialog.show();
-    }
-
-    public static void warning(Activity owner, String message) {
-        AlertDialog alertDialog = new AlertDialog.Builder(owner).create();
-
-        alertDialog.setTitle(owner.getString(R.string.warning));
-        alertDialog.setMessage(message);
-
-        alertDialog.show();
-    }
 
     public static void snackBar(View view,String message){
         Snackbar mySnackbar = Snackbar.make(view, message, BaseTransientBottomBar.LENGTH_LONG);

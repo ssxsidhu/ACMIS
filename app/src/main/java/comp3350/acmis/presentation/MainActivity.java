@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        //shows the front-page once only
         if(!prevStarted) {
             launchFrontPage();
             prevStarted = true;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //launches the front page
     private void launchFrontPage(){
         Intent i = new Intent(this, FrontPageActivity.class);
 
