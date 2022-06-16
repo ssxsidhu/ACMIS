@@ -1,27 +1,20 @@
-package comp3350.acmis.objects;
+package comp3350.acmis.business;
 
 import static org.junit.Assert.*;
 
-import android.util.Log;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
-import comp3350.acmis.application.Main;
-import comp3350.acmis.application.Services;
-import comp3350.acmis.business.BookingManager;
-import comp3350.acmis.persistence.DataAccessStub;
-import comp3350.acmis.persistence.DataAccessStubTest;
 import comp3350.acmis.persistence.TestStubData;
+import comp3350.acmis.objects.*;
 
-public class BookingManagerTest {
+
+public class BookingManagerTest extends TestCase {
 
     public static TestStubData data;
     public static BookingManager test;
