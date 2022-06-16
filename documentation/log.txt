@@ -1,35 +1,65 @@
-Data / Time / Meeting Ajenda / People who attented the meeting
+COMP 3350 Group 1: Sahilpreet Singh Sidhu, Vrushil Kiritkumar Patel, Prahalad Iyer, Mahamud Hasan Asif, Braden Bileski Malcolm
 
-1st June 2022: 6.30 PM-7.30pm -> Meeting to discuss user story implementation, General Structure of ACMIS and Developer Tasks
+Big User Stories and their Developer Tasks:
+	As a User, I want to be able to see my upcoming flights in clear detail (Priority: High) (Cost: 6 days)
+		- Allow user to ID themselves with username       (Estimated Cost: 2 hours) (Actual Cost: 1 hour)
+			* Developers: Sahilpreet
+		- Retrieve a list of the user's booked flights    (Estimated Cost: 1 hour) (Actual Cost: 2 hours )
+			* Developers: Prahalad, Vrushil
+		- Sort the flights by their takeoff date and time (Estimated Cost: 2 hours) (Actual Cost: 1 hour)
+			* Developers: Sahilpreet, Asif
+		- Display the upcoming flights with details       (Estimated Cost: 15 hours) (Actual Cost: 9 hours)
+			* Developers: Sahilpreet
 
-
-2nd June 2022: 12.00 PM-1.30 PM -> Developer tasks assigned to all the teammates, members present include: Braden,Sahilpreet,Prahlad and Vrushil.
-                                -> Discussion was on creation of objects, implementing a stub database and getting ideas for the presentation.
-                                     1. Sahil - Airplanes class + gui
-                                     2. Vrushil - Airlines class + gui
-                                     3. Prahlad - Flights and Client classes
-                                     4. Asif - Gui/ presentation
-                                     5. Braden - stub database + gui
-                                     * Individuals making the specified classes can go ahead and think about the logic and the unit tests.
-
-2nd June 2022: 2.33 pm -> Initialized the readMe file. Added information about the Group project, project name, the members of the group, and how the application is supposed to work. - Vrushil 
-
-7th June 2022: 2.40pm -> Setup Skeletal Project on Github and setup README, Assign DEV tasks as above
-
-9th June 2022: 1.05pm -> Re-evaluated Project Goals and Re-assigned DEV tasks. Project will now focus on booking flights for Users rather than managing airlines as well.
-                         DEV TASKS : 1) Braden & Sahilpreet --> User Class and Stub Database.
-                                     2) Vrushil & Prahalad --> Flight Class and Logic/Processing.
-                                     3) Asif --> GUI (considering User end as primary now)
-
-                                     MEETING ATTENDANCE: ALL PRESENT. OBJECTIVE - FINISH IMPLEMENTATION Before June 12th 11.59pm
-
-
-12th June 2022: 6pm - 7pm -> Teams updating other teams about the progress in specific tasks. Talked mainly about the graphical representation of the application. Talked about the different ideas of how to create an adaptive user interface. 
-Meeting attendance: All present
-
-13th June 2022: 12pm-4pm -> Vrushil and Prahalad worked on Flight class and Added Booking class. Implemented the BookingManager in the business package that deals with all kinds of user requests including searching, booking, cancelling flights. 
-Added 
-
-13th June 2022: 6pm-7pm -> Group meeting, updating the teams on the new updates, requesting for the required functionality in appropriate classes, decided to start the testing process. Meeting attendance Braden,Prahlad,Sahil,Vrushil.
+	As a User, I want to be able to book direct and connecting flights (Priority: High) (Cost: 20 days)
+		- Allow user to ID themselves with username                        (Estimated Cost: 2 hours) (Actual Cost: 1 hour)
+			* Developers: Sahilpreet
+		- Search from all flights by the takeoff and destination location  (Estimated Cost: 8 hours) (Actual Cost: 4 hours)
+			* Developers: Prahalad, Vrushil
+		- Display all the flights that meet the location criteria          (Estimated Cost: 4 hours) (Actual Cost: 10 hours)
+			* Developers: Sahilpreet, asif
+		- If no flights meet criteria, make it obvious there are none      (Estimated Cost: 1 hour) (Actual Cost: 2 hours)
+			* Developers: Sahilpreet,Prahalad
+		- Pick a flight from the list                                      (Estimated Cost: 2 hours) (Actual Cost: 5 hours)
+			* Developers: asif,Vrushil
+		- Allow the user to book the flight                                (Estimated Cost: 5 hours) (Actual Cost: 8 hours)
+			* Developers: Sahilpreet,asif
+		- Create a database to store users and flights, populate with data (Estimated Cost: 5 hours) (Actual Cost: 5 hours)
+			* Developers: Braden
+		- Track incoming and outgoing flights for each location            (Estimated Cost: 2 hours) (Actual Cost: 5 hours)
+			* Developers: Vrushil, Braden
 
 
+Group Meetings:
+	June 1, 2022 : 1 Hour 
+		- Meeting to discuss user story implementation, General Structure of ACMIS and Developer Tasks
+		- Everyone in attendance
+	June 2, 2022 : 1.5 Hours
+		- Developer tasks assigned to all the teammates
+		- Discussion was on creation of objects, implementing a stub database and getting ideas for the presentation
+		- Sahilpreet, Vrushil, Prahald, and Braden in attendance
+	June 7, 2022 : 1.5 Hours
+		- Setup Skeletal Project on Github and setup README
+		- Everyone in attendance
+	June 9, 2022 : 2 Hours
+		- Re-evaluated Project Goals and Re-assigned DEV tasks. 
+		- Project will now focus on booking flights for Users rather than managing airlines
+		- Everyone in attendance
+	June 12, 2022 : 1 Hour
+		- Teams updating other teams about the progress in specific tasks
+		- Talked mainly about the graphical representation of the application 
+		- Talked about the different ideas of how to create an adaptive user interface
+		- Everyone in attendance
+	June 13, 2022 : 1 Hour
+		- Updating the teams on the new updates
+		- Requesting for the required functionality in appropriate classes
+		- Decided to start the testing process
+		- Braden, Prahlad, Sahilpreet, and Vrushil in attendance
+	June 14, 2022 : 1 Hour
+		- Teams linking their parts together
+		- Finalizing the main code base
+		- Discussed testing
+		- Everyone in attendance
+	June 16, 2022 : 2 Hours
+		- FInal testing
+		- Braden, Sahilpreet, and Vrushil in attendance
