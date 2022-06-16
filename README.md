@@ -1,30 +1,57 @@
-# ACMIS
-
-Comp 3350 - Prof John Braico - Summer 2022 :)
-
-Group members
--------------
+# Airline and Client Management Information System (ACMIS)
+## Group members
 Bileski Malcolm, Braden  
 Asif, Mahamud Hasan  
 Iyer, Prahalad  
 Patel, Vrushil Kiritkumar  
 Sidhu, Sahilpreet Singh  
 
-Project name: Airline and Client Management Information System (ACMIS)
-----------------------------------------------------------------------
+---
 
-About
------
--> ACMIS is an Java - android application. It focuses on one major target group which is: Clients/Users.
--> The application uses android studio for the gui implementation and java in the backend for database and logic
--> The Clients are customers who want to book a flight from one place to another. 
-   They will also be able to create an account and use it to book, cancel or even re-schedule flights.
+## Source Code Files:
+   ### comp3350.acmis
 
+   #### \> business
+   * AccessBookings
+   * AccessFlights
+   * AccessLocations
+   * BookingManager
+   * DateFormatter
+   #### \> objects
+   * Booking
+   * Flight
+   * Location
+   * Route
+   * User
+   #### \> persistence
+   * DataAccessStub
+   #### \> presentation
+   * BottomTabActivity
+   * CustomAdapter
+   * FragmentAdadpter
+   * FragmentBook
+   * FragmentManage
+   * HomePageActivity
+   * Messages
+   * SearchResults
 
-** The project is divided into 4 iterations.
-iteration 0 : The Vision statement and the big user stories
-iteration 1 : 1) Developer tasks, technical coding, breaking down 1 big user story and UnitTests.
-              2) Simple User Interface, users can search for flights and book flights.
-              3) Using a stub database to store a list of location,flights, and users
-              4) Business package contains classes that have the logic which connect the user interface to the stub database, It
-                 also has some data processing such as, algorithm for finding the flights from one place to another, and data formatting.
+---
+
+## Private Github Repo:
+* https://github.com/ssxsidhu/ACMIS
+
+---
+## log.txt
+* Located in: /documentation/log.txt
+
+---
+
+## Major Features
+Users are able to search for flights by the takeoff and destination location. They are then able to book from those flights returned from the search. This feature is available in the "Book Flights" tab at the bottom of the screen.
+
+Users can also go to the manage flight screen by pressing the "Manage Flights" tab at the bottom. Here, users can look at the details of all of their upcoming flights. The flights here are sorted by their takeoff date and time.
+
+---
+
+## Android Versions
+Our app was tested on the the Nexus 7 emulator on AndoidStudio using with system image 6.0 (Marshmallow, API level 23). We also tested it on the Nexus 7 tablet.
