@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public class UserTest extends TestCase {
     @Test
     public void testFirstName() {
+        System.out.println("Starting testUser: firstname");
+
         User user = null;
 
         //null firstname
@@ -33,10 +35,14 @@ public class UserTest extends TestCase {
 
         user = new User("    foo     ", "bar", User.Gender.OTHER , "myUsername", "fbp", "fb@gmail.com", "1111111111");
         assertEquals("foo", user.getFirstName());
+
+        System.out.println("Finished testUser: firstname");
     }
 
     @Test
     public void testLastName() {
+        System.out.println("Starting testUser: lastname");
+
         User user = null;
 
         //null lastname
@@ -62,10 +68,14 @@ public class UserTest extends TestCase {
 
         user = new User("    foo     ", "   bar     ", User.Gender.MALE , "myUsername", "fbp", "fb@gmail.com", "1111111111");
         assertEquals("bar", user.getLastName());
+
+        System.out.println("Finished testUser: lastname");
     }
 
     @Test
     public void testGender() {
+        System.out.println("Starting testUser: gender");
+
         User user = null;
 
         //null gender
@@ -76,10 +86,14 @@ public class UserTest extends TestCase {
 
         user = new User("foo", "bar", User.Gender.FEMALE , "myUsername", "fbp", "fb@gmail.com", "1111111111");
         assertEquals(User.Gender.FEMALE, user.getGender());
+
+        System.out.println("Finished testUser: gender");
     }
 
     @Test
     public void testUsername() {
+        System.out.println("Starting testUser: username");
+
         User user = null;
 
         //null username
@@ -108,10 +122,14 @@ public class UserTest extends TestCase {
 
         user = new User("foo", "   bar     ", User.Gender.MALE, "     myUsername ", "fbp", "fb@gmail.com", "1111111111");
         assertEquals("myUsername", user.getUsername());
+
+        System.out.println("Finished testUser: username");
     }
 
     @Test
     public void testPhoneNumber(){
+        System.out.println("Starting testUser: phone number");
+
         User user = null;
 
         //null phone number
@@ -129,11 +147,15 @@ public class UserTest extends TestCase {
             user = new User("foo", "bar", User.Gender.MALE , "myUsername", "fbp", "fb@gmail.com", "123456789123456789");
             fail("Expected a IllegalArgumentException");
         } catch (IllegalArgumentException unused) {}
+
+        System.out.println("Finished testUser: phone number");
     }
 
 
     @Test
     public void testGetBookings() {
+        System.out.println("Starting testUser: get bookings");
+
         //method is not have fully implemented yet, testing current version
         User user = new User("foo", "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1234567890");
         ArrayList<Booking> bookings = new ArrayList<Booking>();
@@ -144,10 +166,14 @@ public class UserTest extends TestCase {
             user.getMyBookings(null);
             fail("Expected a NullPointerException");
         } catch (NullPointerException unused) {}
+
+        System.out.println("Finished testUser: get bookings");
     }
 
     @Test
-    public void testBooking() {
+    public void testAddRemoveBooking() {
+        System.out.println("Starting testUser: add/remove booking");
+
         User user = new User("foo", "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1234567890");
         Booking booking1 = new Booking(user, new Route());
         Booking booking2 = new Booking(user, new Route());
@@ -177,5 +203,7 @@ public class UserTest extends TestCase {
 
         //no booking should have this high of an ID
         assertFalse(user.removeBooking(Integer.MAX_VALUE));
+
+        System.out.println("Finished testUser: add/remove booking");
     }
 }
