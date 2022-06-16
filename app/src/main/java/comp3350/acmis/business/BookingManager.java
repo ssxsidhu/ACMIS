@@ -20,6 +20,10 @@ public class BookingManager {
         data = Services.getDataAccess(Main.dbName);
     }
 
+    public BookingManager(String name) {
+        data = Services.getDataAccess(name);
+    }
+
     // Return List of Routes
     public String searchRoute(Location srcCity, Location destCity, ArrayList<Route> returnRoutes){
 
