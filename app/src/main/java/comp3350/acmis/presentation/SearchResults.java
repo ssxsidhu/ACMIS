@@ -19,9 +19,7 @@ import comp3350.acmis.objects.Route;
 
 public class SearchResults extends AppCompatActivity {
 
-
-    private ArrayList<Route> selectedRoutes = new ArrayList<>();
-    private Location selectedDeparture,selectedDestination;
+    private Location selectedDeparture, selectedDestination;
     BookingManager bookingManager = new BookingManager();
     ArrayList<Route> flightsAvailable = new ArrayList<>();
 
@@ -34,6 +32,11 @@ public class SearchResults extends AppCompatActivity {
 
         flightsAvailable = bookingManager.searchRoute(selectedDeparture,selectedDestination);
         if (flightsAvailable.size() > 0) {
+        String checkFlights= bookingManager.searchRoute(selectedDeparture, selectedDestination,flightsAvailable );
+        if(checkFlights!=null){
+            Messages.noFlightsMessage(this);
+        }
+        else {
             CustomAdapter customAdapter = new CustomAdapter(this, flightsAvailable);
             final ListView listView = (ListView) this.findViewById(R.id.list_items_book_tab);
             final Button book = this.findViewById(R.id.book_button);
@@ -69,12 +72,22 @@ public class SearchResults extends AppCompatActivity {
             public void onClick(View view) {
                 for (int i = 0; i < selectedRoutes.size(); i++) {
                     bookingManager.createBooking("default",selectedRoutes.get(i));
+                            String result = bookingManager.createBooking("default", customAdapter.getItem(i));
+                            if(result!=null){
+                                Messages.snackBar(view,result);
+                            }
+                            else {
+                                Intent i = new Intent(thisActivity.getBaseContext(), MainActivity.class);
+                                thisActivity.startActivity(i);
+                            }
+                        }
+                    });
                 }
-            }
-        });
-        return null;
-    }
+            });
 
+        }
+
+    }
 
     private void receiveData() {
         //RECEIVE DATA VIA INTENT

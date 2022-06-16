@@ -1,16 +1,17 @@
 package comp3350.acmis.objects;
 
 
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class User {
 
     // Instance Variables
-    private String firstName;
-    private String lastName;
-    private Gender gender;
-    private String username;
+    private final String firstName;
+    private final String lastName;
+    private final Gender gender;
+    private final String username;
     private String password;
     private String email;
     private long phoneNumber;
@@ -98,4 +99,5 @@ public class User {
         FEMALE,
         OTHER
     }
+
 }

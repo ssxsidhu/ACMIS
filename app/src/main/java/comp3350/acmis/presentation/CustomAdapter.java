@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
-
 import java.util.ArrayList;
 
 import comp3350.acmis.R;
@@ -21,8 +19,7 @@ public class CustomAdapter extends BaseAdapter {
 
     private Fragment mContext = null;
     private Activity activity;
-    private ArrayList<Route> displayList;
-    private ArrayList<Booking> userBookings;
+    private final ArrayList<Route> displayList;
 
 
     public CustomAdapter(FragmentManage context, ArrayList<Booking> userBookings) {
@@ -31,7 +28,6 @@ public class CustomAdapter extends BaseAdapter {
         for (int i = 0; i < userBookings.size(); i++) {
             displayList.add(userBookings.get(i).getRoute());
         }
-        this.userBookings=userBookings;
     }
 
     public CustomAdapter(Activity activity, ArrayList<Route> flightsAvailable) {
@@ -87,9 +83,7 @@ public class CustomAdapter extends BaseAdapter {
             titleMiddleRight.setText(displayList.get(position).getRoute().get(0).getDestination().getCity());
             titleBottomLeft.setText(displayList.get(position).getRoute().get(0).getDepartureDate());
             titleBottomRight.setText(String.format("FlightID: #%d", displayList.get(position).getRoute().get(0).getFlightID()));
-            if(userBookings!=null) {
-                titleExtraLeft.setText(String.format("Passengers: %d", userBookings.get(position).getNumPassengers()));
-            }
+            titleExtraLeft.setText(String.format("Total Passengers: %d", displayList.get(position).getRoute().get(0).getPassengerList().size()));
             i1.setImageResource(R.drawable.airplane_symbol);
         }
 

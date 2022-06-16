@@ -12,4 +12,5 @@
     <string name="book_flight">Book Flight</string>
     <string name="search_flights">Search Flights</string>
     <string name="upcoming_flights">Upcoming Flights</string>
+    <string name="airplane_logo">Airplane Logo</string>
 </resources>

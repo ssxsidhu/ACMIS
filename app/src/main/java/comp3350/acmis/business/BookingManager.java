@@ -13,7 +13,6 @@ import comp3350.acmis.persistence.DataAccessStub;
 
 public class BookingManager {
 
-    // Which Data base to perform ops on ?
     private DataAccessStub data;
 
     // Constructor
@@ -23,7 +22,9 @@ public class BookingManager {
 
     // Return List of Routes
     public ArrayList<Route> searchRoute(Location srcCity, Location destCity) {
+    public String searchRoute(Location srcCity, Location destCity, ArrayList<Route> returnRoutes){
 
+        returnRoutes.clear();
         ArrayList<Route> validRoutes = new ArrayList<>();
 
         //find route using an algo
@@ -70,6 +71,14 @@ public class BookingManager {
             }
         }
         return validRoutes;
+
+        returnRoutes.addAll(validRoutes);
+        if(validRoutes.size()>0){
+            return null;
+        }
+        else{
+            return "no_flights_found";
+        }
     }       // validRoutes List should have stopOver FLights in the beginning and Direct Flights towards the end.
 
 
@@ -77,6 +86,7 @@ public class BookingManager {
 
     //creating booking
     public void createBooking(String username, Route route) {
+    public String createBooking(String username, Route route){
         User bookerObject = data.getUserObject(username);
         ArrayList<Booking> userBookings = new ArrayList<>();
         Booking newBooking;
@@ -89,6 +99,9 @@ public class BookingManager {
                 if (route.getRoute().get(0).getFlightID() == userBookings.get(i).getRoute().getRoute().get(0).getFlightID()) {
                     userBookings.get(i).incrementPassengers();
                     flag = false;
+            for(int i=0;i<userBookings.size();i++){
+                if(route.getRoute().get(0).getFlightID() == userBookings.get(i).getRoute().getRoute().get(0).getFlightID()){
+                    return "You have already booked this flight for your account";
                 }
             }
 
@@ -96,14 +109,17 @@ public class BookingManager {
                 newBooking = new Booking(bookerObject, route);
                 //adding to the users all the booking.
                 bookerObject.addBooking(newBooking);
-
+                //adding to
+                route.getRoute().get(0).addUser(bookerObject);
                 //adding the booking to the master booking.
                 data.addBooking(newBooking);
-            }
         }
         else {
             System.out.println("no object found");
         }
+
+        return null;
+
     }
 
     public void cancelBooking(int bookingId) {
