@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import junit.framework.TestCase;
 import org.junit.Test;
+
+import comp3350.acmis.application.Main;
 import comp3350.acmis.objects.Location;
 
 public class BookingManagerTest extends TestCase {
@@ -21,6 +23,7 @@ public class BookingManagerTest extends TestCase {
     @Test
     public void testConstructor() {
 
+        Main.startUp();
         BookingManager test = new BookingManager();     // Name of DB is intrinsically Supplied
         assertNotEquals(null,test);
 

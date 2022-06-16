@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -45,7 +46,8 @@ public class FragmentBook extends Fragment {
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
      * @return A new instance of fragment BookFragment.
-     */
+  */
+    //for future use
     public static FragmentBook newInstance(String param1, String param2) {
         FragmentBook fragment = new FragmentBook();
         Bundle args = new Bundle();

@@ -37,13 +37,13 @@ public class DataAccessStub {
 
         bookingManager = new BookingManager();
 
-        allUsers = new ArrayList<User>();
+        allUsers = new ArrayList<>();
         defaultUser = new User("Johnny","victor", User.Gender.MALE,"default","jOhnNNyVi12","johnny.victor@gmail.com","2045558999");
         allUsers.add(defaultUser);
         user = new User("Julie","smith", User.Gender.FEMALE,"jsmith","j&smith$","jmith@gmail.com","2048889999");
         allUsers.add(user);
 
-        allLocations = new ArrayList<Location>();
+        allLocations = new ArrayList<>();
         Location winnipeg = new Location("Winnipeg","Canada","YWG");
         allLocations.add(winnipeg);
         Location montreal = new Location("Montreal","Canada","YUL");
@@ -163,8 +163,7 @@ public class DataAccessStub {
         allFlights.add(calToTor10);
 
 
-        allBookings = new ArrayList<Booking>();
-
+        allBookings = new ArrayList<>();
         bookingManager.createBooking("default",new Route(Collections.singletonList(winToMn)));
         bookingManager.createBooking("default",new Route(Collections.singletonList(torToVan)));
         bookingManager.createBooking("default",new Route(Collections.singletonList(winToTor)));

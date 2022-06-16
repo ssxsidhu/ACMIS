@@ -15,14 +15,6 @@ public class FrontPageActivity extends Activity {
         Main.startUp();
         setContentView(R.layout.front_page_activity);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                finish();
-            }
-        }, 3000);
+        new Handler().postDelayed(() -> finish(), 3000);
     }
-
-
-
 }
