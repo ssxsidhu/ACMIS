@@ -1,14 +1,12 @@
-package comp3350.acmis.objects;
+package comp3350.acmis.business;
 
 import static org.junit.Assert.*;
 
-import org.junit.Rule;
+import junit.framework.TestCase;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import comp3350.acmis.objects.Location;
 
-import comp3350.acmis.business.BookingManager;
-
-public class BookingManagerTest {
+public class BookingManagerTest extends TestCase {
 
     @Test
     public void testSetup()

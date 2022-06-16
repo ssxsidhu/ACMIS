@@ -62,7 +62,6 @@ public class FragmentManage extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
 
@@ -74,7 +73,7 @@ public class FragmentManage extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         myBookingList = new ArrayList<Booking>();
         accessBookings = new AccessBookings("default");
 
@@ -84,8 +83,5 @@ public class FragmentManage extends Fragment {
 
         final ListView listView = (ListView) view.findViewById(R.id.list_items_manage_tab);
         listView.setAdapter(adapter);
-
     }
-
-
 }

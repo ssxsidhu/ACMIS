@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
+
 import comp3350.acmis.R;
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Route;
@@ -27,7 +28,6 @@ public class CustomAdapter extends BaseAdapter {
         for (int i = 0; i < userBookings.size(); i++) {
             displayList.add(userBookings.get(i).getRoute());
         }
-
     }
 
     public CustomAdapter(Activity activity, ArrayList<Route> flightsAvailable) {
@@ -57,7 +57,8 @@ public class CustomAdapter extends BaseAdapter {
         LayoutInflater inflater;
         if(mContext != null) {
             inflater = mContext.getLayoutInflater();
-        }else{
+        }
+        else {
             inflater=activity.getLayoutInflater();
         }
 
@@ -75,7 +76,7 @@ public class CustomAdapter extends BaseAdapter {
         titleExtraLeft = (TextView) row.findViewById(R.id.list_extra_text_left);
         titleExtraRight = (TextView) row.findViewById(R.id.list_extra_text_right);
 
-        if(displayList!=null && displayList.size()>0 && displayList.get(position).getRoute().size()>0){
+        if(displayList!=null && displayList.size()>0 && displayList.get(position).getRoute().size()>0) {
             titleTopLeft.setText(displayList.get(position).getRoute().get(0).getDepartureTime());
             titleTopRight.setText(displayList.get(position).getRoute().get(0).getArrivalTime());
             titleMiddleLeft.setText(displayList.get(position).getRoute().get(0).getSource().getCity());
