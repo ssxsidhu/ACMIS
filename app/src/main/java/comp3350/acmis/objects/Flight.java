@@ -17,8 +17,8 @@ public class Flight {
     private Location source;
     private Location destination;
 
-    //date format yyyy-mm-dd
-    //time format hh-mm
+    //date format "yyyy-mm-dd"
+    //time format "hh:mm"
     private String departureDate;
     private String departureTime;
 
@@ -103,5 +103,4 @@ public class Flight {
     public void newArrival(Location newArrive) {
         destination = newArrive;
     }
-
 }

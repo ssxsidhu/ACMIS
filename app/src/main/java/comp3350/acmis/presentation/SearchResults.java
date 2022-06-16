@@ -1,7 +1,6 @@
 package comp3350.acmis.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,8 +16,6 @@ import comp3350.acmis.R;
 import comp3350.acmis.business.BookingManager;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
-import comp3350.acmis.presentation.BottomTabActivity;
-import comp3350.acmis.presentation.CustomAdapter;
 
 public class SearchResults extends AppCompatActivity {
 
@@ -36,7 +33,7 @@ public class SearchResults extends AppCompatActivity {
         receiveData();
 
         flightsAvailable = bookingManager.searchRoute(selectedDeparture,selectedDestination);
-        if(flightsAvailable.size() > 0) {
+        if (flightsAvailable.size() > 0) {
             CustomAdapter customAdapter = new CustomAdapter(this, flightsAvailable);
             final ListView listView = (ListView) this.findViewById(R.id.list_items_book_tab);
             final Button book = this.findViewById(R.id.book_button);
@@ -58,22 +55,19 @@ public class SearchResults extends AppCompatActivity {
             });
 
         }
-        else{
+        else {
             this.findViewById(R.id.no_results_found).setVisibility(View.VISIBLE);
             this.findViewById(R.id.header_title_book_tab).setVisibility(View.INVISIBLE);
         }
-
-
-
-
     }
 
-        private String bookRoutes(int position){
+
+    private String bookRoutes(int position) {
         Button book = this.findViewById(R.id.book_button);
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(int i=0;i<selectedRoutes.size();i++){
+                for (int i = 0; i < selectedRoutes.size(); i++) {
                     bookingManager.createBooking("default",selectedRoutes.get(i));
                 }
             }
@@ -82,13 +76,11 @@ public class SearchResults extends AppCompatActivity {
     }
 
 
-    private void receiveData()
-    {
+    private void receiveData() {
         //RECEIVE DATA VIA INTENT
         Intent i = getIntent();
         selectedDeparture =(Location) i.getSerializableExtra("selectedDeparture");
         selectedDestination =(Location) i.getSerializableExtra("selectedDestination");
         //SET DATA TO TEXTVIEWS
     }
-
 }

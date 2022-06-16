@@ -23,7 +23,7 @@ public class Booking {
     }
 
 
-    public boolean incrementPassengers(){
+    public boolean incrementPassengers() {
         double checkPassengers = (double)numPassengers + 1;
         boolean ret = false;
 
@@ -31,7 +31,6 @@ public class Booking {
             numPassengers++;
             ret = true;
         }
-
         return ret;
     }
 
@@ -43,7 +42,6 @@ public class Booking {
     public Route getRoute() {
         return route;
     }
-
     public int getNumPassengers() {
         return numPassengers;
     }
@@ -52,9 +50,5 @@ public class Booking {
     public void setNewUser (User newUser){
         booker = newUser;
     }
-
-
-
-
 
 }

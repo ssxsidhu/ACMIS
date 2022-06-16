@@ -1,11 +1,8 @@
 package comp3350.acmis.objects;
 
-import static org.junit.Assert.*;
 
 import junit.framework.TestCase;
-
 import org.junit.Test;
-
 import java.util.ArrayList;
 
 public class UserTest extends TestCase {

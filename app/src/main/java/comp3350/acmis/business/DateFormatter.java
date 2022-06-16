@@ -4,16 +4,15 @@ import java.util.GregorianCalendar;
 
 public class DateFormatter {
 
-    private static final int YEAR = 0;
-    private static final int MONTH = 1;
-    private static final int DAY = 2;
+    private static final int YEAR_IDX = 0;
+    private static final int MONTH_IDX = 1;
+    private static final int DAY_IDX = 2;
 
     private String date;
 
     public DateFormatter(String date) { //must be of format "yyyy-mm-dd" length 10
         final char DASH = '-';
         final int[] DASH_LOCATIONS = {4, 7};
-        final int[] MONTHS = {1 , 2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12};
         final int[] DAYS   = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 
@@ -48,12 +47,12 @@ public class DateFormatter {
             input[i] = Integer.parseInt(arr[i]);
         }
 
-        if (input[MONTH] < 1 || input[MONTH] > 12 || input[YEAR] < 1 || input[DAY] < 1) {
+        if (input[MONTH_IDX] < 1 || input[MONTH_IDX] > 12 || input[YEAR_IDX] < 1 || input[DAY_IDX] < 1) {
             throw new IllegalArgumentException();
         }
-        final boolean isLeapYear =  new GregorianCalendar().isLeapYear(input[YEAR]);
-        if (input[DAY] > DAYS[input[MONTH]-1]) {
-            if (!(isLeapYear && input[MONTH] == 2 && input[DAY] == 29)) {
+        final boolean isLeapYear =  new GregorianCalendar().isLeapYear(input[YEAR_IDX]);
+        if (input[DAY_IDX] > DAYS[input[MONTH_IDX]-1]) {
+            if (!(isLeapYear && input[MONTH_IDX] == 2 && input[DAY_IDX] == 29)) {
                 throw new IllegalArgumentException();
             }
         }
@@ -64,33 +63,32 @@ public class DateFormatter {
     public String format() {
         String[] str = date.split("-");
 
-        switch(str[MONTH]){
-            case "01": str[MONTH] = "January";
+        switch(str[MONTH_IDX]){
+            case "01": str[MONTH_IDX] = "January";
                         break;
-            case "02": str[MONTH] = "February";
+            case "02": str[MONTH_IDX] = "February";
                         break;
-            case "03": str[MONTH] = "March";
+            case "03": str[MONTH_IDX] = "March";
                         break;
-            case "04": str[MONTH] = "April";
+            case "04": str[MONTH_IDX] = "April";
                         break;
-            case "05": str[MONTH] = "May";
+            case "05": str[MONTH_IDX] = "May";
                         break;
-            case "06": str[MONTH] = "June";
+            case "06": str[MONTH_IDX] = "June";
                         break;
-            case "07": str[MONTH] = "July";
+            case "07": str[MONTH_IDX] = "July";
                         break;
-            case "08": str[MONTH] = "August";
+            case "08": str[MONTH_IDX] = "August";
                         break;
-            case "09": str[MONTH] = "September";
+            case "09": str[MONTH_IDX] = "September";
                         break;
-            case "10": str[MONTH] = "November";
+            case "10": str[MONTH_IDX] = "November";
                         break;
-            case "11": str[MONTH] = "October";
+            case "11": str[MONTH_IDX] = "October";
                         break;
-            case "12": str[MONTH] = "December";
-
+            case "12": str[MONTH_IDX] = "December";
         }
 
-        return str[MONTH] + " " + str[DAY] + ", " + str[YEAR];
+        return str[MONTH_IDX] + " " + str[DAY_IDX] + ", " + str[YEAR_IDX];
     }
 }

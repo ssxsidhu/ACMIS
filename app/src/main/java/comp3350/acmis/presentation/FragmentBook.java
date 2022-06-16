@@ -74,7 +74,6 @@ public class FragmentBook extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
@@ -126,7 +125,7 @@ public class FragmentBook extends Fragment {
 //    }
 
 
-    public String search(View rootView){
+    public String search(View rootView) {
         Button search = rootView.findViewById(R.id.search_button);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,15 +137,13 @@ public class FragmentBook extends Fragment {
             }
         });
 
-
-
         return null;
     }
 
 
 
     @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         accessLocations = new AccessLocations();
         locationList = new ArrayList<Location>();
         selectedRoutes = new ArrayList<>();
@@ -195,13 +192,10 @@ public class FragmentBook extends Fragment {
         search(view);
 
     }
-    private void sendData(){
+    private void sendData() {
         Intent i = new Intent(getActivity().getBaseContext(),SearchResults.class);
         i.putExtra("selectedDeparture", selectedDeparture);
         i.putExtra("selectedDestination",selectedDestination);
         getActivity().startActivity(i);
-
     }
-
-
 }

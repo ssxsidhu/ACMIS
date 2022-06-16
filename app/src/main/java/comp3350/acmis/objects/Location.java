@@ -21,13 +21,13 @@ public class Location  implements Serializable {
         locsOutgoingFLights = new ArrayList<>();
     }
 
-    public void addLocationIncoming(Location incoming){
+    public void addLocationIncoming(Location incoming) {
         if (incoming == null) {
             throw new NullPointerException();
         }
         locsIncomingFlights.add(incoming);
     }
-    public void addLocationOutgoing(Location outGoing){
+    public void addLocationOutgoing(Location outGoing) {
         if (outGoing == null) {
             throw new NullPointerException();
         }
@@ -65,7 +65,4 @@ public class Location  implements Serializable {
         }
         return Objects.requireNonNull(value, message + " cannot be null").trim();
     }
-
-
-
 }

@@ -38,7 +38,7 @@ public class User {
     }
 
     // SETTERS
-    public void addBooking(Booking newBook){
+    public void addBooking(Booking newBook) {
         if (newBook == null) {
             throw new NullPointerException();
         }
@@ -53,6 +53,7 @@ public class User {
             throw new NegativeArraySizeException();
         }
 
+        //find booking with matching ID
         for (int i = 0; i < bookings.size() && !found; i++) {
             removal = bookings.get(i);
 
@@ -71,7 +72,7 @@ public class User {
     public Gender getGender() {return gender;}
     public String getUsername() {return username;}
 
-    public String getMyBookings(ArrayList<Booking> myBookings){
+    public String getMyBookings(ArrayList<Booking> myBookings) {
         if (myBookings == null) {
             throw new NullPointerException();
         }
@@ -92,10 +93,9 @@ public class User {
         return Objects.requireNonNull(value, message + " cannot be null").trim();
     }
 
-    public enum Gender{
+    public enum Gender {
         MALE,
         FEMALE,
         OTHER
     }
-
 }

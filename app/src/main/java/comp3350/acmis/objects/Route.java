@@ -9,35 +9,37 @@ public class Route {
     private ArrayList<Flight> route;
 
     // DEFAULT CONSTRUCTOR
-    public Route(){
+    public Route() {
         route = new ArrayList<>();
     }
 
     // CONSTRUCTOR 1 --> Hard Copy
-    public Route(List<Flight> flights){
+    public Route(List<Flight> flights) {
         route = new ArrayList<>();
         route.addAll(flights);
     }
 
     // Constructor 2 --> Soft Copy
-    public Route(ArrayList<Flight> flights){
+    public Route(ArrayList<Flight> flights) {
         route = flights;
     }
 
     // Constructor 3 --> Single or Direct Flight
-    public Route(Flight directFlight)    {
+    public Route(Flight directFlight) {
         route = new ArrayList<>();
         route.add(directFlight);
     }
 
+
+
     // SETTERS
-    public String addToRoute(Flight flight){
+    public String addToRoute(Flight flight) {
         route.add(flight);
-        return  null;
+        return null;
     }
-    public String removeFromRoute(Flight flight){
+    public String removeFromRoute(Flight flight) {
         route.remove(flight);
-        return  null;
+        return null;
     }
 
     // GETTERS

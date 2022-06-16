@@ -1,17 +1,13 @@
 package comp3350.acmis.presentation;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
-
 import comp3350.acmis.R;
 
 public class BottomTabActivity extends AppCompatActivity {
@@ -59,9 +55,6 @@ public class BottomTabActivity extends AppCompatActivity {
                 tabLayout.selectTab(tabLayout.getTabAt(position));
             }
         });
-
-
-
 
     }
 

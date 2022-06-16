@@ -6,7 +6,6 @@ import java.util.List;
 import comp3350.acmis.application.Main;
 import comp3350.acmis.application.Services;
 import comp3350.acmis.objects.Flight;
-import comp3350.acmis.objects.Location;
 import comp3350.acmis.persistence.DataAccessStub;
 
 public class AccessFlights {
@@ -18,10 +17,8 @@ public class AccessFlights {
         dataAccess= Services.getDataAccess(Main.dbName);
     }
 
-    public String getFlights(ArrayList<Flight> flights){
+    public String getFlights(ArrayList<Flight> flights) {
         flights.clear();
         return dataAccess.getAllFlights(flights);
     }
-
-
 }

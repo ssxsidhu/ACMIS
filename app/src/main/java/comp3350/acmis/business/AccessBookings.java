@@ -17,18 +17,18 @@ public class AccessBookings {
     private List<Booking> userBookings;
     private String username;
 
-    public AccessBookings(String user){
+    public AccessBookings(String user) {
         dataAccess=Services.getDataAccess(Main.dbName);
         username=user;
     }
 
-    public String getMyBookings(ArrayList<Booking> myBookings){
+    public String getMyBookings(ArrayList<Booking> myBookings) {
         myBookings.clear();
         ArrayList<User> allUsers = new ArrayList<User>();
         dataAccess.getAllUsers(allUsers);
 
-        for(int i=0;i<allUsers.size();i++){
-            if(allUsers.get(i).getUsername().equals(username)){
+        for (int i = 0; i < allUsers.size(); i++){
+            if (allUsers.get(i).getUsername().equals(username)) {
                 allUsers.get(i).getMyBookings(myBookings);
 
                 //ascending order
@@ -45,7 +45,5 @@ public class AccessBookings {
             }
         }
         return null;
-
     }
-
 }
