@@ -61,25 +61,58 @@ public class DataAccessStub {
 
 
         allFlights =  new ArrayList<Flight>();
-        Flight winToMn = new Flight(winnipeg,montreal,"2022-06-14","10:30","2022-06-15","4:30");
+        Flight winToMn = new Flight(winnipeg,montreal,"2022-06-14","10:30","2022-06-15","14:30");
         winnipeg.addLocationOutgoing(montreal);
         montreal.addLocationIncoming(winnipeg);
         allFlights.add(winToMn);
+        Flight winToMn2 = new Flight(winnipeg,montreal,"2022-07-14","11:30","2022-07-15","15:30");
+        winnipeg.addLocationOutgoing(montreal);
+        montreal.addLocationIncoming(winnipeg);
+        allFlights.add(winToMn2);
+        Flight winToMn3 = new Flight(winnipeg,montreal,"2022-12-04","10:30","2022-12-05","14:30");
+        winnipeg.addLocationOutgoing(montreal);
+        montreal.addLocationIncoming(winnipeg);
+        allFlights.add(winToMn3);
 
         Flight winToTor = new Flight(winnipeg,toronto,"2022-07-04","14:30","2022-07-04","17:30");
         winnipeg.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(winnipeg);
         allFlights.add(winToTor);
+        Flight winToTor2 = new Flight(winnipeg,toronto,"2022-12-24","17:30","2022-12-24","20:30");
+        winnipeg.addLocationOutgoing(toronto);
+        toronto.addLocationIncoming(winnipeg);
+        allFlights.add(winToTor2);
 
         Flight winToVan = new Flight(winnipeg,vancouver,"2022-10-26","17:10","2022-10-27","2:30");
         winnipeg.addLocationOutgoing(vancouver);
         vancouver.addLocationIncoming(winnipeg);
         allFlights.add(winToVan);
 
+        Flight winToReg = new Flight(winnipeg,regina,"2022-11-24","10:30","2022-11-24","12:30");
+        winnipeg.addLocationOutgoing(regina);
+        regina.addLocationIncoming(winnipeg);
+        allFlights.add(winToReg);
+        Flight winToReg2 = new Flight(winnipeg,montreal,"2022-09-15","10:30","2022-09-15","12:30");
+        winnipeg.addLocationOutgoing(montreal);
+        montreal.addLocationIncoming(winnipeg);
+        allFlights.add(winToReg2);
+
         Flight torToVan = new Flight(toronto,vancouver,"2022-06-19","16:30","2022-06-20","1:30");
         toronto.addLocationOutgoing(vancouver);
         vancouver.addLocationIncoming(toronto);
         allFlights.add(torToVan);
+        Flight torToVan2 = new Flight(toronto,vancouver,"2022-06-29","17:30","2022-06-30","2:30");
+        toronto.addLocationOutgoing(vancouver);
+        vancouver.addLocationIncoming(toronto);
+        allFlights.add(torToVan2);
+        Flight torToVan3 = new Flight(toronto,vancouver,"2022-05-14","13:30","2022-05-15","00:30");
+        toronto.addLocationOutgoing(vancouver);
+        vancouver.addLocationIncoming(toronto);
+        allFlights.add(torToVan3);
+        Flight torToVan4 = new Flight(toronto,vancouver,"2022-06-09","16:30","2022-06-09","1:30");
+        toronto.addLocationOutgoing(vancouver);
+        vancouver.addLocationIncoming(toronto);
+        allFlights.add(torToVan4);
 
         Flight torToMn = new Flight(toronto,montreal,"2022-11-30","10:30","2022-30-15","15:30");
         toronto.addLocationOutgoing(montreal);
@@ -91,21 +124,55 @@ public class DataAccessStub {
         winnipeg.addLocationIncoming(toronto);
         allFlights.add(torToWn);
 
+        Flight torToCal = new Flight(toronto,calgary,"2022-10-17","20:50","2022-10-28","01:50");
+        toronto.addLocationOutgoing(calgary);
+        calgary.addLocationIncoming(toronto);
+        allFlights.add(torToCal);
+
 
         Flight regToWin = new Flight(regina,winnipeg,"2022-08-13","17:30","2022-08-13","19:30");
         regina.addLocationOutgoing(winnipeg);
         winnipeg.addLocationIncoming(regina);
         allFlights.add(regToWin);
+        Flight regToWin2 = new Flight(regina,winnipeg,"2022-08-16","17:30","2022-08-16","19:30");
+        regina.addLocationOutgoing(winnipeg);
+        winnipeg.addLocationIncoming(regina);
+        allFlights.add(regToWin2);
+        Flight regToWin3 = new Flight(regina,winnipeg,"2022-08-10","11:30","2022-08-10","15:30");
+        regina.addLocationOutgoing(winnipeg);
+        winnipeg.addLocationIncoming(regina);
+        allFlights.add(regToWin3);
 
         Flight regToCal = new Flight(regina,calgary,"2022-08-11","07:30","2022-08-11","08:00");
         regina.addLocationOutgoing(calgary);
         calgary.addLocationIncoming(regina);
         allFlights.add(regToCal);
+        Flight regToCal2 = new Flight(regina,calgary,"2022-08-17","08:30","2022-08-17","09:00");
+        regina.addLocationOutgoing(calgary);
+        calgary.addLocationIncoming(regina);
+        allFlights.add(regToCal2);
 
         Flight vanToCal = new Flight(vancouver,calgary,"2022-11-11","03:30","2022-11-11","05:00");
         vancouver.addLocationOutgoing(calgary);
         calgary.addLocationIncoming(vancouver);
         allFlights.add(vanToCal);
+        Flight vanToCal2 = new Flight(vancouver,calgary,"2022-06-11","07:30","2022-06-21","09:00");
+        vancouver.addLocationOutgoing(calgary);
+        calgary.addLocationIncoming(vancouver);
+        allFlights.add(vanToCal2);
+
+        Flight calToVan = new Flight(calgary,vancouver,"2022-10-01","11:30","2022-10-01","19:45");
+        calgary.addLocationOutgoing(vancouver);
+        vancouver.addLocationIncoming(calgary);
+        allFlights.add(calToVan);
+        Flight calToVan1 = new Flight(calgary,vancouver,"2022-11-01","11:30","2022-11-01","19:45");
+        calgary.addLocationOutgoing(vancouver);
+        vancouver.addLocationIncoming(calgary);
+        allFlights.add(calToVan1);
+        Flight calToVan2 = new Flight(calgary,vancouver,"2022-12-01","11:30","2022-12-01","19:45");
+        calgary.addLocationOutgoing(vancouver);
+        vancouver.addLocationIncoming(calgary);
+        allFlights.add(calToVan2);
 
         Flight calToTor = new Flight(calgary,toronto,"2022-12-31","10:30","2022-12-31","18:45");
         calgary.addLocationOutgoing(toronto);
@@ -162,11 +229,17 @@ public class DataAccessStub {
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor10);
 
+        Flight montoTor = new Flight(montreal,toronto,"2022-08-11","10:30","2022-11-31","15:45");
+        montreal.addLocationOutgoing(toronto);
+        toronto.addLocationIncoming(montreal);
+        allFlights.add(montoTor);
+
+
 
         allBookings = new ArrayList<>();
         bookingManager.createBooking("default",new Route(Collections.singletonList(winToMn)));
         bookingManager.createBooking("default",new Route(Collections.singletonList(torToVan)));
-        bookingManager.createBooking("default",new Route(Collections.singletonList(winToTor)));
+
 
 
         System.out.println("Opened " +dbType +" database " +dbName);
