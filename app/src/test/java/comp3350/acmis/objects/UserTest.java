@@ -133,27 +133,50 @@ public class UserTest {
     }
 
 
-
     @Test
-    public void testBookings() {
-        User user = new User("foo", "bar", User.Gender.FEMALE , "myUsername", "fbp", "fb@gmail.com", "1234567890");
-        Route route = setupRoute();
-        Booking booking = new Booking(user, route);
-        user.addBooking(booking);
+    public void testGetBookings() {
+        //method is not have fully implemented yet, testing current version
+        User user = new User("foo", "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1234567890");
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
 
-        ArrayList<Route> listOfRoutes = new ArrayList<Route>();
-        listOfRoutes.add(route);
+        assertNull(user.getMyBookings(bookings));
 
-//        assertEquals(user.getMyBookings());
-
-
-
+        try {
+            user.getMyBookings(null);
+            fail("Expected a NullPointerException");
+        } catch (NullPointerException unused) {}
     }
 
-    private Route setupRoute() {
-        Location loc1 = new Location("Winnipeg", "Canada", "YWG");
-        Location loc2 = new Location("Vancouver", "Canada", "YVR");
+    @Test
+    public void testBooking() {
+        User user = new User("foo", "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1234567890");
+        Booking booking1 = new Booking(user, new Route());
+        Booking booking2 = new Booking(user, new Route());
 
-        return new Route(new Flight(loc1, loc2, "2022-06-15", "08:00", "2022-06-15", "11:00"));
+        //test initial size and after 2 inserts size
+        assertEquals(0, user.getBookingsTemporaryTest().size());
+        user.addBooking(booking1);
+        user.addBooking(booking2);
+        assertEquals(2, user.getBookingsTemporaryTest().size());
+
+        //test size after removing 1
+        user.removeBooking(booking1.getBookingId());
+        assertEquals(1, user.getBookingsTemporaryTest().size());
+
+        //test the remaining bookingID matches
+        assertEquals(booking2.getBookingId(), user.getBookingsTemporaryTest().get(0).getBookingId());
+
+        try {
+            user.addBooking(null);
+            fail("Expected a NullPointerException");
+        } catch (NullPointerException unused) {}
+
+        try {
+            user.removeBooking(-1);
+            fail("Expected a NegativeArraySizeException");
+        } catch (NegativeArraySizeException unused) {}
+
+        //no booking should have this high of an ID
+        assertFalse(user.removeBooking(Integer.MAX_VALUE));
     }
 }
