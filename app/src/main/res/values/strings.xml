@@ -13,4 +13,6 @@
     <string name="search_flights">Search Flights</string>
     <string name="upcoming_flights">Upcoming Flights</string>
     <string name="airplane_logo">Airplane Logo</string>
+    <string name="page_title">ACMIS</string>
+    <string name="title_activity_home_page">HomePageActivity</string>
 </resources>

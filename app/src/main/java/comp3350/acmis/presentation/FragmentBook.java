@@ -27,7 +27,7 @@ public class FragmentBook extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private Location selectedDeparture,selectedDestination;
+    private Location selectedDeparture = null,selectedDestination = null;
 
     public FragmentBook() {
         // Required empty public constructor
@@ -89,7 +89,7 @@ public class FragmentBook extends Fragment {
                 adapter.add(selectedDeparture);
             }
             selectedDeparture = adapter.getItem(position);
-            adapter.remove(adapter.getItem(position));
+            adapter.remove(selectedDeparture);
         });
 
 
@@ -105,7 +105,7 @@ public class FragmentBook extends Fragment {
                 adapter.add(selectedDestination);
             }
             selectedDestination=adapter.getItem(position);
-            adapter.remove(adapter.getItem(position));
+            adapter.remove(selectedDestination);
 
         });
 
