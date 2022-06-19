@@ -27,7 +27,7 @@ public class FragmentBook extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private Location selectedDeparture = null,selectedDestination = null;
+    private Location tempDep,tempDes,selectedDeparture,selectedDestination;
 
     public FragmentBook() {
         // Required empty public constructor
@@ -75,37 +75,45 @@ public class FragmentBook extends Fragment {
 
         accessLocations.getLocations(locationList);
 
-        ArrayAdapter<Location> adapter = new ArrayAdapter<>(getActivity(), R.layout.menu_item, R.id.menu_text_view, locationList);
+        ArrayAdapter<Location> adapter1 = new ArrayAdapter<>(getActivity(), R.layout.drop_down_menu_item, R.id.menu_text_view, locationList);
+        ArrayAdapter<Location> adapter2 = new ArrayAdapter<>(getActivity(), R.layout.drop_down_menu_item, R.id.menu_text_view, locationList);
 
         //for dropDown menus
         AutoCompleteTextView ddDeparture = (AutoCompleteTextView) view.findViewById(R.id.auto_departure);
         ddDeparture.setThreshold(1);
-        ddDeparture.setAdapter(adapter);
-
+        ddDeparture.setAdapter(adapter1);
         //departure menu
         TextInputLayout textInputLayout_departure = view.findViewById(R.id.menu_departure);
         ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_departure.getEditText())).setOnItemClickListener((adapterView, view1, position, id) -> {
-            if(selectedDeparture!=null) {
-                adapter.add(selectedDeparture);
+            if(selectedDestination!=null) {
+                adapter2.add(selectedDestination);
+                tempDes=selectedDestination;
+                selectedDestination=null;
             }
-            selectedDeparture = adapter.getItem(position);
-            adapter.remove(selectedDeparture);
+            selectedDeparture = adapter1.getItem(position);
+            tempDep=selectedDeparture;
+            adapter1.remove(selectedDeparture);
+            adapter2.remove(selectedDeparture);
         });
 
 
         //destination menu
         AutoCompleteTextView ddDestination = (AutoCompleteTextView) view.findViewById(R.id.auto_destination);
         ddDestination.setThreshold(1);
-        ddDestination.setAdapter(adapter);
+        ddDestination.setAdapter(adapter2);
 
 
         TextInputLayout textInputLayout_destination = view.findViewById(R.id.menu_destination);
         ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_destination.getEditText())).setOnItemClickListener((adapterView, view12, position, id) -> {
-            if(selectedDestination!=null) {
-                adapter.add(selectedDestination);
+            selectedDestination=adapter2.getItem(position);
+            tempDes=selectedDestination;
+            adapter1.remove(selectedDestination);
+            adapter2.remove(selectedDestination);
+            if(selectedDeparture!=null) {
+                tempDep=selectedDeparture;
+                adapter1.add(selectedDeparture);
+                selectedDeparture=null;
             }
-            selectedDestination=adapter.getItem(position);
-            adapter.remove(selectedDestination);
 
         });
 
@@ -117,11 +125,11 @@ public class FragmentBook extends Fragment {
     public void search(View rootView){
         Button search = rootView.findViewById(R.id.search_button);
         search.setOnClickListener(view -> {
-            if(selectedDeparture!=null && selectedDestination!=null) {
+            if(tempDes!=null && tempDep!=null) {
                 sendData();
             }
             else{
-                if(selectedDeparture == null){
+                if(tempDep == null){
                     Messages.snackBar(view,"Please select departure");
                 }
                 else {
@@ -135,8 +143,8 @@ public class FragmentBook extends Fragment {
 
     private void sendData(){
         Intent i = new Intent(getActivity().getBaseContext(),SearchResults.class);
-        i.putExtra("selectedDeparture", selectedDeparture);
-        i.putExtra("selectedDestination",selectedDestination);
+        i.putExtra("selectedDeparture", tempDep);
+        i.putExtra("selectedDestination",tempDes);
         getActivity().startActivity(i);
 
     }

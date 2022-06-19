@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
+import java.util.List;
+
 import comp3350.acmis.R;
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Route;
@@ -35,6 +37,20 @@ public class CustomAdapter extends BaseAdapter {
         displayList = flightsAvailable;
     }
 
+    public CustomAdapter(FragmentManage context, Booking booking) {
+        mContext=context;
+        displayList=new ArrayList<>();
+        displayList.add(booking.getRoute());
+    }
+
+    public CustomAdapter(FragmentManage Context){
+        mContext = Context;
+        displayList=new ArrayList<>();
+    }
+
+    public void setDisplayList(Booking booking){
+        displayList.add(booking.getRoute());
+    }
     @Override
     public int getCount() {
         return displayList.size();
@@ -64,8 +80,10 @@ public class CustomAdapter extends BaseAdapter {
         View row;
         row = inflater.inflate(R.layout.row, parent, false);
         TextView titleTopLeft, titleTopRight, titleMiddleLeft, titleMiddleRight, titleBottomLeft, titleBottomRight,titleExtraLeft,titleExtraRight;
-        ImageView i1;
-        i1 = (ImageView) row.findViewById(R.id.list_icon);
+        TextView frontDate,frontMonth,frontYear;
+        frontDate = (TextView) row.findViewById(R.id.frontDate);
+        frontMonth = (TextView) row.findViewById(R.id.frontMonth);
+        frontYear = (TextView) row.findViewById(R.id.frontYear);
         titleTopLeft = (TextView) row.findViewById(R.id.list_top_text_left);
         titleTopRight = (TextView) row.findViewById(R.id.list_top_text_right);
         titleMiddleLeft = (TextView) row.findViewById(R.id.list_middle_text_left);
@@ -77,14 +95,16 @@ public class CustomAdapter extends BaseAdapter {
         titleExtraRight = (TextView) row.findViewById(R.id.list_extra_text_right);
 
         if(displayList!=null && displayList.size()>0 && displayList.get(position).getRoute().size()>0) {
+            frontDate.setText("14");
+            frontMonth.setText("Feb");
+            frontYear.setText("2022");
             titleTopLeft.setText(displayList.get(position).getRoute().get(0).getDepartureTime());
             titleTopRight.setText(displayList.get(position).getRoute().get(0).getArrivalTime());
             titleMiddleLeft.setText(displayList.get(position).getRoute().get(0).getSource().getCity());
             titleMiddleRight.setText(displayList.get(position).getRoute().get(0).getDestination().getCity());
             titleBottomLeft.setText(displayList.get(position).getRoute().get(0).getDepartureDate());
             titleBottomRight.setText(String.format("FlightID: #%d", displayList.get(position).getRoute().get(0).getFlightID()));
-            titleExtraLeft.setText(String.format("Total Passengers: %d", displayList.get(position).getRoute().get(0).getPassengerList().size()));
-            i1.setImageResource(R.drawable.airplane_symbol);
+//            titleExtraLeft.setText(String.format("Total Passengers: %d", displayList.get(position).getRoute().get(0).getPassengerList().size()));
         }
 
         return (row);
