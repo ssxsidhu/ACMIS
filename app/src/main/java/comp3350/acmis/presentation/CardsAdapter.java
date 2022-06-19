@@ -1,6 +1,7 @@
 package comp3350.acmis.presentation;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 import comp3350.acmis.R;
 import comp3350.acmis.objects.Booking;
@@ -43,8 +46,11 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
     @Override
     public void onBindViewHolder(@NonNull CardsAdapter.Viewholder holder, int position) {
         // to set data to textview and imageview of each card layout
-        holder.imageView.setImageResource(R.drawable.front_logo);
-
+        String uri = "@mipmap/"+displayList.get(position).getRoute().getRoute().get(0).getDestination().getCity().toLowerCase(Locale.ROOT);
+        int imageResource = context.getResources().getIdentifier(uri, null, context.requireActivity().getPackageName());
+        Drawable res = context.getResources().getDrawable(imageResource);
+        holder.imageView.setImageDrawable(res);
+//        holder.imageView.setImageResource(R.drawable.locationName);
         customAdapter.setDisplayList(displayList.get(position));
         holder.listView.setAdapter(customAdapter);
 

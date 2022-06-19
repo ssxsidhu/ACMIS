@@ -19,8 +19,6 @@
         android:orientation="vertical"
         >
 
-
-
         <View
             android:id="@+id/date_divider"
             android:layout_width="4dp"
@@ -123,7 +121,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_toStartOf="@id/centerShim"
-            android:gravity="center"
+            android:gravity="start"
             android:maxLines="1"
             android:paddingTop="5dp"
             android:textAppearance="?attr/textAppearanceSubtitle1"
@@ -138,7 +136,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_toStartOf="@id/centerShim"
-            android:gravity="center"
+            android:gravity="start"
             android:maxLines="1"
             android:textAllCaps="true"
             android:textAppearance="?attr/textAppearanceTitleLarge"
@@ -154,7 +152,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_toStartOf="@id/centerShim"
-            android:gravity="center"
+            android:gravity="start"
             android:maxLines="1"
             android:textAppearance="?attr/textAppearanceSubtitle2"
             android:textColor="@color/mtrl_list_item_tint" />
@@ -168,7 +166,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_toStartOf="@id/centerShim"
-            android:gravity="center"
+            android:gravity="start"
             android:maxLines="1"
             android:paddingBottom="5dp"
             android:textAppearance="?attr/textAppearanceBody1"
