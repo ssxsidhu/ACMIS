@@ -21,7 +21,7 @@ public class CustomAdapter extends BaseAdapter {
 
     private Fragment mContext = null;
     private Activity activity;
-    private final ArrayList<Route> displayList;
+    private ArrayList<Route> displayList;
 
 
     public CustomAdapter(FragmentManage context, ArrayList<Booking> userBookings) {
@@ -45,10 +45,10 @@ public class CustomAdapter extends BaseAdapter {
 
     public CustomAdapter(FragmentManage Context){
         mContext = Context;
-        displayList=new ArrayList<>();
     }
 
     public void setDisplayList(Booking booking){
+        displayList=new ArrayList<>();
         displayList.add(booking.getRoute());
     }
     @Override

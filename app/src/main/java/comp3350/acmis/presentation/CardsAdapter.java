@@ -22,13 +22,14 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
 
     private FragmentManage context;
     private ArrayList<Booking> displayList;
-//    CustomAdapter customAdapter;
+    CustomAdapter customAdapter;
     //temporary
 
     // Constructor
     public CardsAdapter(FragmentManage context, ArrayList<Booking> userBookings) {
         this.context = context;
         displayList = userBookings;
+        customAdapter = new CustomAdapter(context);
     }
 
     @NonNull
@@ -42,9 +43,9 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
     @Override
     public void onBindViewHolder(@NonNull CardsAdapter.Viewholder holder, int position) {
         // to set data to textview and imageview of each card layout
-//        holder.imageView.setImageResource(R.drawable.montreal);
-        CustomAdapter customAdapter = new CustomAdapter(context,displayList.get(0));
-//        customAdapter.setDisplayList(displayList.get(position));
+        holder.imageView.setImageResource(R.drawable.front_logo);
+
+        customAdapter.setDisplayList(displayList.get(position));
         holder.listView.setAdapter(customAdapter);
 
     }
@@ -63,7 +64,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
         ImageView imageView;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-//            imageView = itemView.findViewById(R.id.card_image);
+            imageView = itemView.findViewById(R.id.card_image);
             listView = itemView.findViewById(R.id.card_view_list);
         }
     }
