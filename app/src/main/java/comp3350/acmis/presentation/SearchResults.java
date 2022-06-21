@@ -27,7 +27,6 @@ public class SearchResults extends AppCompatActivity {
 
         //checks if there are flights available
         String checkFlights= bookingManager.searchRoute(selectedDeparture, selectedDestination,flightsAvailable );
-
         if(checkFlights!=null){
             Messages.noFlightsMessage(this);
         }

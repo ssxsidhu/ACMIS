@@ -244,6 +244,7 @@ public class DataAccessStub {
 
         bookingManager.createBooking("default",new Route(Collections.singletonList(winToMn)));
         bookingManager.createBooking("default",new Route(Collections.singletonList(torToVan)));
+        bookingManager.createBooking("default",new Route(Collections.singletonList(vanToCal)));
 
 
 

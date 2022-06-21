@@ -81,6 +81,8 @@ public class CustomAdapter extends BaseAdapter {
         row = inflater.inflate(R.layout.row, parent, false);
         TextView titleTopLeft, titleTopRight, titleMiddleLeft, titleMiddleRight, titleBottomLeft, titleBottomRight,titleExtraLeft,titleExtraRight;
         TextView frontDate,frontMonth,frontYear;
+        ImageView i1;
+        i1 = (ImageView) row.findViewById(R.id.list_icon);
         frontDate = (TextView) row.findViewById(R.id.frontDate);
         frontMonth = (TextView) row.findViewById(R.id.frontMonth);
         frontYear = (TextView) row.findViewById(R.id.frontYear);
@@ -104,6 +106,7 @@ public class CustomAdapter extends BaseAdapter {
             titleMiddleRight.setText(displayList.get(position).getRoute().get(0).getDestination().getCity());
             titleBottomLeft.setText(displayList.get(position).getRoute().get(0).getDepartureDate());
             titleBottomRight.setText(String.format("FlightID: #%d", displayList.get(position).getRoute().get(0).getFlightID()));
+            i1.setImageResource(R.drawable.airplane_symbol);
 //            titleExtraLeft.setText(String.format("Total Passengers: %d", displayList.get(position).getRoute().get(0).getPassengerList().size()));
         }
 

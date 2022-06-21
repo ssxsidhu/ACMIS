@@ -28,7 +28,6 @@ public class Flight {
     //time format "hh:mm"
     private String departureDate;
     private String departureTime;
-
     private String arrivalDate;
     private String arrivalTime;
 

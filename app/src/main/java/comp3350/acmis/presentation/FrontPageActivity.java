@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.jakewharton.threetenabp.AndroidThreeTen;
+
 import comp3350.acmis.R;
 import comp3350.acmis.application.Main;
 
@@ -16,13 +18,19 @@ public class FrontPageActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AndroidThreeTen.init(this);
 
+        setContentView(R.layout.activity_front_page);
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                startActivity(new Intent(FrontPageActivity.this,MainActivity.class));
-                finish();
+
+                Intent i = new Intent(FrontPageActivity.this,MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
-        }, 1500);
+        }, 2000);
+
 
     }
 }

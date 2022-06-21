@@ -1,16 +1,25 @@
 package comp3350.acmis.presentation;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.ImageDecoder;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +35,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
     private FragmentManage context;
     private ArrayList<Booking> displayList;
     CustomAdapter customAdapter;
+    Bitmap icon;
     //temporary
 
     // Constructor
@@ -56,6 +66,14 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
 
     }
 
+
+    public void resize(int imageSource){
+
+//        Uri uri = Uri.parse(imageUri);
+        icon = BitmapFactory.decodeResource(context.getResources(),imageSource);
+
+    }
+
     @Override
     public int getItemCount() {
         // this method is used for showing number
@@ -70,7 +88,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
         ImageView imageView;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.card_image);
+            imageView= itemView.findViewById(R.id.card_image);
             listView = itemView.findViewById(R.id.card_view_list);
         }
     }
