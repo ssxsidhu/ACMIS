@@ -22,9 +22,6 @@ import comp3350.acmis.R;
 import comp3350.acmis.application.Main;
 
 public class MainActivity extends AppCompatActivity {
-    private TabLayout tabLayout;
-    private ViewPager2 viewPager2;
-    private FragmentAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,18 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //launches the front page
-    private void launchFrontPage(){
-        Intent i = new Intent(this, FrontPageActivity.class);
-
-        //starts and track an activity for result
-        ActivityResultLauncher<Intent> firstPageActivityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {//do Nothing
-                });
-
-        firstPageActivityResultLauncher.launch(i);
-    }
 
     //exit the after pressing the back button at this activity
     @Override

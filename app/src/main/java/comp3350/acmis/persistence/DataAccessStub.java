@@ -1,6 +1,14 @@
 package comp3350.acmis.persistence;
 
 
+import org.threeten.bp.Duration;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.Period;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
+import org.threeten.bp.chrono.ChronoZonedDateTime;
+import org.threeten.bp.temporal.ChronoUnit;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
@@ -63,6 +71,22 @@ public class DataAccessStub {
         allLocations.add(calgary);
         Location regina = new Location("Regina","Canada","YQR");
         allLocations.add(regina);
+
+
+//        ZonedDateTime.of(2022,06,22,19,30,52,10, ZoneId.of("winn"))
+
+//        LocalDateTime ldt = LocalDateTime.now();
+//        ZoneId zoneId = ZoneId.of("America/Winnipeg");
+//        ZonedDateTime zdtAtAsia = ZonedDateTime.now(ZoneId.of("America/Winnipeg"));
+//        ZonedDateTime zdAtET =  ZonedDateTime.now(ZoneId.of("America/Vancouver"));
+////        Period period = Period.between(zdtAtAsia.toLocalDate(),zdtAtAsia.toLocalDate());
+////        long diffHours = ChronoUnit.HOURS.between(zdtAtAsia, zdAtET);
+//
+//        Duration diff = Duration.between(zdAtET, zdtAtAsia);
+//        System.out.println(zdtAtAsia);
+//        System.out.println(zdAtET);
+//        System.out.println(diff);
+
 
 
 
