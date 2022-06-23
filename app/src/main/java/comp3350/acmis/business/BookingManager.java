@@ -104,7 +104,7 @@ public class BookingManager {
             //adding to the users all the booking.
             bookerObject.addBooking(newBooking);
             //adding to
-            route.getRoute().get(0).addUser(bookerObject);
+
             //adding the booking to the master booking.
             data.addBooking(newBooking);
         }
@@ -122,4 +122,10 @@ public class BookingManager {
         User canceller = temp.getBooker();
         canceller.removeBooking(bookingId);
     }
+
+    public void editBooking(int bookingId){
+        //look for the booking in the master database.
+    }
+
+
 }

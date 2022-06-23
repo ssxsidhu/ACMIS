@@ -1,6 +1,10 @@
 package comp3350.acmis.persistence;
 
 
+
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
@@ -51,191 +55,204 @@ public class DataAccessStub {
         user = new User("Julie","smith", User.Gender.FEMALE,"jsmith","j&smith$","jmith@gmail.com","2048889999");
         allUsers.add(user);
 
-        Location winnipeg = new Location("Winnipeg","Canada","YWG");
+        Location winnipeg = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada","YWG");
         allLocations.add(winnipeg);
-        Location montreal = new Location("Montreal","Canada","YUL");
+        Location montreal = new Location("Montreal", ZoneId.of("America/Montreal"), "Canada","YUL");
         allLocations.add(montreal);
-        Location toronto = new Location("Toronto","Canada","YYZ");
+        Location toronto = new Location("Toronto", ZoneId.of("America/Toronto"), "Canada","YYZ");
         allLocations.add(toronto);
-        Location vancouver = new Location("Vancouver","Canada","YVR");
+        Location vancouver = new Location("Vancouver", ZoneId.of("America/Vancouver"), "Canada","YVR");
         allLocations.add(vancouver);
-        Location calgary = new Location("Calgary","Canada","YYC");
+        Location calgary = new Location("Calgary", ZoneId.of("America/Edmonton"), "Canada","YYC");
         allLocations.add(calgary);
-        Location regina = new Location("Regina","Canada","YQR");
+        Location regina = new Location("Regina", ZoneId.of("America/Regina"), "Canada","YQR");
         allLocations.add(regina);
 
 
 
-
-        Flight winToMn = new Flight(winnipeg,montreal,"2022-06-14","10:30","2022-06-15","4:30");
+        //Winnipeg to montreal
+        Flight winToMn = new Flight(winnipeg,montreal, ZonedDateTime.of(2022,6,11,7,30,0,0,winnipeg.getZoneName()), 250, 2.5, 500);
         winnipeg.addLocationOutgoing(montreal);
         montreal.addLocationIncoming(winnipeg);
         allFlights.add(winToMn);
-        Flight winToMn2 = new Flight(winnipeg,montreal,"2022-07-14","11:30","2022-07-15","15:30");
+        Flight winToMn2 = new Flight(winnipeg,montreal, ZonedDateTime.of(2022,6,19,7,30,0,0,winnipeg.getZoneName()), 250, 2.5, 500);
         winnipeg.addLocationOutgoing(montreal);
         montreal.addLocationIncoming(winnipeg);
         allFlights.add(winToMn2);
-        Flight winToMn3 = new Flight(winnipeg,montreal,"2022-12-04","10:30","2022-12-05","14:30");
+        Flight winToMn3 = new Flight(winnipeg,montreal,  ZonedDateTime.of(2022,7,7,7,30,0,0,winnipeg.getZoneName()), 250, 2.5, 1500);
         winnipeg.addLocationOutgoing(montreal);
         montreal.addLocationIncoming(winnipeg);
         allFlights.add(winToMn3);
 
-        Flight winToTor = new Flight(winnipeg,toronto,"2022-07-04","14:30","2022-07-04","17:30");
+        //winnipeg to toronto
+        Flight winToTor = new Flight(winnipeg,toronto,  ZonedDateTime.of(2022,6,13,5,30,0,0,winnipeg.getZoneName()), 150, 2.6, 750);
         winnipeg.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(winnipeg);
         allFlights.add(winToTor);
-        Flight winToTor2 = new Flight(winnipeg,toronto,"2022-12-24","17:30","2022-12-24","20:30");
+        Flight winToTor2 = new Flight(winnipeg,toronto,  ZonedDateTime.of(2022,6,13,5,30,0,0,winnipeg.getZoneName()), 150, 2.6, 750);
         winnipeg.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(winnipeg);
         allFlights.add(winToTor2);
 
-        Flight winToVan = new Flight(winnipeg,vancouver,"2022-10-26","17:10","2022-10-27","2:30");
+        //winnipeg to vancouver
+        Flight winToVan = new Flight(winnipeg,vancouver,  ZonedDateTime.of(2022,8,1,11,30,0,0,winnipeg.getZoneName()), 250, 3.0, 1000);
         winnipeg.addLocationOutgoing(vancouver);
         vancouver.addLocationIncoming(winnipeg);
         allFlights.add(winToVan);
 
-        Flight winToReg = new Flight(winnipeg,regina,"2022-11-24","10:30","2022-11-24","12:30");
+
+        Flight winToReg = new Flight(winnipeg,regina, ZonedDateTime.of(2022,7,14,15,30,0,0,winnipeg.getZoneName()), 100, 3.0, 200);
         winnipeg.addLocationOutgoing(regina);
         regina.addLocationIncoming(winnipeg);
         allFlights.add(winToReg);
-        Flight winToReg2 = new Flight(winnipeg,montreal,"2022-09-15","10:30","2022-09-15","12:30");
+        Flight winToReg2 = new Flight(winnipeg,montreal, ZonedDateTime.of(2022,7,21,15,30,0,0,winnipeg.getZoneName()), 100, 3.0, 200);
         winnipeg.addLocationOutgoing(montreal);
         montreal.addLocationIncoming(winnipeg);
         allFlights.add(winToReg2);
 
-        Flight torToVan = new Flight(toronto,vancouver,"2022-06-19","16:30","2022-06-20","1:30");
+        //toronto to vancouver
+        Flight torToVan = new Flight(toronto,vancouver, ZonedDateTime.of(2022,9,4,13,15,0,0,toronto.getZoneName()), 300, 5.0, 1200);
         toronto.addLocationOutgoing(vancouver);
         vancouver.addLocationIncoming(toronto);
         allFlights.add(torToVan);
-        Flight torToVan2 = new Flight(toronto,vancouver,"2022-06-29","17:30","2022-06-30","2:30");
+        Flight torToVan2 = new Flight(toronto,vancouver,ZonedDateTime.of(2022,9,25,17,15,0,0,toronto.getZoneName()), 300, 5.0, 1200);
         toronto.addLocationOutgoing(vancouver);
         vancouver.addLocationIncoming(toronto);
         allFlights.add(torToVan2);
-        Flight torToVan3 = new Flight(toronto,vancouver,"2022-05-14","13:30","2022-05-15","00:30");
+        Flight torToVan3 = new Flight(toronto,vancouver, ZonedDateTime.of(2022,10,4,13,15,0,0,toronto.getZoneName()), 300, 5.0, 1200);
         toronto.addLocationOutgoing(vancouver);
         vancouver.addLocationIncoming(toronto);
         allFlights.add(torToVan3);
-        Flight torToVan4 = new Flight(toronto,vancouver,"2022-06-09","16:30","2022-06-09","1:30");
+        Flight torToVan4 = new Flight(toronto,vancouver,ZonedDateTime.of(2022,10,25,17,15,0,0,toronto.getZoneName()), 300, 5.0, 1200);
         toronto.addLocationOutgoing(vancouver);
         vancouver.addLocationIncoming(toronto);
         allFlights.add(torToVan4);
 
-        Flight torToMn = new Flight(toronto,montreal,"2022-11-30","10:30","2022-30-15","15:30");
+
+        //toronto to montreal
+        Flight torToMn = new Flight(toronto,montreal, ZonedDateTime.of(2022,10,5,6,0,0,0,toronto.getZoneName()), 300, 1.3, 100);
         toronto.addLocationOutgoing(montreal);
         montreal.addLocationIncoming(toronto);
         allFlights.add(torToMn);
 
-        Flight torToWn = new Flight(toronto,winnipeg,"2022-06-27","20:50","2022-06-27","23:50");
+        //toronto to winnipeg
+        Flight torToWn = new Flight(toronto,winnipeg, ZonedDateTime.of(2022,11,15,16,0,0,0,toronto.getZoneName()), 250, 2.6, 750);
         toronto.addLocationOutgoing(winnipeg);
         winnipeg.addLocationIncoming(toronto);
         allFlights.add(torToWn);
 
-        Flight torToCal = new Flight(toronto,calgary,"2022-10-17","20:50","2022-10-28","01:50");
+        //toronto to calgary
+        Flight torToCal = new Flight(toronto,calgary, ZonedDateTime.of(2022,12,25,19,30,0,0,toronto.getZoneName()), 250, 4.1, 750);
         toronto.addLocationOutgoing(calgary);
         calgary.addLocationIncoming(toronto);
         allFlights.add(torToCal);
 
-
-        Flight regToWin = new Flight(regina,winnipeg,"2022-08-13","17:30","2022-08-13","19:30");
+        //regina to winnipeg
+        Flight regToWin = new Flight(regina,winnipeg, ZonedDateTime.of(2022,8,28,1,30,0,0,regina.getZoneName()), 200, 1.3, 120);
         regina.addLocationOutgoing(winnipeg);
         winnipeg.addLocationIncoming(regina);
         allFlights.add(regToWin);
-        Flight regToWin2 = new Flight(regina,winnipeg,"2022-08-16","17:30","2022-08-16","19:30");
+        Flight regToWin2 = new Flight(regina,winnipeg, ZonedDateTime.of(2022,9,25,2,0,0,0,regina.getZoneName()), 200, 1.3, 120);
         regina.addLocationOutgoing(winnipeg);
         winnipeg.addLocationIncoming(regina);
         allFlights.add(regToWin2);
-        Flight regToWin3 = new Flight(regina,winnipeg,"2022-08-10","11:30","2022-08-10","15:30");
+        Flight regToWin3 = new Flight(regina,winnipeg, ZonedDateTime.of(2022,10,25,3,0,0,0,regina.getZoneName()), 200, 1.3, 120);
         regina.addLocationOutgoing(winnipeg);
         winnipeg.addLocationIncoming(regina);
         allFlights.add(regToWin3);
 
-        Flight regToCal = new Flight(regina,calgary,"2022-08-11","07:30","2022-08-11","08:00");
+
+        //regina to calgary
+        Flight regToCal = new Flight(regina,calgary,ZonedDateTime.of(2022,7,30,12,50,0,0,regina.getZoneName()), 100, 1.5, 180);
         regina.addLocationOutgoing(calgary);
         calgary.addLocationIncoming(regina);
         allFlights.add(regToCal);
-        Flight regToCal2 = new Flight(regina,calgary,"2022-08-17","08:30","2022-08-17","09:00");
+        Flight regToCal2 = new Flight(regina,calgary, ZonedDateTime.of(2022,9,10,12,50,0,0,regina.getZoneName()), 100, 1.5, 180);
         regina.addLocationOutgoing(calgary);
         calgary.addLocationIncoming(regina);
         allFlights.add(regToCal2);
 
-        Flight vanToCal = new Flight(vancouver,calgary,"2022-11-11","03:30","2022-11-11","05:00");
+        //vancouver to calgary
+        Flight vanToCal = new Flight(vancouver,calgary, ZonedDateTime.of(2022,7,29,20,50,0,0,vancouver.getZoneName()), 200, 1.4, 220);
         vancouver.addLocationOutgoing(calgary);
         calgary.addLocationIncoming(vancouver);
         allFlights.add(vanToCal);
-        Flight vanToCal2 = new Flight(vancouver,calgary,"2022-06-11","07:30","2022-06-21","09:00");
+        Flight vanToCal2 = new Flight(vancouver,calgary, ZonedDateTime.of(2022,8,17,10,50,0,0,vancouver.getZoneName()), 200, 1.4, 220);
         vancouver.addLocationOutgoing(calgary);
         calgary.addLocationIncoming(vancouver);
         allFlights.add(vanToCal2);
 
-        Flight calToVan = new Flight(calgary,vancouver,"2022-10-01","11:30","2022-10-01","19:45");
+        //calgary to vancouver
+        Flight calToVan = new Flight(calgary,vancouver, ZonedDateTime.of(2022,10,2,2,0,0,0,calgary.getZoneName()), 200, 1.4, 220);
         calgary.addLocationOutgoing(vancouver);
         vancouver.addLocationIncoming(calgary);
         allFlights.add(calToVan);
-        Flight calToVan1 = new Flight(calgary,vancouver,"2022-11-01","11:30","2022-11-01","19:45");
+        Flight calToVan1 = new Flight(calgary,vancouver,ZonedDateTime.of(2022,10,12,7,0,0,0,calgary.getZoneName()), 200, 1.4, 220);
         calgary.addLocationOutgoing(vancouver);
         vancouver.addLocationIncoming(calgary);
         allFlights.add(calToVan1);
-        Flight calToVan2 = new Flight(calgary,vancouver,"2022-12-01","11:30","2022-12-01","19:45");
+        Flight calToVan2 = new Flight(calgary,vancouver, ZonedDateTime.of(2022,10,25,18,0,0,0,calgary.getZoneName()), 200, 1.4, 220);
         calgary.addLocationOutgoing(vancouver);
         vancouver.addLocationIncoming(calgary);
         allFlights.add(calToVan2);
 
-        Flight calToTor = new Flight(calgary,toronto,"2022-12-31","10:30","2022-12-31","18:45");
+        //calgary to toronto
+        Flight calToTor = new Flight(calgary,toronto,ZonedDateTime.of(2022,7,2,15,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor);
 
-        Flight calToTor1 = new Flight(calgary,toronto,"2022-01-31","10:30","2022-12-31","18:45");
+        Flight calToTor1 = new Flight(calgary,toronto, ZonedDateTime.of(2022,7,9,11,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor1);
 
-        Flight calToTor2 = new Flight(calgary,toronto,"2022-02-28","10:30","2022-12-31","18:45");
+        Flight calToTor2 = new Flight(calgary,toronto, ZonedDateTime.of(2022,7,16,5,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor2);
 
-        Flight calToTor3 = new Flight(calgary,toronto,"2022-03-31","10:30","2022-12-31","18:45");
+        Flight calToTor3 = new Flight(calgary,toronto, ZonedDateTime.of(2022,7,30,21,0,0,0,calgary.getZoneName()), 200, 4.2 , 300);
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor3);
 
-        Flight calToTor4 = new Flight(calgary,toronto,"2022-04-30","10:30","2022-12-31","18:45");
+        Flight calToTor4 = new Flight(calgary,toronto, ZonedDateTime.of(2022,8,2,10,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor4);
 
-        Flight calToTor5 = new Flight(calgary,toronto,"2022-05-31","10:30","2022-12-31","18:45");
+        Flight calToTor5 = new Flight(calgary,toronto, ZonedDateTime.of(2022,8,11,12,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor5);
 
-        Flight calToTor6 = new Flight(calgary,toronto,"2022-06-30","10:30","2022-12-31","18:45");
+        Flight calToTor6 = new Flight(calgary,toronto, ZonedDateTime.of(2022,8,21,18,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor6);
 
-        Flight calToTor7 = new Flight(calgary,toronto,"2022-07-31","10:30","2022-12-31","18:45");
+        Flight calToTor7 = new Flight(calgary,toronto, ZonedDateTime.of(2022,9,24,3,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor7);
 
-        Flight calToTor8 = new Flight(calgary,toronto,"2022-08-31","10:30","2022-12-31","18:45");
+        Flight calToTor8 = new Flight(calgary,toronto, ZonedDateTime.of(2022,9,27,5,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor8);
 
-        Flight calToTor9 = new Flight(calgary,toronto,"2022-09-30","10:30","2022-12-31","18:45");
+        Flight calToTor9 = new Flight(calgary,toronto, ZonedDateTime.of(2022,10,18,17,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor9);
 
-        Flight calToTor10 = new Flight(calgary,toronto,"2022-10-31","10:30","2022-12-31","18:45");
+        Flight calToTor10 = new Flight(calgary,toronto, ZonedDateTime.of(2022,10,22,22,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
         calgary.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(calgary);
         allFlights.add(calToTor10);
 
-        Flight montoTor = new Flight(montreal,toronto,"2022-08-11","10:30","2022-11-31","15:45");
+        Flight montoTor = new Flight(montreal,toronto, ZonedDateTime.of(2022,8,27,15,0,0,0,montreal.getZoneName()), 200, 1.3 , 200);
         montreal.addLocationOutgoing(toronto);
         toronto.addLocationIncoming(montreal);
         allFlights.add(montoTor);

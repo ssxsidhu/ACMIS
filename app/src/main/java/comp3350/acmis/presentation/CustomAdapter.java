@@ -83,7 +83,6 @@ public class CustomAdapter extends BaseAdapter {
             titleMiddleRight.setText(displayList.get(position).getRoute().get(0).getDestination().getCity());
             titleBottomLeft.setText(displayList.get(position).getRoute().get(0).getDepartureDate());
             titleBottomRight.setText(String.format("FlightID: #%d", displayList.get(position).getRoute().get(0).getFlightID()));
-            titleExtraLeft.setText(String.format("Total Passengers: %d", displayList.get(position).getRoute().get(0).getPassengerList().size()));
             i1.setImageResource(R.drawable.airplane_symbol);
         }
 
