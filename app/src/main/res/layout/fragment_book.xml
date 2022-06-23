@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.FragmentBook">
@@ -15,59 +15,138 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.50" />
 
+    <FrameLayout
+        android:id="@+id/fragment_container_book"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/arrow_image" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/menu_departure"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/choose_departure"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/activity_vertical_margin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <AutoCompleteTextView
-            android:id="@+id/auto_departure"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textAutoComplete"
-            tools:ignore="LabelFor" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/menu_destination"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="0dp"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fragment_container_book">
+    <TextView
+        android:id="@+id/airport"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:hint="@string/choose_destination"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <AutoCompleteTextView
-            android:id="@+id/auto_destination"
+        android:visibility="invisible"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:gravity="center"
+        style="?attr/textAppearanceTitleLarge"
+        />
+        <TextView
+            android:id="@+id/city"
+            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textAutoComplete"
-            tools:ignore="LabelFor" />
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            style="?attr/textAppearanceTitleMedium"
+            />
+
+    </LinearLayout>
 
 
-    </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/search_button"
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/choose_departure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/search_flights"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        app:layout_constraintStart_toStartOf="@id/menu_departure"
-        app:layout_constraintTop_toBottomOf="@id/menu_departure"/>
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/choose_departure"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="?attr/floatingActionButtonLargeStyle"
+        app:srcCompat="@drawable/ic_round_flight_takeoff_24" />
+
+
+    <ImageView
+        android:id="@+id/arrow_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_baseline_arrow_forward_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/choose_destination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:enabled="false"
+        android:contentDescription="@string/choose_departure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        style="?attr/floatingActionButtonLargeStyle"
+        app:srcCompat="@drawable/ic_round_flight_land_24" />
+
+
+    <!--    <com.google.android.material.textfield.TextInputLayout-->
+    <!--        android:id="@+id/menu_departure"-->
+    <!--        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:layout_marginEnd="16dp"-->
+    <!--        android:hint="@string/choose_departure"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--        <AutoCompleteTextView-->
+    <!--            android:id="@+id/auto_departure"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:inputType="textAutoComplete"-->
+    <!--            tools:ignore="LabelFor" />-->
+
+    <!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+    <!--    <com.google.android.material.textfield.TextInputLayout-->
+    <!--        android:id="@+id/menu_destination"-->
+    <!--        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginEnd="16dp"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:hint="@string/choose_destination"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/guideline"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--        <AutoCompleteTextView-->
+    <!--            android:id="@+id/auto_destination"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:inputType="textAutoComplete"-->
+    <!--            tools:ignore="LabelFor" />-->
+
+
+    <!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+    <!--    <Button-->
+    <!--        android:id="@+id/search_button"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="@string/search_flights"-->
+    <!--        android:layout_marginTop="@dimen/activity_vertical_margin"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/menu_departure"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/menu_departure"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
