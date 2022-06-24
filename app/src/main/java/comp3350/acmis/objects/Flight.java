@@ -40,14 +40,10 @@ public class Flight {
 
         this.duration = calculateDuration(dur);
         this.arrivalDateandTime = departureDateandTime.plus(duration).withZoneSameInstant(destination.getZoneName());
-
         this.seats = seats;
         this.cost = cost;
-
         this.source = Objects.requireNonNull(source,"Source cannot be null");
         this.destination = Objects.requireNonNull(destination,"Destination cannot be null");
-
-
 
         this.flightID = flightSequence;
         flightSequence++;
@@ -63,12 +59,20 @@ public class Flight {
         return Duration.ofHours(hours).plusMinutes(mins);
     }
 
-
-    public void bookSeat(){
-
+    //this method is used to check if the seats left are enough for the user.
+    public boolean enoughSeats(int seatsTobeBooked){
+        return seats >= seatsTobeBooked;
     }
 
-
+    //when a user books this flight, he/she chooses the # of seats to be booked
+    //those # of seats are to be reserved in the flight.
+    public boolean bookSeat(int bookedSeats){
+        if(enoughSeats(bookedSeats)) {
+            seats = seats - bookedSeats;
+            return true;
+        }
+        return false;
+    }
 
     // GETTERS
     public static int getFlightSequence() {
@@ -98,4 +102,6 @@ public class Flight {
     public ZonedDateTime getDepartureDateandTime() {
         return departureDateandTime;
     }
+
+
 }

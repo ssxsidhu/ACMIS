@@ -8,6 +8,7 @@ import comp3350.acmis.application.Main;
 import comp3350.acmis.application.Services;
 import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
+import comp3350.acmis.objects.Route;
 import comp3350.acmis.persistence.DataAccessStub;
 
 public class SearchRoute {
@@ -35,10 +36,23 @@ public class SearchRoute {
         }
     }
 
+    //get all the routes from the source to the destination
+    //returns an arraylist of routes that stores all the routes.
+    public ArrayList<Route> getRoute(String source, String destination){
+        ArrayList<Route> listOfPaths = new ArrayList<>();
+
+        return findAllRoutes(source,destination,listOfPaths);
+    }
+    //helper method of getRoute
+    private ArrayList<Route> findAllRoutes(String source, String destination, ArrayList<Route> listOfPaths) {
+
+
+         return null;
+    }
+
 
     public Graph<Location> getGraph(Location l) {
         return graph;
-
     }
 
 }
