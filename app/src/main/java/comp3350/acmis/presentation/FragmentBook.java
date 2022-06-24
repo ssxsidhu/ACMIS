@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TwoLineListItem;
 
@@ -44,7 +46,6 @@ public class FragmentBook extends Fragment {
     private Location selectedDeparture,selectedDestination;
     private DepartureFragment departureFragment;
     private DestinationFragment destinationFragment;
-    private FloatingActionButton chooseDestination;
     FragmentManager fragmentManager;
 
 
@@ -97,12 +98,16 @@ public class FragmentBook extends Fragment {
 
 
         FloatingActionButton chooseDeparture = view.findViewById(R.id.choose_departure);
-        chooseDestination = view.findViewById(R.id.choose_destination);
+        FloatingActionButton chooseDestination = view.findViewById(R.id.choose_destination);
 
         chooseDeparture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chooseDeparture.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ADC6FF")));
+                if(selectedDestination == null)
+                    chooseDestination.setEnabled(false);
+                chooseDeparture.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#005AC1")));
+                chooseDeparture.setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                args.putSerializable("selectedDestination",selectedDestination);
                 departureFragment.setArguments(args);
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container_book, departureFragment);
@@ -115,7 +120,9 @@ public class FragmentBook extends Fragment {
         chooseDestination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chooseDestination.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ADC6FF")));
+                chooseDestination.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#005AC1")));
+                chooseDestination.setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                args.putSerializable("selectedDeparture",selectedDeparture);
                 destinationFragment.setArguments(args);
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container_book, destinationFragment);
@@ -125,31 +132,59 @@ public class FragmentBook extends Fragment {
         });
 
 
-        TextView setAirport = view.findViewById(R.id.airport);
-        TextView setCity = view.findViewById(R.id.city);
+        TextView setAirportDeparture = view.findViewById(R.id.airport_departure);
+        TextView setCityDeparture = view.findViewById(R.id.city_departure);
+        TextView setAirportDestination = view.findViewById(R.id.airport_destination);
+        TextView setCityDestination = view.findViewById(R.id.city_destination);
 
+        LinearLayout linearLayoutDeparture = view.findViewById(R.id.layout_departure);
+        LinearLayout linearLayoutDestination = view.findViewById(R.id.layout_destination);
 
-        setAirport.setOnClickListener(new View.OnClickListener() {
+//        setAirportDeparture.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                setAirportDeparture.setVisibility(View.INVISIBLE);
+//                setCityDeparture.setVisibility(View.INVISIBLE);
+//                chooseDeparture.show();
+//                chooseDeparture.performClick();
+//
+//            }
+//        });
+
+        linearLayoutDeparture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAirport.setVisibility(View.INVISIBLE);
-                setCity.setVisibility(View.INVISIBLE);
-                chooseDeparture.show();
-                chooseDeparture.performClick();
+                replace(linearLayoutDeparture,linearLayoutDestination,chooseDeparture,chooseDestination);
             }
         });
+
+        linearLayoutDestination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replace(linearLayoutDestination,linearLayoutDeparture,chooseDestination,chooseDeparture);
+            }
+        });
+
+
+//        setAirportDestination.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                setAirportDestination.setVisibility(View.INVISIBLE);
+//                setCityDestination.setVisibility(View.INVISIBLE);
+//                chooseDestination.show();
+//                chooseDestination.performClick();
+//            }
+//        });
 
         fragmentManager.setFragmentResultListener("selectedDeparture", getViewLifecycleOwner(), new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 selectedDeparture = (Location) result.getSerializable(requestKey);
-                setAirport.setText(selectedDeparture.getAirport());
-                setCity.setText(String.format("%s,%s", selectedDeparture.getCity(), selectedDeparture.getCountry()));
+                setAirportDeparture.setText(selectedDeparture.getAirport());
+                setCityDeparture.setText(String.format("%s,%s", selectedDeparture.getCity(), selectedDeparture.getCountry()));
                 chooseDeparture.hide();
-                setAirport.setVisibility(View.VISIBLE);
-                setCity.setVisibility(View.VISIBLE);
+                linearLayoutDeparture.setVisibility(View.VISIBLE);
                 chooseDestination.setEnabled(true);
-                chooseDestination.performClick();
             }
         });
 
@@ -157,11 +192,27 @@ public class FragmentBook extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 selectedDestination = (Location) result.getSerializable(requestKey);
+                setAirportDestination.setText(selectedDestination.getAirport());
+                setCityDestination.setText(String.format("%s,%s", selectedDestination.getCity(), selectedDestination.getCountry()));
+                chooseDestination.hide();
+                linearLayoutDestination.setVisibility(View.VISIBLE);
             }
         });
 
 
 
+    }
+
+    private void replace(LinearLayout linearLayout1,LinearLayout linearLayout2, FloatingActionButton floatingActionButton1,FloatingActionButton floatingActionButton2){
+        linearLayout1.setVisibility(View.INVISIBLE);
+        floatingActionButton1.show();
+        floatingActionButton1.performClick();
+        if(selectedDeparture!=null && selectedDestination!=null){
+            floatingActionButton2.hide();
+            linearLayout2.setVisibility(View.VISIBLE);
+        }
+
+    }
 
 
 
@@ -228,8 +279,6 @@ public class FragmentBook extends Fragment {
 //            }
 //        });
 
-
-    }
 
 //    private void sendData(){
 //        Intent i = new Intent(getActivity().getBaseContext(),SearchResults.class);

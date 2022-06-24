@@ -29,7 +29,7 @@ public class DepartureFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private ArrayList<Location> locationList;
-    private String mParam2;
+    private Location selectedDestination;
 
     public DepartureFragment() {
         // Required empty public constructor
@@ -48,10 +48,7 @@ public class DepartureFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            locationList = (ArrayList<Location>) getArguments().getSerializable("locationList");
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -63,8 +60,16 @@ public class DepartureFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+        if (getArguments() != null) {
+            locationList = (ArrayList<Location>) getArguments().getSerializable("locationList");
+            selectedDestination = (Location) getArguments().getSerializable("selectedDestination");
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+        ArrayList<Location> duplicateList = new ArrayList<>();
+        duplicateList.addAll(locationList);
+        duplicateList.remove(selectedDestination);
 
-        ArrayAdapter<Location> adapter = new ArrayAdapter<>(getActivity(), R.layout.drop_down_menu_item, R.id.menu_text_view, locationList);
+        ArrayAdapter<Location> adapter = new ArrayAdapter<>(getActivity(), R.layout.drop_down_menu_item, R.id.menu_text_view, duplicateList);
         AutoCompleteTextView ddDeparture = (AutoCompleteTextView) view.findViewById(R.id.auto_departure);
         ddDeparture.setThreshold(1);
         ddDeparture.setAdapter(adapter);

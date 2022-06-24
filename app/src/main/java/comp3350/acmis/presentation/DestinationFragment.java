@@ -31,7 +31,7 @@ public class DestinationFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private ArrayList<Location> locationList;
-    private String mParam2;
+    private Location selectedDeparture;
 
     public DestinationFragment() {
         // Required empty public constructor
@@ -49,10 +49,7 @@ public class DestinationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            locationList = (ArrayList<Location>) getArguments().getSerializable("locationList");
-            //            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -64,12 +61,20 @@ public class DestinationFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+        if (getArguments() != null) {
+            locationList = (ArrayList<Location>) getArguments().getSerializable("locationList");
+            selectedDeparture = (Location) getArguments().getSerializable("selectedDeparture");
+            //            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+        ArrayList<Location> duplicateList = new ArrayList<>();
+        duplicateList.addAll(locationList);
+        duplicateList.remove(selectedDeparture);
 
-        ArrayAdapter<Location> adapter = new ArrayAdapter<>(getActivity(), R.layout.drop_down_menu_item, R.id.menu_text_view, locationList);
+
+        ArrayAdapter<Location> adapter = new ArrayAdapter<>(getActivity(), R.layout.drop_down_menu_item, R.id.menu_text_view, duplicateList);
         AutoCompleteTextView ddDestination = (AutoCompleteTextView) view.findViewById(R.id.auto_destination);
         ddDestination.setThreshold(1);
         ddDestination.setAdapter(adapter);
-
 
         TextInputLayout textInputLayout_destination = view.findViewById(R.id.menu_destination);
         ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_destination.getEditText())).setOnItemClickListener((adapterView, view12, position, id) -> {

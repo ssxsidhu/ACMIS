@@ -5,6 +5,7 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:soundEffectsEnabled="false"
     tools:context=".presentation.FragmentBook">
 
 
@@ -25,38 +26,35 @@
 
 
     <LinearLayout
+        android:id="@+id/layout_departure"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
         android:layout_margin="@dimen/activity_vertical_margin"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guideline"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/fragment_container_book">
     <TextView
-        android:id="@+id/airport"
+        android:id="@+id/airport_departure"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:visibility="invisible"
         android:textAllCaps="true"
         android:textStyle="bold"
         android:gravity="center"
         style="?attr/textAppearanceTitleLarge"
         />
         <TextView
-            android:id="@+id/city"
+            android:id="@+id/city_departure"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
             style="?attr/textAppearanceTitleMedium"
             />
 
     </LinearLayout>
-
-
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/choose_departure"
@@ -80,6 +78,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/layout_destination"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fragment_container_book">
+        <TextView
+            android:id="@+id/airport_destination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:gravity="center"
+            style="?attr/textAppearanceTitleLarge"
+            />
+        <TextView
+            android:id="@+id/city_destination"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?attr/textAppearanceTitleMedium"
+            />
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/choose_destination"
