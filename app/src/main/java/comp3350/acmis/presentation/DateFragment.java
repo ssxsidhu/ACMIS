@@ -22,11 +22,6 @@ import java.util.TimeZone;
 
 import comp3350.acmis.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DateFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DateFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";

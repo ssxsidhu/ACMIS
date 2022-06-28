@@ -1,6 +1,8 @@
 package comp3350.acmis.business;
 
 
+import org.threeten.bp.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -35,11 +37,11 @@ public class AccessBookings {
                 Collections.sort(myBookings, new Comparator<Booking>() {
                     @Override
                     public int compare(Booking booking, Booking t1) {
-                        long departureDate1 = Integer.parseInt(booking.getRoute().getRoute().get(0).getRawDepartureDate().replaceAll("-",""));
-                        long departureDate2 = Integer.parseInt(t1.getRoute().getRoute().get(0).getRawDepartureDate().replaceAll("-",""));
-                        return (int)(departureDate1-departureDate2);
+                        return booking.getRoute().getRoute().get(0).getDepartureDateTime().compareTo(t1.getRoute().getRoute().get(0).getDepartureDateTime());
                     }
                 });
+
+
 
                 return null;
             }

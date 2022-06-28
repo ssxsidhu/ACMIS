@@ -1,6 +1,8 @@
 package comp3350.acmis.business;
 
-import androidx.room.jarjarred.org.antlr.v4.misc.Graph;
+//import androidx.room.jarjarred.org.antlr.v4.misc.Graph;
+
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.graph.Graph;
 
 import java.util.ArrayList;
 
@@ -18,7 +20,7 @@ public class SearchRoute {
     private ArrayList<Flight> flights;
 
     public SearchRoute() {
-        this.graph = new Graph<>();
+//        this.graph = new Graph<>();
         data = Services.getDataAccess(Main.dbName);
         data.getAllFlights(flights);
         this.addAllEdges(flights);
@@ -32,7 +34,7 @@ public class SearchRoute {
             input= flights.get(i);
             //get the source and the location.
             // the edge will be from the source to the destination
-            graph.addEdge(input.getSource(),input.getDestination());
+//            graph.addEdge(input.getSource(),input.getDestination());
         }
     }
 

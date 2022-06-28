@@ -12,6 +12,7 @@ package comp3350.acmis.objects;
 
 
 import org.threeten.bp.Duration;
+import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
 
@@ -96,12 +97,17 @@ public class Flight {
     public Duration getDuration() {
         return duration;
     }
-    public ZonedDateTime getArrivalDateandTime() {
-        return arrivalDateandTime;
+    public String getArrivalTime() {
+        return arrivalDateandTime.getHour() + ":" +arrivalDateandTime.getMinute();
     }
-    public ZonedDateTime getDepartureDateandTime() {
+    public String getDepartureTime() {
+        return departureDateandTime.getHour() + ":" + departureDateandTime.getMinute();
+    }
+
+    public ZonedDateTime getDepartureDateTime(){
         return departureDateandTime;
     }
+
 
 
 }

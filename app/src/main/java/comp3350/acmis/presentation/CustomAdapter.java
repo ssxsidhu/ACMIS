@@ -9,8 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
+
+import org.threeten.bp.format.TextStyle;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import comp3350.acmis.R;
 import comp3350.acmis.objects.Booking;
@@ -97,14 +101,13 @@ public class CustomAdapter extends BaseAdapter {
         titleExtraRight = (TextView) row.findViewById(R.id.list_extra_text_right);
 
         if(displayList!=null && displayList.size()>0 && displayList.get(position).getRoute().size()>0) {
-            frontDate.setText("14");
-            frontMonth.setText("Feb");
-            frontYear.setText("2022");
+            frontDate.setText(String.format("%d", displayList.get(position).getRoute().get(0).getDepartureDateTime().getDayOfMonth()));
+            frontMonth.setText(displayList.get(position).getRoute().get(0).getDepartureDateTime().getMonth().getDisplayName(TextStyle.SHORT, Locale.CANADA));
+            frontYear.setText(String.format("%d", displayList.get(position).getRoute().get(0).getDepartureDateTime().getYear()));
             titleTopLeft.setText(displayList.get(position).getRoute().get(0).getDepartureTime());
             titleTopRight.setText(displayList.get(position).getRoute().get(0).getArrivalTime());
             titleMiddleLeft.setText(displayList.get(position).getRoute().get(0).getSource().getCity());
             titleMiddleRight.setText(displayList.get(position).getRoute().get(0).getDestination().getCity());
-            titleBottomLeft.setText(displayList.get(position).getRoute().get(0).getDepartureDate());
             titleBottomRight.setText(String.format("FlightID: #%d", displayList.get(position).getRoute().get(0).getFlightID()));
             i1.setImageResource(R.drawable.airplane_symbol);
 //            titleExtraLeft.setText(String.format("Total Passengers: %d", displayList.get(position).getRoute().get(0).getPassengerList().size()));
