@@ -1,6 +1,5 @@
 package comp3350.acmis.presentation;
 
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;

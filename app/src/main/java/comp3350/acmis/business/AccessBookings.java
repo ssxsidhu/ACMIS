@@ -26,26 +26,20 @@ public class AccessBookings {
 
     public String getMyBookings(ArrayList<Booking> myBookings) {
         myBookings.clear();
-        ArrayList<User> allUsers = new ArrayList<User>();
-        dataAccess.getAllUsers(allUsers);
-
-        for (int i = 0; i < allUsers.size(); i++){
-            if (allUsers.get(i).getUsername().equals(username)) {
-                allUsers.get(i).getMyBookings(myBookings);
-
-                //ascending order
-                Collections.sort(myBookings, new Comparator<Booking>() {
-                    @Override
-                    public int compare(Booking booking, Booking t1) {
-                        return booking.getRoute().getRoute().get(0).getDepartureDateTime().compareTo(t1.getRoute().getRoute().get(0).getDepartureDateTime());
-                    }
-                });
-
-
-
-                return null;
-            }
+        User user = dataAccess.getUserObject(username);
+        String result;
+        if(user != null) {
+            result = dataAccess.getUserBookings(user, myBookings);
         }
-        return null;
+        else{
+            return "No user found";
+        }
+        Collections.sort(myBookings, new Comparator<Booking>() {
+            @Override
+            public int compare(Booking booking, Booking t1) {
+                return booking.getRoute().getRoute().get(0).getDepartureDateTime().compareTo(t1.getRoute().getRoute().get(0).getDepartureDateTime());
+            }
+        });
+        return result;
     }
 }

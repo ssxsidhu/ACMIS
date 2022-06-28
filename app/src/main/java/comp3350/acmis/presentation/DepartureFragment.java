@@ -1,5 +1,6 @@
 package comp3350.acmis.presentation;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
@@ -60,13 +62,13 @@ public class DepartureFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+
         if (getArguments() != null) {
             locationList = (ArrayList<Location>) getArguments().getSerializable("locationList");
             selectedDestination = (Location) getArguments().getSerializable("selectedDestination");
-//            mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        ArrayList<Location> duplicateList = new ArrayList<>();
-        duplicateList.addAll(locationList);
+
+        ArrayList<Location> duplicateList = new ArrayList<>(locationList);
         duplicateList.remove(selectedDestination);
 
         ArrayAdapter<Location> adapter = new ArrayAdapter<>(getActivity(), R.layout.drop_down_menu_item, R.id.menu_text_view, duplicateList);

@@ -28,13 +28,13 @@ public class CustomAdapter extends BaseAdapter {
     private ArrayList<Route> displayList;
 
 
-    public CustomAdapter(FragmentManage context, ArrayList<Booking> userBookings) {
-        mContext = context;
-        displayList = new ArrayList<>();
-        for (int i = 0; i < userBookings.size(); i++) {
-            displayList.add(userBookings.get(i).getRoute());
-        }
-    }
+//    public CustomAdapter(FragmentManage context, ArrayList<Booking> userBookings) {
+//        mContext = context;
+//        displayList = new ArrayList<>();
+//        for (int i = 0; i < userBookings.size(); i++) {
+//            displayList.add(userBookings.get(i).getRoute());
+//        }
+//    }
 
     public CustomAdapter(Activity activity, ArrayList<Route> flightsAvailable) {
         this.activity = activity;

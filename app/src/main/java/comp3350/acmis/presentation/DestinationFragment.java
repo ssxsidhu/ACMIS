@@ -64,10 +64,9 @@ public class DestinationFragment extends Fragment {
         if (getArguments() != null) {
             locationList = (ArrayList<Location>) getArguments().getSerializable("locationList");
             selectedDeparture = (Location) getArguments().getSerializable("selectedDeparture");
-            //            mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        ArrayList<Location> duplicateList = new ArrayList<>();
-        duplicateList.addAll(locationList);
+
+        ArrayList<Location> duplicateList = new ArrayList<>(locationList);
         duplicateList.remove(selectedDeparture);
 
 
