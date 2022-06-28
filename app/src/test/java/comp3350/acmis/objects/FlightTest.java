@@ -7,16 +7,17 @@ package comp3350.acmis.objects;
 
 import junit.framework.TestCase;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.threeten.bp.Duration;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
 
-public class FlightTest extends TestCase {
+public class FlightTest extends TestCase{
     Location LocA,LocB;
     Flight testFlight;
 
-    @Override
     @Before
     public void setUp()  {
         LocA = new Location("Calgary", ZoneId.of("America/Edmonton"), "Canada","YYC");
@@ -29,43 +30,47 @@ public class FlightTest extends TestCase {
     //Test the getSource method return the correct source city
     public void testgetSource() {
         setUp();
-        assertEquals("Toronto",testFlight.getSource().getCity());
+        //System.out.println(testFlight.get);
+        Assert.assertEquals("Calgary", testFlight.getSource().getCity());
     }
-
     @Test
     //Test the getDestination method returns the correct destination city
     public void testgetDestination() {
         setUp();
 
-        assertEquals("Vancouver", testFlight.getDestination().getCity());
+        Assert.assertEquals("Regina", testFlight.getDestination().getCity());
     }
-
-
-
+    @Test
+    public void testgetSeats() {
+        setUp();
+        Assert.assertEquals(250, testFlight.getSeats());
+    }
 
 
     @Test
-    public void getSeats() {
-
+    public void TestgetDuration() {
+        setUp();
+        Assert.assertEquals(Duration.ofHours(2).plusMinutes(30), testFlight.getDuration());
     }
 
     @Test
-    public void setSeats() {
+    public void TestgetCost() {
+        setUp();
+        Assert.assertEquals(500, testFlight.getCost());
     }
 
     @Test
-    public void getDuration() {
+    public void testenoughSeats(){
+        setUp();
+        assertEquals(true, testFlight.enoughSeats(5));
     }
 
     @Test
-    public void setDuration() {
+    public void testBookSeats(){
+        setUp();
+        assertEquals(true,testFlight.bookSeat(5));
     }
 
-    @Test
-    public void getCost() {
-    }
 
-    @Test
-    public void setCost() {
-    }
+
 }

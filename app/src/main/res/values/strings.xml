@@ -3,8 +3,8 @@
     <string name="title_BottomTabbedActivity">BottomTabbedActivity</string>
     <string name="tab_1">Book flight</string>
     <string name="tab_2">Manage flight</string>
-    <string name="choose_departure">Choose Departure</string>
-    <string name="choose_destination">Choose Destination</string>
+    <string name="choose_departure">Flying from?</string>
+    <string name="choose_destination">Flying to?</string>
     <string name="fatalError">Fatal Error</string>
     <string name="warning">Warning!</string>
     <string name="no_flights_found">No Flights found</string>
@@ -13,4 +13,10 @@
     <string name="search_flights">Search Flights</string>
     <string name="upcoming_flights">Upcoming Flights</string>
     <string name="airplane_logo">Airplane Logo</string>
+    <string name="page_title">ACMIS</string>
+    <string name="title_activity_home_page">HomePageActivity</string>
+    <string name="caption_select_destination">Choose Destination</string>
+    <string name="caption_select_departure">Choose Departure</string>
+    <string name="depart">Depart</string>
+    <string name="passenger">1 passenger</string>
 </resources>

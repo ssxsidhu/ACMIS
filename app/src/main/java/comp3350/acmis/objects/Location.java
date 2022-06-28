@@ -54,7 +54,7 @@ public class Location  implements Serializable {
 
     @Override
     public String toString() {
-        return city +", "+country+", "+airport;
+        return city +", "+country;
     }
 
 

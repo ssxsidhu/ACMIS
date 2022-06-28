@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/choose_departure"
+        android:enabled="true"
+        android:icon="@drawable/ic_round_flight_takeoff_24"
+        android:title="@string/choose_departure"/>
+    <item
+        android:id="@+id/choose_destination"
+        android:enabled="true"
+        android:icon="@drawable/ic_round_flight_land_24"
+        android:title="@string/choose_destination"/>
+
+</menu>
