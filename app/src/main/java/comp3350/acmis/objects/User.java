@@ -10,6 +10,7 @@ public class User {
     private final String lastName;
     private final Gender gender;
     private final String username;
+    private int userID;
     private String password;
     private String email;
     private long phoneNumber;
@@ -30,59 +31,18 @@ public class User {
         if(phoneNumber.length() != 10){
             throw new IllegalArgumentException("Phone number should contain 10 digits");
         }
+
         else{
             this.phoneNumber = Long.parseLong(Objects.requireNonNull(phoneNumber,"Phone number should not be null"));
         }
         bookings = new ArrayList<Booking>();
     }
 
-    // SETTERS
-    public void addBooking(Booking newBook) {
-        if (newBook == null) {
-            throw new NullPointerException();
-        }
-        bookings.add(newBook);
-    }
-
-    public boolean removeBooking(int bookingID) {
-        boolean found = false;
-        Booking removal = null;
-
-        if (bookingID < 0) {
-            throw new NegativeArraySizeException();
-        }
-
-        //find booking with matching ID
-        for (int i = 0; i < bookings.size() && !found; i++) {
-            removal = bookings.get(i);
-
-            if (removal != null && removal.getBookingId() == bookingID) {
-                bookings.remove(removal);
-                found = true;
-            }
-        }
-        return found;
-    }
-
-
     // GETTERS
     public String getFirstName() {return firstName;}
     public String getLastName() {return lastName;}
     public Gender getGender() {return gender;}
     public String getUsername() {return username;}
-
-    public String getMyBookings(ArrayList<Booking> myBookings) {
-        if (myBookings == null) {
-            throw new NullPointerException();
-        }
-        myBookings.addAll(bookings);
-        return null;
-    }
-
-    //used for iteration 1 testing only, used to see if add and remove booking methods are working
-    public ArrayList<Booking> getBookingsTemporaryTest() {
-        return bookings;
-    }
 
     //Error checking in constructor
     private String errorCheck(String value, String message) {

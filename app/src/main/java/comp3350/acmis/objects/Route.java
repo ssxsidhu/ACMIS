@@ -11,23 +11,11 @@ public class Route {
     // What makes up a route for now ? Either a direct flight or a one stop over flight
     private ArrayList<Flight> route;
 
-    // DEFAULT CONSTRUCTOR
-    public Route() {
-        route = new ArrayList<>();
-    }
-
     // CONSTRUCTOR 1 --> Hard Copy
-    public Route(List<Flight> flights) {
-        route = new ArrayList<>();
-        route.addAll(flights);
-    }
+    public Route()
+    {route = new ArrayList<>();}
 
-    // Constructor 2 --> Soft Copy
-    public Route(ArrayList<Flight> flights) {
-        route = flights;
-    }
-
-    // Constructor 3 --> Single or Direct Flight
+    // Constructor 2 --> Single or Direct Flight
     public Route(Flight directFlight) {
         route = new ArrayList<>();
         route.add(directFlight);
@@ -52,10 +40,11 @@ public class Route {
     }
 
     // GETTERS
-    public boolean isEmpty(){
+    public boolean isEmpty(){                       // To Check for Flights
         return route.isEmpty();
     }
-    public ArrayList<Flight> getRoute() {
+
+    public ArrayList<Flight> getFLights() {
         return route;
     }
 

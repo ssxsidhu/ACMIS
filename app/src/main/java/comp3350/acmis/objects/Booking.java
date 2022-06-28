@@ -50,5 +50,30 @@ public class Booking {
     public void setNewUser (User newUser){
         booker = newUser;
     }
+    public void addBooking(Booking newBook) {
+        if (newBook == null) {
+            throw new NullPointerException();
+        }
+        bookings.add(newBook);
+    }
 
+    public boolean removeBooking(int bookingID) {
+        boolean found = false;
+        Booking removal = null;
+
+        if (bookingID < 0) {
+            throw new NegativeArraySizeException();
+        }
+
+        //find booking with matching ID
+        for (int i = 0; i < bookings.size() && !found; i++) {
+            removal = bookings.get(i);
+
+            if (removal != null && removal.getBookingId() == bookingID) {
+                bookings.remove(removal);
+                found = true;
+            }
+        }
+        return found;
+    }
 }

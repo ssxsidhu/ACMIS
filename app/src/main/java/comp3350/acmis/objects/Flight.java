@@ -9,13 +9,10 @@ The Flight also has a list of passengers who booked the flight.
 
 package comp3350.acmis.objects;
 
-
-
-import org.threeten.bp.Duration;
-import org.threeten.bp.ZoneId;
-import org.threeten.bp.ZonedDateTime;
-
+import java.util.ArrayList;
 import java.util.Objects;
+
+import comp3350.acmis.business.DateFormatter;
 
 public class Flight {
 
@@ -26,56 +23,45 @@ public class Flight {
     private int flightID;
     private Location source;
     private Location destination;
-    private ZonedDateTime departureDateandTime;
-    private ZonedDateTime arrivalDateandTime;
 
-    private int seats; // space in the flight
-    private Duration duration; //weight of flight from one place to another
-    private int cost; //cost of the flight - monetary value.
+    //date format "yyyy-mm-dd"
+    //time format "hh:mm"
+    private String departureDate;
+    private String departureTime;
 
+    private String arrivalDate;
+    private String arrivalTime;
+
+    //
+    // Store all users on this flight in a list.
+    private ArrayList<User> passengerList;
 
     //constructor
-    public Flight(Location source, Location destination, ZonedDateTime departureDateandTime, int seats, double dur, int cost){
-        this.departureDateandTime = Objects.requireNonNull(departureDateandTime);
-
-        this.duration = calculateDuration(dur);
-        this.arrivalDateandTime = departureDateandTime.plus(duration).withZoneSameInstant(destination.getZoneName());
-
-        this.seats = seats;
-        this.cost = cost;
-
-        this.source = Objects.requireNonNull(source,"Source cannot be null");
-        this.destination = Objects.requireNonNull(destination,"Destination cannot be null");
-
-
+    public Flight(Location source, Location destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime) {
 
         this.flightID = flightSequence;
+        this.source = Objects.requireNonNull(source,"Source cannot be null");
+        this.destination = Objects.requireNonNull(destination,"Destination cannot be null");
+        this.departureDate = Objects.requireNonNull(departureDate,"Departure date cannot be null");
+        this.departureTime = Objects.requireNonNull(departureTime,"Departure time cannot be null");
+        this.arrivalDate = Objects.requireNonNull(arrivalDate,"Arrival date cannot be null");
+        this.arrivalTime = Objects.requireNonNull(arrivalTime,"Arrival time cannot be null");
+        passengerList =  new ArrayList<>();
         flightSequence++;
     }
 
-    //This method is used to calculate the duration of the flight from source to destination
-    //it returns Duration this that is added to the departure time to calculate the arrival time in another zone.
-    private Duration calculateDuration(double duration){
-        String [] separation = String.valueOf(duration).split("\\.");
-        int hours = Integer.parseInt(separation[0]);
-        int mins = ((Integer.parseInt(separation[1])/10)*60);
 
-        return Duration.ofHours(hours).plusMinutes(mins);
+    //to add passenger to flight
+    public void addUser(User addThis) {
+        passengerList.add(addThis);
     }
-
-
-    public void bookSeat(){
-
-    }
-
-
 
     // GETTERS
-    public static int getFlightSequence() {
-        return flightSequence;
-    }
     public int getFlightID() {
         return flightID;
+    }
+    public static int getFlightSequence() {
+        return flightSequence;
     }
     public Location getSource() {
         return source;
@@ -83,19 +69,34 @@ public class Flight {
     public Location getDestination() {
         return destination;
     }
-    public int getSeats() {
-        return seats;
+    public String getDepartureTime() {
+        return departureTime;
     }
-    public int getCost() {
-        return cost;
+    public String getArrivalTime() {
+        return arrivalTime;
     }
-    public Duration getDuration() {
-        return duration;
+    public String getArrivalDate() {
+        DateFormatter date = new DateFormatter(arrivalDate);
+        return date.format();
     }
-    public ZonedDateTime getArrivalDateandTime() {
-        return arrivalDateandTime;
+    public String getDepartureDate() {
+        DateFormatter date = new DateFormatter(departureDate);
+        return date.format();
     }
-    public ZonedDateTime getDepartureDateandTime() {
-        return departureDateandTime;
+    public String getRawDepartureDate(){
+        return departureDate;
+    }
+    public ArrayList<User> getPassengerList() {
+        return passengerList;
+    }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "flightID=" + flightID +
+                ", source=" + source +
+                ", destination=" + destination +
+                ", flightList="+
+                '}';
     }
 }

@@ -1,27 +1,22 @@
 
 package comp3350.acmis.objects;
 
-import org.threeten.bp.ZoneId;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
-
 public class Location  implements Serializable {
     private final String city;
-    private final ZoneId zoneName;
     private final String country;
     private final String airport;
     private ArrayList<Location> locsIncomingFlights;
     private ArrayList<Location> locsOutgoingFLights;
 
-
-    public Location(String city, ZoneId zoneName, String country, String airport) {
+    public Location(String city, String country, String airport) {
         this.city = errorCheck(city, "City");
-        this.zoneName = zoneName;
         this.country = errorCheck(country, "Country");
         this.airport = errorCheck(airport, "Airport");
+
         locsIncomingFlights = new ArrayList<>();
         locsOutgoingFLights = new ArrayList<>();
     }
@@ -55,9 +50,6 @@ public class Location  implements Serializable {
     }
     public ArrayList<Location> getLocsOutgoingFLights() {
         return locsOutgoingFLights;
-    }
-    public ZoneId getZoneName() {
-        return zoneName;
     }
 
     @Override
