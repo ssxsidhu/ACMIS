@@ -7,147 +7,70 @@ package comp3350.acmis.objects;
 
 import junit.framework.TestCase;
 
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.threeten.bp.Duration;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
 
-public class FlightTest extends TestCase {
+public class FlightTest extends TestCase{
+    Location LocA,LocB;
+    Flight testFlight;
 
-    @Test
-    //this method is used to test if every flight has a unique id. The id is sequential
-    public void testgetFlightSeq() {
-        assertEquals(1,Flight.getFlightSequence());
-        Location location1 = new Location("Toronto", "Canada", "YYZ");
-        Location location2 = new Location("Vancouver", "Canada", "YVR");
-        Flight testY = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15","4:30");
-        assertEquals(2,Flight.getFlightSequence());
-        Flight testZ = new Flight(location2,location1,"2022-11-14","07:30","2022-11-15","10:30");
-        assertEquals(3,Flight.getFlightSequence());
+    @Before
+    public void setUp()  {
+        LocA = new Location("Calgary", ZoneId.of("America/Edmonton"), "Canada","YYC");
+        LocB = new Location("Regina", ZoneId.of("America/Regina"), "Canada","YQR");
+        testFlight = new Flight(LocA,LocB, ZonedDateTime.of(2022,6,11,7,30,0,0,LocA.getZoneName()), 250, 2.5, 500);
 
     }
 
     @Test
     //Test the getSource method return the correct source city
     public void testgetSource() {
-        Location location1 = new Location("Toronto", "Canada", "YYZ");
-        Location location2 = new Location("Vancouver", "Canada", "YVR");
-        Flight test1 = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15","4:30");
-
-        assertEquals("Toronto", test1.getSource().getCity());
+        setUp();
+        //System.out.println(testFlight.get);
+        Assert.assertEquals("Calgary", testFlight.getSource().getCity());
     }
-
     @Test
     //Test the getDestination method returns the correct destination city
     public void testgetDestination() {
-        Location location1 = new Location("Toronto", "Canada", "YYZ");
-        Location location2 = new Location("Vancouver", "Canada", "YVR");
-        Flight test1 = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15","4:30");
+        setUp();
 
-        assertEquals("Vancouver", test1.getDestination().getCity());
+        Assert.assertEquals("Regina", testFlight.getDestination().getCity());
     }
-
-    //getting departure time
     @Test
-    public void testgetDepartureTime() {
-        Location location1 = new Location("Toronto", "Canada", "YYZ");
-        Location location2 = new Location("Vancouver", "Canada", "YVR");
-        Flight test1 = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15","4:30");
-
-        assertEquals("10:30", test1.getDepartureTime());
+    public void testgetSeats() {
+        setUp();
+        Assert.assertEquals(250, testFlight.getSeats());
     }
 
-    //testing the get arrival time
+
     @Test
-    public void getArrivalTime() {
-        Location location1 = new Location("Toronto", "Canada", "YYZ");
-        Location location2 = new Location("Vancouver", "Canada", "YVR");
-        Flight test1 = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15","4:30");
-
-        assertEquals("4:30", test1.getArrivalTime());
+    public void TestgetDuration() {
+        setUp();
+        Assert.assertEquals(Duration.ofHours(2).plusMinutes(30), testFlight.getDuration());
     }
 
-    //testing the get arrival date that used the date formatter.
     @Test
-    public void testgetArrivalDate() {
-        Location location1 = new Location("Toronto", "Canada", "YYZ");
-        Location location2 = new Location("Vancouver", "Canada", "YVR");
-        Flight test1 = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15","4:30");
-
-        assertEquals("June 15, 2022", test1.getArrivalDate());
-
+    public void TestgetCost() {
+        setUp();
+        Assert.assertEquals(500, testFlight.getCost());
     }
 
-    //testing the get departure date that uses the date formatter
     @Test
-    public void testgetDepartureDate() {
-        Location location1 = new Location("Toronto", "Canada", "YYZ");
-        Location location2 = new Location("Vancouver", "Canada", "YVR");
-        Flight test1 = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15","4:30");
-
-        assertEquals("June 14, 2022", test1.getDepartureDate());
+    public void testenoughSeats(){
+        setUp();
+        assertEquals(true, testFlight.enoughSeats(5));
     }
 
-    //testing the get departure date without any formatting
     @Test
-    public void testgetRawDepartureDate() {
-        Location location1 = new Location("Toronto", "Canada", "YYZ");
-        Location location2 = new Location("Vancouver", "Canada", "YVR");
-        Flight test1 = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15","4:30");
-
-        assertEquals("2022-06-14", test1.getRawDepartureDate());
+    public void testBookSeats(){
+        setUp();
+        assertEquals(true,testFlight.bookSeat(5));
     }
 
-    //testing the constructor parameters
-    @Test
-    public void testErrors(){
 
-        //testing for null source location
-        try{
-            Location location1 = new Location("Toronto", "Canada", "YYZ");
-            Location location2 = new Location("Vancouver", "Canada", "YVR");
-            Flight testY = new Flight(null,location2,"2022-06-14","10:30","2022-06-15","4:30");
-            fail("Expected a null pointer exception");
-        }catch(NullPointerException unused){}
-
-        //testing for null destination location
-        try{
-            Location location1 = new Location("Toronto", "Canada", "YYZ");
-            Location location2 = new Location("Vancouver", "Canada", "YVR");
-            Flight testY = new Flight(location1,null,"2022-06-14","10:30","2022-06-15","4:30");
-            fail("Expected a null pointer exception");
-        }catch(NullPointerException unused){}
-
-        //testing for null departure date
-        try{
-            Location location1 = new Location("Toronto", "Canada", "YYZ");
-            Location location2 = new Location("Vancouver", "Canada", "YVR");
-            Flight testY = new Flight(location1,location2,null,"10:30","2022-06-15","4:30");
-            fail("Expected a null pointer exception");
-        }catch(NullPointerException unused){}
-
-        //testing for null departure time
-        try{
-            Location location1 = new Location("Toronto", "Canada", "YYZ");
-            Location location2 = new Location("Vancouver", "Canada", "YVR");
-            Flight testY = new Flight(location1,location2,"2022-06-14",null,"2022-06-15","4:30");
-            fail("Expected a null pointer exception");
-        }catch(NullPointerException unused){}
-
-        //testing for null arrival date
-        try{
-            Location location1 = new Location("Toronto", "Canada", "YYZ");
-            Location location2 = new Location("Vancouver", "Canada", "YVR");
-            Flight testY = new Flight(location1,location2,"2022-06-14","10:30",null,"4:30");
-            fail("Expected a null pointer exception");
-        }catch(NullPointerException unused){}
-
-        //testing for null arrival time
-        try{
-            Location location1 = new Location("Toronto", "Canada", "YYZ");
-            Location location2 = new Location("Vancouver", "Canada", "YVR");
-            Flight testY = new Flight(location1,location2,"2022-06-14","10:30","2022-06-15",null);
-            fail("Expected a null pointer exception");
-        }catch(NullPointerException unused){}
-
-
-    }
 
 }

@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.threeten.bp.ZoneId;
 
 public class LocationTest extends TestCase {
 
@@ -13,9 +14,9 @@ public class LocationTest extends TestCase {
 
     @Before
     private void setup() {
-        myLoc = new Location("Toronto", "Canada", "YYZ");
-        loc2 = new Location("Winnipeg", "Canada", "YWG");
-        loc3 = new Location("Vancouver", "Canada", "YVR");
+        myLoc = new Location("Toronto", ZoneId.of("America/Toronto"), "Canada", "YYZ");
+        loc2 = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
+        loc3 = new Location("Vancouver", ZoneId.of("America/Vancouver"), "Canada", "YVR");
     }
 
     @After
@@ -33,26 +34,26 @@ public class LocationTest extends TestCase {
 
         //null city
         try {
-            loc = new Location(null, "Canada", "YWG");
+            loc = new Location(null, ZoneId.of("America/Winnipeg"), "Canada", "YWG");
             fail("Expected a NullPointerException");
         } catch (NullPointerException unused) {}
 
         //empty city
         try {
-            loc = new Location("", "Canada", "YWG");
+            loc = new Location("", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
             fail("Expected a IllegalArgumentException");
         } catch (IllegalArgumentException unused) {}
 
         //check only spaces
         try {
-            loc = new Location("      ", "Canada", "YWG");
+            loc = new Location("      ", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
             fail("Expected a IllegalArgumentException");
         } catch (IllegalArgumentException unused) {}
 
-        loc = new Location("Winnipeg", "Canada", "YWG");
+        loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
         assertEquals("Winnipeg", loc.getCity());
 
-        loc = new Location(" Winnipeg   ", "Canada", "YWG");
+        loc = new Location(" Winnipeg   ", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
         assertEquals("Winnipeg", loc.getCity());
 
         System.out.println("Finished testLocation: valid city");
@@ -66,26 +67,26 @@ public class LocationTest extends TestCase {
 
         //null country
         try {
-            loc = new Location("Winnipeg", null, "YWG");
+            loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), null, "YWG");
             fail("Expected a NullPointerException");
         } catch (NullPointerException unused) {}
 
         //empty country
         try {
-            loc = new Location("Winnipeg", "", "YWG");
+            loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "", "YWG");
             fail("Expected a IllegalArgumentException");
         } catch (IllegalArgumentException unused) {}
 
         //check only spaces
         try {
-            loc = new Location("Winnipeg", "    ", "YWG");
+            loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "    ", "YWG");
             fail("Expected a IllegalArgumentException");
         } catch (IllegalArgumentException unused) {}
 
-        loc = new Location("Winnipeg", "Canada", "YWG");
+        loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
         assertEquals("Canada", loc.getCountry());
 
-        loc = new Location(" Winnipeg   ", "    Canada  ", "YWG");
+        loc = new Location(" Winnipeg   ", ZoneId.of("America/Winnipeg"), "    Canada  ", "YWG");
         assertEquals("Canada", loc.getCountry());
 
         System.out.println("Finished testLocation: valid country");
@@ -99,26 +100,26 @@ public class LocationTest extends TestCase {
 
         //null airport
         try {
-            loc = new Location("Winnipeg", "Canada", null);
+            loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", null);
             fail("Expected a NullPointerException");
         } catch (NullPointerException unused) {}
 
         //empty airport
         try {
-            loc = new Location("Winnipeg", "Canada", "");
+            loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "");
             fail("Expected a IllegalArgumentException");
         } catch (IllegalArgumentException unused) {}
 
         //check only spaces
         try {
-            loc = new Location("Winnipeg", "Canada", "     ");
+            loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "     ");
             fail("Expected a IllegalArgumentException");
         } catch (IllegalArgumentException unused) {}
 
-        loc = new Location("Winnipeg", "Canada", "YWG");
+        loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
         assertEquals("YWG", loc.getAirport());
 
-        loc = new Location(" Winnipeg   ", "Canada", "   YWG       ");
+        loc = new Location(" Winnipeg   ", ZoneId.of("America/Winnipeg"), "Canada", "   YWG       ");
         assertEquals("YWG", loc.getAirport());
 
         System.out.println("Finished testLocation: valid airport");
