@@ -8,6 +8,7 @@
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/custom_popup_background.xml" value="0.1" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_launcher_background.xml" value="0.161" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_round_search_24.xml" value="0.1" />
+        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_round_today_24.xml" value="0.161" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/splash.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/font/rubik.xml" value="0.1" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/activity_bottom_tab.xml" value="0.22" />
@@ -18,9 +19,10 @@
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/bottom_tabbed_activity.xml" value="0.1796875" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/card_view.xml" value="0.1" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/fade_in.xml" value="0.1796875" />
-        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/fragment_book.xml" value="0.42407407407407405" />
+        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/fragment_book.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/fragment_bottom_tab_activity.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/fragment_bottom_tabbed_activity.xml" value="0.6" />
+        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/fragment_date.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/fragment_departure.xml" value="0.17978113600833767" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/fragment_destination.xml" value="0.165625" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/fragment_manage.xml" value="0.22" />

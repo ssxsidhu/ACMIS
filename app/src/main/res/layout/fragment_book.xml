@@ -20,7 +20,7 @@
         android:id="@+id/fragment_container_book"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/arrow_image" />
 
@@ -40,40 +40,44 @@
         android:id="@+id/airport_departure"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:textAllCaps="true"
         android:textStyle="bold"
+        android:fontFamily="sans-serif"
         android:gravity="center"
-        style="?attr/textAppearanceTitleLarge"
+        style="?attr/textAppearanceHeadlineLarge"
         />
         <TextView
             android:id="@+id/city_departure"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="?attr/textAppearanceTitleMedium"
+            style="?attr/textAppearanceBodyLarge"
             />
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/choose_departure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:contentDescription="@string/choose_departure"
+        android:contentDescription="@string/caption_select_departure"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:showMotionSpec="@android:anim/slide_out_right"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        style="?attr/floatingActionButtonLargeStyle"
-        app:srcCompat="@drawable/ic_round_flight_takeoff_24" />
+        android:text="@string/caption_select_departure"
+        app:collapsedSize="70dp"
+        app:iconSize="30dp"
+        app:icon="@drawable/ic_round_flight_takeoff_24" />
 
 
     <ImageView
         android:id="@+id/arrow_image"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="32dp"
+        android:visibility="invisible"
         android:src="@drawable/ic_baseline_arrow_forward_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,34 +99,36 @@
             android:id="@+id/airport_destination"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:textAllCaps="true"
             android:textStyle="bold"
             android:gravity="center"
-            style="?attr/textAppearanceTitleLarge"
+            style="?attr/textAppearanceHeadlineLarge"
             />
         <TextView
             android:id="@+id/city_destination"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="?attr/textAppearanceTitleMedium"
+            style="?attr/textAppearanceBodyLarge"
             />
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/choose_destination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:enabled="false"
-        android:contentDescription="@string/choose_departure"
+        android:contentDescription="@string/caption_select_destination"
         app:layout_constraintEnd_toEndOf="parent"
+        app:showMotionSpec="@android:anim/slide_out_right"
         app:layout_constraintStart_toEndOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent"
-        style="?attr/floatingActionButtonLargeStyle"
-        app:srcCompat="@drawable/ic_round_flight_land_24" />
+        android:text="@string/caption_select_destination"
+        app:collapsedSize="70dp"
+        app:iconSize="30dp"
+        app:icon="@drawable/ic_round_flight_land_24" />
 
 
     <!--    <com.google.android.material.textfield.TextInputLayout-->
