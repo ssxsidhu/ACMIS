@@ -27,16 +27,26 @@
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@+id/header_title_manage_tab"/>
 
-    <ListView
+<!--    <ListView-->
+<!--        android:id="@+id/list_items_manage_tab"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_gravity="top"-->
+<!--        android:layout_weight="1"-->
+<!--        android:choiceMode="none"-->
+<!--        android:layout_marginTop="@dimen/activity_vertical_margin"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/header_title_manage_tab"/>-->
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_items_manage_tab"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="top"
         android:layout_weight="1"
-        android:choiceMode="none"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_title_manage_tab"/>
-
+        app:layout_constraintTop_toBottomOf="@id/header_title_manage_tab"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

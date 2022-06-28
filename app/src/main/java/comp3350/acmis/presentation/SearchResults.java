@@ -15,8 +15,8 @@ import comp3350.acmis.objects.Route;
 public class SearchResults extends AppCompatActivity {
 
     private Location selectedDeparture, selectedDestination;
-    BookingManager bookingManager = new BookingManager();
-    ArrayList<Route> flightsAvailable = new ArrayList<>();
+    private BookingManager bookingManager = new BookingManager();
+    private ArrayList<Route> flightsAvailable = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -4,14 +4,16 @@ package comp3350.acmis.objects;
 import junit.framework.TestCase;
 
 import org.junit.Test;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
 
 public class RouteTest extends TestCase {
 
     @Test
     public void testAddToRoute() {
-        Location winnipeg = new Location("Winnipeg","Canada","YWG");
-        Location toronto = new Location("Toronto","Canada","YYZ");
-        Flight winToTor = new Flight(winnipeg,toronto,"2022-07-04","14:30","2022-07-04","17:30");
+        Location winnipeg = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada","YWG");
+        Location toronto = new Location("Toronto", ZoneId.of("America/Winnipeg"), "Canada","YYZ");
+        Flight winToTor = new Flight(winnipeg,toronto, ZonedDateTime.of(2022,6,11,7,30,0,0,winnipeg.getZoneName()), 250, 2.5, 500);
         Route testRoute = new Route();
 
         try{
@@ -25,9 +27,9 @@ public class RouteTest extends TestCase {
 
     @Test
     public void testRemoveFromRoute() {
-        Location winnipeg = new Location("Winnipeg","Canada","YWG");
-        Location toronto = new Location("Toronto","Canada","YYZ");
-        Flight winToTor = new Flight(winnipeg,toronto,"2022-07-04","14:30","2022-07-04","17:30");
+        Location winnipeg = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada","YWG");
+        Location toronto = new Location("Toronto", ZoneId.of("America/Winnipeg"), "Canada","YYZ");
+        Flight winToTor = new Flight(winnipeg,toronto, ZonedDateTime.of(2022,6,11,7,30,0,0,winnipeg.getZoneName()), 250, 2.5, 500);
         Route testRoute = new Route();
 
         try{
@@ -48,9 +50,9 @@ public class RouteTest extends TestCase {
 
     @Test
     public void testGetRoute() {
-        Location winnipeg = new Location("Winnipeg","Canada","YWG");
-        Location toronto = new Location("Toronto","Canada","YYZ");
-        Flight winToTor = new Flight(winnipeg,toronto,"2022-07-04","14:30","2022-07-04","17:30");
+        Location winnipeg = new Location("Winnipeg",ZoneId.of("America/Winnipeg") , "Canada","YWG");
+        Location toronto = new Location("Toronto", ZoneId.of("America/Winnipeg"), "Canada","YYZ");
+        Flight winToTor = new Flight(winnipeg,toronto, ZonedDateTime.of(2022,6,11,7,30,0,0,winnipeg.getZoneName()), 250, 2.5, 500);
         Route testRoute = new Route();
         assertNull(testRoute.addToRoute(winToTor));
 
