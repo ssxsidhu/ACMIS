@@ -1,6 +1,5 @@
 package comp3350.acmis.business;
 
-//import androidx.room.jarjarred.org.antlr.v4.misc.Graph;
 
 import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.graph.Graph;
 
@@ -15,10 +14,12 @@ import comp3350.acmis.persistence.DataAccessStub;
 
 public class SearchRoute {
 
+    // INSTANCE VARIABLES
     private Graph<Location> graph;
     private DataAccessStub data;
     private ArrayList<Flight> flights;
 
+    // CONSTRUCTOR
     public SearchRoute() {
 //        this.graph = new Graph<>();
         data = Services.getDataAccess(Main.dbName);
@@ -45,16 +46,15 @@ public class SearchRoute {
 
         return findAllRoutes(source,destination,listOfPaths);
     }
-    //helper method of getRoute
-    private ArrayList<Route> findAllRoutes(String source, String destination, ArrayList<Route> listOfPaths) {
-
-
-         return null;
-    }
 
 
     public Graph<Location> getGraph(Location l) {
         return graph;
     }
 
+    // PRIVATE HELPER METHOD
+    // helper method of getRoute
+    private ArrayList<Route> findAllRoutes(String source, String destination, ArrayList<Route> listOfPaths) {
+        return null;
+    }
 }

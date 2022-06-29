@@ -7,13 +7,13 @@ public class Booking {
     // STATIC VARIABLE
     private static int bookingSeq;          // Assign Unique Booking ID for every Booking
 
-    // Instance Variable
+    // INSTANCE VARIABLES
     private User booker;                    // Person Booking the flight
     private Route route;                    // The Route being taken for reaching from A->B
-    private int bookingId;
-    private int numPassengers;
+    private int bookingId;                  // Unique identifier for this booking
+    private int numPassengers;              // Number of passengers in this booking
 
-    // Constructor()
+    // CONSTRUCTOR
     public Booking(User booker, Route route) {
         this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
         this.route = Objects.requireNonNull(route, "Route cannot be null");
@@ -22,9 +22,9 @@ public class Booking {
         bookingSeq++;
     }
 
-
+    // SETTERS
     public boolean incrementPassengers() {
-        double checkPassengers = (double)numPassengers + 1;
+        double checkPassengers = (double) numPassengers + 1;
         boolean ret = false;
 
         if (checkPassengers <= Integer.MAX_VALUE) {
@@ -33,47 +33,21 @@ public class Booking {
         }
         return ret;
     }
+    public void setNewUser(User newUser) {
+        booker = newUser;
+    }
 
     // GETTERS
     public User getBooker() {
         return booker;
     }
-    public int getBookingId() {return bookingId;}
+    public int getBookingId() {
+        return bookingId;
+    }
     public Route getRoute() {
         return route;
     }
     public int getNumPassengers() {
         return numPassengers;
-    }
-
-    // SETTER
-    public void setNewUser (User newUser){
-        booker = newUser;
-    }
-    public void addBooking(Booking newBook) {
-        if (newBook == null) {
-            throw new NullPointerException();
-        }
-        bookings.add(newBook);
-    }
-
-    public boolean removeBooking(int bookingID) {
-        boolean found = false;
-        Booking removal = null;
-
-        if (bookingID < 0) {
-            throw new NegativeArraySizeException();
-        }
-
-        //find booking with matching ID
-        for (int i = 0; i < bookings.size() && !found; i++) {
-            removal = bookings.get(i);
-
-            if (removal != null && removal.getBookingId() == bookingID) {
-                bookings.remove(removal);
-                found = true;
-            }
-        }
-        return found;
     }
 }

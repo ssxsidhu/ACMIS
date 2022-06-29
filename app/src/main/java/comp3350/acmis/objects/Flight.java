@@ -9,11 +9,8 @@ The Flight also has a list of passengers who booked the flight.
 
 package comp3350.acmis.objects;
 
-
-
 import org.threeten.bp.Duration;
 import org.threeten.bp.ZonedDateTime;
-
 import java.util.Objects;
 
 public class Flight {
@@ -21,7 +18,7 @@ public class Flight {
     // STATIC VARIABLE
     private static int flightSequence=1;
 
-    // Instance Variables
+    // INSTANCE VARIABLES
     private int flightID;
     private Location source;
     private Location destination;
@@ -33,7 +30,7 @@ public class Flight {
     private int cost; //cost of the flight - monetary value.
 
 
-    //constructor
+    // CONSTRUCTOR
     public Flight(Location source, Location destination, ZonedDateTime departureDateandTime, int seats, double dur, int cost){
         this.departureDateandTime = Objects.requireNonNull(departureDateandTime);
 
@@ -48,8 +45,9 @@ public class Flight {
         flightSequence++;
     }
 
-    //This method is used to calculate the duration of the flight from source to destination
-    //it returns Duration this that is added to the departure time to calculate the arrival time in another zone.
+    // SETTERS
+    // This method is used to calculate the duration of the flight from source to destination
+    // it returns Duration this that is added to the departure time to calculate the arrival time in another zone.
     private Duration calculateDuration(double duration){
         String [] separation = String.valueOf(duration).split("\\.");
         int hours = Integer.parseInt(separation[0]);
@@ -58,13 +56,13 @@ public class Flight {
         return Duration.ofHours(hours).plusMinutes(mins);
     }
 
-    //this method is used to check if the seats left are enough for the user.
+    // This method is used to check if the seats left are enough for the user.
     public boolean enoughSeats(int seatsTobeBooked){
         return seats >= seatsTobeBooked;
     }
 
-    //when a user books this flight, he/she chooses the # of seats to be booked
-    //those # of seats are to be reserved in the flight.
+    // When a user books this flight, they choose the number of seats to be booked
+    // Those number of seats are to be reserved in the flight.
     public boolean bookSeat(int bookedSeats){
         if(enoughSeats(bookedSeats)) {
             seats = seats - bookedSeats;
@@ -74,9 +72,6 @@ public class Flight {
     }
 
     // GETTERS
-    public static int getFlightSequence() {
-        return flightSequence;
-    }
     public int getFlightID() {
         return flightID;
     }
@@ -101,11 +96,10 @@ public class Flight {
     public String getDepartureTime() {
         return departureDateandTime.getHour() + ":" + departureDateandTime.getMinute();
     }
-
     public ZonedDateTime getDepartureDateTime(){
         return departureDateandTime;
     }
-
-
-
+    public static int getFlightSequence() {
+        return flightSequence;
+    }
 }

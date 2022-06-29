@@ -4,12 +4,14 @@ import java.util.GregorianCalendar;
 
 public class DateFormatter {
 
+    // INSTANCE VARIABLES
     private static final int YEAR_IDX = 0;
     private static final int MONTH_IDX = 1;
     private static final int DAY_IDX = 2;
 
     private String date;
 
+    // CONSTRUCTOR
     public DateFormatter(String date) { //must be of format "yyyy-mm-dd" length 10
         final char DASH = '-';
         final int[] DASH_LOCATIONS = {4, 7};

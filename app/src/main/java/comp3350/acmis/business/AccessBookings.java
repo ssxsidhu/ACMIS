@@ -15,31 +15,42 @@ import comp3350.acmis.objects.User;
 import comp3350.acmis.persistence.DataAccessStub;
 
 public class AccessBookings {
+
+    // INSTANCE VARIABLES
     private DataAccessStub dataAccess;
     private List<Booking> userBookings;
     private String username;
 
+    // CONSTRUCTOR
     public AccessBookings(String user) {
         dataAccess=Services.getDataAccess(Main.dbName);
         username=user;
     }
 
+    // GETTER
     public String getMyBookings(ArrayList<Booking> myBookings) {
-        myBookings.clear();
+
+        myBookings.clear();                                             // Clear the List we are going to return
+
         User user = dataAccess.getUserObject(username);
         String result;
+
+        // GUARD CONDITION - DO SOMETHING ONLY IF USER EXISTS
         if(user != null) {
             result = dataAccess.getUserBookings(user, myBookings);
         }
         else{
             return "No user found";
         }
-        Collections.sort(myBookings, new Comparator<Booking>() {
+
+        Collections.sort(myBookings, new Comparator<Booking>() {            // Sort the List before we Return it
+
             @Override
             public int compare(Booking booking, Booking t1) {
                 return booking.getRoute().getRoute().get(0).getDepartureDateTime().compareTo(t1.getRoute().getRoute().get(0).getDepartureDateTime());
             }
         });
+
         return result;
     }
 }

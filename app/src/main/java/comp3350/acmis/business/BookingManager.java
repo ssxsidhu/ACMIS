@@ -13,18 +13,19 @@ import comp3350.acmis.persistence.DataAccessStub;
 
 public class BookingManager {
 
+    // INSTANCE VARIABLE - What DataBase are we Using ?
     private DataAccessStub data;
 
-    // Constructor
+    // CONSTRUCTOR 1 - DEFAULT
     public BookingManager() {
         data = Services.getDataAccess(Main.dbName);
     }
-
+    // CONSTRUCTOR 2 - SPECIFIC DB
     public BookingManager(String name) {
         data = Services.getDataAccess(name);
     }
 
-    // Return List of Routes
+    // This method searches for ALL POSSIBLE routes between two cities.
     public String searchRoute(Location srcCity, Location destCity, ArrayList<Route> returnRoutes){
 
         returnRoutes.clear();
@@ -83,9 +84,6 @@ public class BookingManager {
         }
     }       // validRoutes List should have stopOver FLights in the beginning and Direct Flights towards the end.
 
-
-
-
     //creating booking
     public String createBooking(String username, Route route) {
         User bookerObject = data.getUserObject(username);
@@ -109,8 +107,6 @@ public class BookingManager {
         }
         return null;
     }
-
-
 
     public String cancelBooking(int bookingId) {
         Booking result = data.removeBooking(bookingId);

@@ -9,14 +9,18 @@ import comp3350.acmis.objects.Location;
 import comp3350.acmis.persistence.DataAccessStub;
 
 public class AccessLocations {
+
+    // INSTANCE VARIABLES
     private DataAccessStub dataAccess;
     private List<Location> locations;
     private Location location;
 
-    public AccessLocations(){
+    // CONSTRUCTOR
+    public AccessLocations() {
         dataAccess=Services.getDataAccess(Main.dbName);
     }
 
+    // GETTER
     public String getLocations (ArrayList<Location> locations) {
         locations.clear();
         return dataAccess.getLocations(locations);

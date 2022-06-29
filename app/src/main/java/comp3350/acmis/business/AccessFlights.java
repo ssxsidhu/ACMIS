@@ -9,14 +9,18 @@ import comp3350.acmis.objects.Flight;
 import comp3350.acmis.persistence.DataAccessStub;
 
 public class AccessFlights {
+
+    // INSTANCE VARIABLES
     private DataAccessStub dataAccess;
     private List<Flight> flights;
     private Flight Flight;
 
-    public AccessFlights(){
+    // CONSTRUCTOR
+    public AccessFlights() {
         dataAccess= Services.getDataAccess(Main.dbName);
     }
 
+    // GETTER
     public String getFlights(ArrayList<Flight> flights) {
         flights.clear();
         return dataAccess.getAllFlights(flights);
