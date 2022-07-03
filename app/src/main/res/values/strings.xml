@@ -18,5 +18,8 @@
     <string name="caption_select_destination">Choose Destination</string>
     <string name="caption_select_departure">Choose Departure</string>
     <string name="depart">Depart</string>
-    <string name="passenger">1 passenger</string>
+    <string name="passenger">passenger</string>
+    <string name="passengers">passengers</string>
+    <string name="round_trip">Round Trip?</string>
+    <string name="return_flight">Return</string>
 </resources>
