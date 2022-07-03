@@ -21,7 +21,7 @@ import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Route;
 
 //used to display lists
-public class CustomAdapter extends BaseAdapter {
+public class ListViewAdapter extends BaseAdapter {
 
     private Fragment mContext = null;
     private Activity activity;
@@ -36,18 +36,18 @@ public class CustomAdapter extends BaseAdapter {
 //        }
 //    }
 
-    public CustomAdapter(Activity activity, ArrayList<Route> flightsAvailable) {
+    public ListViewAdapter(Activity activity, ArrayList<Route> flightsAvailable) {
         this.activity = activity;
         displayList = flightsAvailable;
     }
 
-    public CustomAdapter(FragmentManage context, Booking booking) {
+    public ListViewAdapter(FragmentManage context, Booking booking) {
         mContext=context;
         displayList=new ArrayList<>();
         displayList.add(booking.getRoute());
     }
 
-    public CustomAdapter(FragmentManage Context){
+    public ListViewAdapter(FragmentManage Context){
         mContext = Context;
     }
 

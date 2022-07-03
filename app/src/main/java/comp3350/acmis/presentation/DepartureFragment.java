@@ -23,30 +23,16 @@ import comp3350.acmis.objects.Location;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DepartureFragment#newInstance} factory method to
+ * Use the {@link DepartureFragment} factory method to
  * create an instance of this fragment.
  */
 public class DepartureFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private ArrayList<Location> locationList;
     private Location selectedDestination;
-
     public DepartureFragment() {
         // Required empty public constructor
     }
-
-
-    public static DepartureFragment newInstance(String param1, String param2) {
-        DepartureFragment fragment = new DepartureFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,8 +63,10 @@ public class DepartureFragment extends Fragment {
         ddDeparture.setAdapter(adapter);
 
         TextInputLayout textInputLayout_departure = view.findViewById(R.id.menu_departure);
+
         ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_departure.getEditText())).setOnItemClickListener((adapterView, view1, position, id) -> {
             Bundle result = new Bundle();
+            ddDeparture.getText().clear();
             result.putSerializable("selectedDeparture",adapter.getItem(position));
             getParentFragmentManager().setFragmentResult("selectedDeparture",result);
         });

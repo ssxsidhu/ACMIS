@@ -1,40 +1,29 @@
 package comp3350.acmis.presentation;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.ImageDecoder;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 import comp3350.acmis.R;
 import comp3350.acmis.objects.Booking;
-import comp3350.acmis.objects.Route;
 
 public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> {
 
     private FragmentManage context;
     private ArrayList<Booking> displayList;
-    CustomAdapter customAdapter;
+    ListViewAdapter listViewAdapter;
     Bitmap icon;
     //temporary
 
@@ -42,7 +31,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
     public CardsAdapter(FragmentManage context, ArrayList<Booking> userBookings) {
         this.context = context;
         displayList = userBookings;
-        customAdapter = new CustomAdapter(context);
+        listViewAdapter = new ListViewAdapter(context);
     }
 
     @NonNull
@@ -61,8 +50,8 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
         Drawable res = context.getResources().getDrawable(imageResource);
         holder.imageView.setImageDrawable(res);
 //        holder.imageView.setImageResource(R.drawable.locationName);
-        customAdapter.setDisplayList(displayList.get(position));
-        holder.listView.setAdapter(customAdapter);
+        listViewAdapter.setDisplayList(displayList.get(position));
+        holder.listView.setAdapter(listViewAdapter);
 
     }
 
