@@ -45,10 +45,10 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
     @Override
     public void onBindViewHolder(@NonNull CardsAdapter.Viewholder holder, int position) {
         // to set data to textview and imageview of each card layout
-        String uri = "@mipmap/"+displayList.get(position).getRoute().getRoute().get(0).getDestination().getCity().toLowerCase(Locale.ROOT);
-        int imageResource = context.getResources().getIdentifier(uri, null, context.requireActivity().getPackageName());
-        Drawable res = context.getResources().getDrawable(imageResource);
-        holder.imageView.setImageDrawable(res);
+//        String uri = "@mipmap/"+displayList.get(position).getRoute().getRoute().get(0).getDestination().getCity().toLowerCase(Locale.ROOT);
+//        int imageResource = context.getResources().getIdentifier(uri, null, context.requireActivity().getPackageName());
+//        Drawable res = context.getResources().getDrawable(imageResource);
+//        holder.imageView.setImageDrawable(res);
 //        holder.imageView.setImageResource(R.drawable.locationName);
         listViewAdapter.setDisplayList(displayList.get(position));
         holder.listView.setAdapter(listViewAdapter);
@@ -74,10 +74,10 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
     // your views such as TextView and Imageview.
     public class Viewholder extends RecyclerView.ViewHolder {
         private ListView listView;
-        ImageView imageView;
+//        ImageView imageView;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-            imageView= itemView.findViewById(R.id.card_image);
+//            imageView= itemView.findViewById(R.id.card_image);
             listView = itemView.findViewById(R.id.card_view_list);
         }
     }
