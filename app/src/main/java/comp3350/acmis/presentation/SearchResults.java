@@ -15,8 +15,8 @@ import comp3350.acmis.objects.Route;
 public class SearchResults extends AppCompatActivity {
 
     private Location selectedDeparture, selectedDestination;
-    BookingManager bookingManager = new BookingManager();
-    ArrayList<Route> flightsAvailable = new ArrayList<>();
+    private BookingManager bookingManager = new BookingManager();
+    private ArrayList<Route> flightsAvailable = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +31,17 @@ public class SearchResults extends AppCompatActivity {
             Messages.noFlightsMessage(this);
         }
         else {
-            CustomAdapter customAdapter = new CustomAdapter(this, flightsAvailable);
+            ListViewAdapter listViewAdapter = new ListViewAdapter(this, flightsAvailable);
             final ListView listView = (ListView) this.findViewById(R.id.list_items_book_tab);
             final Button book = this.findViewById(R.id.book_button);
             Activity thisActivity = this;
-            listView.setAdapter(customAdapter);
+            listView.setAdapter(listViewAdapter);
             //if the user clicks on a list item
             listView.setOnItemClickListener((adapterView, view, i, l) -> {
                 book.setEnabled(true);
                 book.setOnClickListener(view1 -> {
                     //if the user clicks on the book button
-                    String result = bookingManager.createBooking("default", customAdapter.getItem(i));
+                    String result = bookingManager.createBooking("default", listViewAdapter.getItem(i));
                     if(result!=null){
                         Messages.snackBar(view1,result);
                     }

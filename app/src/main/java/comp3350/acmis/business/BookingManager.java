@@ -93,7 +93,7 @@ public class BookingManager {
         Booking newBooking;
 
         if (bookerObject != null && route != null) {
-            bookerObject.getMyBookings(userBookings);
+            data.getUserBookings(bookerObject,userBookings);
             for (int i = 0; i < userBookings.size(); i++) {
                 if (route.getRoute().get(0).getFlightID() == userBookings.get(i).getRoute().getRoute().get(0).getFlightID()) {
                     return "You have already booked this flight for your account";
@@ -101,10 +101,6 @@ public class BookingManager {
             }
 
             newBooking = new Booking(bookerObject, route);
-            //adding to the users all the booking.
-            bookerObject.addBooking(newBooking);
-            //adding to
-            route.getRoute().get(0).addUser(bookerObject);
             //adding the booking to the master booking.
             data.addBooking(newBooking);
         }
@@ -116,10 +112,19 @@ public class BookingManager {
 
 
 
-    public void cancelBooking(int bookingId) {
-        //need this method in the stud database.
-        Booking temp = data.getBooking(bookingId);
-        User canceller = temp.getBooker();
-        canceller.removeBooking(bookingId);
+    public String cancelBooking(int bookingId) {
+        Booking result = data.removeBooking(bookingId);
+        if(result==null){
+            return "Booking not found";
+        }
+        else{
+            return null;
+        }
     }
+
+    public void editBooking(int bookingId){
+        //look for the booking in the master database.
+    }
+
+
 }

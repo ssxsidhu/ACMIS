@@ -4,6 +4,8 @@ import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
 
 import java.util.ArrayList;
 
@@ -53,17 +55,17 @@ public class BookingManagerTest extends TestCase {
         user3 = new User("3","THREE", User.Gender.FEMALE,"three3","bleh","3@gmail.com","1234567890");
 
         // Create 5 locations for out Test purpose. Add them to a list as well.
-        loc1 = new Location("1","1","1");
-        loc2 = new Location("2","2","2");
-        loc3 = new Location("3","3","3");
-        loc4 = new Location("4","4","4");
-        loc5 = new Location("5","5","5");
+        loc1 = new Location("1", ZoneId.of("America/Toronto"), "1","1");
+        loc2 = new Location("2", ZoneId.of("America/Toronto"), "2","2");
+        loc3 = new Location("3", ZoneId.of("America/Toronto"), "3","3");
+        loc4 = new Location("4", ZoneId.of("America/Toronto"), "4","4");
+        loc5 = new Location("5", ZoneId.of("America/Toronto"), "5","5");
 
         // Create just 3 flights. Remember, we ONLY HAVE TO TEST. NOT BUILD THE APP. ADD THESE TO A LIST
         // Each flight will go to next number. THERE FOR LOCATION 5 IS NOT REACHABLE. LOCATION 5 HAS NO FLIGHTS.
-        flight1 = new Flight(loc1,loc2,"","","","");
-        flight2 = new Flight(loc2,loc3,"","","","");
-        flight3 = new Flight(loc3,loc4,"","","","");
+        flight1 = new Flight(loc1,loc2, ZonedDateTime.of(2022,6,11,7,30,0,0,loc1.getZoneName()), 250, 2.5, 500);
+        flight2 = new Flight(loc2,loc3, ZonedDateTime.of(2022,6,11,7,30,0,0,loc2.getZoneName()), 250, 2.5, 500);
+        flight3 = new Flight(loc3,loc4,ZonedDateTime.of(2022,6,11,7,30,0,0,loc3.getZoneName()), 250, 2.5, 500);
         System.out.println("Finished Writing to Database. Executing Unit Tests..");
 
         temp.add(new Route(flight1));

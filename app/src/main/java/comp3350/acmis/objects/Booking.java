@@ -24,7 +24,7 @@ public class Booking {
 
 
     public boolean incrementPassengers() {
-        double checkPassengers = (double)numPassengers + 1;
+        double checkPassengers = (double) numPassengers + 1;
         boolean ret = false;
 
         if (checkPassengers <= Integer.MAX_VALUE) {
@@ -38,16 +38,21 @@ public class Booking {
     public User getBooker() {
         return booker;
     }
-    public int getBookingId() {return bookingId;}
+
+    public int getBookingId() {
+        return bookingId;
+    }
+
     public Route getRoute() {
         return route;
     }
+
     public int getNumPassengers() {
         return numPassengers;
     }
 
     // SETTER
-    public void setNewUser (User newUser){
+    public void setNewUser(User newUser) {
         booker = newUser;
     }
 

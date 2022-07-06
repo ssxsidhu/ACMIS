@@ -1,87 +1,176 @@
 package comp3350.acmis.presentation;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager2.widget.ViewPager2;
-import com.google.android.material.tabs.TabLayout;
-import comp3350.acmis.R;
+import android.os.Handler;
+import android.view.MenuItem;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
-    private TabLayout tabLayout;
-    private ViewPager2 viewPager2;
-    private FragmentAdapter adapter;
-    private static boolean prevStarted = false;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.navigation.NavigationBarView;
+
+import comp3350.acmis.R;
+import comp3350.acmis.application.Main;
+
+public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
+
+//    private Fragment fragmentBook,fragmentManage;
+
+    private boolean doubleBackToExitPressedOnce = false;
+
+    private NavigationBarView mBottomNavigation;
+    private ViewPager viewPager;
+    private ViewPagerAdapter mViewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        //shows the front-page once only
-        if(!prevStarted) {
-            launchFrontPage();
-            prevStarted = true;
-        }
-
         setContentView(R.layout.main_activity);
-        tabLayout = findViewById(R.id.tabLayout);
-        viewPager2 = findViewById(R.id.view_pager2);
+        Main.startUp();
 
-        tabLayout.addTab(tabLayout.newTab().setText("Book flight"));
-        tabLayout.addTab(tabLayout.newTab().setText("Manage flights"));
+        mBottomNavigation = findViewById(R.id.bottom_navigation);
+        mBottomNavigation.setOnItemSelectedListener(this);
 
-        //creates tabs and sets the listener
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        adapter = new FragmentAdapter(fragmentManager, getLifecycle());
-        viewPager2.setAdapter(adapter);
+        viewPager = findViewById(R.id.view_pager);
+        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(mViewPagerAdapter);
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager2.setCurrentItem(tab.getPosition());
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
             }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
-
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
-                tabLayout.selectTab(tabLayout.getTabAt(position));
+                switch (position) {
+                    case 0:
+                        mBottomNavigation.getMenu().findItem(R.id.tab_1).setChecked(true);
+                        break;
+                    case 1:
+                        mBottomNavigation.getMenu().findItem(R.id.tab_2).setChecked(true);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
-
     }
 
-    //launches the front page
-    private void launchFrontPage(){
-        Intent i = new Intent(this, FrontPageActivity.class);
 
-        //starts and track an activity for result
-        ActivityResultLauncher<Intent> firstPageActivityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {//do Nothing
-                });
-
-        firstPageActivityResultLauncher.launch(i);
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.tab_1:
+                viewPager.setCurrentItem(0);
+                break;
+            case R.id.tab_2:
+                viewPager.setCurrentItem(1);
+                break;
+        }
+        return true;
     }
 
+
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.main_activity);
+//        Main.startUp();
+//        fragmentBook = replaceFragment(savedInstanceState,"book");
+//
+//        NavigationBarView bottomNavView =  findViewById(R.id.bottom_navigation);
+//        @SuppressLint("NonConstantResourceId") NavigationBarView.OnItemSelectedListener itemSelectedListener = item -> {
+//            Fragment selectedFragment = null;
+//            switch (item.getItemId()) {
+//                case R.id.tab_1:
+//                    fragmentBook = replaceFragment(savedInstanceState,"book");
+//                    selectedFragment = fragmentBook;
+//                    break;
+//                case R.id.tab_2:
+//                    fragmentManage = replaceFragment(savedInstanceState,"manage");
+//                    selectedFragment = fragmentManage;
+//                    break;
+//            }
+//            assert selectedFragment != null;
+//            getSupportFragmentManager()
+//                    .beginTransaction()
+//                    .replace(R.id.fragment_container, selectedFragment)
+//                    .commit();
+//            return true;
+//        };
+//
+//        itemSelectedListener.onNavigationItemSelected(bottomNavView.getMenu().findItem(R.id.tab_1));
+//        bottomNavView.setOnItemSelectedListener(itemSelectedListener);
+//    }
+//
+//
+//    private Fragment setFragment(String tag, Fragment newFragment) {
+//        FragmentManager fm = getSupportFragmentManager();
+//        Fragment savedFragment = fm.findFragmentByTag(tag);
+//        fm.beginTransaction().replace(R.id.fragment_container, savedFragment != null ? savedFragment : newFragment, tag).commit();
+//        return savedFragment;
+//    }
+//
+//    private Fragment replaceFragment(Bundle savedInstanceState,String fragmentName){
+//        Fragment currentFragment;
+//        if (savedInstanceState != null) {
+//            currentFragment = getSupportFragmentManager().getFragment(savedInstanceState, fragmentName);
+//        }
+//        else{
+//            if(Objects.equals(fragmentName, "book"))
+//                currentFragment = new FragmentBook();
+//            else
+//                currentFragment = new FragmentManage();
+//        }
+//        return currentFragment;
+//    }
+//
+//    @Override
+//    protected void onSaveInstanceState(@NonNull Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//
+//        getSupportFragmentManager().putFragment(outState, "book", fragmentBook);
+//        if(fragmentManage.isAdded())
+//        getSupportFragmentManager().putFragment(outState, "manage", fragmentManage);
+//    }
     //exit the after pressing the back button at this activity
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent(Intent.ACTION_MAIN);
+//        intent.addCategory(Intent.CATEGORY_HOME);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(intent);
+//    }
+
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        //Checking for fragment count on backstack
+         if (!doubleBackToExitPressedOnce) {
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Please click BACK again to exit.", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+        } else {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
     }
 
 }

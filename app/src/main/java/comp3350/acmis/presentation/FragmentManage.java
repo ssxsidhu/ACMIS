@@ -3,6 +3,8 @@ package comp3350.acmis.presentation;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,8 +77,13 @@ public class FragmentManage extends Fragment {
         myBookingList = new ArrayList<>();
         accessBookings = new AccessBookings("default");
         accessBookings.getMyBookings(myBookingList);
-        CustomAdapter adapter = new CustomAdapter(this,myBookingList);
-        final ListView listView = (ListView) view.findViewById(R.id.list_items_manage_tab);
-        listView.setAdapter(adapter);
+        CardsAdapter adapter = new CardsAdapter(this,myBookingList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+
+//        final ListView listView = (ListView) view.findViewById(R.id.list_items_manage_tab);
+        RecyclerView cards = view.findViewById(R.id.list_items_manage_tab);
+//        listView.setAdapter(adapter);
+        cards.setLayoutManager(linearLayoutManager);
+        cards.setAdapter(adapter);
     }
 }
