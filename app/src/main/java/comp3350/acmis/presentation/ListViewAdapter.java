@@ -106,8 +106,8 @@ public class ListViewAdapter extends BaseAdapter {
             frontYear.setText(String.format("%d", displayList.get(position).getRoute().get(0).getDepartureDateTime().getYear()));
             titleTopLeft.setText(displayList.get(position).getRoute().get(0).getDepartureTime());
             titleTopRight.setText(displayList.get(position).getRoute().get(0).getArrivalTime());
-            titleMiddleLeft.setText(displayList.get(position).getRoute().get(0).getSource().getCity());
-            titleMiddleRight.setText(displayList.get(position).getRoute().get(0).getDestination().getCity());
+            titleMiddleLeft.setText(displayList.get(position).getRoute().get(0).getSource().getAirport());
+            titleMiddleRight.setText(displayList.get(position).getRoute().get(0).getDestination().getAirport());
             titleBottomRight.setText(String.format("FlightID: #%d", displayList.get(position).getRoute().get(0).getFlightID()));
             i1.setImageResource(R.drawable.airplane_symbol);
 //            titleExtraLeft.setText(String.format("Total Passengers: %d", displayList.get(position).getRoute().get(0).getPassengerList().size()));

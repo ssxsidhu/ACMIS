@@ -5,30 +5,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="top"
     android:animateLayoutChanges="true"
+    android:gravity="top"
+    android:orientation="vertical"
     tools:context=".presentation.bookDetailsFragment">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:text="@string/round_trip"
-        android:textSize="20sp" />
+        android:layout_gravity="center"
+        android:orientation="horizontal">
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/round_trip_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        style="@style/Widget.Material3.CompoundButton.Switch"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="@string/round_trip"
+            android:textSize="20sp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/round_trip_switch"
+            style="@style/Widget.Material3.CompoundButton.Switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp" />
     </LinearLayout>
 
     <Button
@@ -46,17 +47,18 @@
         app:iconSize="20dp" />
 
     <Button
-        android:id="@+id/pick_arrival_date"
+        android:id="@+id/pick_return_date"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center|top"
-        android:visibility="gone"
-        android:layout_marginBottom="10dp"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:enabled="false"
         android:padding="@dimen/activity_vertical_margin"
         android:text="@string/return_flight"
         android:textColor="@color/md_theme_dark_shadow"
+        android:visibility="gone"
         app:icon="@drawable/ic_round_calendar_month_24"
         app:iconGravity="textStart"
         app:iconSize="20dp" />
@@ -80,10 +82,10 @@
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.33"
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_weight="0.33"
             android:padding="@dimen/activity_vertical_margin"
             android:textColor="@color/md_theme_dark_shadow"
             app:icon="@drawable/ic_round_person_24"
@@ -98,5 +100,20 @@
             app:icon="@drawable/ic_round_remove_24"
             app:iconSize="35dp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/search_flights_button"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:enabled="false"
+        android:layout_margin="10dp"
+        android:padding="@dimen/activity_vertical_margin"
+        android:text="@string/search_flights"
+        android:textColor="@color/design_default_color_background"
+        android:textStyle="bold"
+        app:iconGravity="textStart"
+        app:iconSize="20dp" />
 
 </LinearLayout>
