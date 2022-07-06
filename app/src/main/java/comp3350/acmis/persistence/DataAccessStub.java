@@ -263,7 +263,6 @@ public class DataAccessStub {
         bookingManager.createBooking("default",new Route(Collections.singletonList(torToVan)));
 
 
-
         System.out.println("Opened " +dbType +" database " +dbName);
     }
 
@@ -319,10 +318,10 @@ public class DataAccessStub {
         User result = null;
         for (int i = 0; i < allUsers.size(); i++) {
             if(Objects.equals(allUsers.get(i).getUsername(), username)) {
-                result = allUsers.get(i);
+                return result = allUsers.get(i);
             }
         }
-        return  result;
+        return null;
     }
 
     //to get object of Flight from flightNumber
@@ -344,5 +343,28 @@ public class DataAccessStub {
             }
         }
         return  null;
+    }
+
+
+    public String getUserBookings( User user,ArrayList<Booking> userBookings){
+        for(int i=0; i<allBookings.size();i++){
+            if(allBookings.get(i).getBooker() == user){
+                userBookings.add(allBookings.get(i));
+            }
+        }
+
+        if(userBookings.isEmpty())
+            return "no bookings found";
+        else
+            return null;
+    }
+
+    public Booking removeBooking(int bookingId){
+        for(int i = 0; i < allBookings.size(); i++){
+            if(allBookings.get(i).getBookingId() == bookingId) {
+                return allBookings.remove(i);
+            }
+        }
+        return null;
     }
 }

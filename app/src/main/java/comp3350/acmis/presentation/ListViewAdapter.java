@@ -9,32 +9,52 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
+
+import org.threeten.bp.format.TextStyle;
+
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 import comp3350.acmis.R;
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Route;
 
 //used to display lists
-public class CustomAdapter extends BaseAdapter {
+public class ListViewAdapter extends BaseAdapter {
 
     private Fragment mContext = null;
     private Activity activity;
-    private final ArrayList<Route> displayList;
+    private ArrayList<Route> displayList;
 
 
-    public CustomAdapter(FragmentManage context, ArrayList<Booking> userBookings) {
-        mContext = context;
-        displayList = new ArrayList<>();
-        for (int i = 0; i < userBookings.size(); i++) {
-            displayList.add(userBookings.get(i).getRoute());
-        }
-    }
+//    public CustomAdapter(FragmentManage context, ArrayList<Booking> userBookings) {
+//        mContext = context;
+//        displayList = new ArrayList<>();
+//        for (int i = 0; i < userBookings.size(); i++) {
+//            displayList.add(userBookings.get(i).getRoute());
+//        }
+//    }
 
-    public CustomAdapter(Activity activity, ArrayList<Route> flightsAvailable) {
+    public ListViewAdapter(Activity activity, ArrayList<Route> flightsAvailable) {
         this.activity = activity;
         displayList = flightsAvailable;
     }
 
+    public ListViewAdapter(FragmentManage context, Booking booking) {
+        mContext=context;
+        displayList=new ArrayList<>();
+        displayList.add(booking.getRoute());
+    }
+
+    public ListViewAdapter(FragmentManage Context){
+        mContext = Context;
+    }
+
+    public void setDisplayList(Booking booking){
+        displayList=new ArrayList<>();
+        displayList.add(booking.getRoute());
+    }
     @Override
     public int getCount() {
         return displayList.size();
@@ -64,8 +84,12 @@ public class CustomAdapter extends BaseAdapter {
         View row;
         row = inflater.inflate(R.layout.row, parent, false);
         TextView titleTopLeft, titleTopRight, titleMiddleLeft, titleMiddleRight, titleBottomLeft, titleBottomRight,titleExtraLeft,titleExtraRight;
+        TextView frontDate,frontMonth,frontYear;
         ImageView i1;
         i1 = (ImageView) row.findViewById(R.id.list_icon);
+        frontDate = (TextView) row.findViewById(R.id.frontDate);
+        frontMonth = (TextView) row.findViewById(R.id.frontMonth);
+        frontYear = (TextView) row.findViewById(R.id.frontYear);
         titleTopLeft = (TextView) row.findViewById(R.id.list_top_text_left);
         titleTopRight = (TextView) row.findViewById(R.id.list_top_text_right);
         titleMiddleLeft = (TextView) row.findViewById(R.id.list_middle_text_left);
@@ -77,13 +101,16 @@ public class CustomAdapter extends BaseAdapter {
         titleExtraRight = (TextView) row.findViewById(R.id.list_extra_text_right);
 
         if(displayList!=null && displayList.size()>0 && displayList.get(position).getRoute().size()>0) {
+            frontDate.setText(String.format("%d", displayList.get(position).getRoute().get(0).getDepartureDateTime().getDayOfMonth()));
+            frontMonth.setText(displayList.get(position).getRoute().get(0).getDepartureDateTime().getMonth().getDisplayName(TextStyle.SHORT, Locale.CANADA));
+            frontYear.setText(String.format("%d", displayList.get(position).getRoute().get(0).getDepartureDateTime().getYear()));
             titleTopLeft.setText(displayList.get(position).getRoute().get(0).getDepartureTime());
             titleTopRight.setText(displayList.get(position).getRoute().get(0).getArrivalTime());
-            titleMiddleLeft.setText(displayList.get(position).getRoute().get(0).getSource().getCity());
-            titleMiddleRight.setText(displayList.get(position).getRoute().get(0).getDestination().getCity());
-            titleBottomLeft.setText(displayList.get(position).getRoute().get(0).getDepartureDate());
+            titleMiddleLeft.setText(displayList.get(position).getRoute().get(0).getSource().getAirport());
+            titleMiddleRight.setText(displayList.get(position).getRoute().get(0).getDestination().getAirport());
             titleBottomRight.setText(String.format("FlightID: #%d", displayList.get(position).getRoute().get(0).getFlightID()));
             i1.setImageResource(R.drawable.airplane_symbol);
+//            titleExtraLeft.setText(String.format("Total Passengers: %d", displayList.get(position).getRoute().get(0).getPassengerList().size()));
         }
 
         return (row);
