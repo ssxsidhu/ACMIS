@@ -1,3 +1,7 @@
+//Booking class consists of user who is booking a ticket from one place to another
+//Booking also has a route that is the flight(s) to destination from the source.
+//Booing id and # of passengers booked.
+
 package comp3350.acmis.objects;
 
 import java.util.Objects;

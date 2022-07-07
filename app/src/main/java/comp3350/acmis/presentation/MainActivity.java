@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     @Override
     public void onBackPressed() {
         //Checking for fragment count on backstack
-         if (!doubleBackToExitPressedOnce) {
+        if (!doubleBackToExitPressedOnce) {
             this.doubleBackToExitPressedOnce = true;
             Toast.makeText(this, "Please click BACK again to exit.", Toast.LENGTH_SHORT).show();
 

@@ -1,15 +1,14 @@
 package comp3350.acmis.presentation;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -32,6 +31,7 @@ public class DestinationFragment extends Fragment {
     public DestinationFragment() {
         // Required empty public constructor
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +46,7 @@ public class DestinationFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         if (getArguments() != null) {
             locationList = (ArrayList<Location>) getArguments().getSerializable("locationList");
             selectedDeparture = (Location) getArguments().getSerializable("selectedDeparture");
@@ -63,8 +63,8 @@ public class DestinationFragment extends Fragment {
         ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_destination.getEditText())).setOnItemClickListener((adapterView, view12, position, id) -> {
             Bundle result = new Bundle();
             ddDestination.getText().clear();
-            result.putSerializable("selectedDestination",adapter.getItem(position));
-            getParentFragmentManager().setFragmentResult("selectedDestination",result);
+            result.putSerializable("selectedDestination", adapter.getItem(position));
+            getParentFragmentManager().setFragmentResult("selectedDestination", result);
         });
     }
 }

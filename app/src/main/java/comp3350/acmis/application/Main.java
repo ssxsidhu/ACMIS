@@ -1,7 +1,10 @@
+//Main class. Program starts here. The database is activated and the system start up.
+
 package comp3350.acmis.application;
 
 public class Main {
-    public static final String dbName="UF";
+    public static final String dbName = "UF";
+
     public static void main(String[] args) {
         startUp();
 
@@ -9,13 +12,11 @@ public class Main {
         System.out.println("All done");
     }
 
-    public static void startUp()
-    {
+    public static void startUp() {
         Services.createDataAccess(dbName);
     }
 
-    public static void shutDown()
-    {
+    public static void shutDown() {
         Services.closeDataAccess();
     }
 }

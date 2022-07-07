@@ -1,15 +1,13 @@
 package comp3350.acmis.presentation;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -29,7 +27,7 @@ public class FragmentManage extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-   //future use
+    //future use
     private String mParam1;
     private String mParam2;
     private ArrayList<Booking> myBookingList;
@@ -77,7 +75,7 @@ public class FragmentManage extends Fragment {
         myBookingList = new ArrayList<>();
         accessBookings = new AccessBookings("default");
         accessBookings.getMyBookings(myBookingList);
-        CardsAdapter adapter = new CardsAdapter(this,myBookingList);
+        CardsAdapter adapter = new CardsAdapter(this, myBookingList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
 
 //        final ListView listView = (ListView) view.findViewById(R.id.list_items_manage_tab);

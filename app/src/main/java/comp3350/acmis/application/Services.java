@@ -1,3 +1,5 @@
+//This class is used for data services. For getting data from the database, The database creation, access to database and also closing the data access.
+
 package comp3350.acmis.application;
 
 import comp3350.acmis.persistence.DataAccessStub;

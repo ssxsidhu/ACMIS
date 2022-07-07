@@ -1,14 +1,14 @@
-
+//this is
 package comp3350.acmis.objects;
 
 import org.threeten.bp.ZoneId;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
 
-
-public class Location  implements Serializable {
+public class Location implements Serializable {
     private final String city;
     private final ZoneId zoneName;
     private final String country;
@@ -32,6 +32,7 @@ public class Location  implements Serializable {
         }
         locsIncomingFlights.add(incoming);
     }
+
     public void addLocationOutgoing(Location outGoing) {
         if (outGoing == null) {
             throw new NullPointerException();
@@ -44,31 +45,40 @@ public class Location  implements Serializable {
     public String getCity() {
         return city;
     }
+
     public String getCountry() {
         return country;
     }
+
     public String getAirport() {
         return airport;
     }
+
     public ArrayList<Location> getLocsIncomingFlights() {
         return locsIncomingFlights;
     }
+
     public ArrayList<Location> getLocsOutgoingFLights() {
         return locsOutgoingFLights;
     }
+
     public ZoneId getZoneName() {
         return zoneName;
     }
 
     @Override
     public String toString() {
-        return city +", "+country;
+        return "Location{" +
+                "city='" + city + '\'' +
+                ", zoneName=" + zoneName +
+                ", country='" + country + '\'' +
+                ", airport='" + airport + '\'' +
+                '}';
     }
-
 
     //Error checking in constructor
     private String errorCheck(String value, String message) {
-        if (value.trim().equals("")){
+        if (value.trim().equals("")) {
             throw new IllegalArgumentException(message + " can not be empty");
         }
         return Objects.requireNonNull(value, message + " cannot be null").trim();
