@@ -1,12 +1,15 @@
 package comp3350.acmis.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
+
 import comp3350.acmis.R;
 import comp3350.acmis.business.BookingManager;
 import comp3350.acmis.objects.Location;
@@ -26,11 +29,10 @@ public class SearchResults extends AppCompatActivity {
         receiveData();
 
         //checks if there are flights available
-        String checkFlights= bookingManager.searchRoute(selectedDeparture, selectedDestination,flightsAvailable );
-        if(checkFlights!=null){
+        String checkFlights = bookingManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable);
+        if (checkFlights != null) {
             Messages.noFlightsMessage(this);
-        }
-        else {
+        } else {
             ListViewAdapter listViewAdapter = new ListViewAdapter(this, flightsAvailable);
             final ListView listView = (ListView) this.findViewById(R.id.list_items_book_tab);
             final Button book = this.findViewById(R.id.book_button);
@@ -57,12 +59,11 @@ public class SearchResults extends AppCompatActivity {
     }
 
     // receive data from previous activity
-    private void receiveData()
-    {
+    private void receiveData() {
         //RECEIVE DATA VIA INTENT
         Intent i = getIntent();
-        selectedDeparture =(Location) i.getSerializableExtra("selectedDeparture");
-        selectedDestination =(Location) i.getSerializableExtra("selectedDestination");
+        selectedDeparture = (Location) i.getSerializableExtra("selectedDeparture");
+        selectedDestination = (Location) i.getSerializableExtra("selectedDestination");
         //SET DATA TO TEXTVIEWS
     }
 

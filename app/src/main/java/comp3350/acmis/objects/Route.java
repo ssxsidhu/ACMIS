@@ -33,31 +33,34 @@ public class Route {
         route.add(directFlight);
     }
 
+    // GETTERS
+    public boolean isEmpty() {
+        return route.isEmpty();
+    }
+
+    public ArrayList<Flight> getRoute() {
+        return route;
+    }
+
     // SETTERS
     public String addToRoute(Flight flight) {
-        if(flight != null ) {
+        if (flight != null) {
             route.add(flight);
-        }else{
-            throw new NullPointerException();
-        }
-        return null;
-    }
-    public String removeFromRoute(Flight flight) {
-        if(!route.isEmpty()) {
-            route.remove(flight);
-        }else{
+        } else {
             throw new NullPointerException();
         }
         return null;
     }
 
-    // GETTERS
-    public boolean isEmpty(){
-        return route.isEmpty();
+    public String removeFromRoute(Flight flight) {
+        if (!route.isEmpty()) {
+            route.remove(flight);
+        } else {
+            throw new NullPointerException();
+        }
+        return null;
     }
-    public ArrayList<Flight> getRoute() {
-        return route;
-    }
+
 
     public String getFlightsCSV() {
         String ret = "";

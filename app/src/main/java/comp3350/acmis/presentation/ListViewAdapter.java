@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.fragment.app.Fragment;
 
 import org.threeten.bp.format.TextStyle;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import comp3350.acmis.R;
@@ -42,19 +42,20 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     public ListViewAdapter(FragmentManage context, Booking booking) {
-        mContext=context;
-        displayList=new ArrayList<>();
+        mContext = context;
+        displayList = new ArrayList<>();
         displayList.add(booking.getRoute());
     }
 
-    public ListViewAdapter(FragmentManage Context){
+    public ListViewAdapter(FragmentManage Context) {
         mContext = Context;
     }
 
-    public void setDisplayList(Booking booking){
-        displayList=new ArrayList<>();
+    public void setDisplayList(Booking booking) {
+        displayList = new ArrayList<>();
         displayList.add(booking.getRoute());
     }
+
     @Override
     public int getCount() {
         return displayList.size();
@@ -74,17 +75,16 @@ public class ListViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater;
-        if(mContext != null) {
+        if (mContext != null) {
             inflater = mContext.getLayoutInflater();
-        }
-        else {
-            inflater=activity.getLayoutInflater();
+        } else {
+            inflater = activity.getLayoutInflater();
         }
 
         View row;
         row = inflater.inflate(R.layout.row, parent, false);
-        TextView titleTopLeft, titleTopRight, titleMiddleLeft, titleMiddleRight, titleBottomLeft, titleBottomRight,titleExtraLeft,titleExtraRight;
-        TextView frontDate,frontMonth,frontYear;
+        TextView titleTopLeft, titleTopRight, titleMiddleLeft, titleMiddleRight, titleBottomLeft, titleBottomRight, titleExtraLeft, titleExtraRight;
+        TextView frontDate, frontMonth, frontYear;
         ImageView i1;
         i1 = (ImageView) row.findViewById(R.id.list_icon);
         frontDate = (TextView) row.findViewById(R.id.frontDate);
@@ -100,7 +100,7 @@ public class ListViewAdapter extends BaseAdapter {
         //for future use
         titleExtraRight = (TextView) row.findViewById(R.id.list_extra_text_right);
 
-        if(displayList!=null && displayList.size()>0 && displayList.get(position).getRoute().size()>0) {
+        if (displayList != null && displayList.size() > 0 && displayList.get(position).getRoute().size() > 0) {
             frontDate.setText(String.format("%d", displayList.get(position).getRoute().get(0).getDepartureDateTime().getDayOfMonth()));
             frontMonth.setText(displayList.get(position).getRoute().get(0).getDepartureDateTime().getMonth().getDisplayName(TextStyle.SHORT, Locale.CANADA));
             frontYear.setText(String.format("%d", displayList.get(position).getRoute().get(0).getDepartureDateTime().getYear()));
