@@ -9,6 +9,8 @@ The Flight also has a list of passengers who booked the flight.
 
 package comp3350.acmis.objects;
 
+import androidx.annotation.NonNull;
+
 import org.threeten.bp.Duration;
 import org.threeten.bp.ZonedDateTime;
 import java.util.Objects;
@@ -101,5 +103,10 @@ public class Flight {
     }
     public static int getFlightSequence() {
         return flightSequence;
+    }
+
+    @NonNull
+    public String toString(){
+        return Integer.toString(flightID);
     }
 }

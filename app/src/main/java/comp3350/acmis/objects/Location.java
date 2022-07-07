@@ -1,6 +1,8 @@
 
 package comp3350.acmis.objects;
 
+import androidx.annotation.NonNull;
+
 import org.threeten.bp.ZoneId;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -61,13 +63,23 @@ public class Location  implements Serializable {
     public ZoneId getZoneName() {
         return zoneName;
     }
+
     @Override
+    @NonNull
     public String toString() {
         return city +", "+country;
     }
 
     // PRIVATE HELPER METHOD
     // Error checking in constructor
+
+    public boolean equals(Location compareThis)
+    {
+        return (city.equals(compareThis.getCity()) &&
+                zoneName.equals(compareThis.getZoneName()) &&
+                country.equals(compareThis.getCountry()) &&
+                airport.equals(compareThis.getAirport()));
+    }
     private String errorCheck(String value, String message) {
         if (value.trim().equals("")){
             throw new IllegalArgumentException(message + " can not be empty");
