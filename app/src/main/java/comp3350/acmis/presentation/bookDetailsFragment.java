@@ -176,8 +176,10 @@ public class bookDetailsFragment extends Fragment {
                     pickReturn.setVisibility(View.VISIBLE);
                     searchFlightsButton.setEnabled(false);
                 }
-                else
+                else {
                     pickReturn.setVisibility(View.GONE);
+                    searchFlightsButton.setEnabled(true);
+                }
             }
         });
         return roundTripSwitch.isChecked();

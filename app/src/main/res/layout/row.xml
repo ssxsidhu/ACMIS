@@ -161,10 +161,10 @@
             android:id="@+id/list_icon"
             android:layout_width="80dp"
             android:layout_height="90dp"
-            android:layout_marginTop="7dp"
             android:layout_centerHorizontal="true"
-            android:padding="16dp"
-            android:contentDescription="@string/airplane_logo" />
+            android:layout_marginTop="7dp"
+            android:contentDescription="@string/airplane_logo"
+            android:padding="16dp" />
 
         <TextView
             android:id="@+id/list_extra_text_left"

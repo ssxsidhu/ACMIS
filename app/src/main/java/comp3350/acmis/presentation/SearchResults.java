@@ -1,14 +1,20 @@
 package comp3350.acmis.presentation;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.ListView;
 import java.util.ArrayList;
 import comp3350.acmis.R;
 import comp3350.acmis.business.BookingManager;
+import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
 
@@ -31,27 +37,14 @@ public class SearchResults extends AppCompatActivity {
             Messages.noFlightsMessage(this);
         }
         else {
-            ListViewAdapter listViewAdapter = new ListViewAdapter(this, flightsAvailable);
-            final ListView listView = (ListView) this.findViewById(R.id.list_items_book_tab);
+            SearchResultsCardsAdapter adapter = new SearchResultsCardsAdapter(getBaseContext(),flightsAvailable);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
+            final RecyclerView recyclerView = this.findViewById(R.id.list_search_results);
             final Button book = this.findViewById(R.id.book_button);
             Activity thisActivity = this;
-            listView.setAdapter(listViewAdapter);
+            recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerView.setAdapter(adapter);
             //if the user clicks on a list item
-            listView.setOnItemClickListener((adapterView, view, i, l) -> {
-                book.setEnabled(true);
-                book.setOnClickListener(view1 -> {
-                    //if the user clicks on the book button
-                    String result = bookingManager.createBooking("default", listViewAdapter.getItem(i));
-                    if(result!=null){
-                        Messages.snackBar(view1,result);
-                    }
-                    else {
-                        Intent i1 = new Intent(thisActivity.getBaseContext(), MainActivity.class);
-                        thisActivity.startActivity(i1);
-                    }
-                });
-            });
-
         }
 
     }

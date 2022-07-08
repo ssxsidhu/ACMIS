@@ -2,11 +2,9 @@ package comp3350.acmis.presentation;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import comp3350.acmis.R;
 import comp3350.acmis.objects.Booking;
