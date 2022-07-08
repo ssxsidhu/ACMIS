@@ -63,3 +63,7 @@ Group Meetings:
 	June 16, 2022 : 2 Hours
 		- FInal testing
 		- Braden, Sahilpreet, and Vrushil in attendance
+		
+DEVELOPER TASKS
+===============
+June 23, 2022 : 3-4 hours Figuring out how to calculate duration from one point to another in different timezones. Implemented the date 		and time code in the flight class. Changed All the flight instances to use the zoned date and time.
