@@ -21,4 +21,13 @@ public class Messages {
         owner.findViewById(R.id.no_results_found).setVisibility(View.VISIBLE);
         owner.findViewById(R.id.header_title_book_tab).setVisibility(View.INVISIBLE);
     }
+
+    public static void warning(Activity owner, String message) {
+        AlertDialog alertDialog = new AlertDialog.Builder(owner).create();
+
+        alertDialog.setTitle(owner.getString(R.string.warning));
+        alertDialog.setMessage(message);
+
+        alertDialog.show();
+    }
 }

@@ -48,6 +48,20 @@ public class Flight {
         flightSequence++;
     }
 
+    public Flight(int flightID, Location source, Location destination, ZonedDateTime departureDateandTime, int seats, double dur, int cost){
+        this.departureDateandTime = Objects.requireNonNull(departureDateandTime);
+
+        this.duration = calculateDuration(dur);
+        this.arrivalDateandTime = departureDateandTime.plus(duration).withZoneSameInstant(destination.getZoneName());
+        this.seats = seats;
+        this.cost = cost;
+        this.source = Objects.requireNonNull(source,"Source cannot be null");
+        this.destination = Objects.requireNonNull(destination,"Destination cannot be null");
+
+        this.flightID = flightID;
+        flightSequence++;
+    }
+
     //This method is used to calculate the duration of the flight from source to destination
     //it returns Duration this that is added to the departure time to calculate the arrival time in another zone.
     private Duration calculateDuration(double duration){
@@ -106,6 +120,17 @@ public class Flight {
         return departureDateandTime;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "flightID=" + flightID +
+                ", source=" + source.getCity() +
+                ", destination=" + destination.getCity() +
+                ", departureDateandTime=" + departureDateandTime.toString() +
+                ", arrivalDateandTime=" + arrivalDateandTime.toString() +
+                ", seats=" + seats +
+                ", duration=" + duration +
+                ", cost=" + cost +
+                '}';
+    }
 }
