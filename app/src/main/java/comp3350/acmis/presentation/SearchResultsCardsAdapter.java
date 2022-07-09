@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 import comp3350.acmis.R;
 import comp3350.acmis.objects.Booking;
@@ -44,10 +45,11 @@ public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResult
     @Override
     public void onBindViewHolder(@NonNull SearchResultsCardsAdapter.Viewholder holder, int position) {
        holder.departTime.setText(displayList.get(position).getRoute().get(0).getDepartureTime());
+       System.out.println(displayList.get(position).getRoute().get(0).getArrivalTime());
         holder.arriveTime.setText(displayList.get(position).getRoute().get(0).getArrivalTime());
         holder.departAirport.setText(displayList.get(position).getRoute().get(0).getSource().getAirport());
         holder.destAirport.setText(displayList.get(position).getRoute().get(0).getDestination().getAirport());
-        holder.flightDuration.setText(displayList.get(position).getRoute().get(0).getDuration().toString());
+        holder.flightDuration.setText(String.format(Locale.CANADA,"%d h", displayList.get(position).getRoute().get(0).getDuration().toHours()));
         holder.flightPrice.setText("$ 369");
         holder.numStops.setImageResource(R.drawable.no_stop_shape);
         holder.stopNames.setText("No Stops");

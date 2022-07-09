@@ -96,10 +96,10 @@ public class Flight {
         return duration;
     }
     public String getArrivalTime() {
-        return arrivalDateandTime.getHour() + ":" +arrivalDateandTime.getMinute();
+        return arrivalDateandTime.toLocalTime().toString() ;
     }
     public String getDepartureTime() {
-        return departureDateandTime.getHour() + ":" + departureDateandTime.getMinute();
+        return departureDateandTime.toLocalTime().toString();
     }
 
     public ZonedDateTime getDepartureDateTime(){
