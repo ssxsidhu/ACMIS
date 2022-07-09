@@ -50,7 +50,7 @@ public class DataAccessStub implements DataAccess {
 
         bookingManager = new BookingManager();
 
-        defaultUser = new User("Johnny","victor", User.Gender.MALE,"default","jOhnNNyVi12","johnny.victor@gmail.com","2045558999");
+        defaultUser = new User("John","Braico", User.Gender.MALE,"braico","somePassword","jbraico@cs.umanitoba.ca","2041234567");
         allUsers.add(defaultUser);
         user = new User("Julie","smith", User.Gender.FEMALE,"jsmith","j&smith$","jmith@gmail.com","2048889999");
         allUsers.add(user);
@@ -185,8 +185,8 @@ public class DataAccessStub implements DataAccess {
 
 
 
-        bookingManager.createBooking("default",new Route(Collections.singletonList(winToMn)));
-        bookingManager.createBooking("default",new Route(Collections.singletonList(torToVan)));
+        bookingManager.createBooking("braico", new Route(Collections.singletonList(winToMn)));
+        bookingManager.createBooking("braico", new Route(Collections.singletonList(torToVan)));
 
 
         System.out.println("Opened " +dbType +" database " +dbName);

@@ -39,7 +39,10 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        copyDatabaseToDevice();
+        if (!Main.getDBPathName().equals("UF")) {
+            System.out.println("HERE");
+            copyDatabaseToDevice();
+        }
         Main.startUp();
 
         mBottomNavigation = findViewById(R.id.bottom_navigation);
