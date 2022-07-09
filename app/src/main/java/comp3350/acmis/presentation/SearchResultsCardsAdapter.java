@@ -50,7 +50,7 @@ public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResult
         holder.departAirport.setText(displayList.get(position).getRoute().get(0).getSource().getAirport());
         holder.destAirport.setText(displayList.get(position).getRoute().get(0).getDestination().getAirport());
         holder.flightDuration.setText(String.format(Locale.CANADA,"%d h", displayList.get(position).getRoute().get(0).getDuration().toHours()));
-        holder.flightPrice.setText("$ 369");
+        holder.flightPrice.setText(String.format(Locale.CANADA,"$ %d", displayList.get(position).getRoute().get(0).getCost()));
         holder.numStops.setImageResource(R.drawable.no_stop_shape);
         holder.stopNames.setText("No Stops");
     }
