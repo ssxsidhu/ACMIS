@@ -13,9 +13,7 @@ public interface DataAccess
 
 	void close();
 
-
 	String getAllFlights(ArrayList<Flight> resultList);
-
 
 	String getLocations(ArrayList<Location> resultList);
 
@@ -23,11 +21,5 @@ public interface DataAccess
 
 	User getUserObject(String username);
 
-	Flight getFlightObject(int flightNumber);
-
-	Booking getBooking(int bookingId);
-
 	String getUserBookings(User user, ArrayList<Booking> userBookings);
-
-	Booking removeBooking(int bookingId);
 }

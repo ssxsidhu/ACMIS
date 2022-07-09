@@ -20,7 +20,6 @@ import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
 import comp3350.acmis.objects.User;
-import comp3350.acmis.presentation.MainActivity;
 
 
 public class DataAccessObject implements DataAccess{
@@ -245,13 +244,6 @@ public class DataAccessObject implements DataAccess{
 		return user;
 	}
 
-	public Flight getFlightObject(int flightNumber) { //TODO Never used
-		return null;
-	}
-
-	public Booking getBooking(int bookingId) { //TODO is this used?
-		return null;
-	}
 
 	//TODO currently only does single flight routes
 	public String getUserBookings(User user, ArrayList<Booking> userBookings) {
@@ -327,15 +319,6 @@ public class DataAccessObject implements DataAccess{
 		}
 		return result;
 	}
-
-	public Booking removeBooking(int bookingId) { //TODO this is not implemented yet?
-		return null;
-	}
-
-
-
-
-
 
 
 
