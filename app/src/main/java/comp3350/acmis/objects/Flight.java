@@ -19,7 +19,7 @@ import java.util.Objects;
 public class Flight {
 
     // STATIC VARIABLE
-    private static int flightSequence=1;
+    private static int flightSequence = 1;
 
     // Instance Variables
     private int flightID;
@@ -45,6 +45,20 @@ public class Flight {
         this.destination = Objects.requireNonNull(destination,"Destination cannot be null");
 
         this.flightID = flightSequence;
+        flightSequence++;
+    }
+
+    public Flight(int flightID, Location source, Location destination, ZonedDateTime departureDateandTime, int seats, double dur, int cost){
+        this.departureDateandTime = Objects.requireNonNull(departureDateandTime);
+
+        this.duration = calculateDuration(dur);
+        this.arrivalDateandTime = departureDateandTime.plus(duration).withZoneSameInstant(destination.getZoneName());
+        this.seats = seats;
+        this.cost = cost;
+        this.source = Objects.requireNonNull(source,"Source cannot be null");
+        this.destination = Objects.requireNonNull(destination,"Destination cannot be null");
+
+        this.flightID = flightID;
         flightSequence++;
     }
 
@@ -106,6 +120,17 @@ public class Flight {
         return departureDateandTime;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "flightID=" + flightID +
+                ", source=" + source.getCity() +
+                ", destination=" + destination.getCity() +
+                ", departureDateandTime=" + departureDateandTime.toString() +
+                ", arrivalDateandTime=" + arrivalDateandTime.toString() +
+                ", seats=" + seats +
+                ", duration=" + duration +
+                ", cost=" + cost +
+                '}';
+    }
 }

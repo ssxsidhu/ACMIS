@@ -11,12 +11,13 @@ import comp3350.acmis.application.Services;
 import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
+import comp3350.acmis.persistence.DataAccess;
 import comp3350.acmis.persistence.DataAccessStub;
 
 public class SearchRoute {
 
     private Graph<Location> graph;
-    private DataAccessStub data;
+    private DataAccess data;
     private ArrayList<Flight> flights;
 
     public SearchRoute() {

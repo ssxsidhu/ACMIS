@@ -72,7 +72,7 @@ public class FragmentManage extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         myBookingList = new ArrayList<>();
-        accessBookings = new AccessBookings("default");
+        accessBookings = new AccessBookings("braico");
         accessBookings.getMyBookings(myBookingList);
         CardsAdapter adapter = new CardsAdapter(this,myBookingList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
