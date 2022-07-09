@@ -30,7 +30,12 @@ public class User {
         this.username = errorCheck(username, "Username");
 
         this.password = Objects.requireNonNull(password, "password cannot be null");
-        this.email = Objects.requireNonNull(email, "email cannot be null");
+        if(email.contains("@")){
+            this.email = Objects.requireNonNull(email, "email cannot be null");
+        }else{
+            throw new IllegalArgumentException("Email must contain the character: @ ");
+        }
+
 
         if (phoneNumber.length() != 10) {
             throw new IllegalArgumentException("Phone number should contain 10 digits");
@@ -62,14 +67,13 @@ public class User {
         userSequence++;
     }
 
-    // SETTERS
-//    public void addBooking(Booking newBook) {
-//        if (newBook == null) {
-//            throw new NullPointerException();
-//        }
-//        bookings.add(newBook);
-//    }
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
 
+    public String getEmail() {
+        return email;
+    }
 //    public boolean removeBooking(int bookingID) {
 //        boolean found = false;
 //        Booking removal = null;

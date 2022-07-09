@@ -1,26 +1,28 @@
 package comp3350.acmis.objects;
 
-import junit.framework.TestCase;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.threeten.bp.ZoneId;
 
-public class LocationTest extends TestCase {
+public class LocationTest {
 
     private Location myLoc;
     private Location loc2;
     private Location loc3;
 
+
     @Before
-    private void setup() {
+    public void setup() {
+
         myLoc = new Location("Toronto", ZoneId.of("America/Toronto"), "Canada", "YYZ");
         loc2 = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
         loc3 = new Location("Vancouver", ZoneId.of("America/Vancouver"), "Canada", "YVR");
     }
 
     @After
-    private void teardown() {
+    public void teardown() {
         myLoc = null;
         loc2 = null;
         loc3 = null;
@@ -35,26 +37,29 @@ public class LocationTest extends TestCase {
         //null city
         try {
             loc = new Location(null, ZoneId.of("America/Winnipeg"), "Canada", "YWG");
-            fail("Expected a NullPointerException");
-        } catch (NullPointerException unused) {}
+            Assert.fail("Expected a NullPointerException");
+        } catch (NullPointerException unused) {
+        }
 
         //empty city
         try {
             loc = new Location("", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
-            fail("Expected a IllegalArgumentException");
-        } catch (IllegalArgumentException unused) {}
+            Assert.fail("Expected a IllegalArgumentException");
+        } catch (IllegalArgumentException unused) {
+        }
 
         //check only spaces
         try {
             loc = new Location("      ", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
-            fail("Expected a IllegalArgumentException");
-        } catch (IllegalArgumentException unused) {}
+            Assert.fail("Expected a IllegalArgumentException");
+        } catch (IllegalArgumentException unused) {
+        }
 
         loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
-        assertEquals("Winnipeg", loc.getCity());
+        Assert.assertEquals("Winnipeg", loc.getCity());
 
         loc = new Location(" Winnipeg   ", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
-        assertEquals("Winnipeg", loc.getCity());
+        Assert.assertEquals("Winnipeg", loc.getCity());
 
         System.out.println("Finished testLocation: valid city");
     }
@@ -68,32 +73,36 @@ public class LocationTest extends TestCase {
         //null country
         try {
             loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), null, "YWG");
-            fail("Expected a NullPointerException");
-        } catch (NullPointerException unused) {}
+            Assert.fail("Expected a NullPointerException");
+        } catch (NullPointerException unused) {
+        }
 
         //empty country
         try {
             loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "", "YWG");
-            fail("Expected a IllegalArgumentException");
-        } catch (IllegalArgumentException unused) {}
+            Assert.fail("Expected a IllegalArgumentException");
+        } catch (IllegalArgumentException unused) {
+        }
 
         //check only spaces
         try {
             loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "    ", "YWG");
-            fail("Expected a IllegalArgumentException");
-        } catch (IllegalArgumentException unused) {}
+            Assert.fail("Expected a IllegalArgumentException");
+        } catch (IllegalArgumentException unused) {
+        }
 
         loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
-        assertEquals("Canada", loc.getCountry());
+        Assert.assertEquals("Canada", loc.getCountry());
 
         loc = new Location(" Winnipeg   ", ZoneId.of("America/Winnipeg"), "    Canada  ", "YWG");
-        assertEquals("Canada", loc.getCountry());
+        Assert.assertEquals("Canada", loc.getCountry());
 
         System.out.println("Finished testLocation: valid country");
     }
 
     @Test
     public void testValidAirport() {
+
         System.out.println("Starting testLocation: valid airport");
 
         Location loc;
@@ -101,26 +110,29 @@ public class LocationTest extends TestCase {
         //null airport
         try {
             loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", null);
-            fail("Expected a NullPointerException");
-        } catch (NullPointerException unused) {}
+            Assert.fail("Expected a NullPointerException");
+        } catch (NullPointerException unused) {
+        }
 
         //empty airport
         try {
             loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "");
-            fail("Expected a IllegalArgumentException");
-        } catch (IllegalArgumentException unused) {}
+            Assert.fail("Expected a IllegalArgumentException");
+        } catch (IllegalArgumentException unused) {
+        }
 
         //check only spaces
         try {
             loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "     ");
-            fail("Expected a IllegalArgumentException");
-        } catch (IllegalArgumentException unused) {}
+            Assert.fail("Expected a IllegalArgumentException");
+        } catch (IllegalArgumentException unused) {
+        }
 
         loc = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
-        assertEquals("YWG", loc.getAirport());
+        Assert.assertEquals("YWG", loc.getAirport());
 
         loc = new Location(" Winnipeg   ", ZoneId.of("America/Winnipeg"), "Canada", "   YWG       ");
-        assertEquals("YWG", loc.getAirport());
+        Assert.assertEquals("YWG", loc.getAirport());
 
         System.out.println("Finished testLocation: valid airport");
 
@@ -133,21 +145,22 @@ public class LocationTest extends TestCase {
         setup();
 
         //should be 0 at start
-        assertEquals(0, myLoc.getLocsIncomingFlights().size());
+        Assert.assertEquals(0, myLoc.getLocsIncomingFlights().size());
 
         //add some locations
         myLoc.addLocationIncoming(loc2);
         myLoc.addLocationIncoming(loc3);
 
-        assertEquals(2, myLoc.getLocsIncomingFlights().size());
+        Assert.assertEquals(2, myLoc.getLocsIncomingFlights().size());
 
-        assertTrue(myLoc.getLocsIncomingFlights().contains(loc2));
-        assertTrue(myLoc.getLocsIncomingFlights().contains(loc3));
+        Assert.assertTrue(myLoc.getLocsIncomingFlights().contains(loc2));
+        Assert.assertTrue(myLoc.getLocsIncomingFlights().contains(loc3));
 
         try {
             myLoc.addLocationIncoming(null);
-            fail("Expected a NullPointerException");
-        } catch (NullPointerException unused){}
+            Assert.fail("Expected a NullPointerException");
+        } catch (NullPointerException unused) {
+        }
 
         System.out.println("Finished testLocation: incoming flights");
 
@@ -159,26 +172,23 @@ public class LocationTest extends TestCase {
 
         setup();
 
-//        Location myLoc = new Location("Toronto", "Canada", "YYZ");
-//        Location outgoing1 = new Location("Winnipeg", "Canada", "YWG");
-//        Location outgoing2 = new Location("Vancouver", "Canada", "YVR");
-
         //should be 0 at start
-        assertEquals(0, myLoc.getLocsOutgoingFLights().size());
+        Assert.assertEquals(0, myLoc.getLocsOutgoingFLights().size());
 
         //add some locations
         myLoc.addLocationOutgoing(loc2);
         myLoc.addLocationOutgoing(loc3);
 
-        assertEquals(2, myLoc.getLocsOutgoingFLights().size());
+        Assert.assertEquals(2, myLoc.getLocsOutgoingFLights().size());
 
-        assertTrue(myLoc.getLocsOutgoingFLights().contains(loc2));
-        assertTrue(myLoc.getLocsOutgoingFLights().contains(loc3));
+        Assert.assertTrue(myLoc.getLocsOutgoingFLights().contains(loc2));
+        Assert.assertTrue(myLoc.getLocsOutgoingFLights().contains(loc3));
 
         try {
             myLoc.addLocationOutgoing(null);
-            fail("Expected a NullPointerException");
-        } catch (NullPointerException unused){}
+            Assert.fail("Expected a NullPointerException");
+        } catch (NullPointerException unused) {
+        }
 
         System.out.println("Finished testLocation: outgoing flights");
     }
