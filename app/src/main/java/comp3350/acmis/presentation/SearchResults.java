@@ -41,7 +41,7 @@ public class SearchResults extends AppCompatActivity {
                 book.setEnabled(true);
                 book.setOnClickListener(view1 -> {
                     //if the user clicks on the book button
-                    String result = bookingManager.createBooking("default", listViewAdapter.getItem(i));
+                    String result = bookingManager.createBooking("braico", listViewAdapter.getItem(i));
                     if(result!=null){
                         Messages.snackBar(view1,result);
                     }

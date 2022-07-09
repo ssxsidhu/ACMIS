@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import comp3350.acmis.R;
 import comp3350.acmis.business.AccessLocations;
 import comp3350.acmis.objects.Location;
+import comp3350.acmis.persistence.DataAccessObject;
 
 /**
  * A simple {@link Fragment} subclass.

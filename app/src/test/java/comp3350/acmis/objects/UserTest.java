@@ -152,58 +152,58 @@ public class UserTest extends TestCase {
     }
 
 
-    @Test
-    public void testGetBookings() {
-        System.out.println("Starting testUser: get bookings");
-
-        //method is not have fully implemented yet, testing current version
-        User user = new User("foo", "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1234567890");
-        ArrayList<Booking> bookings = new ArrayList<Booking>();
-
-        assertNull(user.getMyBookings(bookings));
-
-        try {
-            user.getMyBookings(null);
-            fail("Expected a NullPointerException");
-        } catch (NullPointerException unused) {}
-
-        System.out.println("Finished testUser: get bookings");
-    }
-
-    @Test
-    public void testAddRemoveBooking() {
-        System.out.println("Starting testUser: add/remove booking");
-
-        User user = new User("foo", "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1234567890");
-        Booking booking1 = new Booking(user, new Route());
-        Booking booking2 = new Booking(user, new Route());
-
-        //test initial size and after 2 inserts size
-        assertEquals(0, user.getBookingsTemporaryTest().size());
-        user.addBooking(booking1);
-        user.addBooking(booking2);
-        assertEquals(2, user.getBookingsTemporaryTest().size());
-
-        //test size after removing 1
-        user.removeBooking(booking1.getBookingId());
-        assertEquals(1, user.getBookingsTemporaryTest().size());
-
-        //test the remaining bookingID matches
-        assertEquals(booking2.getBookingId(), user.getBookingsTemporaryTest().get(0).getBookingId());
-
-        try {
-            user.addBooking(null);
-            fail("Expected a NullPointerException");
-        } catch (NullPointerException unused) {}
-
-        try {
-            user.removeBooking(-1);
-            fail("Expected a NegativeArraySizeException");
-        } catch (NegativeArraySizeException unused) {}
-
-        //no booking should have this high of an ID
-        assertFalse(user.removeBooking(Integer.MAX_VALUE));
-
-        System.out.println("Finished testUser: add/remove booking");
-    }
+//    @Test
+//    public void testGetBookings() {
+//        System.out.println("Starting testUser: get bookings");
+//
+//        //method is not have fully implemented yet, testing current version
+//        User user = new User("foo", "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1234567890");
+//        ArrayList<Booking> bookings = new ArrayList<Booking>();
+//
+//        assertNull(user.getMyBookings(bookings));
+//
+//        try {
+//            user.getMyBookings(null);
+//            fail("Expected a NullPointerException");
+//        } catch (NullPointerException unused) {}
+//
+//        System.out.println("Finished testUser: get bookings");
+//    }
+//
+//    @Test
+//    public void testAddRemoveBooking() {
+//        System.out.println("Starting testUser: add/remove booking");
+//
+//        User user = new User("foo", "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1234567890");
+//        Booking booking1 = new Booking(user, new Route());
+//        Booking booking2 = new Booking(user, new Route());
+//
+//        //test initial size and after 2 inserts size
+//        assertEquals(0, user.getBookingsTemporaryTest().size());
+//        user.addBooking(booking1);
+//        user.addBooking(booking2);
+//        assertEquals(2, user.getBookingsTemporaryTest().size());
+//
+//        //test size after removing 1
+//        user.removeBooking(booking1.getBookingId());
+//        assertEquals(1, user.getBookingsTemporaryTest().size());
+//
+//        //test the remaining bookingID matches
+//        assertEquals(booking2.getBookingId(), user.getBookingsTemporaryTest().get(0).getBookingId());
+//
+//        try {
+//            user.addBooking(null);
+//            fail("Expected a NullPointerException");
+//        } catch (NullPointerException unused) {}
+//
+//        try {
+//            user.removeBooking(-1);
+//            fail("Expected a NegativeArraySizeException");
+//        } catch (NegativeArraySizeException unused) {}
+//
+//        //no booking should have this high of an ID
+//        assertFalse(user.removeBooking(Integer.MAX_VALUE));
+//
+//        System.out.println("Finished testUser: add/remove booking");
+//    }
 }
