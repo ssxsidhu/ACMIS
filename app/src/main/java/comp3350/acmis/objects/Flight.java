@@ -19,7 +19,7 @@ import java.util.Objects;
 public class Flight {
 
     // STATIC VARIABLE
-    private static int flightSequence=1;
+    private static int flightSequence = 1;
 
     // Instance Variables
     private int flightID;

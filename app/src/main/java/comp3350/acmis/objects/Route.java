@@ -59,4 +59,17 @@ public class Route {
         return route;
     }
 
+    public String getFlightsCSV() {
+        String ret = "";
+        for (int i = 0; i < route.size(); i++) {
+            ret += route.get(i).getFlightID() + "";
+
+            if (i != route.size()-1) {
+                ret += ",";
+            }
+        }
+
+        return ret;
+    }
+
 }
