@@ -196,16 +196,6 @@ public class DataAccessStub implements DataAccess {
         System.out.println("Closed " +dbType +" database " +dbName);
     }
 
-    public String getAllUsers(ArrayList<User> resultList) {
-        resultList.addAll(allUsers);
-        return null;
-    }
-
-    public String insertUser(User newUser) {
-        allUsers.add(newUser);
-        return null;
-    }
-
     public String getAllFlights(ArrayList<Flight> resultList) {
         resultList.addAll(allFlights);
         return null;
@@ -219,11 +209,6 @@ public class DataAccessStub implements DataAccess {
         return null;
     }
 
-    public String insertLocation(Location newLocation) {
-        allLocations.add(newLocation);
-        return  null;
-    }
-
     //returns the locations
     public String getLocations(ArrayList<Location> resultList) {
         resultList.addAll(allLocations);
@@ -234,7 +219,6 @@ public class DataAccessStub implements DataAccess {
         allBookings.add(newBooking);
         return null;
     }
-
 
     //to get object of User from username
     public User getUserObject(String username) {
@@ -247,28 +231,6 @@ public class DataAccessStub implements DataAccess {
         return null;
     }
 
-    //to get object of Flight from flightNumber
-    public Flight getFlightObject(int flightNumber) {
-        Flight result = null;
-        for (int i = 0; i < allFlights.size(); i++) {
-            if(allFlights.get(i).getFlightID() == flightNumber) {
-                result = allFlights.get(i);
-            }
-        }
-        return result;
-    }
-
-    //method for getting a specific booking from the db using the booking id
-    public Booking getBooking(int bookingId) {
-        for(int i = 0; i < allBookings.size(); i++){
-            if(allBookings.get(i).getBookingId() == bookingId) {
-                return allBookings.get(i);
-            }
-        }
-        return  null;
-    }
-
-
     public String getUserBookings( User user,ArrayList<Booking> userBookings) {
         for(int i=0; i<allBookings.size();i++){
             if(allBookings.get(i).getBooker() == user){
@@ -280,14 +242,5 @@ public class DataAccessStub implements DataAccess {
             return "no bookings found";
         else
             return null;
-    }
-
-    public Booking removeBooking(int bookingId) {
-        for(int i = 0; i < allBookings.size(); i++){
-            if(allBookings.get(i).getBookingId() == bookingId) {
-                return allBookings.remove(i);
-            }
-        }
-        return null;
     }
 }

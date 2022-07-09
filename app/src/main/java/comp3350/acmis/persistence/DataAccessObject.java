@@ -25,7 +25,7 @@ import comp3350.acmis.objects.User;
 public class DataAccessObject implements DataAccess{
 	private Statement st1, st2, st3;
 	private Connection c1;
-	private ResultSet rs2, rs3, rs4, rs5;
+	private ResultSet rs2, rs3, rs4;
 
 	private String dbName;
 	private String dbType;
