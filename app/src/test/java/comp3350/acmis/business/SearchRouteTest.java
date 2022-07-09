@@ -2,7 +2,7 @@ package comp3350.acmis.business;
 
 import static org.junit.Assert.*;
 
-import androidx.room.jarjarred.org.antlr.v4.misc.Graph;
+//import androidx.room.jarjarred.org.antlr.v4.misc.Graph;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,14 +18,14 @@ import comp3350.acmis.persistence.DataAccessStub;
 
 public class SearchRouteTest {
 
-    private Graph<Location> graph;
+   // private Graph<Location> graph;
     private DataAccessStub data;
     private SearchRoute s;
     private ArrayList <Flight> f;
 
     @Before
     private void setUp()   {
-        this.graph = new Graph<>();
+   //     this.graph = new Graph<>();
         data = Services.getDataAccess(Main.dbName);
         s = new SearchRoute();
         f = new ArrayList<>();
@@ -33,7 +33,7 @@ public class SearchRouteTest {
 
     @After
     private void tearDown()   {
-        graph = null;
+   //     graph = null;
         data = null;
         s = null;
 
