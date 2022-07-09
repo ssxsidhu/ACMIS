@@ -66,4 +66,5 @@ Group Meetings:
 		
 DEVELOPER TASKS
 ===============
-June 23, 2022 : 3-4 hours Figuring out how to calculate duration from one point to another in different timezones. Implemented the date 		and time code in the flight class. Changed All the flight instances to use the zoned date and time.
+June 23rd, 2022 : 3-4 hours, Figuring out how to calculate duration from one point to another in different timezones. Implemented the date and time code in the flight class. Changed All the flight instances to use the zoned date and time. -Vrushil 
+July 7th, 2022  : 7 hours, refactored all the code. Ensured only one consistent coding style in all the files. Remove unused files and commented out code. Added more testing in User, Flight and location classes. Changed the test suite from junit 3 to junit 4. -Vrushil
