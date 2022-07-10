@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import org.threeten.bp.format.TextStyle;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import comp3350.acmis.R;
@@ -101,14 +100,14 @@ public class ListViewAdapter extends BaseAdapter {
         titleExtraRight = (TextView) row.findViewById(R.id.list_extra_text_right);
 
         if(displayList!=null && displayList.size()>0 && displayList.get(position).getRoute().size()>0) {
-            frontDate.setText(String.format("%d", displayList.get(position).getRoute().get(0).getDepartureDateTime().getDayOfMonth()));
-            frontMonth.setText(displayList.get(position).getRoute().get(0).getDepartureDateTime().getMonth().getDisplayName(TextStyle.SHORT, Locale.CANADA));
-            frontYear.setText(String.format("%d", displayList.get(position).getRoute().get(0).getDepartureDateTime().getYear()));
-            titleTopLeft.setText(displayList.get(position).getRoute().get(0).getDepartureTime());
-            titleTopRight.setText(displayList.get(position).getRoute().get(0).getArrivalTime());
+//            frontDate.setText(String.format("%d", displayList.get(position).getRoute().get(0).getDepartureDateTime().getDayOfMonth()));
+//            frontMonth.setText(displayList.get(position).getRoute().get(0).getDepartureDateTime().getMonth().getDisplayName(TextStyle.SHORT, Locale.CANADA));
+//            frontYear.setText(String.format("%d", displayList.get(position).getRoute().get(0).getDepartureDateTime().getYear()));
+//            titleTopLeft.setText(displayList.get(position).getRoute().get(0).getDepartureTime());
+//            titleTopRight.setText(displayList.get(position).getRoute().get(0).getArrivalTime());
             titleMiddleLeft.setText(displayList.get(position).getRoute().get(0).getSource().getAirport());
             titleMiddleRight.setText(displayList.get(position).getRoute().get(0).getDestination().getAirport());
-            titleBottomRight.setText(String.format("FlightID: #%d", displayList.get(position).getRoute().get(0).getFlightID()));
+            titleBottomRight.setText(String.format("FlightID: #%d", displayList.get(position).getRoute().get(0).getFlightId()));
             i1.setImageResource(R.drawable.airplane_symbol);
 //            titleExtraLeft.setText(String.format("Total Passengers: %d", displayList.get(position).getRoute().get(0).getPassengerList().size()));
         }

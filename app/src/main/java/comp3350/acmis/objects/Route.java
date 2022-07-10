@@ -3,10 +3,11 @@
 
 package comp3350.acmis.objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Route {
+public class Route implements Serializable{
 
     // What makes up a route for now ? Either a direct flight or a one stop over flight
     private ArrayList<Flight> route;
@@ -14,17 +15,6 @@ public class Route {
     // DEFAULT CONSTRUCTOR
     public Route() {
         route = new ArrayList<>();
-    }
-
-    // CONSTRUCTOR 1 --> Hard Copy
-    public Route(List<Flight> flights) {
-        route = new ArrayList<>();
-        route.addAll(flights);
-    }
-
-    // Constructor 2 --> Soft Copy
-    public Route(ArrayList<Flight> flights) {
-        route = flights;
     }
 
     // Constructor 3 --> Single or Direct Flight
@@ -42,6 +32,7 @@ public class Route {
         }
         return null;
     }
+
     public String removeFromRoute(Flight flight) {
         if(!route.isEmpty()) {
             route.remove(flight);
@@ -62,7 +53,7 @@ public class Route {
     public String getFlightsCSV() {
         String ret = "";
         for (int i = 0; i < route.size(); i++) {
-            ret += route.get(i).getFlightID() + "";
+            ret += route.get(i).getFlightId() + "";
 
             if (i != route.size()-1) {
                 ret += ",";

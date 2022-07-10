@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:width="100dp"
+        android:width="200dp"
         android:height="10dp"
         android:gravity="center">
         <rotate android:fromDegrees="180">
@@ -40,7 +40,7 @@
     <item
         android:width="8dp"
         android:height="8dp"
-        android:left="30dp"
+        android:left="60dp"
         android:gravity="start|center">
         <shape android:shape="oval">
             <stroke
@@ -53,7 +53,7 @@
     <item
         android:width="8dp"
         android:height="8dp"
-        android:right="30dp"
+        android:right="60dp"
         android:gravity="end|center">
         <shape android:shape="oval">
             <stroke
