@@ -26,7 +26,6 @@ public class Booking {
         bookingSeq++;
     }
 
-
     public boolean incrementPassengers() {
         double checkPassengers = (double) numPassengers + 1;
         boolean ret = false;
