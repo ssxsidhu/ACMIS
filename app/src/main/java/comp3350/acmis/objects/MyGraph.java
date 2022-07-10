@@ -25,24 +25,26 @@ public class MyGraph {
     // SETTERS
     public String addNode(Location newLocation)
     {
-        Node newNode = new Node(newLocation);
+        Node newNode = new Node(newLocation);              // Create the Node, Create a Corresponding Adjacency List to that Node and push it into ArrayList.
         sourceNodes.add(new AdjacencyList(newNode));
+        numSourceNodes++;
+
         return null;
     }
-
     public String addEdge(Flight newFlight)
     {
-        Location start = newFlight.getSource();
+        Location start = newFlight.getSource();                 // For easier Readability.
 
         // Iterate until we find sourceCity
         for(int i=0;i<sourceNodes.size();i++)
         {
-           //if(sourceNodes.get(i).equals(start))              // If we Find that Node then add the Flight and Location to this Node
-            if(sourceNodes.get(i).getSourceCity().equals(start.getCity()))
+
+            if(sourceNodes.get(i).getSourceCity().equals(start.getCity()))                // If we Find that Node then add the Flight and Location to this Node
             {
                 sourceNodes.get(i).addNext(newFlight.getDestination(), newFlight);        // Supply Connecting Node and the flight to that connecting Node to the Adjacency List having that Source Node.
             }
         }
+        numEdges++;
 
         return null;
     }
@@ -65,6 +67,27 @@ public class MyGraph {
         return null;
     }
 
+    // Get Adjacent Nodes connected by an Edge for the Given Node
+    public String getAdjacentNodes(Location getNeighbors ,ArrayList<Node> returnNodes) {
+
+        // Do Something only if requested City exists in the Graph.
+        if(!containsSourceCity(getNeighbors))
+        return  "Source City Does Not Exist in Graph";
+        else{
+
+            int index = 0;
+            while(!getNeighbors.equals(sourceNodes.get(index)))
+            {
+                index++;
+            }
+
+            AdjacencyList temp = sourceNodes.get(index);
+            temp.copyList(returnNodes);
+
+            return null;
+        }
+    }
+
     // GETTERS
     public int getNumSourceNodes() {
         return numSourceNodes;
@@ -73,4 +96,16 @@ public class MyGraph {
         return numEdges;
     }
 
+    // PRIVATE HELPER METHOD TO WRAP CODE AND REDUCE DUPLICITY
+    public boolean containsSourceCity(Location checkThis)
+    {
+        boolean exists = false;
+        for(int i=0;i<sourceNodes.size();i++) {
+
+            if(sourceNodes.get(i).getSourceCity().equals(checkThis)) {
+                exists = true;
+            }
+        }
+        return exists;
+    }
 }
