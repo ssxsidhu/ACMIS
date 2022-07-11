@@ -72,8 +72,33 @@ public class RouteManager {
         return null;
     }
 
+    // PRIVATE HELPER METHOD
+    private void depthFirst(MyGraph graph, Location source, Location dest, ArrayList<Location> visited, ArrayList<Location> path) {
+
+        if(source.equals(dest)) {
+            return;
+        }
+
+        visited.add(source);            // Add this so we don't come back to source for checking every time and thus prevent dead loop.
+        ArrayList<Location> neighbors = new ArrayList<>();          // These are the neighbors of the source Node. CHECK ALL NEIGHBORS FOR A PATH TO DEST
+        graph.getNeighborCities(source,neighbors);                  // Initialise all neighbors of the source node into this list.
+
+        for(int i=0;i<neighbors.size();i++) {                       // Iterate over each Neighbor and perform tasks...
+
+            if(!visited.contains(neighbors.get(i))) {
+
+                path.add(neighbors.get(i));
+                depthFirst(graph, source, dest, visited, path);
+                path.remove(neighbors.get(i));
+            }
+        }
+
+        visited.remove(source);
+
+    }
+
 //     PRIVATE HELPER METHOD
-//     This method iterates throught the entire list of all flights in the data base.
+//     This method iterates through the entire list of all flights in the data base.
 //     It extracts the particular flight that links the requested source and destination.
 //     The source and destination may be the true source and true destination or a stopover
 //     source or a stop over destination. The essential job of this method is to just return

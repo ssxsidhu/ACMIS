@@ -73,12 +73,21 @@ public class Location  implements Serializable {
     // PRIVATE HELPER METHOD
     // Error checking in constructor
 
-    public boolean equals(Location compareThis)
+    @Override
+    public boolean equals(Object compare)
     {
-        return (city.equals(compareThis.getCity()) &&
-                zoneName.equals(compareThis.getZoneName()) &&
-                country.equals(compareThis.getCountry()) &&
-                airport.equals(compareThis.getAirport()));
+
+        if(compare.getClass() == getClass()) {                  // Check if object being passed is a Object of this Class.
+
+            Location compareThis = (Location)compare;           // Type Cast explicitly to LOCATION type.
+
+            return (city.equals(compareThis.getCity()) &&
+                    zoneName.equals(compareThis.getZoneName()) &&
+                    country.equals(compareThis.getCountry()) &&
+                    airport.equals(compareThis.getAirport()));
+        }
+
+        return  false;
     }
     private String errorCheck(String value, String message) {
         if (value.trim().equals("")){
