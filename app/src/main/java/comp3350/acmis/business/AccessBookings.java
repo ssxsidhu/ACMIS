@@ -1,7 +1,7 @@
+//This class is used to connect the database and the presentation
+//Database is accessed to get all the bookings of a particular User.
+
 package comp3350.acmis.business;
-
-
-import org.threeten.bp.LocalDateTime;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,32 +13,29 @@ import comp3350.acmis.application.Services;
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.User;
 import comp3350.acmis.persistence.DataAccess;
-import comp3350.acmis.persistence.DataAccessStub;
 
 public class AccessBookings {
     private DataAccess dataAccess;
-    private List<Booking> userBookings;
     private String username;
 
     public AccessBookings(String user) {
-        dataAccess=Services.getDataAccess(Main.dbName);
-        username=user;
+        dataAccess = Services.getDataAccess(Main.dbName);
+        username = user;
     }
 
     public String getMyBookings(ArrayList<Booking> myBookings) {
         myBookings.clear();
         User user = dataAccess.getUserObject(username);
         String result;
-        if(user != null) {
+        if (user != null) {
             result = dataAccess.getUserBookings(user, myBookings);
-        }
-        else{
+        } else {
             return "No user found";
         }
         Collections.sort(myBookings, new Comparator<Booking>() {
             @Override
             public int compare(Booking booking, Booking t1) {
-                return booking.getRoute().getRoute().get(0).getDepartureDateTime().compareTo(t1.getRoute().getRoute().get(0).getDepartureDateTime());
+                return booking.getRouteDepart().getRoute().get(0).getDepartureDateTime().compareTo(t1.getRouteDepart().getRoute().get(0).getDepartureDateTime());
             }
         });
         return result;

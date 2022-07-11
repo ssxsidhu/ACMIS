@@ -70,11 +70,11 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/add_button"
+            android:id="@+id/subtract_button"
             style="@style/Widget.App.Button.OutlinedButton.IconOnly"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:icon="@drawable/ic_round_add_24"
+            app:icon="@drawable/ic_round_remove_24"
             app:iconSize="35dp" />
 
         <Button
@@ -93,11 +93,11 @@
             app:iconSize="20dp" />
 
         <Button
-            android:id="@+id/subtract_button"
+            android:id="@+id/add_button"
             style="@style/Widget.App.Button.OutlinedButton.IconOnly"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:icon="@drawable/ic_round_remove_24"
+            app:icon="@drawable/ic_round_add_24"
             app:iconSize="35dp" />
     </LinearLayout>
 

@@ -181,7 +181,7 @@ public class DataAccessObject implements DataAccess{
 
 	public String addBooking(Booking newBooking) {
 		int userID = newBooking.getBooker().getUserID();
-		String route = newBooking.getRoute().getFlightsCSV();
+		String route = newBooking.getRouteDepart().getFlightsCSV();
 
 		result = null;
 		try {

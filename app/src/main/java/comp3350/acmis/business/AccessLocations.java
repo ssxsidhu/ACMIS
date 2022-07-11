@@ -1,3 +1,6 @@
+//This class is yours as in interface to connect the database and the presentation
+//helps to get all the locations from the database.
+
 package comp3350.acmis.business;
 
 import java.util.ArrayList;
@@ -14,11 +17,11 @@ public class AccessLocations {
     private List<Location> locations;
     private Location location;
 
-    public AccessLocations(){
-        dataAccess=Services.getDataAccess(Main.dbName);
+    public AccessLocations() {
+        dataAccess = Services.getDataAccess(Main.dbName);
     }
 
-    public String getLocations (ArrayList<Location> locations) {
+    public String getLocations(ArrayList<Location> locations) {
         locations.clear();
         return dataAccess.getLocations(locations);
     }

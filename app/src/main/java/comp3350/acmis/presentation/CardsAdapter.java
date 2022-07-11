@@ -1,37 +1,36 @@
 package comp3350.acmis.presentation;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 
 import java.util.ArrayList;
 import java.util.Locale;
 
 import comp3350.acmis.R;
+import comp3350.acmis.business.AccessRouteFlights;
 import comp3350.acmis.objects.Booking;
+import comp3350.acmis.objects.Route;
 
 public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> {
 
-    private FragmentManage context;
+    private Context mContext;
     private ArrayList<Booking> displayList;
-    ListViewAdapter listViewAdapter;
-    Bitmap icon;
-    //temporary
-
     // Constructor
-    public CardsAdapter(FragmentManage context, ArrayList<Booking> userBookings) {
-        this.context = context;
+    public CardsAdapter(Context context,ArrayList<Booking> userBookings) {
+        mContext = context;
         displayList = userBookings;
-        listViewAdapter = new ListViewAdapter(context);
     }
 
     @NonNull
@@ -44,24 +43,37 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
 
     @Override
     public void onBindViewHolder(@NonNull CardsAdapter.Viewholder holder, int position) {
-        // to set data to textview and imageview of each card layout
-//        String uri = "@mipmap/"+displayList.get(position).getRoute().getRoute().get(0).getDestination().getCity().toLowerCase(Locale.ROOT);
-//        int imageResource = context.getResources().getIdentifier(uri, null, context.requireActivity().getPackageName());
-//        Drawable res = context.getResources().getDrawable(imageResource);
-//        holder.imageView.setImageDrawable(res);
-//        holder.imageView.setImageResource(R.drawable.locationName);
-        listViewAdapter.setDisplayList(displayList.get(position));
-        holder.listView.setAdapter(listViewAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        holder.recyclerView.setLayoutManager(linearLayoutManager);
+        ArrayList<Route> bookedRouteList = new ArrayList<>();
+        Booking currBooking = displayList.get(position);
+        bookedRouteList.add(currBooking.getRouteDepart());
+
+        if(currBooking.checkForReturn()) {
+            bookedRouteList.add(currBooking.getRouteReturn());
+            holder.directionImage.setImageResource(R.drawable.ic_round_u_turn_right_24);
+        }
+        AccessRouteFlights accessRouteFlights = new AccessRouteFlights(currBooking.getRouteDepart());
+
+        holder.cityDepart.setText(accessRouteFlights.getConnectSource().getCity());
+        accessRouteFlights.setConnectFlightPos(accessRouteFlights.getNumStops());
+        holder.cityDest.setText(accessRouteFlights.getConnectDestination().getCity());
+
+        holder.numPassengers.setText(String.format(Locale.CANADA,"%d ", currBooking.getNumPassengers()));
+
+        holder.recyclerView.setAdapter(new SearchResultsCardsAdapter(bookedRouteList,true, new SearchResultsCardsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Route item) {
+                Intent i = new Intent(mContext, RouteDetails.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.putExtra("selectedRoute", item);
+                i.putExtra("continueButtonVisibility",false);
+                mContext.startActivity(i);
+            }
+        }));
 
     }
 
-
-    public void resize(int imageSource){
-
-//        Uri uri = Uri.parse(imageUri);
-        icon = BitmapFactory.decodeResource(context.getResources(),imageSource);
-
-    }
 
     @Override
     public int getItemCount() {
@@ -73,12 +85,16 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
     // View holder class for initializing of
     // your views such as TextView and Imageview.
     public class Viewholder extends RecyclerView.ViewHolder {
-        private ListView listView;
-//        ImageView imageView;
+        private RecyclerView recyclerView;
+        private TextView cityDepart,cityDest,numPassengers;
+        private ImageView directionImage;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-//            imageView= itemView.findViewById(R.id.card_image);
-            listView = itemView.findViewById(R.id.card_view_list);
+            recyclerView = itemView.findViewById(R.id.card_view_list);
+            cityDepart = itemView.findViewById(R.id.card_city_depart);
+            cityDest = itemView.findViewById(R.id.card_city_arrive);
+            numPassengers = itemView.findViewById(R.id.card_num_passengers);
+            directionImage = itemView.findViewById(R.id.card_direction_image);
         }
     }
 }
