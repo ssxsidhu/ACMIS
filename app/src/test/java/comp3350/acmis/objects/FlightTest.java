@@ -1,9 +1,7 @@
 /*
 This class is used to test the functionality of the flight class.
-
  */
 package comp3350.acmis.objects;
-
 
 import org.junit.After;
 import org.junit.Assert;

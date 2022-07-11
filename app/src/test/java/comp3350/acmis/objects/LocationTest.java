@@ -138,58 +138,6 @@ public class LocationTest {
 
     }
 
-    @Test
-    public void testIncomingLocs() {
-        System.out.println("Starting testLocation: incoming flights");
 
-        setup();
 
-        //should be 0 at start
-        Assert.assertEquals(0, myLoc.getLocsIncomingFlights().size());
-
-        //add some locations
-        myLoc.addLocationIncoming(loc2);
-        myLoc.addLocationIncoming(loc3);
-
-        Assert.assertEquals(2, myLoc.getLocsIncomingFlights().size());
-
-        Assert.assertTrue(myLoc.getLocsIncomingFlights().contains(loc2));
-        Assert.assertTrue(myLoc.getLocsIncomingFlights().contains(loc3));
-
-        try {
-            myLoc.addLocationIncoming(null);
-            Assert.fail("Expected a NullPointerException");
-        } catch (NullPointerException unused) {
-        }
-
-        System.out.println("Finished testLocation: incoming flights");
-
-    }
-
-    @Test
-    public void testOutgoingLocs() {
-        System.out.println("Starting testLocation: outgoing flights");
-
-        setup();
-
-        //should be 0 at start
-        Assert.assertEquals(0, myLoc.getLocsOutgoingFLights().size());
-
-        //add some locations
-        myLoc.addLocationOutgoing(loc2);
-        myLoc.addLocationOutgoing(loc3);
-
-        Assert.assertEquals(2, myLoc.getLocsOutgoingFLights().size());
-
-        Assert.assertTrue(myLoc.getLocsOutgoingFLights().contains(loc2));
-        Assert.assertTrue(myLoc.getLocsOutgoingFLights().contains(loc3));
-
-        try {
-            myLoc.addLocationOutgoing(null);
-            Assert.fail("Expected a NullPointerException");
-        } catch (NullPointerException unused) {
-        }
-
-        System.out.println("Finished testLocation: outgoing flights");
-    }
 }

@@ -112,18 +112,7 @@ public class BookingManager {
     }
 
 
-    public String cancelBooking(int bookingId) {
-        Booking result = data.removeBooking(bookingId);
-        if (result == null) {
-            return "Booking not found";
-        } else {
-            return null;
-        }
-    }
 
-    public void editBooking(int bookingId) {
-        //look for the booking in the master database.
-    }
 
 
 }
