@@ -12,15 +12,16 @@ package comp3350.acmis.objects;
 import org.threeten.bp.Duration;
 import org.threeten.bp.ZonedDateTime;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Flight {
+public class Flight implements Serializable {
 
     // STATIC VARIABLE
     private static int flightSequence = 1;
 
     // Instance Variables
-    private int flightID;
+    private int flightId;
     private Location source;
     private Location destination;
     private ZonedDateTime departureDateandTime;
@@ -40,11 +41,11 @@ public class Flight {
         this.cost = (int) errorCheck(cost,"Cost");
         this.source = Objects.requireNonNull(source, "Source cannot be null");
         this.destination = Objects.requireNonNull(destination, "Destination cannot be null");
-        this.flightID = flightSequence;
+        this.flightId = flightSequence;
         flightSequence++;
     }
 
-    public Flight(int flightID, Location source, Location destination, ZonedDateTime departureDateandTime, int seats, double dur, int cost){
+    public Flight(int flightId, Location source, Location destination, ZonedDateTime departureDateandTime, int seats, double dur, int cost){
         this.departureDateandTime = Objects.requireNonNull(departureDateandTime);
 
         this.duration = calculateDuration(dur);
@@ -54,7 +55,7 @@ public class Flight {
         this.source = Objects.requireNonNull(source,"Source cannot be null");
         this.destination = Objects.requireNonNull(destination,"Destination cannot be null");
 
-        this.flightID = flightID;
+        this.flightId = flightId;
         flightSequence++;
     }
 
@@ -92,8 +93,8 @@ public class Flight {
         return flightSequence;
     }
 
-    public int getFlightID() {
-        return flightID;
+    public int getFlightId() {
+        return flightId;
     }
 
     public Location getSource() {
@@ -115,15 +116,9 @@ public class Flight {
     public Duration getDuration() {
         return duration;
     }
-
-    public String getArrivalTime() {
-        return arrivalDateandTime.getHour() + ":" + arrivalDateandTime.getMinute();
+    public ZonedDateTime getArrivalDateTime() {
+        return arrivalDateandTime ;
     }
-
-    public String getDepartureTime() {
-        return departureDateandTime.getHour() + ":" + departureDateandTime.getMinute();
-    }
-
     public ZonedDateTime getDepartureDateTime() {
         return departureDateandTime;
     }
@@ -139,7 +134,7 @@ public class Flight {
     @Override
     public String toString() {
         return "Flight{" +
-                "flightID=" + flightID +
+                "flightId=" + flightId +
                 ", source=" + source.getCity() +
                 ", destination=" + destination.getCity() +
                 ", departureDateandTime=" + departureDateandTime.toString() +

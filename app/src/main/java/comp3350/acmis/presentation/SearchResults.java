@@ -1,12 +1,15 @@
 package comp3350.acmis.presentation;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
 
@@ -28,35 +31,60 @@ public class SearchResults extends AppCompatActivity {
 
         receiveData();
 
+        Utils.setStatusBarColor(getWindow(), getBaseContext());
+        setAppBarLayout();
+
+
+
         //checks if there are flights available
         String checkFlights = bookingManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable);
         if (checkFlights != null) {
             Messages.noFlightsMessage(this);
         } else {
-            ListViewAdapter listViewAdapter = new ListViewAdapter(this, flightsAvailable);
-            final ListView listView = (ListView) this.findViewById(R.id.list_items_book_tab);
-            final Button book = this.findViewById(R.id.book_button);
-            Activity thisActivity = this;
-            listView.setAdapter(listViewAdapter);
-            //if the user clicks on a list item
-            listView.setOnItemClickListener((adapterView, view, i, l) -> {
-                book.setEnabled(true);
-                book.setOnClickListener(view1 -> {
-                    //if the user clicks on the book button
-                    String result = bookingManager.createBooking("braico", listViewAdapter.getItem(i));
-                    if(result!=null){
-                        Messages.snackBar(view1,result);
-                    }
-                    else {
-                        Intent i1 = new Intent(thisActivity.getBaseContext(), MainActivity.class);
-                        thisActivity.startActivity(i1);
-                    }
-                });
-            });
-
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
+            final RecyclerView recyclerView = this.findViewById(R.id.list_search_results);
+            recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerView.setAdapter(new SearchResultsCardsAdapter(getBaseContext(), flightsAvailable, new SearchResultsCardsAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(Route item) {
+                    Intent i = new Intent(getBaseContext(), RouteDetails.class);
+                    i.putExtra("selectedRoute", item);
+                    startActivity(i);
+                }
+            }));
         }
-
     }
+
+    private void setAppBarLayout() {
+        MaterialToolbar materialToolbar = findViewById(R.id.search_results_top_app_bar);
+        NestedScrollView nestedScrollView = findViewById(R.id.search_results_scroll);
+        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY > 150)
+                    materialToolbar.setBackgroundColor(ContextCompat.getColor(getBaseContext(),R.color.md_theme_dark_shadow));
+                else
+                    materialToolbar.setBackgroundColor(ContextCompat.getColor(getBaseContext(), android.R.color.transparent));
+
+
+            }
+        });
+    }
+
+
+//    private void changeColor(int colorFrom, int colorTo){
+//        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+//        colorAnimation.setDuration(250); // milliseconds
+//        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//
+//            @Override
+//            public void onAnimationUpdate(ValueAnimator animator) {
+//            }
+//
+//        });
+//        colorAnimation.start();
+//    }
+
 
     // receive data from previous activity
     private void receiveData() {
@@ -64,7 +92,7 @@ public class SearchResults extends AppCompatActivity {
         Intent i = getIntent();
         selectedDeparture = (Location) i.getSerializableExtra("selectedDeparture");
         selectedDestination = (Location) i.getSerializableExtra("selectedDestination");
-        //SET DATA TO TEXTVIEWS
     }
+
 
 }

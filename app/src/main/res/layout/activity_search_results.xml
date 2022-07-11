@@ -1,81 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.SearchResults"
+    android:background="@color/md_theme_dark_onSurface"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/tool_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.ACMIS">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:minHeight="?actionBarSize"
-            android:textSize="25sp"
-            android:padding="@dimen/appbar_padding"
-            android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/search_results_scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/window_seat" />
+
+
+    <TextView
+        android:id="@+id/search_results_departing_date"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="100dp"
+        android:text="Departing Date"
+        android:textColor="@color/design_default_color_background"
+        android:textSize="40sp" />
+
     <TextView
         android:id="@+id/header_title_book_tab"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_below="@id/search_results_departing_date"
+        android:textColor="@color/design_default_color_background"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="@string/search_results"
         android:textSize="25sp" />
 
-    <View
-        android:id="@+id/separator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="3dp"
-        android:layout_below="@id/header_title_book_tab"
-        android:background="@android:color/darker_gray" />
+<!--    <View-->
+<!--        android:id="@+id/separator"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:layout_marginTop="3dp"-->
+<!--        android:layout_below="@id/header_title_book_tab"-->
+<!--        android:background="@android:color/darker_gray" />-->
 
     <TextView
         android:id="@+id/no_results_found"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/no_flights_found"
-        android:textSize="40sp"
-        android:visibility="invisible"
+        android:layout_below="@id/search_results_departing_date"
         android:gravity="center"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:textStyle="bold"/>
-</RelativeLayout>
+        android:text="@string/no_flights_found"
+        android:textColor="@color/design_default_color_background"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
 
-    <ListView
-        android:id="@+id/list_items_book_tab"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_search_results"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header_title_book_tab"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:choiceMode="singleChoice" />
 
-    <Button
-        android:id="@+id/book_button"
+</RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/search_results_top_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/book_flight"
-        android:enabled="false"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
+        app:navigationIcon="@drawable/ic_round_close_24"
+        app:navigationIconTint="@color/design_default_color_background"
+        app:subtitle="subtitle"
+        app:subtitleCentered="true"
+        app:layout_scrollFlags="noScroll"
+        app:subtitleTextAppearance="?attr/textAppearanceBody1"
+        app:subtitleTextColor="@color/design_default_color_background" />
 
-
-</LinearLayout>
+</RelativeLayout>

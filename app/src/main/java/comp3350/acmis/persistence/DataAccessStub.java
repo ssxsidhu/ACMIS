@@ -185,8 +185,8 @@ public class DataAccessStub implements DataAccess {
 
 
 
-        bookingManager.createBooking("braico", new Route(Collections.singletonList(winToMn)));
-        bookingManager.createBooking("braico", new Route(Collections.singletonList(torToVan)));
+        bookingManager.createBooking("braico", new Route(winToMn));
+        bookingManager.createBooking("braico", new Route(torToVan));
 
 
         System.out.println("Opened " +dbType +" database " +dbName);

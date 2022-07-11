@@ -19,20 +19,22 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZoneOffset;
 
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
 import comp3350.acmis.R;
+import comp3350.acmis.business.BookingManager;
 import comp3350.acmis.objects.Location;
 
 public class bookDetailsFragment extends Fragment {
 
 
     private int selectedNumPassengers = 1;
-    private LocalDate departDate, returnDate;
-    private Button pickReturn, pickDepart, searchFlightsButton;
+    private LocalDate departDate,returnDate;
+    private Button pickReturn,pickDepart,searchFlightsButton;
 
     public bookDetailsFragment() {
         // Required empty public constructor
@@ -61,7 +63,7 @@ public class bookDetailsFragment extends Fragment {
         searchFlights();
     }
 
-    private MaterialDatePicker<Long> setCalender(String titleText, long startDate) {
+    private MaterialDatePicker<Long> setCalender(String titleText,long startDate) {
 
         //date picker builder
         MaterialDatePicker.Builder<Long> materialDateBuilder = MaterialDatePicker.Builder.datePicker();
@@ -79,9 +81,9 @@ public class bookDetailsFragment extends Fragment {
 
     }
 
-    private void pickDepartDate(View view) {
+    private void pickDepartDate(View view){
         long today = MaterialDatePicker.todayInUtcMilliseconds();
-        MaterialDatePicker<Long> materialDatePicker = setCalender("Select Departure Date", today);
+        MaterialDatePicker<Long> materialDatePicker = setCalender("Select Departure Date",today);
         pickDepart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,12 +96,12 @@ public class bookDetailsFragment extends Fragment {
             pickDepart.setText(String.format(Locale.CANADA, "Depart %s", materialDatePicker.getHeaderText()));
             departDate = Instant.ofEpochMilli(selection).atZone(ZoneId.systemDefault()).toLocalDate();
             pickReturn.setEnabled(true);
-            if (returnDate != null && returnDate.isBefore(departDate)) {
+            if(returnDate!=null && returnDate.isBefore(departDate)){
                 returnDate = null;
                 searchFlightsButton.setEnabled(false);
                 pickReturn.setText(requireContext().getString(R.string.return_flight));
             }
-            if (!checkRoundTrip(view))
+            if(!checkRoundTrip(view))
                 searchFlightsButton.setEnabled(true);
         });
 
@@ -111,7 +113,7 @@ public class bookDetailsFragment extends Fragment {
         pickReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MaterialDatePicker<Long> materialDatePicker = setCalender("Select Return Date", departDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli());
+                MaterialDatePicker<Long> materialDatePicker = setCalender("Select Return Date",departDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli());
                 materialDatePicker.show(getParentFragmentManager(), "MATERIAL_DATE_PICKER_RETURN");
                 materialDatePicker.addOnPositiveButtonClickListener(selection -> {
                     pickReturn.setText(String.format(Locale.CANADA, "Return %s", materialDatePicker.getHeaderText()));
@@ -170,17 +172,20 @@ public class bookDetailsFragment extends Fragment {
 //                else
 //                    pickArrival.setVisibility(View.GONE);
 
-                if (compoundButton.isChecked()) {
+                if(compoundButton.isChecked()) {
                     pickReturn.setVisibility(View.VISIBLE);
                     searchFlightsButton.setEnabled(false);
-                } else
+                }
+                else {
                     pickReturn.setVisibility(View.GONE);
+                    searchFlightsButton.setEnabled(true);
+                }
             }
         });
         return roundTripSwitch.isChecked();
     }
 
-    private void searchFlights() {
+    private void searchFlights(){
         searchFlightsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,8 +195,8 @@ public class bookDetailsFragment extends Fragment {
     }
 
     private void sendData() {
-        Location selectedDestination = null, selectedDeparture = null;
-        if (getArguments() != null) {
+        Location selectedDestination =  null,selectedDeparture = null;
+        if(getArguments()!=null){
             selectedDeparture = (Location) getArguments().get("selectedDeparture");
             selectedDestination = (Location) getArguments().get("selectedDestination");
         }

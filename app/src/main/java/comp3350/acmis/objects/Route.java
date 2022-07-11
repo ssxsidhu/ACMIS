@@ -3,10 +3,11 @@
 
 package comp3350.acmis.objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Route {
+public class Route implements Serializable{
 
     // What makes up a route for now ? Either a direct flight or a one stop over flight
     private ArrayList<Flight> route;
@@ -16,56 +17,43 @@ public class Route {
         route = new ArrayList<>();
     }
 
-    // CONSTRUCTOR 1 --> Hard Copy
-    public Route(List<Flight> flights) {
-        route = new ArrayList<>();
-        route.addAll(flights);
-    }
-
-    // Constructor 2 --> Soft Copy
-    public Route(ArrayList<Flight> flights) {
-        route = flights;
-    }
-
     // Constructor 3 --> Single or Direct Flight
     public Route(Flight directFlight) {
         route = new ArrayList<>();
         route.add(directFlight);
     }
 
-    // GETTERS
-    public boolean isEmpty() {
-        return route.isEmpty();
-    }
-
-    public ArrayList<Flight> getRoute() {
-        return route;
-    }
-
     // SETTERS
     public String addToRoute(Flight flight) {
-        if (flight != null) {
+        if(flight != null ) {
             route.add(flight);
-        } else {
+        }else{
             throw new NullPointerException();
         }
         return null;
     }
 
     public String removeFromRoute(Flight flight) {
-        if (!route.isEmpty()) {
+        if(!route.isEmpty()) {
             route.remove(flight);
-        } else {
+        }else{
             throw new NullPointerException();
         }
         return null;
     }
 
+    // GETTERS
+    public boolean isEmpty(){
+        return route.isEmpty();
+    }
+    public ArrayList<Flight> getRoute() {
+        return route;
+    }
 
     public String getFlightsCSV() {
         String ret = "";
         for (int i = 0; i < route.size(); i++) {
-            ret += route.get(i).getFlightID() + "";
+            ret += route.get(i).getFlightId() + "";
 
             if (i != route.size()-1) {
                 ret += ",";
