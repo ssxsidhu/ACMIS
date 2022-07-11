@@ -1,9 +1,9 @@
+//
+
 package comp3350.acmis.business;
 
-import org.threeten.bp.ZoneId;
-import org.threeten.bp.ZonedDateTime;
-
 import java.util.ArrayList;
+import java.util.Objects;
 
 import comp3350.acmis.application.Main;
 import comp3350.acmis.application.Services;
@@ -28,12 +28,14 @@ public class BookingManager {
     }
 
     // Return List of Routes
-    public String searchRoute(Location srcCity, Location destCity, ArrayList<Route> returnRoutes){
+    // travelling from one point to another there can be a multiple ways.
+    // all the different routes are stored in a list and the list is returned.
+    public String searchRoute(Location srcCity, Location destCity, ArrayList<Route> returnRoutes, int numPassengers){
 
         returnRoutes.clear();
         ArrayList<Route> validRoutes = new ArrayList<>();
 
-        //find route using an algo
+
         ArrayList<Flight> allDBFlights = new ArrayList<>();
         data.getAllFlights(allDBFlights);
         ArrayList<Location> allDBLocations = new ArrayList<>();
@@ -73,7 +75,10 @@ public class BookingManager {
 
             if(allDBFlights.get(i).getSource().getCity().equals(srcCity.getCity()) &&
                allDBFlights.get(i).getDestination().getCity().equals(destCity.getCity())) {
+                if(allDBFlights.get(i).enoughSeats(numPassengers)){
                     validRoutes.add(new Route(allDBFlights.get(i)));
+                }
+
             }
         }
 //        Location winnipeg = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada","YWG");
@@ -102,11 +107,14 @@ public class BookingManager {
 
 
     //creating booking
-    public String createBooking(String username, Route route) {
-        User bookerObject = data.getUserObject(username);
+    public String createBooking(String username, Route route, int numPassengers) {
+        User bookerObject = data.getUserObject(Objects.requireNonNull(username));
         ArrayList<Booking> userBookings = new ArrayList<>();
         Booking newBooking;
 
+        //get the user's all the bookings
+        //check if the flight is already booked
+        //add a booking only if the flight is not booked already
         if (bookerObject != null && route != null) {
             data.getUserBookings(bookerObject,userBookings);
             for (int i = 0; i < userBookings.size(); i++) {
@@ -114,13 +122,12 @@ public class BookingManager {
                     return "You have already booked this flight for your account";
                 }
             }
-
-            newBooking = new Booking(bookerObject, route);
+            newBooking = new Booking(bookerObject, route,numPassengers);
             //adding the booking to the master booking.
             data.addBooking(newBooking);
         }
         else {
-            return "no object found";
+            throw new NullPointerException("object not found");
         }
         return null;
     }

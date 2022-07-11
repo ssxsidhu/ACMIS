@@ -113,6 +113,8 @@ public class Flight implements Serializable {
         return cost;
     }
 
+
+
     public Duration getDuration() {
         return duration;
     }

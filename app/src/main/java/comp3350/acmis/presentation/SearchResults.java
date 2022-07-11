@@ -23,6 +23,7 @@ public class SearchResults extends AppCompatActivity {
     private Location selectedDeparture, selectedDestination;
     private BookingManager bookingManager = new BookingManager();
     private ArrayList<Route> flightsAvailable = new ArrayList<>();
+    private int numOfPassengers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +35,10 @@ public class SearchResults extends AppCompatActivity {
         Utils.setStatusBarColor(getWindow(), getBaseContext());
         setAppBarLayout();
 
-
+        numOfPassengers=1;
 
         //checks if there are flights available
-        String checkFlights = bookingManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable);
+        String checkFlights = bookingManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable,numOfPassengers);
         if (checkFlights != null) {
             Messages.noFlightsMessage(this);
         } else {
