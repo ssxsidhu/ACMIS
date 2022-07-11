@@ -9,8 +9,6 @@ The Flight also has a list of passengers who booked the flight.
 
 package comp3350.acmis.objects;
 
-
-
 import org.threeten.bp.Duration;
 import org.threeten.bp.ZonedDateTime;
 
@@ -34,16 +32,14 @@ public class Flight {
 
 
     //constructor
-    public Flight(Location source, Location destination, ZonedDateTime departureDateandTime, int seats, double dur, int cost){
+    public Flight(Location source, Location destination, ZonedDateTime departureDateandTime, int seats, double dur, int cost) {
         this.departureDateandTime = Objects.requireNonNull(departureDateandTime);
-
-        this.duration = calculateDuration(dur);
-        this.arrivalDateandTime = departureDateandTime.plus(duration).withZoneSameInstant(destination.getZoneName());
-        this.seats = seats;
-        this.cost = cost;
-        this.source = Objects.requireNonNull(source,"Source cannot be null");
-        this.destination = Objects.requireNonNull(destination,"Destination cannot be null");
-
+        this.duration = calculateDuration(errorCheck(dur,"Duration"));
+        this.arrivalDateandTime =Objects.requireNonNull( departureDateandTime.plus(duration).withZoneSameInstant(destination.getZoneName()));
+        this.seats = (int) errorCheck(seats,"Seats");
+        this.cost = (int) errorCheck(cost,"Cost");
+        this.source = Objects.requireNonNull(source, "Source cannot be null");
+        this.destination = Objects.requireNonNull(destination, "Destination cannot be null");
         this.flightID = flightSequence;
         flightSequence++;
     }
@@ -64,23 +60,27 @@ public class Flight {
 
     //This method is used to calculate the duration of the flight from source to destination
     //it returns Duration this that is added to the departure time to calculate the arrival time in another zone.
-    private Duration calculateDuration(double duration){
-        String [] separation = String.valueOf(duration).split("\\.");
+    public Duration calculateDuration(double duration) {
+        String[] separation = String.valueOf(duration).split("\\.");
         int hours = Integer.parseInt(separation[0]);
-        int mins = ((Integer.parseInt(separation[1])/10)*60);
-
-        return Duration.ofHours(hours).plusMinutes(mins);
+        double temp = (Integer.parseInt(separation[1]));
+        double mins = (temp/10) * 60;
+        return Duration.ofHours(hours).plusMinutes((long) mins);
     }
 
     //this method is used to check if the seats left are enough for the user.
-    public boolean enoughSeats(int seatsTobeBooked){
+    public boolean enoughSeats(int seatsTobeBooked) {
         return seats >= seatsTobeBooked;
     }
 
     //when a user books this flight, he/she chooses the # of seats to be booked
     //those # of seats are to be reserved in the flight.
-    public boolean bookSeat(int bookedSeats){
-        if(enoughSeats(bookedSeats)) {
+    public boolean bookSeat(int bookedSeats) {
+        if(bookedSeats<=0){
+            throw new IllegalArgumentException("Cannot book 0 or negative seats");
+        }
+
+        if (enoughSeats(bookedSeats)) {
             seats = seats - bookedSeats;
             return true;
         }
@@ -91,33 +91,49 @@ public class Flight {
     public static int getFlightSequence() {
         return flightSequence;
     }
+
     public int getFlightID() {
         return flightID;
     }
+
     public Location getSource() {
         return source;
     }
+
     public Location getDestination() {
         return destination;
     }
+
     public int getSeats() {
         return seats;
     }
+
     public int getCost() {
         return cost;
     }
+
     public Duration getDuration() {
         return duration;
     }
+
     public String getArrivalTime() {
-        return arrivalDateandTime.getHour() + ":" +arrivalDateandTime.getMinute();
+        return arrivalDateandTime.getHour() + ":" + arrivalDateandTime.getMinute();
     }
+
     public String getDepartureTime() {
         return departureDateandTime.getHour() + ":" + departureDateandTime.getMinute();
     }
 
-    public ZonedDateTime getDepartureDateTime(){
+    public ZonedDateTime getDepartureDateTime() {
         return departureDateandTime;
+    }
+
+    //Error checking in constructor
+    private double errorCheck(double value, String message) {
+        if (value<=0) {
+            throw new IllegalArgumentException(message + " value cannot be 0 or negative");
+        }
+        return value;
     }
 
     @Override

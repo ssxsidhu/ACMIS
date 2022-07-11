@@ -1,11 +1,9 @@
 package comp3350.acmis.objects;
 
-
-import junit.framework.TestCase;
+import org.junit.Assert;
 import org.junit.Test;
-import java.util.ArrayList;
 
-public class UserTest extends TestCase {
+public class UserTest {
     @Test
     public void testFirstName() {
         System.out.println("Starting testUser: firstname");
@@ -14,27 +12,33 @@ public class UserTest extends TestCase {
 
         //null firstname
         try {
-            user = new User(null, "bar", User.Gender.OTHER , "myUsername", "fbp", "fb@gmail.com", "1111111111");
-            fail("Expected a NullPointerException");
-        } catch (NullPointerException unused) {}
+            user = new User(null, "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1111111111");
+            Assert.fail("Expected a NullPointerException");
+        } catch (NullPointerException unused) {
+        }
 
         //empty firstname
         try {
-            user = new User("", "bar", User.Gender.OTHER , "myUsername", "fbp", "fb@gmail.com", "1111111111");
-            fail("Expected a IllegalArgumentException");
-        } catch (IllegalArgumentException unused) {}
+            user = new User("", "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1111111111");
+            Assert.fail("Expected a IllegalArgumentException");
+        } catch (IllegalArgumentException unused) {
+        }
 
         //check only spaces
         try {
-            user = new User("      ", "bar", User.Gender.OTHER , "myUsername", "fbp", "fb@gmail.com", "1111111111");
-            fail("Expected a IllegalArgumentException");
-        } catch (IllegalArgumentException unused) {}
+            user = new User("      ", "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1111111111");
+            Assert.fail("Expected a IllegalArgumentException");
+        } catch (IllegalArgumentException unused) {
+        }
 
-        user = new User("foo", "bar", User.Gender.OTHER , "myUsername", "fbp", "fb@gmail.com", "1111111111");
-        assertEquals("foo", user.getFirstName());
+        user = new User("foo", "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1111111111");
+        Assert.assertEquals("foo", user.getFirstName());
 
-        user = new User("    foo     ", "bar", User.Gender.OTHER , "myUsername", "fbp", "fb@gmail.com", "1111111111");
-        assertEquals("foo", user.getFirstName());
+        user = new User("    foo     ", "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1111111111");
+        Assert.assertEquals("foo", user.getFirstName());
+
+        user = new User("MUSK", "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1111111111");
+        Assert.assertEquals("MUSK", user.getFirstName());
 
         System.out.println("Finished testUser: firstname");
     }
@@ -47,27 +51,30 @@ public class UserTest extends TestCase {
 
         //null lastname
         try {
-            user = new User("foo", null, User.Gender.MALE , "myUsername", "fbp", "fb@gmail.com", "1111111111");
-            fail("Expected a NullPointerException");
-        } catch (NullPointerException unused) {}
+            user = new User("foo", null, User.Gender.MALE, "myUsername", "fbp", "fb@gmail.com", "1111111111");
+            Assert.fail("Expected a NullPointerException");
+        } catch (NullPointerException unused) {
+        }
 
         //empty lastname
         try {
-            user = new User("foo", "", User.Gender.MALE , "myUsername", "fbp", "fb@gmail.com", "1111111111");
-            fail("Expected a IllegalArgumentException");
-        } catch (IllegalArgumentException unused) {}
+            user = new User("foo", "", User.Gender.MALE, "myUsername", "fbp", "fb@gmail.com", "1111111111");
+            Assert.fail("Expected a IllegalArgumentException");
+        } catch (IllegalArgumentException unused) {
+        }
 
         //check only spaces
         try {
-            user = new User("foo", "      ", User.Gender.MALE , "myUsername", "fbp", "fb@gmail.com", "1111111111");
-            fail("Expected a IllegalArgumentException");
-        } catch (IllegalArgumentException unused) {}
+            user = new User("foo", "      ", User.Gender.MALE, "myUsername", "fbp", "fb@gmail.com", "1111111111");
+            Assert.fail("Expected a IllegalArgumentException");
+        } catch (IllegalArgumentException unused) {
+        }
 
-        user = new User("foo", "bar", User.Gender.MALE , "myUsername", "fbp", "fb@gmail.com", "1111111111");
-        assertEquals("bar", user.getLastName());
+        user = new User("foo", "bar", User.Gender.MALE, "myUsername", "fbp", "fb@gmail.com", "1111111111");
+        Assert.assertEquals("bar", user.getLastName());
 
-        user = new User("    foo     ", "   bar     ", User.Gender.MALE , "myUsername", "fbp", "fb@gmail.com", "1111111111");
-        assertEquals("bar", user.getLastName());
+        user = new User("    foo     ", "   bar     ", User.Gender.MALE, "myUsername", "fbp", "fb@gmail.com", "1111111111");
+        Assert.assertEquals("bar", user.getLastName());
 
         System.out.println("Finished testUser: lastname");
     }
@@ -80,12 +87,13 @@ public class UserTest extends TestCase {
 
         //null gender
         try {
-            user = new User("foo", "bar", null , "myUsername", "fbp", "fb@gmail.com", "1111111111");
-            fail("Expected a NullPointerException");
-        } catch (NullPointerException unused) {}
+            user = new User("foo", "bar", null, "myUsername", "fbp", "fb@gmail.com", "1111111111");
+            Assert.fail("Expected a NullPointerException");
+        } catch (NullPointerException unused) {
+        }
 
-        user = new User("foo", "bar", User.Gender.FEMALE , "myUsername", "fbp", "fb@gmail.com", "1111111111");
-        assertEquals(User.Gender.FEMALE, user.getGender());
+        user = new User("foo", "bar", User.Gender.FEMALE, "myUsername", "fbp", "fb@gmail.com", "1111111111");
+        Assert.assertEquals(User.Gender.FEMALE, user.getGender());
 
         System.out.println("Finished testUser: gender");
     }
@@ -99,111 +107,108 @@ public class UserTest extends TestCase {
         //null username
         try {
             user = new User("foo", "bar", User.Gender.MALE, null, "fbp", "fb@gmail.com", "1111111111");
-            fail("Expected a NullPointerException");
+            Assert.fail("Expected a NullPointerException");
         } catch (NullPointerException unused) {
         }
 
         //empty username
         try {
             user = new User("foo", "bar", User.Gender.MALE, "", "fbp", "fb@gmail.com", "1111111111");
-            fail("Expected a IllegalArgumentException");
+            Assert.fail("Expected a IllegalArgumentException");
         } catch (IllegalArgumentException unused) {
         }
 
         //check only spaces
         try {
             user = new User("foo", "bar", User.Gender.MALE, "    ", "fbp", "fb@gmail.com", "1111111111");
-            fail("Expected a IllegalArgumentException");
+            Assert.fail("Expected a IllegalArgumentException");
         } catch (IllegalArgumentException unused) {
         }
 
         user = new User("foo", "bar", User.Gender.MALE, "myUsername", "fbp", "fb@gmail.com", "1111111111");
-        assertEquals("myUsername", user.getUsername());
+        Assert.assertEquals("myUsername", user.getUsername());
 
         user = new User("foo", "   bar     ", User.Gender.MALE, "     myUsername ", "fbp", "fb@gmail.com", "1111111111");
-        assertEquals("myUsername", user.getUsername());
+        Assert.assertEquals("myUsername", user.getUsername());
 
+        user = new User("foo", "   bar     ", User.Gender.MALE, "superDuperMonkey123", "fbp", "fb@gmail.com", "1111111111");
+        Assert.assertEquals("superDuperMonkey123", user.getUsername());
         System.out.println("Finished testUser: username");
     }
 
     @Test
-    public void testPhoneNumber(){
+    public void testPhoneNumber() {
         System.out.println("Starting testUser: phone number");
 
         User user;
 
         //null phone number
         try {
-            user = new User("foo", "bar", User.Gender.MALE , "myUsername", "fbp", "fb@gmail.com", null);
-            fail("Expected a NullPointerException");
-        } catch (NullPointerException unused) {}
+            user = new User("foo", "bar", User.Gender.MALE, "myUsername", "fbp", "fb@gmail.com", null);
+            Assert.fail("Expected a NullPointerException");
+        } catch (NullPointerException unused) {
+        }
 
         //check phone number length
         try {
-            user = new User("foo", "bar", User.Gender.MALE , "myUsername", "fbp", "fb@gmail.com", "123");
-            fail("Expected a IllegalArgumentException");
-        } catch (IllegalArgumentException unused) {}
+            user = new User("foo", "bar", User.Gender.MALE, "myUsername", "fbp", "fb@gmail.com", "123");
+            Assert.fail("Expected a IllegalArgumentException");
+        } catch (IllegalArgumentException unused) {
+        }
         try {
-            user = new User("foo", "bar", User.Gender.MALE , "myUsername", "fbp", "fb@gmail.com", "123456789123456789");
-            fail("Expected a IllegalArgumentException");
-        } catch (IllegalArgumentException unused) {}
+            user = new User("foo", "bar", User.Gender.MALE, "myUsername", "fbp", "fb@gmail.com", "123456789123456789");
+            Assert.fail("Expected a IllegalArgumentException");
+        } catch (IllegalArgumentException unused) {
+        }
+
+        //valid phone number
+        user = new User("foo", "bar", User.Gender.MALE, "superDuperMonkey123", "fbp", "fb@gmail.com", "1111111111");
+        Assert.assertEquals(1111111111, user.getPhoneNumber());
 
         System.out.println("Finished testUser: phone number");
     }
 
+    @Test
+    public void testEmail() {
+        System.out.println("Starting testUser:  email");
+        User user;
 
-//    @Test
-//    public void testGetBookings() {
-//        System.out.println("Starting testUser: get bookings");
-//
-//        //method is not have fully implemented yet, testing current version
-//        User user = new User("foo", "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1234567890");
-//        ArrayList<Booking> bookings = new ArrayList<Booking>();
-//
-//        assertNull(user.getMyBookings(bookings));
-//
-//        try {
-//            user.getMyBookings(null);
-//            fail("Expected a NullPointerException");
-//        } catch (NullPointerException unused) {}
-//
-//        System.out.println("Finished testUser: get bookings");
-//    }
-//
-//    @Test
-//    public void testAddRemoveBooking() {
-//        System.out.println("Starting testUser: add/remove booking");
-//
-//        User user = new User("foo", "bar", User.Gender.OTHER, "myUsername", "fbp", "fb@gmail.com", "1234567890");
-//        Booking booking1 = new Booking(user, new Route());
-//        Booking booking2 = new Booking(user, new Route());
-//
-//        //test initial size and after 2 inserts size
-//        assertEquals(0, user.getBookingsTemporaryTest().size());
-//        user.addBooking(booking1);
-//        user.addBooking(booking2);
-//        assertEquals(2, user.getBookingsTemporaryTest().size());
-//
-//        //test size after removing 1
-//        user.removeBooking(booking1.getBookingId());
-//        assertEquals(1, user.getBookingsTemporaryTest().size());
-//
-//        //test the remaining bookingID matches
-//        assertEquals(booking2.getBookingId(), user.getBookingsTemporaryTest().get(0).getBookingId());
-//
-//        try {
-//            user.addBooking(null);
-//            fail("Expected a NullPointerException");
-//        } catch (NullPointerException unused) {}
-//
-//        try {
-//            user.removeBooking(-1);
-//            fail("Expected a NegativeArraySizeException");
-//        } catch (NegativeArraySizeException unused) {}
-//
-//        //no booking should have this high of an ID
-//        assertFalse(user.removeBooking(Integer.MAX_VALUE));
-//
-//        System.out.println("Finished testUser: add/remove booking");
-//    }
+        //null email
+        try {
+            user = new User("foo", "bar", User.Gender.MALE, "myUsername", "fbp", null, "1111111111");
+            Assert.fail("Expected a NullPointerException");
+        } catch (NullPointerException unused) {
+        }
+
+        //empty email
+        try {
+            user = new User("foo", "bar", User.Gender.MALE, "myUsername", "fbp", "", null);
+            Assert.fail("Expected a NullPointerException");
+        } catch (IllegalArgumentException unused) {
+        }
+
+        //empty email, only spaces found in the email
+        try {
+            user = new User("foo", "bar", User.Gender.MALE, "      ", "fbp", "     ", null);
+            Assert.fail("Expected a NullPointerException");
+        } catch (IllegalArgumentException unused) {
+        }
+
+        //the email is invalid, does not contain the @ symbol
+        try {
+            user = new User("foo", "bar", User.Gender.MALE, "      ", "fbp", "superDuperMonkey.com", null);
+            Assert.fail("Expected a NullPointerException");
+        } catch (IllegalArgumentException unused) {
+        }
+
+        //a valid way of storing the email
+        user = new User("foo", "bar", User.Gender.MALE, "superDuperMonkey123", "fbp", "fb@gmail.com", "1111111111");
+        Assert.assertEquals("fb@gmail.com", user.getEmail());
+
+        System.out.println("Finished testUser: email");
+
+
+    }
+
+
 }

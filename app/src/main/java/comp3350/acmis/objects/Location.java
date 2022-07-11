@@ -47,4 +47,18 @@ public class Location  implements Serializable {
         }
         return Objects.requireNonNull(value, message + " cannot be null").trim();
     }
+
+    //equals method for testing purposes
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Location)) return false;
+        Location location = (Location) o;
+        return Objects.equals(getCity(), location.getCity()) && Objects.equals(getZoneName(), location.getZoneName()) && Objects.equals(getCountry(), location.getCountry()) && Objects.equals(getAirport(), location.getAirport());
+    }
+
+
 }

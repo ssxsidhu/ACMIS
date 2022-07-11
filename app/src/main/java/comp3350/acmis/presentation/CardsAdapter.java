@@ -2,19 +2,15 @@ package comp3350.acmis.presentation;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import java.util.ArrayList;
-import java.util.Locale;
 
 import comp3350.acmis.R;
 import comp3350.acmis.objects.Booking;
@@ -56,10 +52,10 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
     }
 
 
-    public void resize(int imageSource){
+    public void resize(int imageSource) {
 
 //        Uri uri = Uri.parse(imageUri);
-        icon = BitmapFactory.decodeResource(context.getResources(),imageSource);
+        icon = BitmapFactory.decodeResource(context.getResources(), imageSource);
 
     }
 
@@ -74,7 +70,8 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
     // your views such as TextView and Imageview.
     public class Viewholder extends RecyclerView.ViewHolder {
         private ListView listView;
-//        ImageView imageView;
+
+        //        ImageView imageView;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 //            imageView= itemView.findViewById(R.id.card_image);
