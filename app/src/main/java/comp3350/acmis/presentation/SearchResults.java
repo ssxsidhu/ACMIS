@@ -137,6 +137,7 @@ public class SearchResults extends AppCompatActivity {
         selectedDestination = (Location) i.getSerializableExtra("selectedDestination");
         departDate = (LocalDate) i.getSerializableExtra("departDate");
         returnDate = (LocalDate) i.getSerializableExtra("returnDate");
+        System.out.println(departDate+", "+returnDate);
         selectedDepartRoute = (Route) i.getSerializableExtra("selectedDepartRoute");
         showReturnFlightRslts = i.getBooleanExtra("showReturnView", false);
     }

@@ -19,7 +19,7 @@
             app:subtitleTextColor="@color/design_default_color_background"
             app:subtitleCentered="true"
             app:subtitle="subtitle"
-            app:subtitleTextAppearance="?attr/textAppearanceBody1"
+            app:subtitleTextAppearance="?attr/textAppearanceTitleLarge"
             app:navigationIconTint="@color/design_default_color_background"
             app:navigationIcon="@drawable/ic_round_close_24" />
 
@@ -38,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
             android:text="  Total Duration:"
             app:drawableLeftCompat="@drawable/ic_outline_timer_24" />
 
@@ -45,6 +46,7 @@
             android:id="@+id/total_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="5dp"
             android:text="Duration"

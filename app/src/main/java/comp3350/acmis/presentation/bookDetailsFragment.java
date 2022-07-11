@@ -94,7 +94,8 @@ public class bookDetailsFragment extends Fragment {
 
         materialDatePicker.addOnPositiveButtonClickListener(selection -> {
             pickDepart.setText(String.format(Locale.CANADA, "Depart %s", materialDatePicker.getHeaderText()));
-            departDate = Instant.ofEpochMilli(selection).atZone(ZoneId.systemDefault()).toLocalDate();
+            departDate = Instant.ofEpochMilli(selection).atZone(ZoneId.of("America/Winnipeg")).toLocalDate();
+            System.out.println("in book fragment"+departDate+", "+returnDate);
             pickReturn.setEnabled(true);
             if(returnDate!=null && returnDate.isBefore(departDate)){
                 returnDate = null;
