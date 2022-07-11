@@ -31,13 +31,12 @@ public class BookingTest {
         booking2 = null;
     }
 
-
     @Test
     public void testBooking() {
         System.out.println("Starting testBooking: booking");
 
         setup();
-
+        //booking id is unique
         Assert.assertTrue(booking1.getBookingId() != booking2.getBookingId());
 
         Assert.assertEquals(user, booking1.getBooker());

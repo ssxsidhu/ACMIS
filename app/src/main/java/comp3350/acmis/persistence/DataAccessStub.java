@@ -185,8 +185,8 @@ public class DataAccessStub implements DataAccess {
 
 
 
-        bookingManager.createBooking("braico", new Route(winToMn));
-        bookingManager.createBooking("braico", new Route(torToVan));
+        bookingManager.createBooking("braico", new Route(winToMn),2);
+        bookingManager.createBooking("braico", new Route(torToVan),2);
 
 
         System.out.println("Opened " +dbType +" database " +dbName);
@@ -220,6 +220,7 @@ public class DataAccessStub implements DataAccess {
         return null;
     }
 
+
     //to get object of User from username
     public User getUserObject(String username) {
         User result = null;
@@ -243,4 +244,5 @@ public class DataAccessStub implements DataAccess {
         else
             return null;
     }
+
 }

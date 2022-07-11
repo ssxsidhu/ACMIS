@@ -74,7 +74,7 @@ public class FlightTest {
         //valid date and time departure
         setUp();
         //time only
-        Assert.assertEquals("7:30", testFlight.getDepartureTime());
+        Assert.assertTrue( testFlight.getDepartureDateTime()!=null);
         tearDown();
     }
 
@@ -84,7 +84,7 @@ public class FlightTest {
         try {
             testFlight = new Flight(LocA, LocB, null, 250, 2.5, 500);
             //departure date and time is null , so that means arrival date and time will also be null
-            Assert.assertNull(testFlight.getArrivalTime());
+            Assert.assertNull(testFlight.getArrivalDateTime());
             Assert.fail("Expected a NullPointerException");
         } catch (NullPointerException unused) {
         }
@@ -92,7 +92,7 @@ public class FlightTest {
         //valid date and time departure
         setUp();
         //time only
-        Assert.assertEquals("10:0", testFlight.getArrivalTime());
+        Assert.assertTrue(testFlight.getArrivalDateTime()!=null);
 
         tearDown();
     }

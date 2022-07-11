@@ -21,7 +21,16 @@ public class Booking {
     public Booking(User booker, Route route) {
         this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
         this.route = Objects.requireNonNull(route, "Route cannot be null");
-        numPassengers = 1;
+
+        bookingId = bookingSeq;
+        bookingSeq++;
+    }
+
+    // Constructor with number of passengers.
+    public Booking(User booker, Route route, int numP) {
+        this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
+        this.route = Objects.requireNonNull(route, "Route cannot be null");
+        numPassengers = numP;
         bookingId = bookingSeq;
         bookingSeq++;
     }
