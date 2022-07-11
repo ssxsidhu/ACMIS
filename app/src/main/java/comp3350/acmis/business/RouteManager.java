@@ -72,10 +72,11 @@ public class RouteManager {
         return null;
     }
 
-    // PRIVATE HELPER METHOD
-    private void depthFirst(MyGraph graph, Location source, Location dest, ArrayList<Location> visited, ArrayList<Location> path) {
+    // PRIVATE HELPER METHOD        //https://thealgorists.com/Algo/AllPathsBetweenTwoNodes
+    private void depthFirst(MyGraph graph, Location source, Location dest, ArrayList<Location> visited, ArrayList<Location> path, ArrayList<ArrayList<Location>> allPaths) {
 
         if(source.equals(dest)) {
+            allPaths.add(path);
             return;
         }
 
@@ -88,7 +89,7 @@ public class RouteManager {
             if(!visited.contains(neighbors.get(i))) {
 
                 path.add(neighbors.get(i));
-                depthFirst(graph, source, dest, visited, path);
+                depthFirst(graph, neighbors.get(i), dest, visited, path, allPaths);
                 path.remove(neighbors.get(i));
             }
         }
