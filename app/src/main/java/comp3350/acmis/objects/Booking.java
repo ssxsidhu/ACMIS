@@ -4,6 +4,7 @@
 
 package comp3350.acmis.objects;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Booking {
@@ -13,23 +14,31 @@ public class Booking {
 
     // Instance Variable
     private User booker;                    // Person Booking the flight
-    private Route route;                    // The Route being taken for reaching from A->B
+    private Route routeDepart,routeReturn = null;                    // The Route being taken for reaching from A->B
     private int bookingId;
     private int numPassengers;
 
     // Constructor()
-    public Booking(User booker, Route route) {
+    public Booking(User booker, Route routeDepart) {
         this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
-        this.route = Objects.requireNonNull(route, "Route cannot be null");
-
+        this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
         bookingId = bookingSeq;
         bookingSeq++;
     }
 
     // Constructor with number of passengers.
-    public Booking(User booker, Route route, int numP) {
+    public Booking(User booker, Route routeDepart, int numP) {
         this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
-        this.route = Objects.requireNonNull(route, "Route cannot be null");
+        this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
+        numPassengers = numP;
+        bookingId = bookingSeq;
+        bookingSeq++;
+    }
+
+    public Booking(User booker, Route routeDepart, Route routeReturn, int numP) {
+        this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
+        this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
+        this.routeReturn = routeReturn;
         numPassengers = numP;
         bookingId = bookingSeq;
         bookingSeq++;
@@ -55,8 +64,16 @@ public class Booking {
         return bookingId;
     }
 
-    public Route getRoute() {
-        return route;
+    public Route getRouteDepart() {
+        return routeDepart;
+    }
+
+    public boolean checkForReturn(){
+        return routeReturn!=null;
+    }
+
+    public Route getRouteReturn(){
+        return  routeReturn;
     }
 
     public int getNumPassengers() {

@@ -3,6 +3,7 @@ package comp3350.acmis.presentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,7 +40,7 @@ public class SearchResults extends AppCompatActivity {
         setContentView(R.layout.activity_search_results);
 
         receiveData();
-        setAppBarLayout();
+
         Utils.setStatusBarColor(getWindow(), getBaseContext());
 
         numOfPassengers=1;
@@ -52,18 +53,20 @@ public class SearchResults extends AppCompatActivity {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
             final RecyclerView recyclerView = this.findViewById(R.id.list_search_results);
             recyclerView.setLayoutManager(linearLayoutManager);
-            recyclerView.setAdapter(new SearchResultsCardsAdapter(getBaseContext(), flightsAvailable, new SearchResultsCardsAdapter.OnItemClickListener() {
+            recyclerView.setAdapter(new SearchResultsCardsAdapter(flightsAvailable,false,new SearchResultsCardsAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(Route item) {
                     Intent i = new Intent(getBaseContext(), RouteDetails.class);
                     i.putExtra("selectedRoute", item);
                     i.putExtra("returnDate",returnDate);
                     i.putExtra("selectedDepartRoute",selectedDepartRoute);
+                    i.putExtra("numPassengers",getIntent().getIntExtra("numPassengers",1));
                     startActivity(i);
                 }
             }));
         }
 
+        setAppBarLayout();
         TextView searchTitle = findViewById(R.id.search_results_title);
         TextView searchLocationTitle = findViewById(R.id.search_results_location_title);
 
@@ -81,7 +84,17 @@ public class SearchResults extends AppCompatActivity {
     private void setAppBarLayout() {
         MaterialToolbar materialToolbar = findViewById(R.id.search_results_top_app_bar);
         NestedScrollView nestedScrollView = findViewById(R.id.search_results_scroll);
-        materialToolbar.setSubtitle(selectedDeparture.getAirport().toUpperCase(Locale.CANADA) + " ->- " + selectedDestination.getAirport().toUpperCase(Locale.CANADA));
+        nestedScrollView.getParent().requestChildFocus(nestedScrollView, nestedScrollView);
+        TextView searchDepartAirport = findViewById(R.id.search_depart_airport);
+        TextView searchDestAirport = findViewById(R.id.search_arrive_airport);
+        ImageView searchDirection = findViewById(R.id.search_direction_image);
+
+        searchDepartAirport.setText(selectedDeparture.getAirport());
+        searchDestAirport.setText(selectedDestination.getAirport());
+
+        if(returnDate!=null)
+            searchDirection.setImageResource(R.drawable.ic_round_u_turn_right_24);
+
         materialToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

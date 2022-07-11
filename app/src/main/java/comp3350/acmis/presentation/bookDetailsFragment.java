@@ -200,6 +200,7 @@ public class bookDetailsFragment extends Fragment {
         i.putExtra("selectedDestination", selectedDestination);
         i.putExtra("departDate",departDate);
         i.putExtra("returnDate",returnDate);
+        i.putExtra("numPassengers",selectedNumPassengers);
         requireActivity().startActivity(i);
     }
 }

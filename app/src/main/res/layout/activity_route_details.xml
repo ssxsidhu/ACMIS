@@ -70,7 +70,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
-        style="@style/TextAppearance.AppCompat.Title"
+        style="@style/TextAppearance.Material3.HeadlineMedium"
         android:text="$Cost"/>
 
     <Button
@@ -78,6 +78,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.3"
+        android:textSize="20sp"
         android:text="@string/continue_button" />
     </LinearLayout>
 

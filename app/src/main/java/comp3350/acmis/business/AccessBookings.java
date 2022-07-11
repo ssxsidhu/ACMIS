@@ -16,7 +16,6 @@ import comp3350.acmis.persistence.DataAccess;
 
 public class AccessBookings {
     private DataAccess dataAccess;
-    private List<Booking> userBookings;
     private String username;
 
     public AccessBookings(String user) {
@@ -36,7 +35,7 @@ public class AccessBookings {
         Collections.sort(myBookings, new Comparator<Booking>() {
             @Override
             public int compare(Booking booking, Booking t1) {
-                return booking.getRoute().getRoute().get(0).getDepartureDateTime().compareTo(t1.getRoute().getRoute().get(0).getDepartureDateTime());
+                return booking.getRouteDepart().getRoute().get(0).getDepartureDateTime().compareTo(t1.getRouteDepart().getRoute().get(0).getDepartureDateTime());
             }
         });
         return result;

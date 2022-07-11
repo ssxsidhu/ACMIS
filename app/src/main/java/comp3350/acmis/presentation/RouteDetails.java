@@ -64,6 +64,7 @@ public class RouteDetails extends AppCompatActivity {
                     if(returnDate==null) {
                         Intent i = new Intent(getBaseContext(), OrderSummary.class);
                         i.putExtra("selectedDepartRoute", route);
+                        i.putExtra("numPassengers",getIntent().getIntExtra("numPassengers",1));
                         startActivity(i);
                     }
                     else if(selectedDepartRoute == null) {
@@ -76,12 +77,14 @@ public class RouteDetails extends AppCompatActivity {
                         i.putExtra("selectedDeparture",routeDetails.getConnectDestination());
                         i.putExtra("returnDate",returnDate);
                         i.putExtra("selectedDepartRoute",route);
+                        i.putExtra("numPassengers",getIntent().getIntExtra("numPassengers",1));
                         startActivity(i);
                     }
                     else{
                         Intent i = new Intent(getBaseContext(), OrderSummary.class);
                         i.putExtra("selectedDepartRoute", selectedDepartRoute);
                         i.putExtra("selectedReturnRoute",route);
+                        i.putExtra("numPassengers",getIntent().getIntExtra("numPassengers",1));
                         startActivity(i);
                     }
                 }

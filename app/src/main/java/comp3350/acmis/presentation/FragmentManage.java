@@ -10,11 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
+
 import java.util.ArrayList;
 
 import comp3350.acmis.R;
 import comp3350.acmis.business.AccessBookings;
 import comp3350.acmis.objects.Booking;
+import comp3350.acmis.objects.Flight;
+import comp3350.acmis.objects.Location;
+import comp3350.acmis.objects.Route;
+import comp3350.acmis.objects.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,12 +81,21 @@ public class FragmentManage extends Fragment {
         myBookingList = new ArrayList<>();
         accessBookings = new AccessBookings("braico");
         accessBookings.getMyBookings(myBookingList);
-        CardsAdapter adapter = new CardsAdapter(this,myBookingList);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
 
-//        final ListView listView = (ListView) view.findViewById(R.id.list_items_manage_tab);
+//        User defaultUser = new User("John","Braico", User.Gender.MALE,"braico","somePassword","jbraico@cs.umanitoba.ca","2041234567");
+//        Location vancouver = new Location("Vancouver", ZoneId.of("America/Vancouver"), "Canada","YVR");
+//        Location calgary = new Location("Calgary", ZoneId.of("America/Edmonton"), "Canada","YYC");
+//        Flight vanToCal = new Flight(vancouver,calgary, ZonedDateTime.of(2022,7,29,20,50,0,0,vancouver.getZoneName()), 200, 1.4, 220);
+//        Flight calToVan = new Flight(calgary,vancouver, ZonedDateTime.of(2022,10,2,2,0,0,0,calgary.getZoneName()), 200, 1.4, 220);
+//
+//        Route r1 = new Route(vanToCal);
+//        Route r2 = new Route(calToVan);
+//
+//        myBookingList.add(new Booking(defaultUser,r1,r2,2));
+
+        CardsAdapter adapter = new CardsAdapter(requireActivity().getBaseContext(), myBookingList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         RecyclerView cards = view.findViewById(R.id.list_items_manage_tab);
-//        listView.setAdapter(adapter);
         cards.setLayoutManager(linearLayoutManager);
         cards.setAdapter(adapter);
     }
