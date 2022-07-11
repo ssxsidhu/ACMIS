@@ -1,6 +1,5 @@
 package comp3350.acmis.presentation;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -118,7 +117,6 @@ public class FragmentBook extends Fragment {
         chooseDestination.setOnClickListener(chooseDestinationListener);
 
 
-
         LinearLayout linearLayoutDeparture = view.findViewById(R.id.layout_departure);
         LinearLayout linearLayoutDestination = view.findViewById(R.id.layout_destination);
         arrow = view.findViewById(R.id.arrow_image);
@@ -145,7 +143,7 @@ public class FragmentBook extends Fragment {
 //            linearLayoutDeparture.setVisibility(View.VISIBLE);
 //            arrow.setVisibility(View.VISIBLE);
             chooseDestination.setEnabled(true);
-            if(!useFragmentResults(view,selectedDeparture,chooseDeparture,linearLayoutDeparture,args))
+            if (!useFragmentResults(view, selectedDeparture, chooseDeparture, linearLayoutDeparture, args))
                 chooseDestinationListener.onClick(view);
 
         });
@@ -161,22 +159,21 @@ public class FragmentBook extends Fragment {
 //                bookDetailsFragment.setArguments(args);
 //                callFragment(bookDetailsFragment);
 //            }
-            useFragmentResults(view,selectedDestination,chooseDestination,linearLayoutDestination,args);
+            useFragmentResults(view, selectedDestination, chooseDestination, linearLayoutDestination, args);
         });
 
     }
 
-    private Boolean useFragmentResults(View view,Location location,ExtendedFloatingActionButton button,LinearLayout linearLayout,Bundle args){
+    private Boolean useFragmentResults(View view, Location location, ExtendedFloatingActionButton button, LinearLayout linearLayout, Bundle args) {
         TextView setAirportDeparture = view.findViewById(R.id.airport_departure);
         TextView setCityDeparture = view.findViewById(R.id.city_departure);
         TextView setAirportDestination = view.findViewById(R.id.airport_destination);
         TextView setCityDestination = view.findViewById(R.id.city_destination);
 
-        if(location == selectedDeparture){
+        if (location == selectedDeparture) {
             setAirportDeparture.setText(location.getAirport());
             setCityDeparture.setText(String.format("%s, %s", location.getCity(), location.getCountry()));
-        }
-        else{
+        } else {
             setAirportDestination.setText(location.getAirport());
             setCityDestination.setText(String.format("%s, %s", location.getCity(), location.getCountry()));
         }
@@ -190,8 +187,7 @@ public class FragmentBook extends Fragment {
             bookDetailsFragment.setArguments(args);
             callFragment(bookDetailsFragment);
             return true;
-        }
-        else
+        } else
             return false;
     }
 

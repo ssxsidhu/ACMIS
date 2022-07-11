@@ -2,7 +2,6 @@ package comp3350.acmis.presentation;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.view.View;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
@@ -12,12 +11,12 @@ import comp3350.acmis.R;
 
 public class Messages {
 
-    public static void snackBar(View view,String message){
+    public static void snackBar(View view, String message) {
         Snackbar mySnackbar = Snackbar.make(view, message, BaseTransientBottomBar.LENGTH_LONG);
         mySnackbar.show();
     }
 
-    public static void noFlightsMessage(Activity owner){
+    public static void noFlightsMessage(Activity owner) {
         owner.findViewById(R.id.no_results_found).setVisibility(View.VISIBLE);
         owner.findViewById(R.id.header_title_book_tab).setVisibility(View.INVISIBLE);
     }

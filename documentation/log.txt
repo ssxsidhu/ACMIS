@@ -61,10 +61,32 @@ Group Meetings:
 		- Discussed testing
 		- Everyone in attendance
 	June 16, 2022 : 2 Hours
-		- FInal testing
+		- Final testing
 		- Braden, Sahilpreet, and Vrushil in attendance
 		
 DEVELOPER TASKS
 ===============
-June 23rd, 2022 : 3-4 hours, Figuring out how to calculate duration from one point to another in different timezones. Implemented the date and time code in the flight class. Changed All the flight instances to use the zoned date and time. -Vrushil 
-July 7th, 2022  : 7 hours, refactored all the code. Ensured only one consistent coding style in all the files. Remove unused files and commented out code. Added more testing in User, Flight and location classes. Changed the test suite from junit 3 to junit 4. -Vrushil
+June 18th, 2022 : 10 hours, Sahilpreet
+   -Changed the ui for input of source location and destination location
+   -Changed the front animation
+   -Made the transition effect from front page to main activity
+   -Changed the app icon
+   
+June 23rd, 2022 : 3-4 hours, Vrushil
+   -Figuring out how to calculate duration from one point to another in different timezones. 
+   -Implemented the date and time code in the flight class. 
+   -Changed All the flight instances to use the zoned date and time.  
+   
+June 25th, 2022 : 4 hours, Sahilpreet
+   -Added a new fragment for getting the details of the flight from the user which includes:
+   		-Departure date the user is travelling on
+		-Return Date
+		-Number of passengers the user wants to add
+		
+July 7th, 2022  : 7 hours, Vrushil
+   -Refactored all the code.
+   -Ensured only one consistent coding style in all the files. 
+   -Remove unused files and commented out code. 
+   -Added more testing in User, Flight and location classes. 
+   -Changed the test suite from junit 3 to junit 4. 
+ 
