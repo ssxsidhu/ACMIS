@@ -1,81 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.SearchResults"
+    android:background="@color/md_theme_dark_onSurface"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/tool_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.ACMIS">
 
-        <TextView
-            android:id="@+id/title"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/search_results_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:minHeight="?actionBarSize"
-            android:textSize="25sp"
-            android:padding="@dimen/appbar_padding"
-            android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+            android:layout_height="wrap_content">
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/window_seat" />
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/search_results_title_layout"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
 
-    <TextView
-        android:id="@+id/header_title_book_tab"
-        android:layout_width="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="80dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/search_results_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.8"
+                    android:text="Title"
+                    android:textAppearance="?attr/textAppearanceHeadline3"
+                    android:textColor="@color/design_default_color_background" />
+
+                <TextView
+                    android:id="@+id/search_results_location_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:text="Location title"
+                    android:textAppearance="?attr/textAppearanceTitleLarge"
+                    android:textColor="@color/design_default_color_background" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/search_results_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/search_results_title_layout"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
+                android:text="@string/search_results"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <!--    <View-->
+            <!--        android:id="@+id/separator"-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="1dp"-->
+            <!--        android:layout_marginTop="3dp"-->
+            <!--        android:layout_below="@id/header_title_book_tab"-->
+            <!--        android:background="@android:color/darker_gray" />-->
+
+            <TextView
+                android:id="@+id/no_results_found"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/search_results_title_layout"
+                android:gravity="center"
+                android:text="@string/no_flights_found"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_search_results"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:layout_below="@id/search_results_text"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:choiceMode="singleChoice" />
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/search_results_top_app_bar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="@string/search_results"
-        android:textSize="25sp" />
+        app:layout_scrollFlags="noScroll"
+        app:navigationIcon="@drawable/ic_round_chevron_left_24"
+        app:navigationIconTint="@color/design_default_color_background"
+        app:subtitleCentered="true"
+        app:subtitleTextAppearance="?attr/textAppearanceTitleLarge"
+        app:subtitleTextColor="@color/design_default_color_background">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="14dp"
+            android:orientation="horizontal">
 
-    <View
-        android:id="@+id/separator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="3dp"
-        android:layout_below="@id/header_title_book_tab"
-        android:background="@android:color/darker_gray" />
+            <TextView
+                android:id="@+id/search_depart_airport"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:gravity="end"
+                android:textColor="@color/md_theme_dark_onSurface"
+                android:layout_marginEnd="5dp"
+                android:textSize="22sp"
+                android:text="City depart" />
 
-    <TextView
-        android:id="@+id/no_results_found"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/no_flights_found"
-        android:textSize="40sp"
-        android:visibility="invisible"
-        android:gravity="center"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:textStyle="bold"/>
-</RelativeLayout>
+            <ImageView
+                android:id="@+id/search_direction_image"
+                android:layout_width="wrap_content"
+                android:layout_weight="0"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_round_arrow_forward_24"
+                app:tint="@color/md_theme_dark_onSurface" />
 
-    <ListView
-        android:id="@+id/list_items_book_tab"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_weight="1"
-        android:choiceMode="singleChoice" />
+
+            <TextView
+                android:id="@+id/search_arrive_airport"
+                android:layout_weight="0.3"
+                android:gravity="start"
+                android:textColor="@color/md_theme_dark_onSurface"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="22sp"
+                android:text="City dest" />
+
+        </LinearLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <Button
         android:id="@+id/book_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/search_results_scroll"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:padding="@dimen/activity_horizontal_margin"
         android:text="@string/book_flight"
-        android:enabled="false"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:visibility="gone"/>
 
-
-</LinearLayout>
+</RelativeLayout>
