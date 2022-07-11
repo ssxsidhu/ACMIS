@@ -33,6 +33,9 @@ public class SearchResults extends AppCompatActivity {
 
         Utils.setStatusBarColor(getWindow(), getBaseContext());
         setAppBarLayout();
+
+
+
         //checks if there are flights available
         String checkFlights = bookingManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable);
         if (checkFlights != null) {

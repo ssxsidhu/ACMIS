@@ -21,7 +21,7 @@ public class Flight implements Serializable {
     private static int flightSequence = 1;
 
     // Instance Variables
-    private int flightID;
+    private int flightId;
     private Location source;
     private Location destination;
     private ZonedDateTime departureDateandTime;
@@ -41,7 +41,7 @@ public class Flight implements Serializable {
         this.cost = (int) errorCheck(cost,"Cost");
         this.source = Objects.requireNonNull(source, "Source cannot be null");
         this.destination = Objects.requireNonNull(destination, "Destination cannot be null");
-        this.flightID = flightSequence;
+        this.flightId = flightSequence;
         flightSequence++;
     }
 
@@ -93,8 +93,8 @@ public class Flight implements Serializable {
         return flightSequence;
     }
 
-    public int getFlightID() {
-        return flightID;
+    public int getFlightId() {
+        return flightId;
     }
 
     public Location getSource() {
@@ -134,7 +134,7 @@ public class Flight implements Serializable {
     @Override
     public String toString() {
         return "Flight{" +
-                "flightID=" + flightId +
+                "flightId=" + flightId +
                 ", source=" + source.getCity() +
                 ", destination=" + destination.getCity() +
                 ", departureDateandTime=" + departureDateandTime.toString() +
