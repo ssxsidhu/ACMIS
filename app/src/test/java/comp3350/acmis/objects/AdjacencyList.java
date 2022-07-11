@@ -4,11 +4,12 @@ import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AdjacencyList {
 
-    @Before
+    @BeforeClass
     public void setup(){
 
     }
