@@ -36,7 +36,7 @@ public class RouteDetails extends AppCompatActivity {
         totalDuration.setText(routeDetails.getRouteTotalDuration());
 
 
-        setStatusBarColor();
+        Utils.setStatusBarColor(getWindow(),getBaseContext());
         MaterialToolbar materialToolbar = findViewById(R.id.details_top_app_bar);
         materialToolbar.setSubtitle("Departing "+routeDetails.getConnectFormattedDepartureDate());
 
@@ -65,10 +65,5 @@ public class RouteDetails extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void setStatusBarColor(){
-        Window window = this.getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.setStatusBarColor(ContextCompat.getColor(getBaseContext(),R.color.md_theme_dark_shadow));
-    }
+
 }
