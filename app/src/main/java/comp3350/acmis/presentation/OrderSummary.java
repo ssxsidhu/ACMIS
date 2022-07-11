@@ -28,6 +28,7 @@ public class OrderSummary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
         setAppBarLayout();
+        Utils.setStatusBarColor(getWindow(),getBaseContext());
         orderRoute.add((Route) getIntent().getSerializableExtra("selectedDepartRoute"));
         Route returnRoute = (Route) getIntent().getSerializableExtra("selectedReturnRoute");
         if(returnRoute!=null)
@@ -39,7 +40,7 @@ public class OrderSummary extends AppCompatActivity {
         TextView routeLocationTitle  = findViewById(R.id.search_results_location_title);
 
         //set textview showing search results to invisible
-        findViewById(R.id.search_results_title).setVisibility(View.INVISIBLE);
+        findViewById(R.id.search_results_text).setVisibility(View.INVISIBLE);
 
         routeLocationTitle.setText(String.format(Locale.CANADA,"From %s", journeyDetails.getConnectSource().getCity()));
 

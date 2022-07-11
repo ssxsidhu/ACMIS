@@ -36,7 +36,7 @@
                 <!--                    android:choiceMode="none"/>-->
 
 
-            <androidx.recyclerview.widget.RecyclerView
+            <ListView
                 android:id="@+id/card_view_list"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
