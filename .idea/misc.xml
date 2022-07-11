@@ -5,16 +5,23 @@
       <map>
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.161" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/background_row_item.xml" value="0.1" />
+        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/bg_horizontal_dotted_line.xml" value="0.174" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/custom_popup_background.xml" value="0.1" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/dot_shape.xml" value="0.174" />
+        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/dotted_line_vertical.xml" value="0.174" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_direct_flight.xml" value="0.5" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_launcher_background.xml" value="0.161" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_outline_timer_24.xml" value="0.174" />
+        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_round_airplanemode_active_24.xml" value="0.174" />
+        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_round_chevron_left_24.xml" value="0.174" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_round_search_24.xml" value="0.1" />
+        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_round_texture_24.xml" value="0.174" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_round_today_24.xml" value="0.161" />
+        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_round_u_turn_right_24.xml" value="0.174" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/no_stop_shape.xml" value="0.174" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/one_stop_shape.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/rounded_corner.xml" value="0.174" />
+        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/rounded_corner_with_dotted_line.xml" value="0.174" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/splash.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/three_stop_shape.xml" value="0.174" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/two_stop_shape.xml" value="0.174" />
@@ -26,7 +33,7 @@
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/activity_bottom_tabbed.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/activity_front_page.xml" value="0.22" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/activity_route_details.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/activity_search_results.xml" value="0.3025" />
+        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/activity_search_results.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/bottom_tab_activity.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/bottom_tabbed_activity.xml" value="0.1796875" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/card_view.xml" value="0.3333333333333333" />
@@ -49,6 +56,7 @@
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/row.xml" value="0.359375" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/search_results_card_view.xml" value="0.4494047619047619" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1796875" />
+        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/menu/selection_navigation.xml" value="0.6666666666666666" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.161" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>

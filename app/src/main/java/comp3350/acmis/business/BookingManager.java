@@ -107,7 +107,7 @@ public class BookingManager {
 
 
     //creating booking
-    public String createBooking(String username, Route route, int numPassengers) {
+    public String createBooking(String username, Route departRoute,Route returnRoute, int numPassengers) {
         User bookerObject = data.getUserObject(Objects.requireNonNull(username));
         ArrayList<Booking> userBookings = new ArrayList<>();
         Booking newBooking;
@@ -115,14 +115,18 @@ public class BookingManager {
         //get the user's all the bookings
         //check if the flight is already booked
         //add a booking only if the flight is not booked already
-        if (bookerObject != null && route != null) {
+        if (bookerObject != null && departRoute != null) {
             data.getUserBookings(bookerObject,userBookings);
             for (int i = 0; i < userBookings.size(); i++) {
-                if (route.getRoute().get(0).getFlightId() == userBookings.get(i).getRoute().getRoute().get(0).getFlightId()) {
+                if (departRoute.getRoute().get(0).getFlightId() == userBookings.get(i).getRouteDepart().getRoute().get(0).getFlightId()) {
                     return "You have already booked this flight for your account";
                 }
             }
-            newBooking = new Booking(bookerObject, route,numPassengers);
+
+            if(returnRoute == null)
+            newBooking = new Booking(bookerObject, departRoute,numPassengers);
+            else
+                newBooking = new Booking(bookerObject,departRoute,returnRoute,numPassengers);
             //adding the booking to the master booking.
             data.addBooking(newBooking);
         }

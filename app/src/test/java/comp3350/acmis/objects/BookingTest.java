@@ -40,7 +40,7 @@ public class BookingTest {
         Assert.assertTrue(booking1.getBookingId() != booking2.getBookingId());
 
         Assert.assertEquals(user, booking1.getBooker());
-        Assert.assertEquals(route, booking1.getRoute());
+        Assert.assertEquals(route, booking1.getRouteDepart());
 
         booking1.setNewUser(user2);
         Assert.assertEquals(user2, booking1.getBooker());

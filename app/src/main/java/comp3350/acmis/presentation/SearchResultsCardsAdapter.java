@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -19,20 +21,22 @@ import comp3350.acmis.objects.Route;
 
 public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResultsCardsAdapter.Viewholder> {
 
-    private Context context;
+
     private ArrayList<Route> displayList;
     private AccessRouteFlights routeFlightDetails;
     private final OnItemClickListener listener;
+    private boolean isRouteOrderSelected = false;
+
     //temporary
 
     public interface OnItemClickListener {
         void onItemClick(Route item);
     }
     // Constructor
-    public SearchResultsCardsAdapter(Context context, ArrayList<Route> flightsAvailable, OnItemClickListener listener) {
-        this.context = context;
+    public SearchResultsCardsAdapter(ArrayList<Route> flightsAvailable,boolean isRouteOrderSelected, OnItemClickListener listener) {
         displayList = flightsAvailable;
         this.listener = listener;
+        this.isRouteOrderSelected = isRouteOrderSelected;
     }
 
     @NonNull
@@ -50,6 +54,11 @@ public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResult
         routeFlightDetails.setConnectFlightPos(0);
         holder.departTime.setText(routeFlightDetails.getConnectDepartureTime());
         holder.departAirport.setText(routeFlightDetails.getConnectSource().getAirport());
+        if(isRouteOrderSelected){
+            holder.routeDate.setVisibility(View.VISIBLE);
+            holder.routeDate.setText(String.format(Locale.CANADA,"   %s, %d", Utils.getFormattedDate(routeFlightDetails.getConnectDepartureDate()),routeFlightDetails.getConnectDepartureDate().getYear()));
+            holder.flightPrice.setVisibility(View.GONE);
+        }
 
         routeFlightDetails.setConnectFlightPos(routeFlightDetails.getNumStops());
 
@@ -91,10 +100,11 @@ public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResult
     }
 
 
+
     // View holder class for initializing of
     // your views such as TextView and Imageview.
     public class Viewholder extends RecyclerView.ViewHolder {
-        private TextView departTime, arriveTime, departAirport, destAirport, flightDuration, flightPrice, stopNames;
+        private TextView departTime, arriveTime, departAirport, destAirport, flightDuration, flightPrice, stopNames, routeDate;
         private ImageView numStops;
 
         public Viewholder(@NonNull View itemView) {
@@ -106,6 +116,7 @@ public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResult
             flightDuration = itemView.findViewById(R.id.flight_duration);
             flightPrice = itemView.findViewById(R.id.available_price);
             stopNames = itemView.findViewById(R.id.stopover_names);
+            routeDate = itemView.findViewById(R.id.route_date);
             numStops = itemView.findViewById(R.id.num_stops_image);
         }
 

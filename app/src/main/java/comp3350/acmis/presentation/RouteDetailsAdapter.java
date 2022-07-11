@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -41,6 +43,10 @@ public class RouteDetailsAdapter extends RecyclerView.Adapter<RouteDetailsAdapte
     @Override
     public void onBindViewHolder(@NonNull RouteDetailsAdapter.Viewholder holder, int position) {
         routeDetails.setConnectFlightPos(position);
+        if(position>0){
+            holder.routeLayoverLayout.setVisibility(View.VISIBLE);
+            holder.routeLayoverTime.setText(String.format(Locale.CANADA,"%s layover", routeDetails.getCurrLayoverTime()));
+        }
         holder.detailsDepartTime.setText(routeDetails.getConnectDepartureTime());
         holder.detailsArriveTime.setText(routeDetails.getConnectArrivalTime());
         holder.detailsDepartAirport.setText(routeDetails.getConnectSource().getAirport());
@@ -66,7 +72,8 @@ public class RouteDetailsAdapter extends RecyclerView.Adapter<RouteDetailsAdapte
     // View holder class for initializing of
     // your views such as TextView and Imageview.
     public class Viewholder extends RecyclerView.ViewHolder {
-        TextView detailsDepartTime,detailsArriveTime,detailsDepartAirport,detailsArriveAirport,detailsDepartCity,detailsArriveCity,detailsDuration;
+        TextView detailsDepartTime,detailsArriveTime,detailsDepartAirport,detailsArriveAirport,detailsDepartCity,detailsArriveCity,detailsDuration,routeLayoverTime;
+        LinearLayout routeLayoverLayout;
         ImageView verticalStopImage;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +85,8 @@ public class RouteDetailsAdapter extends RecyclerView.Adapter<RouteDetailsAdapte
             detailsArriveCity = itemView.findViewById(R.id.details_arrive_city);
             detailsDuration = itemView.findViewById(R.id.details_duration);
             verticalStopImage = itemView.findViewById(R.id.vertical_stops_image);
+            routeLayoverLayout = itemView.findViewById(R.id.route_layover_time_layout);
+            routeLayoverTime = itemView.findViewById(R.id.route_layover_time);
         }
     }
 }
