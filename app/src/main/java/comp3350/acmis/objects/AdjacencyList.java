@@ -39,20 +39,20 @@ public class AdjacencyList {
     public String getSourceCity(){
         return source.getLoc().getCity();
     }
-    public String copyList (ArrayList<Node> copyHere) {                      // Deep Copy of our List.
+    public String copyList (ArrayList<Location> copyHere) {                      // Deep Copy of our List. We are returning ONLY LOCATIONS
 
         if(copyHere==null) {                                                 // GUARD CONDITION --> Do Something ONLY if we have a valid list.
             return "CANNOT COPY TO A NULL LIST.";
         }
 
         Node temp = source;
-        while(temp.getNext()!=null) {
+        while(temp.getNext()!=null) {                                       // Iterate until the last Node and extract Locations and push to List in Params.
 
-            copyHere.add(temp);
+            copyHere.add(temp.getLoc());
             temp = temp.getNext();
         }
 
-        copyHere.add(temp);
+        copyHere.add(temp.getLoc());                                        // Make sure we dont miss last Location. Structure of Iteration does not add last node to List in Params
         return null;
     }
     public boolean contains(Location thisLoc) {
@@ -67,11 +67,10 @@ public class AdjacencyList {
             temp = temp.getNext();
         }
 
-        if (temp.getNext().getLoc().equals(thisLoc))                        // Check for last Node. Iteration DOES NOT CHECK FOR LAST NODE. Hence checking here.
+        if (temp.getLoc().equals(thisLoc))                        // Check for last Node. Iteration DOES NOT CHECK FOR LAST NODE. Hence checking here.
             exists = true;
 
-
-        return false;
+        return exists;
     }
 
 
