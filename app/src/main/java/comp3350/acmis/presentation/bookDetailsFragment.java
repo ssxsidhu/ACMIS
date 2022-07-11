@@ -167,11 +167,6 @@ public class bookDetailsFragment extends Fragment {
         roundTripSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                if (pickArrival.getVisibility() == View.GONE)
-//                    pickArrival.setVisibility(View.VISIBLE);
-//                else
-//                    pickArrival.setVisibility(View.GONE);
-
                 if(compoundButton.isChecked()) {
                     pickReturn.setVisibility(View.VISIBLE);
                     searchFlightsButton.setEnabled(false);
@@ -203,6 +198,8 @@ public class bookDetailsFragment extends Fragment {
         Intent i = new Intent(requireActivity().getBaseContext(), SearchResults.class);
         i.putExtra("selectedDeparture", selectedDeparture);
         i.putExtra("selectedDestination", selectedDestination);
+        i.putExtra("departDate",departDate);
+        i.putExtra("returnDate",returnDate);
         requireActivity().startActivity(i);
     }
 }

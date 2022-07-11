@@ -52,13 +52,6 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
     }
 
 
-    public void resize(int imageSource) {
-
-//        Uri uri = Uri.parse(imageUri);
-        icon = BitmapFactory.decodeResource(context.getResources(), imageSource);
-
-    }
-
     @Override
     public int getItemCount() {
         // this method is used for showing number

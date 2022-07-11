@@ -10,6 +10,7 @@
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_direct_flight.xml" value="0.5" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_launcher_background.xml" value="0.161" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_outline_timer_24.xml" value="0.174" />
+        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_round_chevron_left_24.xml" value="0.174" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_round_search_24.xml" value="0.1" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/ic_round_today_24.xml" value="0.161" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/drawable/no_stop_shape.xml" value="0.174" />
@@ -26,7 +27,7 @@
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/activity_bottom_tabbed.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/activity_front_page.xml" value="0.22" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/activity_route_details.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/activity_search_results.xml" value="0.3025" />
+        <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/activity_search_results.xml" value="0.26506024096385544" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/bottom_tab_activity.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/bottom_tabbed_activity.xml" value="0.1796875" />
         <entry key="..\:/Users/sidhu/AndroidStudioProjects/ACMIS/app/src/main/res/layout/card_view.xml" value="0.3333333333333333" />

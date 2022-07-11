@@ -91,12 +91,8 @@ public class AccessRouteFlights  {
         return currConnectFlight.getDepartureDateTime().toLocalTime().toString();
     }
 
-    public String getConnectFormattedDepartureDate(){
-        String formattedDate;
-        LocalDate localDate = currConnectFlight.getDepartureDateTime().toLocalDate();
-        formattedDate = localDate.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.CANADA)+", ";
-        formattedDate += localDate.getMonth().getDisplayName(TextStyle.SHORT,Locale.CANADA)+" "+localDate.getDayOfMonth();
-        return formattedDate;
+    public LocalDate getConnectDepartureDate(){
+         return currConnectFlight.getDepartureDateTime().toLocalDate();
     }
 
     public int getNumStops(){
