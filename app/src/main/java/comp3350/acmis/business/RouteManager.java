@@ -27,7 +27,7 @@ public class RouteManager {
     public RouteManager()
     {
         graph = new MyGraph();
-        dataAccess = Services.getDataAccess(Main.dbName);
+        dataAccess = (DataAccessStub) Services.getDataAccess(Main.dbName);
 
         dataAccess.getAllFlights(flightList);
         dataAccess.getLocations(locationList);
@@ -40,7 +40,7 @@ public class RouteManager {
         ArrayList<Route> connectedRoutes = new ArrayList<>();
 
         checkDirectRoute(source,dest,returnThis);
-
+        checkConnectedRoutes(source,dest,returnThis);
 
         return null;
     }
@@ -56,7 +56,7 @@ public class RouteManager {
         for (int i = 0; i < tempCities.size(); i++) {           // Iterate through the list of all cities. If destination city exists there is possibly a direct route.
             if (tempCities.get(i).equals(dest)) {
                 temp = getFlight(source, dest);
-
+                returnThis.add(new Route(temp));
             }
         }
 
@@ -75,6 +75,7 @@ public class RouteManager {
     // PRIVATE HELPER METHOD        //https://thealgorists.com/Algo/AllPathsBetweenTwoNodes
     private void depthFirst(MyGraph graph, Location source, Location dest, ArrayList<Location> visited, ArrayList<Location> path, ArrayList<ArrayList<Location>> allPaths) {
 
+        // BASE CASE
         if(source.equals(dest)) {
             allPaths.add(path);
             return;
@@ -116,7 +117,9 @@ public class RouteManager {
                 temp.getDestination().equals(destination)) {            // If found simply make returnThis NON-NULL and Loop Breaks.
 
                 returnThis=temp;
+
             }
+            index++;
         }
 
         return returnThis;
