@@ -13,13 +13,13 @@ public interface DataAccess
 
 	void close();
 
-	String getAllFlights(ArrayList<Flight> resultList);
+	String getAllFlights(ArrayList<Flight> resultList); //done
 
-	String getLocations(ArrayList<Location> resultList);
+	String getLocations(ArrayList<Location> resultList); //done
 
 	String addBooking(Booking newBooking);
 
-	User getUserObject(String username);
+	User getUserObject(String username); //done
 
 	String getUserBookings(User user, ArrayList<Booking> userBookings);
 }

@@ -79,6 +79,19 @@ public class User {
         return email;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return phoneNumber == user.phoneNumber && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && gender == user.gender && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, gender, username, password, email, phoneNumber);
+    }
+
     //Error checking in constructor
     private String errorCheck(String value, String message) {
         if (value.trim().equals("")) {

@@ -12,6 +12,7 @@ import comp3350.acmis.objects.FlightTest;
 import comp3350.acmis.objects.LocationTest;
 import comp3350.acmis.objects.RouteTest;
 import comp3350.acmis.objects.UserTest;
+import comp3350.acmis.persistence.StubDBTest;
 
 @RunWith(Suite.class)
 
@@ -24,7 +25,8 @@ import comp3350.acmis.objects.UserTest;
         AccessBookingsTest.class,
         BookingManagerTest.class,
         AccessLocationsTest.class,
-        AccessRouteFlightsTest.class
+        AccessRouteFlightsTest.class,
+        StubDBTest.class
 })
 
 public class TestJunitSuite {
