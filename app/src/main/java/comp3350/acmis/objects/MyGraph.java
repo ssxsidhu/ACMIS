@@ -42,9 +42,11 @@ public class MyGraph {
             if(sourceNodes.get(i).getSourceCity().equals(start.getCity()))                // If we Find that Node then add the Flight and Location to this Node
             {
                 sourceNodes.get(i).addNext(newFlight.getDestination(), newFlight);        // Supply Connecting Node and the flight to that connecting Node to the Adjacency List having that Source Node.
+                numEdges++;
             }
+
         }
-        numEdges++;
+
 
         return null;
     }

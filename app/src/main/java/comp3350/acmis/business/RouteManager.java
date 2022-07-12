@@ -13,24 +13,28 @@ import comp3350.acmis.objects.MyGraph;
 import comp3350.acmis.objects.Route;
 import comp3350.acmis.objects.Node;
 
+import comp3350.acmis.persistence.DataAccessObject;
 import comp3350.acmis.persistence.DataAccessStub;
 
 public class RouteManager {
 
     // INSTANCE VARIABLES
     private MyGraph graph;                  // This is the Graph storing all the Connections..
-    private DataAccessStub dataAccess;
-    private ArrayList<Flight> flightList;
-    private ArrayList<Location> locationList;
+    private DataAccessObject dataAccess;
+    private ArrayList<Flight> flightList = new ArrayList<>();
+    private ArrayList<Location> locationList = new ArrayList<>();
 
     // CONSTRUCTOR
     public RouteManager()
     {
         graph = new MyGraph();
-        dataAccess = (DataAccessStub) Services.getDataAccess(Main.dbName);
-
+        dataAccess = (DataAccessObject) Services.getDataAccess(Main.dbName);
+        flightList = new ArrayList<>();
+        locationList = new ArrayList<>();
         dataAccess.getAllFlights(flightList);
         dataAccess.getLocations(locationList);
+        graph.populateSourceNodes(locationList);
+        graph.populateEdges(flightList);
     }
 
     // Return a list of ALL POSSIBLE ROUTES because that's how it works.
@@ -68,7 +72,10 @@ public class RouteManager {
         }
     }
     private String checkConnectedRoutes(Location source, Location dest, ArrayList<Route> returnThis) {
-
+        ArrayList<Location> visited = new ArrayList<>();
+        ArrayList<Location> path = new ArrayList<>();
+        ArrayList<ArrayList<Location>> allPossiblePaths = new ArrayList<ArrayList<Location>>();
+        depthFirst(graph,source,dest,visited,path,allPossiblePaths);
         return null;
     }
 
@@ -77,20 +84,22 @@ public class RouteManager {
 
         // BASE CASE
         if(source.equals(dest)) {
-            allPaths.add(path);
-            return;
+            System.out.println(path);
+            return ;
         }
 
         visited.add(source);            // Add this so we don't come back to source for checking every time and thus prevent dead loop.
         ArrayList<Location> neighbors = new ArrayList<>();          // These are the neighbors of the source Node. CHECK ALL NEIGHBORS FOR A PATH TO DEST
         graph.getNeighborCities(source,neighbors);                  // Initialise all neighbors of the source node into this list.
 
+        ArrayList<ArrayList<Location>> allPathsCopy = new ArrayList<ArrayList<Location>>(allPaths);
+
         for(int i=0;i<neighbors.size();i++) {                       // Iterate over each Neighbor and perform tasks...
 
             if(!visited.contains(neighbors.get(i))) {
 
                 path.add(neighbors.get(i));
-                depthFirst(graph, neighbors.get(i), dest, visited, path, allPaths);
+                depthFirst(graph, neighbors.get(i), dest, visited, path, allPathsCopy);
                 path.remove(neighbors.get(i));
             }
         }

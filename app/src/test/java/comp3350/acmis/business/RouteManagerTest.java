@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-public class RouteManager extends TestCase{
+public class RouteManagerTest extends TestCase{
 
     @Before
     public void setup() {
