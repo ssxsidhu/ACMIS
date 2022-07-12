@@ -83,17 +83,7 @@ Users can also go to the manage flight screen by pressing the "Manage Flights" t
     return flight: Source:Toronto Destination:Montreal date: 8th august,2022
     
   2.first flight: Source:Calgary Destination:Vancouver date: 16th July,2022
-    return flight: Source:Vancouver Destination:Calgary date: 19th august,2022
-    
-  **This can be tested for using the stubdatabase.**  
-  1.first flight: Source:Toronto Destination:Winnipeg date: 8th July,2022
-    return flight: Source:WInnipeg Destination:Toronto date: 25th July,2022
-    
-  2.first flight: Source:Toronto Destination:Calgary date: 1st July,2022
-    return flight: Source:Calgary Destination:Toronto date: 12th July,2022
-    
-  3.first flight: Source:Vancouver Destination:Montreal date: 6th July,2022
-    return flight: Source:Montreal Destination:Vancouver date: 18th July,2022
+    return flight: Source:Vancouver Destination:Calgary date: 19th august,2022.
     
 2.Changing the stub database to the hsqldb or vice verca can be done in the main class. This is done by      commenting out the database name that is not used. 
 
