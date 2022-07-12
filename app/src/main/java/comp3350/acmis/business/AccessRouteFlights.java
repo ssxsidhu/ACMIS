@@ -2,10 +2,8 @@ package comp3350.acmis.business;
 
 import org.threeten.bp.Duration;
 import org.threeten.bp.LocalDate;
-import org.threeten.bp.format.TextStyle;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
@@ -20,11 +18,9 @@ public class AccessRouteFlights  {
         currConnectFlight = currRouteFlights.get(0);
     }
 
-
     private long calculateLayover(Flight flightArrival, Flight flightDeparture) {
         return Duration.between(flightArrival.getArrivalDateTime(), flightDeparture.getDepartureDateTime()).toMillis();
     }
-
 
     private String toStringDuration(long durationInMillis) {
         Duration duration = Duration.ofMillis(durationInMillis);
@@ -57,11 +53,10 @@ public class AccessRouteFlights  {
         return toStringDuration(totalFlying + totalLayover);
     }
 
-
     public String getCurrLayoverTime() {
         int currentFlightPos = currRouteFlights.indexOf(currConnectFlight);
         long layover = 0;
-        if (currRouteFlights.size() > 1) {
+        if (currRouteFlights.size()>currentFlightPos+1) {
             layover = calculateLayover(currConnectFlight, currRouteFlights.get(currentFlightPos + 1));
         }
         return toStringDuration(layover);
@@ -70,19 +65,19 @@ public class AccessRouteFlights  {
     public Location getConnectSource() {
         return currConnectFlight.getSource();
     }
-
     public Location getConnectDestination() {
         return currConnectFlight.getDestination();
     }
-
     public int getConnectSeats() {
         return currConnectFlight.getSeats();
+    }
+    public int getNumStops(){
+        return currRouteFlights.size()-1;
     }
 
     public String getConnectDuration() {
         return toStringDuration(currConnectFlight.getDuration().toMillis());
     }
-
     public String getConnectArrivalTime() {
         return currConnectFlight.getArrivalDateTime().toLocalTime().toString();
     }
@@ -91,16 +86,7 @@ public class AccessRouteFlights  {
         return currConnectFlight.getDepartureDateTime().toLocalTime().toString();
     }
 
-    public String getConnectFormattedDepartureDate(){
-        String formattedDate;
-        LocalDate localDate = currConnectFlight.getDepartureDateTime().toLocalDate();
-        formattedDate = localDate.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.CANADA)+", ";
-        formattedDate += localDate.getMonth().getDisplayName(TextStyle.SHORT,Locale.CANADA)+" "+localDate.getDayOfMonth();
-        return formattedDate;
+    public LocalDate getConnectDepartureDate(){
+         return currConnectFlight.getDepartureDateTime().toLocalDate();
     }
-
-    public int getNumStops(){
-        return currRouteFlights.size()-1;
-    }
-
 }

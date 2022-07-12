@@ -8,85 +8,147 @@
     android:background="@color/md_theme_dark_onSurface"
     android:orientation="vertical">
 
-<androidx.core.widget.NestedScrollView
-    android:id="@+id/search_results_scroll"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageView
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/search_results_scroll"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scaleType="fitXY"
-        android:src="@mipmap/window_seat" />
+        android:layout_height="wrap_content">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/search_results_departing_date"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="100dp"
-        android:text="Departing Date"
-        android:textColor="@color/design_default_color_background"
-        android:textSize="40sp" />
+            <ImageView
+                android:id="@+id/window_image"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/window_seat" />
 
-    <TextView
-        android:id="@+id/header_title_book_tab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:layout_below="@id/search_results_departing_date"
-        android:textColor="@color/design_default_color_background"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="@string/search_results"
-        android:textSize="25sp" />
+            <LinearLayout
+                android:id="@+id/search_results_title_layout"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
 
-<!--    <View-->
-<!--        android:id="@+id/separator"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="1dp"-->
-<!--        android:layout_marginTop="3dp"-->
-<!--        android:layout_below="@id/header_title_book_tab"-->
-<!--        android:background="@android:color/darker_gray" />-->
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="80dp"
+                android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/no_results_found"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/search_results_departing_date"
-        android:gravity="center"
-        android:text="@string/no_flights_found"
-        android:textColor="@color/design_default_color_background"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/search_results_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.8"
+                    android:text="Title"
+                    android:textAppearance="?attr/textAppearanceHeadline3"
+                    android:textColor="@color/design_default_color_background" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_search_results"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/header_title_book_tab"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:choiceMode="singleChoice" />
+                <TextView
+                    android:id="@+id/search_results_location_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:text="Location title"
+                    android:textAppearance="?attr/textAppearanceTitleLarge"
+                    android:textColor="@color/design_default_color_background" />
+            </LinearLayout>
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/search_results_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/search_results_title_layout"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center"
+                android:text="@string/search_results"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
-</androidx.core.widget.NestedScrollView>
+            <TextView
+                android:id="@+id/no_results_found"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/window_image"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:text="@string/no_flights_found"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_search_results"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:layout_below="@id/search_results_text"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:choiceMode="singleChoice" />
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/search_results_top_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/ic_round_close_24"
-        app:navigationIconTint="@color/design_default_color_background"
-        app:subtitle="subtitle"
-        app:subtitleCentered="true"
         app:layout_scrollFlags="noScroll"
-        app:subtitleTextAppearance="?attr/textAppearanceBody1"
-        app:subtitleTextColor="@color/design_default_color_background" />
+        app:navigationIcon="@drawable/ic_round_chevron_left_24"
+        app:navigationIconTint="@color/design_default_color_background"
+        app:subtitleCentered="true"
+        app:subtitleTextAppearance="?attr/textAppearanceTitleLarge"
+        app:subtitleTextColor="@color/design_default_color_background">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="14dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/search_depart_airport"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:gravity="end"
+                android:textColor="@color/md_theme_dark_onSurface"
+                android:layout_marginEnd="5dp"
+                android:textSize="22sp"
+                android:text="City depart" />
+
+            <ImageView
+                android:id="@+id/search_direction_image"
+                android:layout_width="wrap_content"
+                android:layout_weight="0"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_round_arrow_forward_24"
+                app:tint="@color/md_theme_dark_onSurface" />
+
+
+            <TextView
+                android:id="@+id/search_arrive_airport"
+                android:layout_weight="0.3"
+                android:gravity="start"
+                android:textColor="@color/md_theme_dark_onSurface"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="22sp"
+                android:text="City dest" />
+
+        </LinearLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <Button
+        android:id="@+id/book_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_results_scroll"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="@string/book_flight"
+        android:textSize="20sp"
+        android:visibility="gone"/>
 
 </RelativeLayout>

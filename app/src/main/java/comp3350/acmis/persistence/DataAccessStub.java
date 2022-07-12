@@ -1,12 +1,10 @@
 package comp3350.acmis.persistence;
 
 
-
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Objects;
 
 import comp3350.acmis.application.Main;
@@ -27,8 +25,7 @@ public class DataAccessStub implements DataAccess {
     private BookingManager bookingManager;
 
 
-    public DataAccessStub(String dbName)
-    {
+    public DataAccessStub(String dbName) {
         this.dbName = dbName;
         allUsers = new ArrayList<>();
         allLocations = new ArrayList<>();
@@ -43,7 +40,6 @@ public class DataAccessStub implements DataAccess {
         allFlights =  new ArrayList<Flight>();
         allBookings = new ArrayList<>();
     }
-
 
     public void open(String dbName) {
         User user,defaultUser;
@@ -184,10 +180,8 @@ public class DataAccessStub implements DataAccess {
         allFlights.add(montoTor);
 
 
-
-        bookingManager.createBooking("braico", new Route(winToMn),2);
-        bookingManager.createBooking("braico", new Route(torToVan),2);
-
+        bookingManager.createBooking("braico", new Route(winToMn),null,2);
+        bookingManager.createBooking("braico", new Route(torToVan),null,2);
 
         System.out.println("Opened " +dbType +" database " +dbName);
     }
@@ -202,9 +196,6 @@ public class DataAccessStub implements DataAccess {
     }
 
     public String insertFlight(Flight newFlight) {
-        Location dest = newFlight.getDestination();
-        Location source = newFlight.getSource();
-
         allFlights.add(newFlight);
         return null;
     }
@@ -219,7 +210,6 @@ public class DataAccessStub implements DataAccess {
         allBookings.add(newBooking);
         return null;
     }
-
 
     //to get object of User from username
     public User getUserObject(String username) {
@@ -244,5 +234,4 @@ public class DataAccessStub implements DataAccess {
         else
             return null;
     }
-
 }

@@ -89,4 +89,11 @@ July 7th, 2022  : 7 hours, Vrushil
    -Remove unused files and commented out code. 
    -Added more testing in User, Flight and location classes. 
    -Changed the test suite from junit 3 to junit 4. 
- 
+
+July 8th,2022 : 2 hours, Vrushil
+   -Added the functionality for the searchRoute to check if the flight has enough seats.
+   -Bookings now have number of passengers/tickets booked by the user.
+   
+July 11th,2022 : 4 hours, Vrushil
+   -Cleaned up the code in Route,Booking and Booking Manager class.
+   -Added more thorough testing in the 3 classes.

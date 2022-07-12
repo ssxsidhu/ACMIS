@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class Route implements Serializable {
 
-    // What makes up a route for now ? Either a direct flight or a one stop over flight
+    // INSTANCE VARIABLE -  What makes up a route for now ? Either a direct flight or a one stop over flight
     private ArrayList<Flight> route;
 
     // DEFAULT CONSTRUCTOR
@@ -19,7 +19,6 @@ public class Route implements Serializable {
 
     // Constructor 1 --> Single or Direct Flight
     public Route(Flight directFlight) {
-
         route = new ArrayList<>();
         route.add(Objects.requireNonNull(directFlight, "Flight cannot be null"));
     }
@@ -38,13 +37,13 @@ public class Route implements Serializable {
     public boolean isEmpty() {
         return route.isEmpty();
     }
-
     public ArrayList<Flight> getRoute() {
         return route;
     }
 
     public String getFlightsCSV() {
         String ret = "";
+
         for (int i = 0; i < route.size(); i++) {
             ret += route.get(i).getFlightId() + "";
 
@@ -52,7 +51,10 @@ public class Route implements Serializable {
                 ret += ",";
             }
         }
+
+        if (ret.equals("")) {
+            ret = null;
+        }
         return ret;
     }
-
 }
