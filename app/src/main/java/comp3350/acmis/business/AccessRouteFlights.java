@@ -61,7 +61,7 @@ public class AccessRouteFlights  {
     public String getCurrLayoverTime() {
         int currentFlightPos = currRouteFlights.indexOf(currConnectFlight);
         long layover = 0;
-        if (currRouteFlights.size()> currentFlightPos+1) {
+        if (currRouteFlights.size()>currentFlightPos+1) {
             layover = calculateLayover(currConnectFlight, currRouteFlights.get(currentFlightPos + 1));
         }
         return toStringDuration(layover);

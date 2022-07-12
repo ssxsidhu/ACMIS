@@ -72,7 +72,7 @@ public class RouteDetails extends AppCompatActivity {
                         i.putExtra("showReturnView",true);
                         routeDetails.setConnectFlightPos(0);
                         i.putExtra("selectedDestination",routeDetails.getConnectSource());
-                        i.putExtra("departDate",routeDetails.getConnectDepartureDate());
+                        i.putExtra("departDate",returnDate);
                         routeDetails.setConnectFlightPos(routeDetails.getNumStops());
                         i.putExtra("selectedDeparture",routeDetails.getConnectDestination());
                         i.putExtra("returnDate",returnDate);

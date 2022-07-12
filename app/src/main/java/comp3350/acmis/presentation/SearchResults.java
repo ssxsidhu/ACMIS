@@ -15,6 +15,8 @@ import org.threeten.bp.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
 import comp3350.acmis.R;
+import comp3350.acmis.business.BookingManager;
+import comp3350.acmis.business.FilterRoutes;
 import comp3350.acmis.business.RouteManager;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
@@ -26,6 +28,7 @@ public class SearchResults extends AppCompatActivity {
     private Route selectedDepartRoute;
     private Boolean showReturnFlightRslts;
     private RouteManager routeManager =  new RouteManager();
+    private BookingManager bookingManager =  new BookingManager();
     private ArrayList<Route> flightsAvailable = new ArrayList<>();
 
     @Override
@@ -38,8 +41,9 @@ public class SearchResults extends AppCompatActivity {
         Utils.setStatusBarColor(getWindow(), getBaseContext());
 
         //checks if there are flights available
-        String checkFlights = routeManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable);
-//        String checkFlights = bookingManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable,numOfPassengers);
+//        String checkFlights = routeManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable);
+        FilterRoutes filterRoutes = new FilterRoutes(selectedDeparture,selectedDestination);
+        String checkFlights = filterRoutes.getFilteredRoutes(flightsAvailable,departDate);
         if (checkFlights != null) {
             Messages.noFlightsMessage(this);
         } else {
@@ -65,12 +69,11 @@ public class SearchResults extends AppCompatActivity {
 
         if (!showReturnFlightRslts) {
             searchTitle.setText(String.format(Locale.CANADA, "Departing %s", Utils.getFormattedDate(departDate)));
-            searchLocationTitle.setText(String.format(Locale.CANADA,"From %s", selectedDeparture.getCity()));
         }
         else {
-            searchTitle.setText(String.format(Locale.CANADA, "Returning %s", Utils.getFormattedDate(returnDate)));
-            searchLocationTitle.setText(String.format(Locale.CANADA,"From %s", selectedDestination.getCity()));
+            searchTitle.setText(String.format(Locale.CANADA, "Returning %s", Utils.getFormattedDate(departDate)));
         }
+        searchLocationTitle.setText(String.format(Locale.CANADA,"From %s", selectedDeparture.getCity()));
 
     }
 

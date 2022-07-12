@@ -198,6 +198,7 @@ public class bookDetailsFragment extends Fragment {
                     searchFlightsButton.setEnabled(false);
                 }
                 else {
+                    returnDate=null;
                     pickReturn.setVisibility(View.GONE);
                     searchFlightsButton.setEnabled(true);
                 }
