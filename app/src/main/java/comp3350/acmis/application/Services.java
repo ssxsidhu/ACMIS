@@ -19,7 +19,7 @@ public class Services {
             else {
                 dataAccessService = new DataAccessObject(dbName);
             }
-            dataAccessService.open(Main.getDBPathName()); //getDBPathName()
+            dataAccessService.open(Main.getDBPathName());
         }
         return dataAccessService;
     }
