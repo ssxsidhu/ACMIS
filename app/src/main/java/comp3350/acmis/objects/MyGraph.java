@@ -16,7 +16,6 @@ public class MyGraph {
 
     // CONSTRUCTOR
     public MyGraph() {
-
         sourceNodes = new ArrayList<>();
         numSourceNodes = 0;
         numEdges = 0;

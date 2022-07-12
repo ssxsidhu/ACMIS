@@ -117,6 +117,11 @@ public class Flight implements Serializable {
         return departureDateandTime;
     }
 
+    //for testing
+    public static void setFlightSequence(int flightSequence) {
+        Flight.flightSequence = flightSequence;
+    }
+
     //Error checking in constructor
     private double errorCheck(double value, String message) {
         if (value<=0) {
