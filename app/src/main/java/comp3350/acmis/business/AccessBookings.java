@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import comp3350.acmis.application.Main;
 import comp3350.acmis.application.Services;
@@ -20,7 +21,7 @@ public class AccessBookings {
 
     public AccessBookings(String user) {
         dataAccess = Services.getDataAccess(Main.dbName);
-        username = user;
+        username = Objects.requireNonNull(user);
     }
 
     public String getMyBookings(ArrayList<Booking> myBookings) {
