@@ -2,7 +2,6 @@
 
 package comp3350.acmis.application;
 
-import comp3350.acmis.application.Main;
 import comp3350.acmis.persistence.DataAccess;
 import comp3350.acmis.persistence.DataAccessObject;
 import comp3350.acmis.persistence.DataAccessStub;

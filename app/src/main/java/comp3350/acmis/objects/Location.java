@@ -7,7 +7,7 @@ import org.threeten.bp.ZoneId;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Location  implements Serializable {
+public class Location implements Serializable {
 
     // INSTANCE VARIABLES
     private final String city;
@@ -43,25 +43,20 @@ public class Location  implements Serializable {
         return city + ", " + country;
     }
 
-    // PRIVATE HELPER METHOD
-    // Error checking in constructor
-
     @Override
-    public boolean equals(Object compare)
-    {
-
+    public boolean equals(Object compare) {
         if(compare.getClass() == getClass()) {                  // Check if object being passed is a Object of this Class.
-
             Location compareThis = (Location)compare;           // Type Cast explicitly to LOCATION type.
-
             return (city.equals(compareThis.getCity()) &&
                     zoneName.equals(compareThis.getZoneName()) &&
                     country.equals(compareThis.getCountry()) &&
                     airport.equals(compareThis.getAirport()));
         }
-
         return  false;
     }
+
+    // PRIVATE HELPER METHOD
+    // Error checking in constructor
     private String errorCheck(String value, String message) {
         if (value.trim().equals("")) {
             throw new IllegalArgumentException(message + " can not be empty");

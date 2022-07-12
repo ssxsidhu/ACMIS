@@ -30,7 +30,6 @@ public class DataAccessObject implements DataAccess {
 	private String dbName;
 	private String dbType;
 
-
 	private String cmdString;
 	private int updateCount;
 	private String result;
