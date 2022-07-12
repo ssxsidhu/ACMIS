@@ -122,6 +122,18 @@ public class Flight implements Serializable {
         Flight.flightSequence = flightSequence;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Flight flight = (Flight) o;
+        return seats == flight.seats && cost == flight.cost && Objects.equals(source, flight.source) && Objects.equals(destination, flight.destination) && Objects.equals(departureDateandTime, flight.departureDateandTime) && Objects.equals(arrivalDateandTime, flight.arrivalDateandTime) && Objects.equals(duration, flight.duration);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(source, destination, departureDateandTime, arrivalDateandTime, seats, duration, cost);
+    }
+
     //Error checking in constructor
     private double errorCheck(double value, String message) {
         if (value<=0) {
