@@ -77,11 +77,27 @@ June 23rd, 2022 : 3-4 hours, Vrushil
    -Implemented the date and time code in the flight class. 
    -Changed All the flight instances to use the zoned date and time.  
    
+June 24, 2022 : 2-3 Hours, Prahalad
+   -Conduct Initial Code Clean up and Refactoring of Classes
+   -Research Path Finding algorithms and Graph implementation for Connected Flights
+   
 June 25th, 2022 : 4 hours, Sahilpreet
    -Added a new fragment for getting the details of the flight from the user which includes:
    		-Departure date the user is travelling on
 		-Return Date
 		-Number of passengers the user wants to add
+		
+June 28th, 2022 : 3.5 Hours, Prahalad
+   -Create Skeletal Code for Graph, Adjacency List and Nodes
+   -Ensure Data Structure consistency across design by including necessary wrappers
+   -Integrate Depth First Search Idea into a Method to be used
+   
+   
+July 6th 28th, 2022 : 5.5 Hours, Prahalad
+   -Create Skeletal Code for RouteManager
+   -Implemented Node and AdjacencyList Classes
+   -Implemented toString methods to other Object Classes
+   -Implemented equals methods to other Object Classes
 		
 July 7th, 2022  : 7 hours, Vrushil
    -Refactored all the code.
@@ -94,6 +110,19 @@ July 8th,2022 : 2 hours, Vrushil
    -Added the functionality for the searchRoute to check if the flight has enough seats.
    -Bookings now have number of passengers/tickets booked by the user.
    
+July 8th, 2022 : 6 hours, Prahalad
+   -Finished DFS implementation for Route Manager
+   -Refactored and commented code on Adjacency list, Graph and Node classes.
+   -Started creating Direct Route and Conncected route implementation
+  
+July 11th,2022 : 8 hours, Vrushil, Sahil, Prahalad, Braden
+   -Performed Extensive Debugging on Route Manager and Database Interface
+   -Created Test Suites and Ran Tests on Objects
+   
 July 11th,2022 : 4 hours, Vrushil
    -Cleaned up the code in Route,Booking and Booking Manager class.
    -Added more thorough testing in the 3 classes.
+   
+ July 11th,2022 : 5 hours, Braden, Vrushil, Sahilpreet and Prahalad
+    - Perform extensive testing and implement Return Routes
+    - Refactor Code in all classes and comments where needed
