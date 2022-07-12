@@ -72,11 +72,23 @@ June 18th, 2022 : 10 hours, Sahilpreet
    -Made the transition effect from front page to main activity
    -Changed the app icon
    
+June 20rd, 2022 : 3-4 hours, Braden
+   -Hsqldb design and layout
+June 21st,2022 : 3 hours , Sahil 
+-Added search results page which shows the flights available from Location A to B on the departure date
+-Added a custom recyclerview adapter to show the list of flights
+-Created a view for a single item of list which shows required details
+-Added viewPager for tabs at the bottom which makes the tabs persistent upon changing.
+   
 June 23rd, 2022 : 3-4 hours, Vrushil
    -Figuring out how to calculate duration from one point to another in different timezones. 
    -Implemented the date and time code in the flight class. 
    -Changed All the flight instances to use the zoned date and time.  
    
+June 24rd, 2022 : 7 hours, Braden 
+    -Hsqldb implementation
+    -Created Database Interface
+    
 June 24, 2022 : 2-3 Hours, Prahalad
    -Conduct Initial Code Clean up and Refactoring of Classes
    -Research Path Finding algorithms and Graph implementation for Connected Flights
@@ -86,14 +98,23 @@ June 25th, 2022 : 4 hours, Sahilpreet
    		-Departure date the user is travelling on
 		-Return Date
 		-Number of passengers the user wants to add
-		
+	
+June 27h, 2022 : 2hours, Sahilpreet
+-Added a details page for the route when the user clicks on an item from search results
+-Created a custom shape to represent route
+-Created a custom adapter to show the details of the route
+
 June 28th, 2022 : 3.5 Hours, Prahalad
    -Create Skeletal Code for Graph, Adjacency List and Nodes
    -Ensure Data Structure consistency across design by including necessary wrappers
    -Integrate Depth First Search Idea into a Method to be used
    
-   
-July 6th 28th, 2022 : 5.5 Hours, Prahalad
+July 1st ,2022 : 5 hours, Sahil
+-Created a order summary page to show the selected flight and book it
+-Added a continue button in route details page which shows this page if the user wants a one-way booking or shows return flights if the user wants a round-trip
+-Removed problems related to Law of demeter related problems from the adapters
+
+July 6th, 2022 : 5.5 Hours, Prahalad
    -Create Skeletal Code for RouteManager
    -Implemented Node and AdjacencyList Classes
    -Implemented toString methods to other Object Classes
@@ -113,8 +134,16 @@ July 8th,2022 : 2 hours, Vrushil
 July 8th, 2022 : 6 hours, Prahalad
    -Finished DFS implementation for Route Manager
    -Refactored and commented code on Adjacency list, Graph and Node classes.
-   -Started creating Direct Route and Conncected route implementation
-  
+   -Started creating Direct Route and Conncected route implementation.
+   
+July 8th, 2022 : 6 hours, Braden
+   -Linking the hsqldb to the project, ensuring everything run smoothly.
+   -Added datastub testing.
+   
+July,8th 2022: 2 hours, Sahilpreet
+-Created a custom Card adapter for manage flights tab which shows all the booked flights
+-Shows a single Card if the flight booked is one-way , otherwise shows 2 nested cards for each flight if the flight is round-trip
+
 July 11th,2022 : 8 hours, Vrushil, Sahil, Prahalad, Braden
    -Performed Extensive Debugging on Route Manager and Database Interface
    -Created Test Suites and Ran Tests on Objects
@@ -123,6 +152,19 @@ July 11th,2022 : 4 hours, Vrushil
    -Cleaned up the code in Route,Booking and Booking Manager class.
    -Added more thorough testing in the 3 classes.
    
- July 11th,2022 : 5 hours, Braden, Vrushil, Sahilpreet and Prahalad
+July 11th,2022 : 5 hours, Braden, Vrushil, Sahilpreet and Prahalad
     - Perform extensive testing and implement Return Routes
     - Refactor Code in all classes and comments where needed
+    
+July 12th, 2022 : 5 hours, Vrushil, Braden 
+    - Updating the readMe
+    - Looking for return flights from both databases just to make it easier for the markers.
+July 12th, 2022 : 3 hours, Vrushil
+    - Added testing for AccessLocation,AccessRouteFlights,AccessBookings
+    - Reformatting its code.
+    - Reformatted Presentation package. 
+    - Removed all unused imports/dead code.
+
+
+    
+ 
