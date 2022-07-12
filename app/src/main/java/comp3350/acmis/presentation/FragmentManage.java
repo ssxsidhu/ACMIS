@@ -1,27 +1,19 @@
 package comp3350.acmis.presentation;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.threeten.bp.ZoneId;
-import org.threeten.bp.ZonedDateTime;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import comp3350.acmis.R;
 import comp3350.acmis.business.AccessBookings;
 import comp3350.acmis.objects.Booking;
-import comp3350.acmis.objects.Flight;
-import comp3350.acmis.objects.Location;
-import comp3350.acmis.objects.Route;
-import comp3350.acmis.objects.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +25,7 @@ public class FragmentManage extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-   //future use
+    //future use
     private String mParam1;
     private String mParam2;
     private ArrayList<Booking> myBookingList;
@@ -93,7 +85,7 @@ public class FragmentManage extends Fragment {
 //
 //        myBookingList.add(new Booking(defaultUser,r1,r2,2));
 
-         CardsAdapter adapter = new CardsAdapter(requireActivity().getBaseContext(), myBookingList);
+        CardsAdapter adapter = new CardsAdapter(requireActivity().getBaseContext(), myBookingList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         RecyclerView cards = view.findViewById(R.id.list_items_manage_tab);
         cards.setLayoutManager(linearLayoutManager);

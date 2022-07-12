@@ -1,15 +1,12 @@
 package comp3350.acmis.presentation;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -32,8 +29,9 @@ public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResult
     public interface OnItemClickListener {
         void onItemClick(Route item);
     }
+
     // Constructor
-    public SearchResultsCardsAdapter(ArrayList<Route> flightsAvailable,boolean isRouteOrderSelected, OnItemClickListener listener) {
+    public SearchResultsCardsAdapter(ArrayList<Route> flightsAvailable, boolean isRouteOrderSelected, OnItemClickListener listener) {
         displayList = flightsAvailable;
         this.listener = listener;
         this.isRouteOrderSelected = isRouteOrderSelected;
@@ -54,9 +52,9 @@ public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResult
         routeFlightDetails.setConnectFlightPos(0);
         holder.departTime.setText(routeFlightDetails.getConnectDepartureTime());
         holder.departAirport.setText(routeFlightDetails.getConnectSource().getAirport());
-        if(isRouteOrderSelected){
+        if (isRouteOrderSelected) {
             holder.routeDate.setVisibility(View.VISIBLE);
-            holder.routeDate.setText(String.format(Locale.CANADA,"   %s, %d", Utils.getFormattedDate(routeFlightDetails.getConnectDepartureDate()),routeFlightDetails.getConnectDepartureDate().getYear()));
+            holder.routeDate.setText(String.format(Locale.CANADA, "   %s, %d", Utils.getFormattedDate(routeFlightDetails.getConnectDepartureDate()), routeFlightDetails.getConnectDepartureDate().getYear()));
             holder.flightPrice.setVisibility(View.GONE);
         }
 
@@ -65,11 +63,11 @@ public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResult
         holder.arriveTime.setText(routeFlightDetails.getConnectArrivalTime());
         holder.destAirport.setText(routeFlightDetails.getConnectDestination().getAirport());
         holder.flightDuration.setText(routeFlightDetails.getRouteTotalDuration());
-        holder.flightPrice.setText(String.format(Locale.CANADA,"$%d", routeFlightDetails.getRouteTotalCost()));
+        holder.flightPrice.setText(String.format(Locale.CANADA, "$%d", routeFlightDetails.getRouteTotalCost()));
 
         int stopShape = 0;
         String numStops;
-        switch (routeFlightDetails.getNumStops()){
+        switch (routeFlightDetails.getNumStops()) {
             case 1:
                 stopShape = R.drawable.one_stop_shape;
                 numStops = "1 Stop";
@@ -100,7 +98,6 @@ public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResult
     }
 
 
-
     // View holder class for initializing of
     // your views such as TextView and Imageview.
     public class Viewholder extends RecyclerView.ViewHolder {
@@ -122,7 +119,8 @@ public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResult
 
         public void bind(final Route item, final OnItemClickListener listener) {
             itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
+                @Override
+                public void onClick(View v) {
                     listener.onItemClick(item);
                 }
             });

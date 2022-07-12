@@ -1,14 +1,13 @@
 package comp3350.acmis.presentation;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

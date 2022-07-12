@@ -29,9 +29,9 @@ public class User {
         this.username = errorCheck(username, "Username");
 
         this.password = Objects.requireNonNull(password, "password cannot be null");
-        if(email.contains("@")){
+        if (email.contains("@")) {
             this.email = Objects.requireNonNull(email, "email cannot be null");
-        }else{
+        } else {
             throw new IllegalArgumentException("Email must contain the character: @ ");
         }
 
@@ -55,11 +55,10 @@ public class User {
         this.password = Objects.requireNonNull(password, "password cannot be null");
         this.email = Objects.requireNonNull(email, "email cannot be null");
 
-        if(phoneNumber.length() != 10){
+        if (phoneNumber.length() != 10) {
             throw new IllegalArgumentException("Phone number should contain 10 digits");
-        }
-        else{
-            this.phoneNumber = Long.parseLong(Objects.requireNonNull(phoneNumber,"Phone number should not be null"));
+        } else {
+            this.phoneNumber = Long.parseLong(Objects.requireNonNull(phoneNumber, "Phone number should not be null"));
         }
 
         this.userID = userID;
@@ -67,14 +66,30 @@ public class User {
     }
 
     // GETTERS
-    public int getUserID() {return userID;}
-    public String getFirstName() {return firstName;}
-    public String getLastName() {return lastName;}
-    public Gender getGender() {return gender;}
-    public String getUsername() {return username;}
+    public int getUserID() {
+        return userID;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
     public long getPhoneNumber() {
         return phoneNumber;
     }
+
     public String getEmail() {
         return email;
     }
@@ -87,6 +102,7 @@ public class User {
         User user = (User) o;
         return phoneNumber == user.phoneNumber && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && gender == user.gender && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email);
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(firstName, lastName, gender, username, password, email, phoneNumber);

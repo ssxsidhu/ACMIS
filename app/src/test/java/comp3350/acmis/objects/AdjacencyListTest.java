@@ -1,7 +1,5 @@
 package comp3350.acmis.objects;
 
-import androidx.annotation.NonNull;
-
 import junit.framework.TestCase;
 
 import org.junit.After;
@@ -23,7 +21,7 @@ public class AdjacencyListTest extends TestCase {
     @Before
     public void setup() {
         testLoc1 = new Location("Location 1", ZoneId.systemDefault(), "TEST Country", "TEST AIRPORT");
-        testLoc2 = new Location("Location 2", ZoneId.systemDefault(),"TEST Country", "TEST AIRPORT");
+        testLoc2 = new Location("Location 2", ZoneId.systemDefault(), "TEST Country", "TEST AIRPORT");
         testLoc3 = new Location("Location 3", ZoneId.systemDefault(), "TEST Country", "TEST AIRPORT");
         testLoc4 = new Location("Location 4", ZoneId.systemDefault(), "TEST Country", "TEST AIRPORT");
         testLoc5 = new Location("NOT CONNECTED to 1", ZoneId.systemDefault(), "TEST Country", "TEST AIRPORT");
@@ -53,15 +51,15 @@ public class AdjacencyListTest extends TestCase {
     public void testSize() {
 
         setup();
-        Assert.assertEquals(testThis.getSize(),0);
-        testThis.addNext(testLoc2,flight2);
-        testThis.addNext(testLoc3,flight3);
+        Assert.assertEquals(testThis.getSize(), 0);
+        testThis.addNext(testLoc2, flight2);
+        testThis.addNext(testLoc3, flight3);
 
-        Assert.assertEquals(testThis.getSize(),2);
-        testThis.addNext(testLoc4,flight4);
-        testThis.addNext(testLoc5,flight5);
+        Assert.assertEquals(testThis.getSize(), 2);
+        testThis.addNext(testLoc4, flight4);
+        testThis.addNext(testLoc5, flight5);
 
-        Assert.assertEquals(testThis.getSize(),4);
+        Assert.assertEquals(testThis.getSize(), 4);
         tear();
     }
 
@@ -70,16 +68,17 @@ public class AdjacencyListTest extends TestCase {
 
         setup();
 
-        try{
-            testThis.addNext(null,null);
+        try {
+            testThis.addNext(null, null);
             Assert.fail("Expected Null Pointer Exception");
 
-        }catch (NullPointerException nullptr){}
+        } catch (NullPointerException nullptr) {
+        }
 
         System.out.println("Connect Location 2 to Location 1 with FLight 1");
-        testThis.addNext(testLoc2,flight1);
+        testThis.addNext(testLoc2, flight1);
 
-        Assert.assertTrue(testThis.getSize()==1);
+        Assert.assertTrue(testThis.getSize() == 1);
         Assert.assertEquals(testThis.getSourceCity(), testLoc1.getCity());
         Assert.assertTrue(testThis.contains(testLoc2));
 
@@ -94,13 +93,13 @@ public class AdjacencyListTest extends TestCase {
         Assert.assertFalse(testThis.contains(testLoc2));
         Assert.assertTrue(testThis.contains(testLoc1));
 
-        testThis.addNext(testLoc2,flight2);
+        testThis.addNext(testLoc2, flight2);
         Assert.assertTrue(testThis.contains(testLoc2));
         Assert.assertFalse(testThis.contains(testLoc3));
         Assert.assertFalse(testThis.contains(testLoc4));
 
-        testThis.addNext(testLoc3,flight3);
-        testThis.addNext(testLoc4,flight4);
+        testThis.addNext(testLoc3, flight3);
+        testThis.addNext(testLoc4, flight4);
 
         Assert.assertTrue(testThis.contains(testLoc3));
         Assert.assertTrue(testThis.contains(testLoc4));
@@ -114,27 +113,27 @@ public class AdjacencyListTest extends TestCase {
         setup();
 
         System.out.println("Test for Copy Lists. Add 3 locations to list.");
-        testThis.addNext(testLoc2,flight1);
-        testThis.addNext(testLoc3,flight3);
-        testThis.addNext(testLoc4,flight4);
-        testThis.addNext(testLoc5,flight5);
+        testThis.addNext(testLoc2, flight1);
+        testThis.addNext(testLoc3, flight3);
+        testThis.addNext(testLoc4, flight4);
+        testThis.addNext(testLoc5, flight5);
 
         ArrayList<Location> getLocs = null;
 
-        try{
+        try {
             testThis.copyList(getLocs);
             Assert.fail("Expected A NULL POINTER EXCEPTION");
+        } catch (NullPointerException nullptr) {
         }
-        catch(NullPointerException nullptr){}
 
         getLocs = new ArrayList<Location>();
         testThis.copyList(getLocs);
 
-        Assert.assertEquals(testThis.getSize(),4);
-        Assert.assertEquals(testThis.contains(testLoc1),getLocs.contains(testLoc1));
-        Assert.assertEquals(testThis.contains(testLoc2),getLocs.contains(testLoc2));
-        Assert.assertEquals(testThis.contains(testLoc3),getLocs.contains(testLoc3));
-        Assert.assertEquals(testThis.contains(testLoc4),getLocs.contains(testLoc4));
+        Assert.assertEquals(testThis.getSize(), 4);
+        Assert.assertEquals(testThis.contains(testLoc1), getLocs.contains(testLoc1));
+        Assert.assertEquals(testThis.contains(testLoc2), getLocs.contains(testLoc2));
+        Assert.assertEquals(testThis.contains(testLoc3), getLocs.contains(testLoc3));
+        Assert.assertEquals(testThis.contains(testLoc4), getLocs.contains(testLoc4));
 
         System.out.println("All testCopyList Tests Passed !");
         tear();
