@@ -51,137 +51,223 @@ public class DataAccessStub implements DataAccess {
         user = new User("Julie","smith", User.Gender.FEMALE,"jsmith","j&smith$","jmith@gmail.com","2048889999");
         allUsers.add(user);
 
-        Location winnipeg = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada","YWG");
+        Location winnipeg = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
         allLocations.add(winnipeg);
-        Location montreal = new Location("Montreal", ZoneId.of("America/Montreal"), "Canada","YUL");
+        Location montreal = new Location("Montreal", ZoneId.of("America/Montreal"), "Canada", "YUL");
         allLocations.add(montreal);
-        Location toronto = new Location("Toronto", ZoneId.of("America/Toronto"), "Canada","YYZ");
+        Location toronto = new Location("Toronto", ZoneId.of("America/Toronto"), "Canada", "YYZ");
         allLocations.add(toronto);
-        Location vancouver = new Location("Vancouver", ZoneId.of("America/Vancouver"), "Canada","YVR");
+        Location vancouver = new Location("Vancouver", ZoneId.of("America/Vancouver"), "Canada", "YVR");
         allLocations.add(vancouver);
-        Location calgary = new Location("Calgary", ZoneId.of("America/Edmonton"), "Canada","YYC");
+        Location calgary = new Location("Calgary", ZoneId.of("America/Edmonton"), "Canada", "YYC");
         allLocations.add(calgary);
-        Location regina = new Location("Regina", ZoneId.of("America/Regina"), "Canada","YQR");
+        Location regina = new Location("Regina", ZoneId.of("America/Regina"), "Canada", "YQR");
         allLocations.add(regina);
 
+        allFlights.add(new Flight(montreal, calgary, ZonedDateTime.of(2022, 8, 6, 5, 0, 0, 0, montreal.getZoneName()), 175, 4.75, 120));
+        allFlights.add(new Flight(montreal, calgary, ZonedDateTime.of(2022, 8, 24, 17, 30, 0, 0, montreal.getZoneName()), 125, 4.75, 300));
+        allFlights.add(new Flight(toronto, calgary, ZonedDateTime.of(2022, 7, 1, 17, 30, 0, 0, toronto.getZoneName()), 200, 3.25, 100));
+        allFlights.add(new Flight(vancouver, winnipeg, ZonedDateTime.of(2022, 8, 5, 5, 30, 0, 0, vancouver.getZoneName()), 150, 2.5, 220));
+        allFlights.add(new Flight(calgary, regina, ZonedDateTime.of(2022, 8, 10, 13, 0, 0, 0, calgary.getZoneName()), 200, 1.5, 140));
+        allFlights.add(new Flight(winnipeg, toronto, ZonedDateTime.of(2022, 7, 25, 20, 30, 0, 0, winnipeg.getZoneName()), 100, 2.3, 200));
+        allFlights.add(new Flight(toronto, winnipeg, ZonedDateTime.of(2022, 7, 8, 22, 0, 0, 0, toronto.getZoneName()), 125, 2.3, 100));
+        allFlights.add(new Flight(calgary, vancouver, ZonedDateTime.of(2022, 7, 3, 9, 30, 0, 0, calgary.getZoneName()), 200, 2.0, 120));
+        allFlights.add(new Flight(montreal, regina, ZonedDateTime.of(2022, 7, 23, 15, 30, 0, 0, montreal.getZoneName()), 200, 4.0, 240));
+        allFlights.add(new Flight(toronto, vancouver, ZonedDateTime.of(2022, 7, 24, 18, 0, 0, 0, toronto.getZoneName()), 175, 4.5, 260));
+        allFlights.add(new Flight(montreal, vancouver, ZonedDateTime.of(2022, 7, 25, 15, 30, 0, 0, montreal.getZoneName()), 125, 4.75, 260));
+        allFlights.add(new Flight(toronto, winnipeg, ZonedDateTime.of(2022, 7, 13, 11, 0, 0, 0, toronto.getZoneName()), 175, 2.3, 180));
+        allFlights.add(new Flight(montreal, toronto, ZonedDateTime.of(2022, 7, 10, 0, 0, 0, 0, montreal.getZoneName()), 175, 1.25, 200));
+        allFlights.add(new Flight(vancouver, toronto, ZonedDateTime.of(2022, 8, 5, 16, 30, 0, 0, vancouver.getZoneName()), 200, 4.5, 160));
+        allFlights.add(new Flight(montreal, regina, ZonedDateTime.of(2022, 7, 19, 16, 0, 0, 0, montreal.getZoneName()), 100, 4.0, 120));
+        allFlights.add(new Flight(regina, winnipeg, ZonedDateTime.of(2022, 7, 10, 23, 0, 0, 0, regina.getZoneName()), 175, 2.0, 200));
+        allFlights.add(new Flight(calgary, vancouver, ZonedDateTime.of(2022, 7, 18, 17, 0, 0, 0, calgary.getZoneName()), 100, 2.0, 260));
+        allFlights.add(new Flight(montreal, calgary, ZonedDateTime.of(2022, 8, 27, 17, 0, 0, 0, montreal.getZoneName()), 125, 4.75, 300));
+        allFlights.add(new Flight(regina, calgary, ZonedDateTime.of(2022, 8, 22, 6, 30, 0, 0, regina.getZoneName()), 100, 1.5, 240));
+        allFlights.add(new Flight(toronto, winnipeg, ZonedDateTime.of(2022, 7, 29, 5, 30, 0, 0, toronto.getZoneName()), 175, 2.3, 220));
+        allFlights.add(new Flight(toronto, vancouver, ZonedDateTime.of(2022, 8, 17, 18, 0, 0, 0, toronto.getZoneName()), 175, 4.5, 140));
+        allFlights.add(new Flight(calgary, winnipeg, ZonedDateTime.of(2022, 7, 25, 21, 30, 0, 0, calgary.getZoneName()), 150, 1.25, 260));
+        allFlights.add(new Flight(calgary, winnipeg, ZonedDateTime.of(2022, 8, 8, 7, 0, 0, 0, calgary.getZoneName()), 175, 1.25, 160));
+        allFlights.add(new Flight(vancouver, regina, ZonedDateTime.of(2022, 8, 28, 3, 30, 0, 0, vancouver.getZoneName()), 125, 1.3, 100));
+        allFlights.add(new Flight(vancouver, calgary, ZonedDateTime.of(2022, 7, 13, 7, 0, 0, 0, vancouver.getZoneName()), 175, 2.0, 220));
+        allFlights.add(new Flight(regina, toronto, ZonedDateTime.of(2022, 8, 17, 18, 30, 0, 0, regina.getZoneName()), 175, 4.2, 300));
+        allFlights.add(new Flight(calgary, winnipeg, ZonedDateTime.of(2022, 7, 11, 13, 30, 0, 0, calgary.getZoneName()), 125, 1.25, 220));
+        allFlights.add(new Flight(toronto, montreal, ZonedDateTime.of(2022, 7, 23, 4, 0, 0, 0, toronto.getZoneName()), 175, 1.25, 100));
+        allFlights.add(new Flight(montreal, regina, ZonedDateTime.of(2022, 7, 24, 4, 30, 0, 0, montreal.getZoneName()), 100, 4.0, 260));
+        allFlights.add(new Flight(calgary, toronto, ZonedDateTime.of(2022, 7, 12, 20, 30, 0, 0, calgary.getZoneName()), 125, 3.25, 100));
+        allFlights.add(new Flight(regina, vancouver, ZonedDateTime.of(2022, 8, 29, 14, 0, 0, 0, regina.getZoneName()), 125, 1.3, 100));
+        allFlights.add(new Flight(winnipeg, vancouver, ZonedDateTime.of(2022, 7, 6, 12, 30, 0, 0, winnipeg.getZoneName()), 125, 2.5, 140));
+        allFlights.add(new Flight(toronto, winnipeg, ZonedDateTime.of(2022, 8, 10, 21, 0, 0, 0, toronto.getZoneName()), 125, 2.3, 300));
+        allFlights.add(new Flight(winnipeg, regina, ZonedDateTime.of(2022, 8, 15, 23, 0, 0, 0, winnipeg.getZoneName()), 175, 2.0, 220));
+        allFlights.add(new Flight(vancouver, winnipeg, ZonedDateTime.of(2022, 7, 6, 4, 30, 0, 0, vancouver.getZoneName()), 100, 2.5, 260));
+        allFlights.add(new Flight(winnipeg, regina, ZonedDateTime.of(2022, 8, 15, 23, 30, 0, 0, winnipeg.getZoneName()), 200, 2.0, 260));
+        allFlights.add(new Flight(regina, calgary, ZonedDateTime.of(2022, 7, 25, 4, 30, 0, 0, regina.getZoneName()), 100, 1.5, 160));
+        allFlights.add(new Flight(vancouver, montreal, ZonedDateTime.of(2022, 7, 18, 23, 30, 0, 0, vancouver.getZoneName()), 100, 4.75, 220));
+        allFlights.add(new Flight(vancouver, calgary, ZonedDateTime.of(2022, 7, 16, 18, 0, 0, 0, vancouver.getZoneName()), 150, 2.0, 220));
+        allFlights.add(new Flight(montreal, calgary, ZonedDateTime.of(2022, 7, 24, 0, 0, 0, 0, montreal.getZoneName()), 125, 4.75, 300));
+        allFlights.add(new Flight(montreal, regina, ZonedDateTime.of(2022, 7, 16, 4, 0, 0, 0, montreal.getZoneName()), 175, 4.0, 120));
+        allFlights.add(new Flight(winnipeg, regina, ZonedDateTime.of(2022, 8, 29, 4, 30, 0, 0, winnipeg.getZoneName()), 200, 2.0, 100));
+        allFlights.add(new Flight(toronto, regina, ZonedDateTime.of(2022, 7, 9, 22, 0, 0, 0, toronto.getZoneName()), 150, 4.2, 160));
+        allFlights.add(new Flight(vancouver, regina, ZonedDateTime.of(2022, 8, 17, 18, 0, 0, 0, vancouver.getZoneName()), 100, 1.3, 160));
+        allFlights.add(new Flight(toronto, vancouver, ZonedDateTime.of(2022, 8, 8, 18, 30, 0, 0, toronto.getZoneName()), 175, 4.5, 260));
+        allFlights.add(new Flight(winnipeg, vancouver, ZonedDateTime.of(2022, 7, 8, 17, 0, 0, 0, winnipeg.getZoneName()), 150, 2.5, 180));
+        allFlights.add(new Flight(toronto, regina, ZonedDateTime.of(2022, 7, 27, 12, 30, 0, 0, toronto.getZoneName()), 125, 4.2, 280));
+        allFlights.add(new Flight(regina, vancouver, ZonedDateTime.of(2022, 8, 11, 20, 30, 0, 0, regina.getZoneName()), 150, 1.3, 280));
+        allFlights.add(new Flight(calgary, montreal, ZonedDateTime.of(2022, 7, 30, 2, 30, 0, 0, calgary.getZoneName()), 200, 4.75, 260));
+        allFlights.add(new Flight(winnipeg, regina, ZonedDateTime.of(2022, 7, 11, 10, 0, 0, 0, winnipeg.getZoneName()), 150, 2.0, 160));
+        allFlights.add(new Flight(winnipeg, regina, ZonedDateTime.of(2022, 7, 29, 8, 30, 0, 0, winnipeg.getZoneName()), 150, 2.0, 100));
+        allFlights.add(new Flight(calgary, regina, ZonedDateTime.of(2022, 7, 23, 13, 30, 0, 0, calgary.getZoneName()), 150, 1.5, 140));
+        allFlights.add(new Flight(regina, toronto, ZonedDateTime.of(2022, 7, 24, 10, 0, 0, 0, regina.getZoneName()), 125, 4.2, 240));
+        allFlights.add(new Flight(vancouver, toronto, ZonedDateTime.of(2022, 8, 20, 3, 0, 0, 0, vancouver.getZoneName()), 125, 4.5, 100));
+        allFlights.add(new Flight(regina, winnipeg, ZonedDateTime.of(2022, 8, 31, 3, 0, 0, 0, regina.getZoneName()), 150, 2.0, 300));
+        allFlights.add(new Flight(toronto, montreal, ZonedDateTime.of(2022, 7, 15, 13, 0, 0, 0, toronto.getZoneName()), 150, 1.25, 100));
+        allFlights.add(new Flight(regina, montreal, ZonedDateTime.of(2022, 8, 14, 22, 30, 0, 0, regina.getZoneName()), 100, 4.0, 180));
+        allFlights.add(new Flight(toronto, winnipeg, ZonedDateTime.of(2022, 7, 31, 3, 30, 0, 0, toronto.getZoneName()), 150, 2.3, 220));
+        allFlights.add(new Flight(toronto, montreal, ZonedDateTime.of(2022, 8, 13, 5, 30, 0, 0, toronto.getZoneName()), 150, 1.25, 100));
+        allFlights.add(new Flight(regina, montreal, ZonedDateTime.of(2022, 8, 11, 14, 30, 0, 0, regina.getZoneName()), 200, 4.0, 140));
+        allFlights.add(new Flight(toronto, vancouver, ZonedDateTime.of(2022, 8, 25, 18, 30, 0, 0, toronto.getZoneName()), 125, 4.5, 100));
+        allFlights.add(new Flight(toronto, regina, ZonedDateTime.of(2022, 8, 30, 23, 0, 0, 0, toronto.getZoneName()), 150, 4.2, 220));
+        allFlights.add(new Flight(winnipeg, regina, ZonedDateTime.of(2022, 8, 16, 17, 30, 0, 0, winnipeg.getZoneName()), 125, 2.0, 140));
+        allFlights.add(new Flight(calgary, winnipeg, ZonedDateTime.of(2022, 7, 10, 23, 30, 0, 0, calgary.getZoneName()), 150, 1.25, 200));
+        allFlights.add(new Flight(montreal, winnipeg, ZonedDateTime.of(2022, 7, 4, 3, 0, 0, 0, montreal.getZoneName()), 200, 2.6, 100));
+        allFlights.add(new Flight(vancouver, montreal, ZonedDateTime.of(2022, 7, 24, 4, 30, 0, 0, vancouver.getZoneName()), 175, 4.75, 220));
+        allFlights.add(new Flight(montreal, winnipeg, ZonedDateTime.of(2022, 7, 4, 14, 0, 0, 0, montreal.getZoneName()), 200, 2.6, 100));
+        allFlights.add(new Flight(winnipeg, regina, ZonedDateTime.of(2022, 7, 10, 9, 30, 0, 0, winnipeg.getZoneName()), 200, 2.0, 160));
+        allFlights.add(new Flight(toronto, winnipeg, ZonedDateTime.of(2022, 8, 3, 4, 30, 0, 0, toronto.getZoneName()), 200, 2.3, 260));
+        allFlights.add(new Flight(regina, montreal, ZonedDateTime.of(2022, 7, 3, 22, 0, 0, 0, regina.getZoneName()), 100, 4.0, 220));
+        allFlights.add(new Flight(calgary, winnipeg, ZonedDateTime.of(2022, 7, 12, 22, 0, 0, 0, calgary.getZoneName()), 175, 1.25, 160));
+        allFlights.add(new Flight(montreal, vancouver, ZonedDateTime.of(2022, 8, 15, 20, 30, 0, 0, montreal.getZoneName()), 200, 4.75, 300));
+        allFlights.add(new Flight(calgary, vancouver, ZonedDateTime.of(2022, 8, 18, 11, 30, 0, 0, calgary.getZoneName()), 150, 2.0, 200));
+        allFlights.add(new Flight(calgary, winnipeg, ZonedDateTime.of(2022, 8, 17, 8, 30, 0, 0, calgary.getZoneName()), 175, 1.25, 260));
+        allFlights.add(new Flight(regina, winnipeg, ZonedDateTime.of(2022, 8, 28, 16, 30, 0, 0, regina.getZoneName()), 150, 2.0, 180));
+        allFlights.add(new Flight(montreal, vancouver, ZonedDateTime.of(2022, 8, 2, 21, 0, 0, 0, montreal.getZoneName()), 200, 4.75, 160));
+        allFlights.add(new Flight(toronto, calgary, ZonedDateTime.of(2022, 8, 27, 18, 0, 0, 0, toronto.getZoneName()), 125, 3.25, 300));
+        allFlights.add(new Flight(winnipeg, montreal, ZonedDateTime.of(2022, 8, 24, 18, 0, 0, 0, winnipeg.getZoneName()), 125, 2.6, 300));
+        allFlights.add(new Flight(montreal, winnipeg, ZonedDateTime.of(2022, 7, 26, 12, 0, 0, 0, montreal.getZoneName()), 175, 2.6, 280));
+        allFlights.add(new Flight(toronto, montreal, ZonedDateTime.of(2022, 8, 10, 1, 0, 0, 0, toronto.getZoneName()), 175, 1.25, 220));
+        allFlights.add(new Flight(vancouver, montreal, ZonedDateTime.of(2022, 7, 5, 12, 30, 0, 0, vancouver.getZoneName()), 125, 4.75, 220));
+        allFlights.add(new Flight(calgary, vancouver, ZonedDateTime.of(2022, 8, 8, 0, 30, 0, 0, calgary.getZoneName()), 125, 2.0, 260));
+        allFlights.add(new Flight(montreal, vancouver, ZonedDateTime.of(2022, 7, 8, 21, 0, 0, 0, montreal.getZoneName()), 200, 4.75, 160));
+        allFlights.add(new Flight(montreal, regina, ZonedDateTime.of(2022, 8, 17, 12, 30, 0, 0, montreal.getZoneName()), 125, 4.0, 100));
+        allFlights.add(new Flight(calgary, vancouver, ZonedDateTime.of(2022, 8, 24, 5, 30, 0, 0, calgary.getZoneName()), 175, 2.0, 300));
+        allFlights.add(new Flight(toronto, regina, ZonedDateTime.of(2022, 7, 22, 0, 30, 0, 0, toronto.getZoneName()), 150, 4.2, 120));
+        allFlights.add(new Flight(vancouver, regina, ZonedDateTime.of(2022, 8, 16, 0, 30, 0, 0, vancouver.getZoneName()), 175, 1.3, 140));
+        allFlights.add(new Flight(vancouver, winnipeg, ZonedDateTime.of(2022, 8, 30, 9, 30, 0, 0, vancouver.getZoneName()), 125, 2.5, 120));
+        allFlights.add(new Flight(montreal, regina, ZonedDateTime.of(2022, 8, 16, 11, 0, 0, 0, montreal.getZoneName()), 175, 4.0, 160));
+        allFlights.add(new Flight(calgary, vancouver, ZonedDateTime.of(2022, 7, 22, 11, 30, 0, 0, calgary.getZoneName()), 100, 2.0, 200));
+        allFlights.add(new Flight(calgary, regina, ZonedDateTime.of(2022, 8, 14, 17, 30, 0, 0, calgary.getZoneName()), 175, 1.5, 100));
+        allFlights.add(new Flight(toronto, regina, ZonedDateTime.of(2022, 7, 18, 12, 30, 0, 0, toronto.getZoneName()), 125, 4.2, 200));
+        allFlights.add(new Flight(calgary, winnipeg, ZonedDateTime.of(2022, 8, 6, 15, 30, 0, 0, calgary.getZoneName()), 200, 1.25, 240));
+        allFlights.add(new Flight(calgary, regina, ZonedDateTime.of(2022, 8, 14, 23, 30, 0, 0, calgary.getZoneName()), 150, 1.5, 240));
+        allFlights.add(new Flight(regina, vancouver, ZonedDateTime.of(2022, 7, 28, 8, 30, 0, 0, regina.getZoneName()), 200, 1.3, 160));
+        allFlights.add(new Flight(vancouver, montreal, ZonedDateTime.of(2022, 7, 6, 14, 0, 0, 0, vancouver.getZoneName()), 100, 4.75, 120));
+        allFlights.add(new Flight(montreal, vancouver, ZonedDateTime.of(2022, 7, 18, 10, 0, 0, 0, montreal.getZoneName()), 125, 4.75, 260));
+        allFlights.add(new Flight(regina, vancouver, ZonedDateTime.of(2022, 8, 31, 20, 30, 0, 0, regina.getZoneName()), 200, 1.3, 300));
+        allFlights.add(new Flight(toronto, vancouver, ZonedDateTime.of(2022, 7, 7, 9, 30, 0, 0, toronto.getZoneName()), 100, 4.5, 300));
+        allFlights.add(new Flight(toronto, regina, ZonedDateTime.of(2022, 8, 7, 13, 0, 0, 0, toronto.getZoneName()), 125, 4.2, 260));
+        allFlights.add(new Flight(calgary, toronto, ZonedDateTime.of(2022, 8, 7, 8, 30, 0, 0, calgary.getZoneName()), 200, 3.25, 160));
+        allFlights.add(new Flight(montreal, vancouver, ZonedDateTime.of(2022, 8, 24, 3, 0, 0, 0, montreal.getZoneName()), 150, 4.75, 120));
+        allFlights.add(new Flight(vancouver, toronto, ZonedDateTime.of(2022, 7, 29, 1, 30, 0, 0, vancouver.getZoneName()), 125, 4.5, 260));
+        allFlights.add(new Flight(winnipeg, montreal, ZonedDateTime.of(2022, 8, 13, 8, 0, 0, 0, winnipeg.getZoneName()), 125, 2.6, 160));
+        allFlights.add(new Flight(toronto, vancouver, ZonedDateTime.of(2022, 8, 28, 15, 0, 0, 0, toronto.getZoneName()), 175, 4.5, 160));
+        allFlights.add(new Flight(calgary, vancouver, ZonedDateTime.of(2022, 8, 20, 0, 30, 0, 0, calgary.getZoneName()), 150, 2.0, 100));
+        allFlights.add(new Flight(winnipeg, toronto, ZonedDateTime.of(2022, 8, 20, 3, 30, 0, 0, winnipeg.getZoneName()), 150, 2.3, 260));
+        allFlights.add(new Flight(vancouver, calgary, ZonedDateTime.of(2022, 8, 12, 13, 0, 0, 0, vancouver.getZoneName()), 200, 2.0, 160));
+        allFlights.add(new Flight(montreal, calgary, ZonedDateTime.of(2022, 8, 27, 10, 30, 0, 0, montreal.getZoneName()), 100, 4.75, 300));
+        allFlights.add(new Flight(vancouver, toronto, ZonedDateTime.of(2022, 8, 25, 15, 30, 0, 0, vancouver.getZoneName()), 100, 4.5, 240));
+        allFlights.add(new Flight(toronto, vancouver, ZonedDateTime.of(2022, 7, 8, 6, 0, 0, 0, toronto.getZoneName()), 200, 4.5, 260));
+        allFlights.add(new Flight(montreal, toronto, ZonedDateTime.of(2022, 7, 27, 6, 0, 0, 0, montreal.getZoneName()), 200, 1.25, 220));
+        allFlights.add(new Flight(toronto, regina, ZonedDateTime.of(2022, 8, 12, 0, 30, 0, 0, toronto.getZoneName()), 100, 4.2, 100));
+        allFlights.add(new Flight(vancouver, winnipeg, ZonedDateTime.of(2022, 7, 16, 0, 0, 0, 0, vancouver.getZoneName()), 125, 2.5, 240));
+        allFlights.add(new Flight(regina, winnipeg, ZonedDateTime.of(2022, 7, 30, 19, 30, 0, 0, regina.getZoneName()), 150, 2.0, 160));
+        allFlights.add(new Flight(vancouver, regina, ZonedDateTime.of(2022, 7, 11, 21, 0, 0, 0, vancouver.getZoneName()), 200, 1.3, 260));
+        allFlights.add(new Flight(vancouver, montreal, ZonedDateTime.of(2022, 7, 29, 7, 0, 0, 0, vancouver.getZoneName()), 125, 4.75, 240));
+        allFlights.add(new Flight(vancouver, calgary, ZonedDateTime.of(2022, 7, 28, 22, 30, 0, 0, vancouver.getZoneName()), 125, 2.0, 280));
+        allFlights.add(new Flight(toronto, regina, ZonedDateTime.of(2022, 8, 20, 11, 30, 0, 0, toronto.getZoneName()), 200, 4.2, 100));
+        allFlights.add(new Flight(calgary, toronto, ZonedDateTime.of(2022, 7, 2, 11, 0, 0, 0, calgary.getZoneName()), 150, 3.25, 300));
+        allFlights.add(new Flight(regina, winnipeg, ZonedDateTime.of(2022, 8, 5, 20, 30, 0, 0, regina.getZoneName()), 200, 2.0, 140));
+        allFlights.add(new Flight(winnipeg, regina, ZonedDateTime.of(2022, 7, 18, 5, 0, 0, 0, winnipeg.getZoneName()), 100, 2.0, 240));
+        allFlights.add(new Flight(winnipeg, toronto, ZonedDateTime.of(2022, 7, 14, 1, 30, 0, 0, winnipeg.getZoneName()), 200, 2.3, 200));
+        allFlights.add(new Flight(regina, calgary, ZonedDateTime.of(2022, 8, 14, 4, 30, 0, 0, regina.getZoneName()), 125, 1.5, 280));
+        allFlights.add(new Flight(vancouver, calgary, ZonedDateTime.of(2022, 7, 24, 20, 30, 0, 0, vancouver.getZoneName()), 125, 2.0, 240));
+        allFlights.add(new Flight(winnipeg, montreal, ZonedDateTime.of(2022, 7, 27, 0, 30, 0, 0, winnipeg.getZoneName()), 150, 2.6, 180));
+        allFlights.add(new Flight(vancouver, montreal, ZonedDateTime.of(2022, 7, 10, 19, 0, 0, 0, vancouver.getZoneName()), 125, 4.75, 240));
+        allFlights.add(new Flight(toronto, regina, ZonedDateTime.of(2022, 8, 8, 16, 30, 0, 0, toronto.getZoneName()), 175, 4.2, 260));
+        allFlights.add(new Flight(vancouver, calgary, ZonedDateTime.of(2022, 8, 11, 1, 30, 0, 0, vancouver.getZoneName()), 150, 2.0, 280));
+        allFlights.add(new Flight(montreal, toronto, ZonedDateTime.of(2022, 8, 5, 5, 30, 0, 0, montreal.getZoneName()), 175, 1.25, 300));
+        allFlights.add(new Flight(winnipeg, toronto, ZonedDateTime.of(2022, 8, 26, 12, 30, 0, 0, winnipeg.getZoneName()), 200, 2.3, 260));
+        allFlights.add(new Flight(calgary, winnipeg, ZonedDateTime.of(2022, 8, 26, 20, 30, 0, 0, calgary.getZoneName()), 200, 1.25, 160));
+        allFlights.add(new Flight(montreal, vancouver, ZonedDateTime.of(2022, 7, 29, 13, 30, 0, 0, montreal.getZoneName()), 100, 4.75, 200));
+        allFlights.add(new Flight(montreal, winnipeg, ZonedDateTime.of(2022, 8, 17, 12, 30, 0, 0, montreal.getZoneName()), 200, 2.6, 120));
+        allFlights.add(new Flight(montreal, winnipeg, ZonedDateTime.of(2022, 7, 28, 14, 30, 0, 0, montreal.getZoneName()), 125, 2.6, 180));
+        allFlights.add(new Flight(vancouver, regina, ZonedDateTime.of(2022, 8, 25, 10, 0, 0, 0, vancouver.getZoneName()), 175, 1.3, 240));
+        allFlights.add(new Flight(regina, calgary, ZonedDateTime.of(2022, 7, 25, 17, 0, 0, 0, regina.getZoneName()), 150, 1.5, 260));
+        allFlights.add(new Flight(calgary, toronto, ZonedDateTime.of(2022, 7, 16, 7, 0, 0, 0, calgary.getZoneName()), 125, 3.25, 120));
+        allFlights.add(new Flight(regina, montreal, ZonedDateTime.of(2022, 7, 9, 1, 30, 0, 0, regina.getZoneName()), 125, 4.0, 300));
+        allFlights.add(new Flight(montreal, winnipeg, ZonedDateTime.of(2022, 7, 31, 21, 30, 0, 0, montreal.getZoneName()), 150, 2.6, 160));
+        allFlights.add(new Flight(calgary, winnipeg, ZonedDateTime.of(2022, 8, 14, 15, 0, 0, 0, calgary.getZoneName()), 175, 1.25, 160));
+        allFlights.add(new Flight(regina, montreal, ZonedDateTime.of(2022, 8, 17, 16, 30, 0, 0, regina.getZoneName()), 200, 4.0, 160));
+        allFlights.add(new Flight(regina, montreal, ZonedDateTime.of(2022, 8, 20, 15, 30, 0, 0, regina.getZoneName()), 125, 4.0, 260));
+        allFlights.add(new Flight(toronto, winnipeg, ZonedDateTime.of(2022, 8, 31, 18, 30, 0, 0, toronto.getZoneName()), 175, 2.3, 280));
+        allFlights.add(new Flight(winnipeg, regina, ZonedDateTime.of(2022, 7, 13, 21, 30, 0, 0, winnipeg.getZoneName()), 125, 2.0, 200));
+        allFlights.add(new Flight(regina, montreal, ZonedDateTime.of(2022, 7, 5, 6, 30, 0, 0, regina.getZoneName()), 125, 4.0, 220));
+        allFlights.add(new Flight(regina, vancouver, ZonedDateTime.of(2022, 8, 7, 2, 0, 0, 0, regina.getZoneName()), 100, 1.3, 260));
+        allFlights.add(new Flight(regina, calgary, ZonedDateTime.of(2022, 8, 22, 16, 0, 0, 0, regina.getZoneName()), 100, 1.5, 120));
+        allFlights.add(new Flight(toronto, montreal, ZonedDateTime.of(2022, 7, 30, 5, 0, 0, 0, toronto.getZoneName()), 150, 1.25, 120));
+        allFlights.add(new Flight(toronto, montreal, ZonedDateTime.of(2022, 8, 13, 19, 30, 0, 0, toronto.getZoneName()), 200, 1.25, 140));
+        allFlights.add(new Flight(calgary, montreal, ZonedDateTime.of(2022, 8, 29, 4, 30, 0, 0, calgary.getZoneName()), 100, 4.75, 300));
+        allFlights.add(new Flight(calgary, regina, ZonedDateTime.of(2022, 8, 6, 15, 0, 0, 0, calgary.getZoneName()), 150, 1.5, 300));
+        allFlights.add(new Flight(toronto, regina, ZonedDateTime.of(2022, 8, 26, 15, 30, 0, 0, toronto.getZoneName()), 125, 4.2, 200));
+        allFlights.add(new Flight(regina, toronto, ZonedDateTime.of(2022, 7, 26, 13, 30, 0, 0, regina.getZoneName()), 200, 4.2, 240));
+        allFlights.add(new Flight(toronto, regina, ZonedDateTime.of(2022, 7, 3, 20, 30, 0, 0, toronto.getZoneName()), 125, 4.2, 240));
+        allFlights.add(new Flight(montreal, regina, ZonedDateTime.of(2022, 8, 19, 9, 0, 0, 0, montreal.getZoneName()), 175, 4.0, 280));
+        allFlights.add(new Flight(regina, vancouver, ZonedDateTime.of(2022, 7, 21, 20, 30, 0, 0, regina.getZoneName()), 150, 1.3, 220));
+        allFlights.add(new Flight(regina, vancouver, ZonedDateTime.of(2022, 8, 4, 2, 0, 0, 0, regina.getZoneName()), 125, 1.3, 200));
+        allFlights.add(new Flight(montreal, vancouver, ZonedDateTime.of(2022, 8, 14, 4, 0, 0, 0, montreal.getZoneName()), 200, 4.75, 280));
+        allFlights.add(new Flight(montreal, vancouver, ZonedDateTime.of(2022, 7, 13, 10, 0, 0, 0, montreal.getZoneName()), 150, 4.75, 200));
+        allFlights.add(new Flight(vancouver, montreal, ZonedDateTime.of(2022, 7, 26, 23, 0, 0, 0, vancouver.getZoneName()), 100, 4.75, 220));
+        allFlights.add(new Flight(calgary, winnipeg, ZonedDateTime.of(2022, 8, 30, 18, 30, 0, 0, calgary.getZoneName()), 150, 1.25, 220));
+        allFlights.add(new Flight(vancouver, regina, ZonedDateTime.of(2022, 8, 23, 6, 30, 0, 0, vancouver.getZoneName()), 100, 1.3, 240));
+        allFlights.add(new Flight(calgary, regina, ZonedDateTime.of(2022, 8, 30, 4, 0, 0, 0, calgary.getZoneName()), 100, 1.5, 220));
+        allFlights.add(new Flight(montreal, winnipeg, ZonedDateTime.of(2022, 7, 18, 11, 30, 0, 0, montreal.getZoneName()), 200, 2.6, 140));
+        allFlights.add(new Flight(vancouver, regina, ZonedDateTime.of(2022, 7, 26, 23, 30, 0, 0, vancouver.getZoneName()), 175, 1.3, 140));
+        allFlights.add(new Flight(calgary, montreal, ZonedDateTime.of(2022, 8, 28, 15, 0, 0, 0, calgary.getZoneName()), 125, 4.75, 140));
+        allFlights.add(new Flight(regina, winnipeg, ZonedDateTime.of(2022, 8, 31, 21, 0, 0, 0, regina.getZoneName()), 200, 2.0, 220));
+        allFlights.add(new Flight(regina, vancouver, ZonedDateTime.of(2022, 7, 24, 5, 0, 0, 0, regina.getZoneName()), 150, 1.3, 120));
+        allFlights.add(new Flight(vancouver, regina, ZonedDateTime.of(2022, 7, 30, 5, 0, 0, 0, vancouver.getZoneName()), 150, 1.3, 120));
+        allFlights.add(new Flight(montreal, calgary, ZonedDateTime.of(2022, 8, 24, 5, 30, 0, 0, montreal.getZoneName()), 175, 4.75, 200));
+        allFlights.add(new Flight(winnipeg, montreal, ZonedDateTime.of(2022, 8, 30, 6, 0, 0, 0, winnipeg.getZoneName()), 200, 2.6, 140));
+        allFlights.add(new Flight(calgary, toronto, ZonedDateTime.of(2022, 8, 18, 15, 30, 0, 0, calgary.getZoneName()), 200, 3.25, 120));
+        allFlights.add(new Flight(montreal, vancouver, ZonedDateTime.of(2022, 7, 10, 9, 0, 0, 0, montreal.getZoneName()), 150, 4.75, 140));
+        allFlights.add(new Flight(winnipeg, calgary, ZonedDateTime.of(2022, 8, 9, 12, 0, 0, 0, winnipeg.getZoneName()), 175, 1.25, 200));
+        allFlights.add(new Flight(regina, calgary, ZonedDateTime.of(2022, 8, 16, 7, 30, 0, 0, regina.getZoneName()), 200, 1.5, 160));
+        allFlights.add(new Flight(winnipeg, vancouver, ZonedDateTime.of(2022, 8, 28, 16, 0, 0, 0, winnipeg.getZoneName()), 175, 2.5, 120));
+        allFlights.add(new Flight(regina, vancouver, ZonedDateTime.of(2022, 8, 4, 17, 0, 0, 0, regina.getZoneName()), 175, 1.3, 100));
+        allFlights.add(new Flight(regina, toronto, ZonedDateTime.of(2022, 7, 26, 22, 0, 0, 0, regina.getZoneName()), 150, 4.2, 100));
+        allFlights.add(new Flight(regina, winnipeg, ZonedDateTime.of(2022, 7, 26, 12, 0, 0, 0, regina.getZoneName()), 150, 2.0, 180));
+        allFlights.add(new Flight(calgary, winnipeg, ZonedDateTime.of(2022, 8, 30, 19, 0, 0, 0, calgary.getZoneName()), 175, 1.25, 300));
+        allFlights.add(new Flight(toronto, winnipeg, ZonedDateTime.of(2022, 7, 11, 21, 30, 0, 0, toronto.getZoneName()), 100, 2.3, 160));
+        allFlights.add(new Flight(toronto, vancouver, ZonedDateTime.of(2022, 7, 28, 12, 0, 0, 0, toronto.getZoneName()), 150, 4.5, 100));
+        allFlights.add(new Flight(calgary, winnipeg, ZonedDateTime.of(2022, 8, 9, 7, 30, 0, 0, calgary.getZoneName()), 125, 1.25, 180));
+        allFlights.add(new Flight(regina, vancouver, ZonedDateTime.of(2022, 7, 8, 13, 30, 0, 0, regina.getZoneName()), 200, 1.3, 280));
+        allFlights.add(new Flight(toronto, vancouver, ZonedDateTime.of(2022, 8, 17, 23, 0, 0, 0, toronto.getZoneName()), 125, 4.5, 140));
+        allFlights.add(new Flight(vancouver, calgary, ZonedDateTime.of(2022, 7, 30, 10, 30, 0, 0, vancouver.getZoneName()), 100, 2.0, 200));
+        allFlights.add(new Flight(toronto, montreal, ZonedDateTime.of(2022, 8, 8, 2, 30, 0, 0, toronto.getZoneName()), 175, 1.25, 100));
+        allFlights.add(new Flight(montreal, regina, ZonedDateTime.of(2022, 7, 16, 0, 30, 0, 0, montreal.getZoneName()), 175, 4.0, 240));
+        allFlights.add(new Flight(winnipeg, toronto, ZonedDateTime.of(2022, 7, 1, 13, 0, 0, 0, winnipeg.getZoneName()), 200, 2.3, 280));
+        allFlights.add(new Flight(toronto, vancouver, ZonedDateTime.of(2022, 7, 17, 18, 0, 0, 0, toronto.getZoneName()), 200, 4.5, 200));
+        allFlights.add(new Flight(regina, montreal, ZonedDateTime.of(2022, 8, 20, 23, 0, 0, 0, regina.getZoneName()), 125, 4.0, 180));
+        allFlights.add(new Flight(calgary, montreal, ZonedDateTime.of(2022, 7, 21, 0, 30, 0, 0, calgary.getZoneName()), 200, 4.75, 280));
+        allFlights.add(new Flight(montreal, winnipeg, ZonedDateTime.of(2022, 8, 20, 23, 30, 0, 0, montreal.getZoneName()), 200, 2.6, 140));
+        allFlights.add(new Flight(calgary, vancouver, ZonedDateTime.of(2022, 7, 16, 0, 0, 0, 0, calgary.getZoneName()), 125, 2.0, 160));
+        allFlights.add(new Flight(winnipeg, regina, ZonedDateTime.of(2022, 7, 14, 2, 0, 0, 0, winnipeg.getZoneName()), 125, 2.0, 100));
+        allFlights.add(new Flight(montreal, winnipeg, ZonedDateTime.of(2022, 7, 27, 4, 30, 0, 0, montreal.getZoneName()), 175, 2.6, 220));
+        allFlights.add(new Flight(regina, winnipeg, ZonedDateTime.of(2022, 7, 27, 17, 0, 0, 0, regina.getZoneName()), 125, 2.0, 180));
+        allFlights.add(new Flight(winnipeg, vancouver, ZonedDateTime.of(2022, 8, 22, 6, 0, 0, 0, winnipeg.getZoneName()), 150, 2.5, 240));
+        allFlights.add(new Flight(regina, toronto, ZonedDateTime.of(2022, 7, 15, 17, 0, 0, 0, regina.getZoneName()), 200, 4.2, 300));
 
 
-        //Winnipeg to montreal
-        Flight winToMn = new Flight(winnipeg,montreal, ZonedDateTime.of(2022,6,11,7,30,0,0,winnipeg.getZoneName()), 250, 2.5, 500);
-        allFlights.add(winToMn);
-        Flight winToMn2 = new Flight(winnipeg,montreal, ZonedDateTime.of(2022,6,19,7,30,0,0,winnipeg.getZoneName()), 250, 2.5, 500);
-        allFlights.add(winToMn2);
-        Flight winToMn3 = new Flight(winnipeg,montreal,  ZonedDateTime.of(2022,7,7,7,30,0,0,winnipeg.getZoneName()), 250, 2.5, 1500);
-        allFlights.add(winToMn3);
-
-        //winnipeg to toronto
-        Flight winToTor = new Flight(winnipeg,toronto,  ZonedDateTime.of(2022,6,13,5,30,0,0,winnipeg.getZoneName()), 150, 2.6, 750);
-        allFlights.add(winToTor);
-        Flight winToTor2 = new Flight(winnipeg,toronto,  ZonedDateTime.of(2022,6,13,5,30,0,0,winnipeg.getZoneName()), 150, 2.6, 750);
-        allFlights.add(winToTor2);
-
-        //winnipeg to vancouver
-        Flight winToVan = new Flight(winnipeg,vancouver,  ZonedDateTime.of(2022,8,1,11,30,0,0,winnipeg.getZoneName()), 250, 3.0, 1000);
-        allFlights.add(winToVan);
-
-
-        Flight winToReg = new Flight(winnipeg,regina, ZonedDateTime.of(2022,7,14,15,30,0,0,winnipeg.getZoneName()), 100, 3.0, 200);
-        allFlights.add(winToReg);
-        Flight winToReg2 = new Flight(winnipeg,montreal, ZonedDateTime.of(2022,7,21,15,30,0,0,winnipeg.getZoneName()), 100, 3.0, 200);
-        allFlights.add(winToReg2);
-
-        //toronto to vancouver
-        Flight torToVan = new Flight(toronto,vancouver, ZonedDateTime.of(2022,9,4,13,15,0,0,toronto.getZoneName()), 300, 5.0, 1200);
-        allFlights.add(torToVan);
-        Flight torToVan2 = new Flight(toronto,vancouver,ZonedDateTime.of(2022,9,25,17,15,0,0,toronto.getZoneName()), 300, 5.0, 1200);
-        allFlights.add(torToVan2);
-        Flight torToVan3 = new Flight(toronto,vancouver, ZonedDateTime.of(2022,10,4,13,15,0,0,toronto.getZoneName()), 300, 5.0, 1200);
-        allFlights.add(torToVan3);
-        Flight torToVan4 = new Flight(toronto,vancouver,ZonedDateTime.of(2022,10,25,17,15,0,0,toronto.getZoneName()), 300, 5.0, 1200);
-        allFlights.add(torToVan4);
-
-
-        //toronto to montreal
-        Flight torToMn = new Flight(toronto,montreal, ZonedDateTime.of(2022,10,5,6,0,0,0,toronto.getZoneName()), 300, 1.3, 100);
-        allFlights.add(torToMn);
-
-        //toronto to winnipeg
-        Flight torToWn = new Flight(toronto,winnipeg, ZonedDateTime.of(2022,11,15,16,0,0,0,toronto.getZoneName()), 250, 2.6, 750);
-        allFlights.add(torToWn);
-
-        //toronto to calgary
-        Flight torToCal = new Flight(toronto,calgary, ZonedDateTime.of(2022,12,25,19,30,0,0,toronto.getZoneName()), 250, 4.1, 750);
-        allFlights.add(torToCal);
-
-        //regina to winnipeg
-        Flight regToWin = new Flight(regina,winnipeg, ZonedDateTime.of(2022,8,28,1,30,0,0,regina.getZoneName()), 200, 1.3, 120);
-        allFlights.add(regToWin);
-        Flight regToWin2 = new Flight(regina,winnipeg, ZonedDateTime.of(2022,9,25,2,0,0,0,regina.getZoneName()), 200, 1.3, 120);
-        allFlights.add(regToWin2);
-        Flight regToWin3 = new Flight(regina,winnipeg, ZonedDateTime.of(2022,10,25,3,0,0,0,regina.getZoneName()), 200, 1.3, 120);
-        allFlights.add(regToWin3);
-
-
-        //regina to calgary
-        Flight regToCal = new Flight(regina,calgary,ZonedDateTime.of(2022,7,30,12,50,0,0,regina.getZoneName()), 100, 1.5, 180);
-        allFlights.add(regToCal);
-        Flight regToCal2 = new Flight(regina,calgary, ZonedDateTime.of(2022,9,10,12,50,0,0,regina.getZoneName()), 100, 1.5, 180);
-        allFlights.add(regToCal2);
-
-        //vancouver to calgary
-        Flight vanToCal = new Flight(vancouver,calgary, ZonedDateTime.of(2022,7,29,20,50,0,0,vancouver.getZoneName()), 200, 1.4, 220);
-        allFlights.add(vanToCal);
-        Flight vanToCal2 = new Flight(vancouver,calgary, ZonedDateTime.of(2022,8,17,10,50,0,0,vancouver.getZoneName()), 200, 1.4, 220);
-        allFlights.add(vanToCal2);
-
-        //calgary to vancouver
-        Flight calToVan = new Flight(calgary,vancouver, ZonedDateTime.of(2022,10,2,2,0,0,0,calgary.getZoneName()), 200, 1.4, 220);
-        allFlights.add(calToVan);
-        Flight calToVan1 = new Flight(calgary,vancouver,ZonedDateTime.of(2022,10,12,7,0,0,0,calgary.getZoneName()), 200, 1.4, 220);
-        allFlights.add(calToVan1);
-        Flight calToVan2 = new Flight(calgary,vancouver, ZonedDateTime.of(2022,10,25,18,0,0,0,calgary.getZoneName()), 200, 1.4, 220);
-        allFlights.add(calToVan2);
-
-        //calgary to toronto
-        Flight calToTor = new Flight(calgary,toronto,ZonedDateTime.of(2022,7,2,15,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
-        allFlights.add(calToTor);
-
-        Flight calToTor1 = new Flight(calgary,toronto, ZonedDateTime.of(2022,7,9,11,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
-        allFlights.add(calToTor1);
-
-        Flight calToTor2 = new Flight(calgary,toronto, ZonedDateTime.of(2022,7,16,5,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
-        allFlights.add(calToTor2);
-
-        Flight calToTor3 = new Flight(calgary,toronto, ZonedDateTime.of(2022,7,30,21,0,0,0,calgary.getZoneName()), 200, 4.2 , 300);
-        allFlights.add(calToTor3);
-
-        Flight calToTor4 = new Flight(calgary,toronto, ZonedDateTime.of(2022,8,2,10,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
-        allFlights.add(calToTor4);
-
-        Flight calToTor5 = new Flight(calgary,toronto, ZonedDateTime.of(2022,8,11,12,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
-        allFlights.add(calToTor5);
-
-        Flight calToTor6 = new Flight(calgary,toronto, ZonedDateTime.of(2022,8,21,18,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
-        allFlights.add(calToTor6);
-
-        Flight calToTor7 = new Flight(calgary,toronto, ZonedDateTime.of(2022,9,24,3,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
-        allFlights.add(calToTor7);
-
-        Flight calToTor8 = new Flight(calgary,toronto, ZonedDateTime.of(2022,9,27,5,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
-        allFlights.add(calToTor8);
-
-        Flight calToTor9 = new Flight(calgary,toronto, ZonedDateTime.of(2022,10,18,17,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
-        allFlights.add(calToTor9);
-
-        Flight calToTor10 = new Flight(calgary,toronto, ZonedDateTime.of(2022,10,22,22,30,0,0,calgary.getZoneName()), 200, 4.2 , 300);
-        allFlights.add(calToTor10);
-
-        Flight montoTor = new Flight(montreal,toronto, ZonedDateTime.of(2022,8,27,15,0,0,0,montreal.getZoneName()), 200, 1.3 , 200);
-        allFlights.add(montoTor);
-
-
-        bookingManager.createBooking("braico", new Route(winToMn),null,2);
-        bookingManager.createBooking("braico", new Route(torToVan),null,2);
+//        bookingManager.createBooking("braico", new Route(winToMn),null,2);
+//        bookingManager.createBooking("braico", new Route(torToVan),null,2);
 
         System.out.println("Opened " +dbType +" database " +dbName);
     }
@@ -234,4 +320,5 @@ public class DataAccessStub implements DataAccess {
         else
             return null;
     }
+
 }
