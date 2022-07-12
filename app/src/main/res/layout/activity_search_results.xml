@@ -76,13 +76,14 @@
                 android:id="@+id/no_results_found"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:layout_below="@id/search_results_title_layout"
                 android:gravity="center"
                 android:text="@string/no_flights_found"
                 android:textColor="@color/design_default_color_background"
                 android:textSize="40sp"
                 android:textStyle="bold"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_search_results"

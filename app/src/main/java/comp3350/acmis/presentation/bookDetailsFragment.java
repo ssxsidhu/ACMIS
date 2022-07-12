@@ -1,5 +1,6 @@
 package comp3350.acmis.presentation;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,8 +22,12 @@ import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZoneOffset;
+import org.threeten.bp.format.DateTimeFormatter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -72,7 +77,7 @@ public class bookDetailsFragment extends Fragment {
 
         //calender constraints setting
         CalendarConstraints.Builder constraints = new CalendarConstraints.Builder();
-        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         constraints.setStart(startDate);
         calendar.set(2022, 12, Calendar.DATE);
         constraints.setEnd(calendar.getTimeInMillis());
@@ -83,7 +88,7 @@ public class bookDetailsFragment extends Fragment {
     }
 
     private void pickDepartDate(View view){
-        long today = Instant.now().toEpochMilli();
+        long today = MaterialDatePicker.todayInUtcMilliseconds();
         MaterialDatePicker<Long> materialDatePicker = setCalender("Select Departure Date",today);
         pickDepart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,8 +100,9 @@ public class bookDetailsFragment extends Fragment {
 
         materialDatePicker.addOnPositiveButtonClickListener(selection -> {
             pickDepart.setText(String.format(Locale.CANADA, "Depart %s", materialDatePicker.getHeaderText()));
-            departDate = Instant.ofEpochMilli(selection).atZone(ZoneId.systemDefault()).toLocalDate();
-            System.out.println("in book fragment"+departDate+", "+returnDate);
+            Calendar utc = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+            utc.setTimeInMillis(selection);
+            departDate = LocalDate.parse(calendarToDate(utc,"yyyy-MM-dd"));
             pickReturn.setEnabled(true);
             if(returnDate!=null && returnDate.isBefore(departDate)){
                 returnDate = null;
@@ -109,7 +115,6 @@ public class bookDetailsFragment extends Fragment {
 
     }
 
-
     private void pickReturnDate(View view) {
         checkRoundTrip(view);
         pickReturn.setOnClickListener(new View.OnClickListener() {
@@ -119,12 +124,28 @@ public class bookDetailsFragment extends Fragment {
                 materialDatePicker.show(getParentFragmentManager(), "MATERIAL_DATE_PICKER_RETURN");
                 materialDatePicker.addOnPositiveButtonClickListener(selection -> {
                     pickReturn.setText(String.format(Locale.CANADA, "Return %s", materialDatePicker.getHeaderText()));
-                    returnDate = Instant.ofEpochMilli(selection).atZone(ZoneId.systemDefault()).toLocalDate();
+                    Calendar utc = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+                    utc.setTimeInMillis(selection);
+                    returnDate = LocalDate.parse(calendarToDate(utc,"yyyy-MM-dd")); ;
                     searchFlightsButton.setEnabled(true);
                 });
             }
         });
 
+    }
+
+
+    public String calendarToDate(Calendar calendar, String dateFormat) {
+        if (calendar == null) {
+            return null;
+        }
+        Locale locale = requireContext().getResources().getConfiguration().locale;
+        DateFormat df = new SimpleDateFormat(dateFormat, locale);
+        TimeZone timeZone = TimeZone.getTimeZone("UTC");
+        df.setTimeZone(timeZone);
+
+        Date d = calendar.getTime();
+        return df.format(d);
     }
 
     private void pickNumPassengers(View view) {
@@ -137,8 +158,11 @@ public class bookDetailsFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectedNumPassengers++;
-                setNumPassengers(passengerButton);
+                if(selectedNumPassengers<25) {
+                    selectedNumPassengers++;
+                    setNumPassengers(passengerButton);
+                }else
+                    Messages.snackBar(view,"Maximum Number of passengers reached for this account");
                 subtractButton.setEnabled(selectedNumPassengers != 1);
             }
         });
