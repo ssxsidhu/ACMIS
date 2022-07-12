@@ -22,7 +22,7 @@ import comp3350.acmis.objects.Route;
 import comp3350.acmis.objects.User;
 
 
-public class DataAccessObject implements DataAccess{
+public class DataAccessObject implements DataAccess {
 	private Statement st1, st2, st3;
 	private Connection c1;
 	private ResultSet rs1, rs2, rs3, rs4;
@@ -137,7 +137,6 @@ public class DataAccessObject implements DataAccess{
 		return result;
 	}
 
-
 	public String getLocations(ArrayList<Location> resultList) {
 		Location location;
 		int id = -1;
@@ -168,11 +167,6 @@ public class DataAccessObject implements DataAccess{
 		return result;
 	}
 
-
-
-
-
-
 	public String addBooking(Booking newBooking) {
 		int userID = newBooking.getBooker().getUserID();
 		int numPassengers = newBooking.getNumPassengers();
@@ -202,8 +196,6 @@ public class DataAccessObject implements DataAccess{
 
 		return null;
 	}
-
-
 
 	public User getUserObject(String username) {
 		User user = null;
@@ -251,8 +243,6 @@ public class DataAccessObject implements DataAccess{
 		return user;
 	}
 
-
-	//TODO currently only does single flight routes
 	public String getUserBookings(User user, ArrayList<Booking> userBookings) {
 		Booking booking;
 		Route routeDepart = new Route();
@@ -263,7 +253,6 @@ public class DataAccessObject implements DataAccess{
 		String departureFlights = EOF, returnFlights = EOF;
 
 		result = null;
-		//GET ALL BOOKINGS
 		try {
 			cmdString = "Select * from Bookings where userID = " + user.getUserID();
 			rs1 = st1.executeQuery(cmdString);
@@ -271,7 +260,6 @@ public class DataAccessObject implements DataAccess{
 				numPassengers = rs1.getInt("numPassengers");
 
 				departureFlights = rs1.getString("routeDepart");
-
 				String departureList[] = departureFlights.split(",");
 				for (int i = 0; i < departureList.length; i++) {
 					String currentFlightID = departureList[i];
@@ -326,25 +314,80 @@ public class DataAccessObject implements DataAccess{
 					rs3.close();
 				}
 
-				System.out.println(routeDepart.getFlightsCSV());
 				returnFlights = rs1.getString("routeReturn");
+				if (returnFlights != null) {
+					String returnList[] = returnFlights.split(",");
+					for (int i = 0; i < departureList.length; i++) {
+						String currentFlightID = returnList[i];
 
-				System.out.println(routeDepart.getFlightsCSV());
+						try {
+							cmdString = "Select * from Flights where flightID = " + currentFlightID;
+							rs3 = st2.executeQuery(cmdString);
 
-				booking = new Booking(user, routeDepart, null, numPassengers);
+							while (rs3.next()) {
+								int id = rs3.getInt("flightID");
+								int startLocation = rs3.getInt("startLocation");
+								int endLocation =  rs3.getInt("endLocation");
+								int year =  rs3.getInt("year");
+								int month = rs3.getInt("month");
+								int day = rs3.getInt("day");
+								int hour = rs3.getInt("hour");
+								int minute = rs3.getInt("minute");
+								int seats = rs3.getInt("seats");
+								int cost = rs3.getInt("cost");
+								double duration = rs3.getDouble("duration");
+
+								try {
+									cmdString = "Select * from Locations where locationID = " + startLocation + " or locationID = " + endLocation;
+									rs4 = st2.executeQuery(cmdString);
+
+									while (rs4.next()) {
+										String city = rs4.getString("city");
+										String country =  rs4.getString("country");
+										String airport =  rs4.getString("airport");
+										String timezone = rs4.getString("timezone");
+
+										if (rs4.getString("locationID").equals(startLocation + "")) {
+											source = new Location(city, ZoneId.of(timezone), country, airport);
+										}
+										else {
+											dest = new Location(city, ZoneId.of(timezone), country, airport);
+										}
+									}
+
+								} catch (Exception e) {
+									result = processSQLError(e);
+								}
+								rs4.close();
+
+								flight = new Flight(id, source, dest, ZonedDateTime.of(year, month, day, hour, minute, 0, 0, source.getZoneName()), seats, duration, cost );
+								routeReturn.addToRoute(flight);
+							}
+
+						} catch (Exception e) {
+							result = processSQLError(e);
+						}
+						rs3.close();
+					}
+				}
+
+				if (routeReturn.getRoute().size() != 0) {
+					booking = new Booking(user, routeDepart, routeReturn, numPassengers);
+				}
+				else {
+					booking = new Booking(user, routeDepart, null, numPassengers);
+				}
+
 				userBookings.add(booking);
+				routeDepart = new Route();
+				routeReturn = new Route();
 			}
-			rs1.close(); //END GET ALL BOOKINGS
+			rs1.close();
 		} catch (Exception e) {
 			result = processSQLError(e);
 		}
 		return result;
 	}
-
-
-
-
-
 
 	public String checkWarning(Statement st, int updateCount) {
 		String result = null;
