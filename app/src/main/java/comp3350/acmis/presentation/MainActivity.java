@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         setContentView(R.layout.main_activity);
 
         if (!Main.getDBPathName().equals("UF")) {
-            System.out.println("HERE");
             copyDatabaseToDevice();
         }
         Main.startUp();
