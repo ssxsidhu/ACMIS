@@ -5,18 +5,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.appbar.MaterialToolbar;
+
 import org.threeten.bp.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Locale;
+
 import comp3350.acmis.R;
 import comp3350.acmis.business.BookingManager;
-import comp3350.acmis.business.FilterRoutes;
 import comp3350.acmis.business.RouteManager;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
@@ -28,8 +32,9 @@ public class SearchResults extends AppCompatActivity {
     private Route selectedDepartRoute;
     private Boolean showReturnFlightRslts;
     private RouteManager routeManager =  new RouteManager();
-    private BookingManager bookingManager =  new BookingManager();
+    private BookingManager bookingManager = new BookingManager();
     private ArrayList<Route> flightsAvailable = new ArrayList<>();
+    private int numOfPassengers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +45,11 @@ public class SearchResults extends AppCompatActivity {
 
         Utils.setStatusBarColor(getWindow(), getBaseContext());
 
+        numOfPassengers=1;
+
         //checks if there are flights available
-//        String checkFlights = routeManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable);
-        FilterRoutes filterRoutes = new FilterRoutes(selectedDeparture,selectedDestination);
-        String checkFlights = filterRoutes.getFilteredRoutes(flightsAvailable,departDate);
+        String checkFlights = routeManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable);
+//        String checkFlights = bookingManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable,numOfPassengers);
         if (checkFlights != null) {
             Messages.noFlightsMessage(this);
         } else {
@@ -69,11 +75,12 @@ public class SearchResults extends AppCompatActivity {
 
         if (!showReturnFlightRslts) {
             searchTitle.setText(String.format(Locale.CANADA, "Departing %s", Utils.getFormattedDate(departDate)));
+            searchLocationTitle.setText(String.format(Locale.CANADA,"From %s", selectedDeparture.getCity()));
         }
         else {
-            searchTitle.setText(String.format(Locale.CANADA, "Returning %s", Utils.getFormattedDate(departDate)));
+            searchTitle.setText(String.format(Locale.CANADA, "Returning %s", Utils.getFormattedDate(returnDate)));
+            searchLocationTitle.setText(String.format(Locale.CANADA,"From %s", selectedDestination.getCity()));
         }
-        searchLocationTitle.setText(String.format(Locale.CANADA,"From %s", selectedDeparture.getCity()));
 
     }
 
@@ -110,6 +117,21 @@ public class SearchResults extends AppCompatActivity {
     }
 
 
+//    private void changeColor(int colorFrom, int colorTo){
+//        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+//        colorAnimation.setDuration(250); // milliseconds
+//        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//
+//            @Override
+//            public void onAnimationUpdate(ValueAnimator animator) {
+//            }
+//
+//        });
+//        colorAnimation.start();
+//    }
+
+
+
     // receive data from previous activity
     private void receiveData() {
         //RECEIVE DATA VIA INTENT
@@ -118,6 +140,7 @@ public class SearchResults extends AppCompatActivity {
         selectedDestination = (Location) i.getSerializableExtra("selectedDestination");
         departDate = (LocalDate) i.getSerializableExtra("departDate");
         returnDate = (LocalDate) i.getSerializableExtra("returnDate");
+        System.out.println(departDate+", "+returnDate);
         selectedDepartRoute = (Route) i.getSerializableExtra("selectedDepartRoute");
         showReturnFlightRslts = i.getBooleanExtra("showReturnView", false);
     }
