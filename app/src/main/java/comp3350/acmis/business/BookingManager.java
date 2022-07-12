@@ -32,7 +32,7 @@ public class BookingManager {
     // Return List of Routes
     // travelling from one point to another there can be a multiple ways.
     // all the different routes are stored in a list and the list is returned.
-    public String searchRoute(Location srcCity, Location destCity, ArrayList<Route> returnRoutes, int numPassengers){
+    public String searchRoute(Location srcCity, Location destCity, ArrayList<Route> returnRoutes){
 
         returnRoutes.clear();
         ArrayList<Route> validRoutes = new ArrayList<>();
@@ -76,7 +76,7 @@ public class BookingManager {
 
             if(allDBFlights.get(i).getSource().getCity().equals(srcCity.getCity()) &&
                allDBFlights.get(i).getDestination().getCity().equals(destCity.getCity())) {
-                if(allDBFlights.get(i).enoughSeats(numPassengers)){
+                {
                     validRoutes.add(new Route(allDBFlights.get(i)));
                 }
 

@@ -22,14 +22,13 @@ import comp3350.acmis.objects.Route;
 import comp3350.acmis.objects.User;
 
 
-public class DataAccessObject implements DataAccess{
+public class DataAccessObject implements DataAccess {
 	private Statement st1, st2, st3;
 	private Connection c1;
-	private ResultSet rs2, rs3, rs4;
+	private ResultSet rs1, rs2, rs3, rs4;
 
 	private String dbName;
 	private String dbType;
-
 
 	private String cmdString;
 	private int updateCount;
@@ -41,11 +40,9 @@ public class DataAccessObject implements DataAccess{
 		this.dbName = dbName;
 	}
 
-	public void open(String dbPath)
-	{
+	public void open(String dbPath) {
 		String url;
-		try
-		{
+		try {
 			// Setup for HSQL
 			dbType = "HSQL";
 			Class.forName("org.hsqldb.jdbcDriver").newInstance();
@@ -55,26 +52,22 @@ public class DataAccessObject implements DataAccess{
 			st2 = c1.createStatement();
 			st3 = c1.createStatement();
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			processSQLError(e);
 		}
 		System.out.println("Opened " +dbType +" database " +dbPath);
 	}
 
-	public void close()
-	{
-		try
-		{	// commit all changes to the database
+	public void close() {
+		try {	// commit all changes to the database
 			cmdString = "shutdown compact";
-			rs2 = st1.executeQuery(cmdString);
+			rs1 = st1.executeQuery(cmdString);
 			c1.close();
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			processSQLError(e);
 		}
-		System.out.println("Closed " +dbType +" database " +dbName);
+		System.out.println("Closed " + dbType + " database " + dbName);
 	}
 
 	public String getAllFlights(ArrayList<Flight> resultList) {
@@ -96,31 +89,31 @@ public class DataAccessObject implements DataAccess{
 		result = null;
 		try {
 			cmdString = "Select * from Flights";
-			rs2 = st1.executeQuery(cmdString);
-			while (rs2.next()) {
-				id = rs2.getInt("flightID");
-				startLocation = rs2.getInt("startLocation");
-				endLocation =  rs2.getInt("endLocation");
-				year =  rs2.getInt("year");
-				month = rs2.getInt("month");
-				day = rs2.getInt("day");
-				hour = rs2.getInt("hour");
-				minute = rs2.getInt("minute");
-				seats = rs2.getInt("seats");
-				cost = rs2.getInt("cost");
-				duration = rs2.getDouble("duration");
+			rs1 = st1.executeQuery(cmdString);
+			while (rs1.next()) {
+				id = rs1.getInt("flightID");
+				startLocation = rs1.getInt("startLocation");
+				endLocation =  rs1.getInt("endLocation");
+				year =  rs1.getInt("year");
+				month = rs1.getInt("month");
+				day = rs1.getInt("day");
+				hour = rs1.getInt("hour");
+				minute = rs1.getInt("minute");
+				seats = rs1.getInt("seats");
+				cost = rs1.getInt("cost");
+				duration = rs1.getDouble("duration");
 
 				try {
 					cmdString = "Select * from Locations where locationID = " + startLocation + " or locationID = " + endLocation;
-					rs3 = st2.executeQuery(cmdString);
+					rs2 = st2.executeQuery(cmdString);
 
-					while (rs3.next()) {
-						String city = rs3.getString("city");
-						String country =  rs3.getString("country");
-						String airport =  rs3.getString("airport");
-						String timezone = rs3.getString("timezone");
+					while (rs2.next()) {
+						String city = rs2.getString("city");
+						String country =  rs2.getString("country");
+						String airport =  rs2.getString("airport");
+						String timezone = rs2.getString("timezone");
 
-						if (rs3.getString("locationID").equals(startLocation + "")) {
+						if (rs2.getString("locationID").equals(startLocation + "")) {
 							source = new Location(city, ZoneId.of(timezone), country, airport);
 						}
 						else {
@@ -131,18 +124,17 @@ public class DataAccessObject implements DataAccess{
 				} catch (Exception e) {
 					result = processSQLError(e);
 				}
-				rs3.close();
+				rs2.close();
 
 				flight = new Flight(id, source, dest, ZonedDateTime.of(year, month, day, hour, minute, 0, 0, source.getZoneName()), seats, duration, cost );
 				resultList.add(flight);
 			}
-			rs2.close();
+			rs1.close();
 		} catch (Exception e) {
 			result = processSQLError(e);
 		}
 		return result;
 	}
-
 
 	public String getLocations(ArrayList<Location> resultList) {
 		Location location;
@@ -156,36 +148,44 @@ public class DataAccessObject implements DataAccess{
 		result = null;
 		try {
 			cmdString = "Select * from Locations";
-			rs2 = st1.executeQuery(cmdString);
-			while (rs2.next()) {
-				id = rs2.getInt("locationID");
-				city = rs2.getString("city");
-				country =  rs2.getString("country");
-				airport =  rs2.getString("airport");
-				timezone = rs2.getString("timezone");
+			rs1 = st1.executeQuery(cmdString);
+			while (rs1.next()) {
+				id = rs1.getInt("locationID");
+				city = rs1.getString("city");
+				country =  rs1.getString("country");
+				airport =  rs1.getString("airport");
+				timezone = rs1.getString("timezone");
 
 				location = new Location(city, ZoneId.of(timezone), country, airport);
 				resultList.add(location);
 			}
-			rs2.close();
+			rs1.close();
 		} catch (Exception e) {
 			result = processSQLError(e);
 		}
 		return result;
 	}
 
-
-
-
-
-
 	public String addBooking(Booking newBooking) {
 		int userID = newBooking.getBooker().getUserID();
-		String route = newBooking.getRouteDepart().getFlightsCSV();
+		int numPassengers = newBooking.getNumPassengers();
+		String routeDepart = newBooking.getRouteDepart().getFlightsCSV();
+		String routeReturn = null;
+
+		if (newBooking.checkForReturn()) {
+			routeReturn = newBooking.getRouteReturn().getFlightsCSV();
+		}
 
 		result = null;
 		try {
-			cmdString = "Insert into Bookings values (NULL," + userID + "," + route +");";
+			cmdString = "Insert into Bookings values (" +
+					"NULL" + ", " +
+					userID + ", " +
+					routeDepart + ", " +
+					routeReturn + ", " +
+					numPassengers +
+					");";
+
 			updateCount = st1.executeUpdate(cmdString);
 			result = checkWarning(st1, updateCount);
 
@@ -195,8 +195,6 @@ public class DataAccessObject implements DataAccess{
 
 		return null;
 	}
-
-
 
 	public User getUserObject(String username) {
 		User user = null;
@@ -213,16 +211,16 @@ public class DataAccessObject implements DataAccess{
 
 		try {
 			cmdString = "Select * from Users where username = '" + username + "'";
-			rs2 = st1.executeQuery(cmdString);
-			while (rs2.next()) {
-				userID = rs2.getInt("userID");
-				firstname = rs2.getString("firstname");
-				lastname = rs2.getString("lastname");
-				gender = rs2.getString("gender");
-				userName = rs2.getString("username");
+			rs1 = st1.executeQuery(cmdString);
+			while (rs1.next()) {
+				userID = rs1.getInt("userID");
+				firstname = rs1.getString("firstname");
+				lastname = rs1.getString("lastname");
+				gender = rs1.getString("gender");
+				userName = rs1.getString("username");
 				password = "somePassword";
-				email = rs2.getString("email");
-				phoneNumber = rs2.getString("phoneNumber");
+				email = rs1.getString("email");
+				phoneNumber = rs1.getString("phoneNumber");
 
 				if (gender.equals("MALE")) {
 					finalGender = User.Gender.MALE;
@@ -236,7 +234,7 @@ public class DataAccessObject implements DataAccess{
 
 				user = new User(userID, firstname, lastname, finalGender, userName, password, email, phoneNumber);
 			}
-			rs2.close();
+			rs1.close();
 		} catch (Exception e) {
 			result = processSQLError(e);
 		}
@@ -244,105 +242,164 @@ public class DataAccessObject implements DataAccess{
 		return user;
 	}
 
-
-	//TODO currently only does single flight routes
 	public String getUserBookings(User user, ArrayList<Booking> userBookings) {
 		Booking booking;
-		Route route = new Route();
+		Route routeDepart = new Route();
+		Route routeReturn = new Route();
+		int numPassengers = -1;
 		Location source = null, dest = null;
 		Flight flight = null;
-		String flightList = EOF;
+		String departureFlights = EOF, returnFlights = EOF;
 
 		result = null;
 		try {
 			cmdString = "Select * from Bookings where userID = " + user.getUserID();
-			rs2 = st1.executeQuery(cmdString);
-			while (rs2.next()) {
-				flightList = rs2.getString("route");
+			rs1 = st1.executeQuery(cmdString);
+			while (rs1.next()) {
+				numPassengers = rs1.getInt("numPassengers");
 
-				try {
-					cmdString = "Select * from Flights where flightID = " + flightList;
-					rs3 = st2.executeQuery(cmdString);
+				departureFlights = rs1.getString("routeDepart");
+				String departureList[] = departureFlights.split(",");
+				for (int i = 0; i < departureList.length; i++) {
+					String currentFlightID = departureList[i];
 
-					while (rs3.next()) {
-						int id = rs3.getInt("flightID");
-						int startLocation = rs3.getInt("startLocation");
-						int endLocation =  rs3.getInt("endLocation");
-						int year =  rs3.getInt("year");
-						int month = rs3.getInt("month");
-						int day = rs3.getInt("day");
-						int hour = rs3.getInt("hour");
-						int minute = rs3.getInt("minute");
-						int seats = rs3.getInt("seats");
-						int cost = rs3.getInt("cost");
-						double duration = rs3.getDouble("duration");
+					try {
+						cmdString = "Select * from Flights where flightID = " + currentFlightID;
+						rs3 = st2.executeQuery(cmdString);
+
+						while (rs3.next()) {
+							int id = rs3.getInt("flightID");
+							int startLocation = rs3.getInt("startLocation");
+							int endLocation =  rs3.getInt("endLocation");
+							int year =  rs3.getInt("year");
+							int month = rs3.getInt("month");
+							int day = rs3.getInt("day");
+							int hour = rs3.getInt("hour");
+							int minute = rs3.getInt("minute");
+							int seats = rs3.getInt("seats");
+							int cost = rs3.getInt("cost");
+							double duration = rs3.getDouble("duration");
+
+							try {
+								cmdString = "Select * from Locations where locationID = " + startLocation + " or locationID = " + endLocation;
+								rs4 = st2.executeQuery(cmdString);
+
+								while (rs4.next()) {
+									String city = rs4.getString("city");
+									String country =  rs4.getString("country");
+									String airport =  rs4.getString("airport");
+									String timezone = rs4.getString("timezone");
+
+									if (rs4.getString("locationID").equals(startLocation + "")) {
+										source = new Location(city, ZoneId.of(timezone), country, airport);
+									}
+									else {
+										dest = new Location(city, ZoneId.of(timezone), country, airport);
+									}
+								}
+
+							} catch (Exception e) {
+								result = processSQLError(e);
+							}
+							rs4.close();
+
+							flight = new Flight(id, source, dest, ZonedDateTime.of(year, month, day, hour, minute, 0, 0, source.getZoneName()), seats, duration, cost );
+							routeDepart.addToRoute(flight);
+						}
+
+					} catch (Exception e) {
+						result = processSQLError(e);
+					}
+					rs3.close();
+				}
+
+				returnFlights = rs1.getString("routeReturn");
+				if (returnFlights != null) {
+					String returnList[] = returnFlights.split(",");
+					for (int i = 0; i < departureList.length; i++) {
+						String currentFlightID = returnList[i];
 
 						try {
-							cmdString = "Select * from Locations where locationID = " + startLocation + " or locationID = " + endLocation;
-							rs4 = st2.executeQuery(cmdString);
+							cmdString = "Select * from Flights where flightID = " + currentFlightID;
+							rs3 = st2.executeQuery(cmdString);
 
-							while (rs4.next()) {
-								String city = rs4.getString("city");
-								String country =  rs4.getString("country");
-								String airport =  rs4.getString("airport");
-								String timezone = rs4.getString("timezone");
+							while (rs3.next()) {
+								int id = rs3.getInt("flightID");
+								int startLocation = rs3.getInt("startLocation");
+								int endLocation =  rs3.getInt("endLocation");
+								int year =  rs3.getInt("year");
+								int month = rs3.getInt("month");
+								int day = rs3.getInt("day");
+								int hour = rs3.getInt("hour");
+								int minute = rs3.getInt("minute");
+								int seats = rs3.getInt("seats");
+								int cost = rs3.getInt("cost");
+								double duration = rs3.getDouble("duration");
 
-								if (rs4.getString("locationID").equals(startLocation + "")) {
-									source = new Location(city, ZoneId.of(timezone), country, airport);
+								try {
+									cmdString = "Select * from Locations where locationID = " + startLocation + " or locationID = " + endLocation;
+									rs4 = st2.executeQuery(cmdString);
+
+									while (rs4.next()) {
+										String city = rs4.getString("city");
+										String country =  rs4.getString("country");
+										String airport =  rs4.getString("airport");
+										String timezone = rs4.getString("timezone");
+
+										if (rs4.getString("locationID").equals(startLocation + "")) {
+											source = new Location(city, ZoneId.of(timezone), country, airport);
+										}
+										else {
+											dest = new Location(city, ZoneId.of(timezone), country, airport);
+										}
+									}
+
+								} catch (Exception e) {
+									result = processSQLError(e);
 								}
-								else {
-									dest = new Location(city, ZoneId.of(timezone), country, airport);
-								}
+								rs4.close();
+
+								flight = new Flight(id, source, dest, ZonedDateTime.of(year, month, day, hour, minute, 0, 0, source.getZoneName()), seats, duration, cost );
+								routeReturn.addToRoute(flight);
 							}
 
 						} catch (Exception e) {
 							result = processSQLError(e);
 						}
-						rs4.close();
-
-						flight = new Flight(id, source, dest, ZonedDateTime.of(year, month, day, hour, minute, 0, 0, source.getZoneName()), seats, duration, cost );
+						rs3.close();
 					}
-
-				} catch (Exception e) {
-					result = processSQLError(e);
 				}
-				rs3.close();
 
-				route = new Route(flight);
+				if (routeReturn.getRoute().size() != 0) {
+					booking = new Booking(user, routeDepart, routeReturn, numPassengers);
+				}
+				else {
+					booking = new Booking(user, routeDepart, null, numPassengers);
+				}
 
-				booking = new Booking(user, route);
 				userBookings.add(booking);
+				routeDepart = new Route();
+				routeReturn = new Route();
 			}
-			rs2.close();
+			rs1.close();
 		} catch (Exception e) {
 			result = processSQLError(e);
 		}
 		return result;
 	}
 
-
-
-
-
-
 	public String checkWarning(Statement st, int updateCount) {
-		String result;
-
-		result = null;
-		try
-		{
+		String result = null;
+		try {
 			SQLWarning warning = st.getWarnings();
-			if (warning != null)
-			{
+			if (warning != null) {
 				result = warning.getMessage();
 			}
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			result = processSQLError(e);
 		}
-		if (updateCount != 1)
-		{
+		if (updateCount != 1) {
 			result = "Tuple not inserted correctly.";
 		}
 		return result;

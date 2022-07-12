@@ -3,7 +3,6 @@
 
 package comp3350.acmis.objects;
 
-
 import java.util.Objects;
 
 public class User {
@@ -67,53 +66,18 @@ public class User {
         userSequence++;
     }
 
-    public long getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-//    public boolean removeBooking(int bookingID) {
-//        boolean found = false;
-//        Booking removal = null;
-//
-//        if (bookingID < 0) {
-//            throw new NegativeArraySizeException();
-//        }
-//
-//        //find booking with matching ID
-//        for (int i = 0; i < bookings.size() && !found; i++) {
-//            removal = bookings.get(i);
-//
-//            if (removal != null && removal.getBookingId() == bookingID) {
-//                bookings.remove(removal);
-//                found = true;
-//            }
-//        }
-//        return found;
-//    }
-
-
     // GETTERS
     public int getUserID() {return userID;}
     public String getFirstName() {return firstName;}
     public String getLastName() {return lastName;}
     public Gender getGender() {return gender;}
     public String getUsername() {return username;}
-
-//    public String getMyBookings(ArrayList<Booking> myBookings) {
-//        if (myBookings == null) {
-//            throw new NullPointerException();
-//        }
-//        myBookings.addAll(bookings);
-//        return null;
-//    }
-
-    //used for iteration 1 testing only, used to see if add and remove booking methods are working
-//    public ArrayList<Booking> getBookingsTemporaryTest() {
-//        return bookings;
-//    }
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+    public String getEmail() {
+        return email;
+    }
 
     //Error checking in constructor
     private String errorCheck(String value, String message) {
@@ -128,6 +92,4 @@ public class User {
         FEMALE,
         OTHER
     }
-
-
 }

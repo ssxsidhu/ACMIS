@@ -4,29 +4,19 @@
 
 package comp3350.acmis.objects;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class Booking {
 
-    // STATIC VARIABLE
-    private static int bookingSeq;          // Assign Unique Booking ID for every Booking
+    // Static VARIABLE
+    private static int bookingSeq;                 // Assign Unique Booking ID for every Booking
 
     // Instance Variable
-    private User booker;                    // Person Booking the flight
-    private Route routeDepart,routeReturn = null;                    // The Route being taken for reaching from A->B
+    private User booker;                           // Person Booking the flight
+    private Route routeDepart, routeReturn = null; // The Route being taken for reaching from A->B
     private int bookingId;
     private int numPassengers;
 
-    // Constructor()
-    public Booking(User booker, Route routeDepart) {
-        this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
-        this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
-        bookingId = bookingSeq;
-        bookingSeq++;
-    }
-
-    // Constructor with number of passengers.
     public Booking(User booker, Route routeDepart, int numP) {
         this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
         this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
@@ -59,30 +49,19 @@ public class Booking {
     public User getBooker() {
         return booker;
     }
-
     public int getBookingId() {
         return bookingId;
     }
-
     public Route getRouteDepart() {
         return routeDepart;
     }
-
-    public boolean checkForReturn(){
-        return routeReturn!=null;
-    }
-
     public Route getRouteReturn(){
         return  routeReturn;
     }
-
     public int getNumPassengers() {
         return numPassengers;
     }
-
-    // SETTER
-    public void setNewUser(User newUser) {
-        booker = newUser;
+    public boolean checkForReturn(){
+        return routeReturn!=null;
     }
-
 }

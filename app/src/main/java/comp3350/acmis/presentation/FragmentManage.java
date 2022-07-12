@@ -93,7 +93,7 @@ public class FragmentManage extends Fragment {
 //
 //        myBookingList.add(new Booking(defaultUser,r1,r2,2));
 
-        CardsAdapter adapter = new CardsAdapter(requireActivity().getBaseContext(), myBookingList);
+         CardsAdapter adapter = new CardsAdapter(requireActivity().getBaseContext(), myBookingList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         RecyclerView cards = view.findViewById(R.id.list_items_manage_tab);
         cards.setLayoutManager(linearLayoutManager);

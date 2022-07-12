@@ -92,29 +92,21 @@ public class Flight implements Serializable {
     public static int getFlightSequence() {
         return flightSequence;
     }
-
     public int getFlightId() {
         return flightId;
     }
-
     public Location getSource() {
         return source;
     }
-
     public Location getDestination() {
         return destination;
     }
-
     public int getSeats() {
         return seats;
     }
-
     public int getCost() {
         return cost;
     }
-
-
-
     public Duration getDuration() {
         return duration;
     }
@@ -131,19 +123,5 @@ public class Flight implements Serializable {
             throw new IllegalArgumentException(message + " value cannot be 0 or negative");
         }
         return value;
-    }
-
-    @Override
-    public String toString() {
-        return "Flight{" +
-                "flightId=" + flightId +
-                ", source=" + source.getCity() +
-                ", destination=" + destination.getCity() +
-                ", departureDateandTime=" + departureDateandTime.toString() +
-                ", arrivalDateandTime=" + arrivalDateandTime.toString() +
-                ", seats=" + seats +
-                ", duration=" + duration +
-                ", cost=" + cost +
-                '}';
     }
 }
