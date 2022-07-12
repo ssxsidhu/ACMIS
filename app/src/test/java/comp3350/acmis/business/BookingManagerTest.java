@@ -133,7 +133,6 @@ public class BookingManagerTest {
 
         tearDown();
     }
-
     @Test
     public void testValidCreateBookingOneWay(){
         setup();
