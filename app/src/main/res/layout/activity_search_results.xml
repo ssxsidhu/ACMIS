@@ -19,6 +19,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/window_image"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:scaleType="fitXY"
@@ -64,22 +65,14 @@
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
-            <!--    <View-->
-            <!--        android:id="@+id/separator"-->
-            <!--        android:layout_width="match_parent"-->
-            <!--        android:layout_height="1dp"-->
-            <!--        android:layout_marginTop="3dp"-->
-            <!--        android:layout_below="@id/header_title_book_tab"-->
-            <!--        android:background="@android:color/darker_gray" />-->
-
             <TextView
                 android:id="@+id/no_results_found"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/search_results_title_layout"
+                android:layout_below="@id/window_image"
+                android:layout_marginTop="50dp"
                 android:gravity="center"
                 android:text="@string/no_flights_found"
-                android:textColor="@color/design_default_color_background"
                 android:textSize="40sp"
                 android:textStyle="bold"
                 android:visibility="invisible" />

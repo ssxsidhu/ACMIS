@@ -39,6 +39,8 @@ public class RouteManager {
         checkDirectRoute(source,dest,returnThis);
         checkConnectedRoutes(source,dest,returnThis);
 
+        if(returnThis.isEmpty())
+            return "No flights found";
         return null;
     }
 
