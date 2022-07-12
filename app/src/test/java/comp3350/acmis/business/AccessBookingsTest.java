@@ -8,8 +8,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.threeten.bp.ZonedDateTime;
 
+import java.util.ArrayList;
+
 import comp3350.acmis.application.Main;
 import comp3350.acmis.application.Services;
+import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Flight;
 import comp3350.acmis.persistence.DataAccess;
 
@@ -20,26 +23,72 @@ public class AccessBookingsTest {
 
     @Before
     public void setUp() {
-        testConn = new AccessBookings("Tester");
-        dataAccess = Services.getDataAccess(Main.dbName);
-        dataAccess.open("\"database/acmisHSQLDB\"");
+        Main.startUp();
+        testConn = new AccessBookings("braico");
+
+        Services.getDataAccess(Main.dbName);
+
     }
 
     @After
     public void tearDown() {
         testConn = null;
+        dataAccess = null;
+        Main.shutDown();
     }
 
     @Test
-    public void testBookingAccess() {
-        setUp();
-        //null string
+    public void testBookingAccessCreation() {
+        //null string that will be used to find user
         try {
             testConn = new AccessBookings(null);
             Assert.fail("Expected a NullPointerException");
         } catch (NullPointerException unused) {
         }
 
+        setUp();
+
+        //valid access boooking connection is created.
+        Assert.assertTrue(testConn!=null);
+
+        tearDown();
     }
+
+    @Test
+    public void testGetMyBookingsNullValue(){
+        //null arraylist passed to getMyBooking class
+        setUp();
+        try {
+            testConn.getMyBookings(null);
+            Assert.fail("Expected a NullPointerException");
+        } catch (NullPointerException unused) {
+        }
+        tearDown();
+    }
+
+    @Test
+    public void testUserFoundOrNotFound(){
+        //if the user is not found in the database the not booking will be available on their name
+        testConn = new AccessBookings("Tester");
+        Assert.assertEquals("No user found",testConn.getMyBookings(new ArrayList<>()));
+
+        testConn = new AccessBookings("Hooman");
+        Assert.assertEquals("No user found",testConn.getMyBookings(new ArrayList<>()));
+
+        //user found in the database.
+        testConn = new AccessBookings("braico");
+        assertNull(testConn.getMyBookings(new ArrayList<>()));
+    }
+
+    @Test
+    public void testGetBookings(){
+        testConn = new AccessBookings("braico");
+        ArrayList<Booking> booked = new ArrayList<>();
+        testConn.getMyBookings(booked);
+
+        Assert.assertEquals(2,booked.size());
+
+    }
+
 
 }

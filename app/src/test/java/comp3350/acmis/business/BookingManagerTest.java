@@ -31,7 +31,7 @@ public class BookingManagerTest {
     ArrayList<Location> allLocations ;
     ArrayList<Booking> allBookings;
 
-    private static User user1,user2,user3;
+    private static User defaultU,user1,user2,user3;
 
     private static Flight flight1;
     private static Flight flight2;
@@ -120,13 +120,33 @@ public class BookingManagerTest {
     }
 
     @Test
-    public void testValidCreateBooking(){
+    public void testValidCreateBookingTwoWay(){
         setup();
         ArrayList<Booking> booked = new ArrayList<>();
-        test.createBooking("one1",new Route(flight2), new Route(flight3),2);
-        test.getData().getUserBookings(user1,booked);
+        test.createBooking("braico",new Route(flight2), new Route(flight3),2);
+        defaultU =  test.getData().getUserObject("braico");
+        test.getData().getUserBookings(defaultU,booked);
 
-        Assert.assertEquals(2,booked.size());
+        //2 are already booked in the database
+        //with one more booking there should be a total of 3 bookings
+        Assert.assertEquals(3,booked.size());
+
+        tearDown();
+    }
+
+    @Test
+    public void testValidCreateBookingOneWay(){
+        setup();
+        ArrayList<Booking> booked = new ArrayList<>();
+        test.createBooking("braico",new Route(flight2), null,2);
+        defaultU =  test.getData().getUserObject("braico");
+        test.getData().getUserBookings(defaultU,booked);
+
+        //2 are already booked in the database
+        //with one more booking there should be a total of 3 bookings
+        Assert.assertEquals(3,booked.size());
+
+        tearDown();
     }
 
 

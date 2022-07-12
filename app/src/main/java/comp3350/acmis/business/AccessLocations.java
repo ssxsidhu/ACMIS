@@ -1,7 +1,9 @@
-//This class is yours as in interface to connect the database and the presentation
+//This class is used as an interface to connect the database and the presentation
 //helps to get all the locations from the database.
 
 package comp3350.acmis.business;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +16,19 @@ import comp3350.acmis.persistence.DataAccess;
 public class AccessLocations {
     private DataAccess dataAccess;
     private List<Location> locations;
-    private Location location;
+
 
     public AccessLocations() {
         dataAccess = Services.getDataAccess(Main.dbName);
     }
 
-    public String getLocations(ArrayList<Location> locations) {
-        locations.clear();
+    public String getLocations( ArrayList<Location> locations) {
+        if(locations!=null){
+            locations.clear();
+        }else{
+            throw new NullPointerException();
+        }
+
         return dataAccess.getLocations(locations);
     }
 }

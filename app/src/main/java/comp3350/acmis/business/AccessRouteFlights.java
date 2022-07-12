@@ -1,9 +1,12 @@
 package comp3350.acmis.business;
 
+
+
 import org.threeten.bp.Duration;
 import org.threeten.bp.LocalDate;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
@@ -14,19 +17,29 @@ public class AccessRouteFlights  {
     private Flight currConnectFlight;
 
     public AccessRouteFlights(Route route) {
-        currRouteFlights = route.getRoute();
+        currRouteFlights = Objects.requireNonNull(route).getRoute();
         currConnectFlight = currRouteFlights.get(0);
     }
 
-    private long calculateLayover(Flight flightArrival, Flight flightDeparture) {
-        return Duration.between(flightArrival.getArrivalDateTime(), flightDeparture.getDepartureDateTime()).toMillis();
+    public long calculateLayover(Flight flightArrival, Flight flightDeparture) {
+        if (flightArrival != null && flightDeparture != null) {
+            return Duration.between(flightArrival.getArrivalDateTime(), flightDeparture.getDepartureDateTime()).toMillis();
+        }else{
+            throw new NullPointerException();
+        }
     }
 
-    private String toStringDuration(long durationInMillis) {
-        Duration duration = Duration.ofMillis(durationInMillis);
-        long hours = duration.toHours();
-        long minutes = duration.minusHours(hours).toMinutes();
-        return hours + "h " + minutes + "m";
+    public String toStringDuration(long durationInMillis) {
+        if(durationInMillis > 0){
+            Duration duration = Duration.ofMillis(durationInMillis);
+            long hours = duration.toHours();
+            System.out.println(hours+"gasgahqjt");
+            long minutes = duration.minusHours(hours).toMinutes();
+            return hours + "h " + minutes + "m";
+        }else{
+            throw new IllegalArgumentException("duration cannot be negative");
+        }
+
     }
 
     public void setConnectFlightPos(int pos) {

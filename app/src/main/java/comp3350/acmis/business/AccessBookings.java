@@ -3,9 +3,12 @@
 
 package comp3350.acmis.business;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Objects;
 
 import comp3350.acmis.application.Main;
 import comp3350.acmis.application.Services;
@@ -22,12 +25,17 @@ public class AccessBookings {
         username = Objects.requireNonNull(user);
     }
 
-    public String getMyBookings(ArrayList<Booking> myBookings) {
-        myBookings.clear();
+    public String getMyBookings(ArrayList<Booking>myBookings) {
+
         User user = dataAccess.getUserObject(username);
         String result;
         if (user != null) {
-            result = dataAccess.getUserBookings(user, myBookings);
+            if(myBookings!=null) {
+                myBookings.clear();
+                result = dataAccess.getUserBookings(user, myBookings);
+            }else{
+                throw new NullPointerException();
+            }
         } else {
             return "No user found";
         }
