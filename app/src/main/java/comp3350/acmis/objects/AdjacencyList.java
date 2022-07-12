@@ -20,16 +20,26 @@ public class AdjacencyList {
     private int size;                       // Stores number of nodes but also denotes the total stopovers in a Route.
 
     // CONSTRUCTOR
-    public AdjacencyList(Node source) {
-        this.source = source;
-        size = 0;
+    public AdjacencyList(Location source) {
+
+        if(source!=null) {
+            this.source = new Node(source);
+            size = 0;
+        }
+        else
+            throw new NullPointerException();
     }
 
     // SETTERS - WRAPPER METHOD
     public String addNext(Location addThisLoc, Flight newFlight) {
 
-        Node addThis = new Node(addThisLoc, newFlight);
-        return addNext(addThis);
+        if(addThisLoc!=null && newFlight!=null) {
+            Node addThis = new Node(addThisLoc, newFlight);
+            return addNext(addThis);
+        }
+        else {
+            throw new NullPointerException();
+        }
     }
 
     // GETTERS
@@ -37,12 +47,15 @@ public class AdjacencyList {
         return size;
     }
     public String getSourceCity(){
-        return source.getLoc().getCity();
+        if(size!=0)
+            return source.getLoc().getCity();
+        else
+            return "CANNOT FETCH FROM EMPTY LIST";
     }
     public String copyList (ArrayList<Location> copyHere) {                      // Deep Copy of our List. We are returning ONLY LOCATIONS
 
         if(copyHere==null) {                                                 // GUARD CONDITION --> Do Something ONLY if we have a valid list.
-            return "CANNOT COPY TO A NULL LIST.";
+            throw  new NullPointerException();
         }
 
         Node temp = source;

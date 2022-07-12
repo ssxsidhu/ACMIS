@@ -37,8 +37,8 @@ public class RouteTest {
         try {
             testRoute = new Route(null);
             Assert.fail("Expected a NullPointerException");
-        } catch (NullPointerException unused) {
-        }
+        } catch (NullPointerException unused) {}
+
 
         //valid flight added to the route
         setUp();

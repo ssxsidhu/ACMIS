@@ -75,9 +75,9 @@ public class AccessBookingsTest {
         testConn = new AccessBookings("Hooman");
         Assert.assertEquals("No user found",testConn.getMyBookings(new ArrayList<>()));
 
-        //user found in the database.
+        //user found in the database
         testConn = new AccessBookings("braico");
-        assertNull(testConn.getMyBookings(new ArrayList<>()));
+        assertEquals("no bookings found", testConn.getMyBookings(new ArrayList<>()));
     }
 
     @Test
@@ -86,7 +86,7 @@ public class AccessBookingsTest {
         ArrayList<Booking> booked = new ArrayList<>();
         testConn.getMyBookings(booked);
 
-        Assert.assertEquals(2,booked.size());
+        Assert.assertEquals(0,booked.size());
 
     }
 
