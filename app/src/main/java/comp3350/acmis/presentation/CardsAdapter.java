@@ -2,13 +2,10 @@ package comp3350.acmis.presentation;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,8 +24,9 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
 
     private Context mContext;
     private ArrayList<Booking> displayList;
+
     // Constructor
-    public CardsAdapter(Context context,ArrayList<Booking> userBookings) {
+    public CardsAdapter(Context context, ArrayList<Booking> userBookings) {
         mContext = context;
         displayList = userBookings;
     }
@@ -49,7 +47,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
         Booking currBooking = displayList.get(position);
         bookedRouteList.add(currBooking.getRouteDepart());
 
-        if(currBooking.checkForReturn()) {
+        if (currBooking.checkForReturn()) {
             bookedRouteList.add(currBooking.getRouteReturn());
             holder.directionImage.setImageResource(R.drawable.ic_round_u_turn_right_24);
         }
@@ -59,15 +57,15 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
         accessRouteFlights.setConnectFlightPos(accessRouteFlights.getNumStops());
         holder.cityDest.setText(accessRouteFlights.getConnectDestination().getCity());
 
-        holder.numPassengers.setText(String.format(Locale.CANADA,"%d ", currBooking.getNumPassengers()));
+        holder.numPassengers.setText(String.format(Locale.CANADA, "%d ", currBooking.getNumPassengers()));
 
-        holder.recyclerView.setAdapter(new SearchResultsCardsAdapter(bookedRouteList,true, new SearchResultsCardsAdapter.OnItemClickListener() {
+        holder.recyclerView.setAdapter(new SearchResultsCardsAdapter(bookedRouteList, true, new SearchResultsCardsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Route item) {
                 Intent i = new Intent(mContext, RouteDetails.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.putExtra("selectedRoute", item);
-                i.putExtra("continueButtonVisibility",false);
+                i.putExtra("continueButtonVisibility", false);
                 mContext.startActivity(i);
             }
         }));
@@ -86,8 +84,9 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
     // your views such as TextView and Imageview.
     public class Viewholder extends RecyclerView.ViewHolder {
         private RecyclerView recyclerView;
-        private TextView cityDepart,cityDest,numPassengers;
+        private TextView cityDepart, cityDest, numPassengers;
         private ImageView directionImage;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             recyclerView = itemView.findViewById(R.id.card_view_list);

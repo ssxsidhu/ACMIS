@@ -4,6 +4,7 @@ package comp3350.acmis.objects;
 import androidx.annotation.NonNull;
 
 import org.threeten.bp.ZoneId;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -27,12 +28,15 @@ public class Location implements Serializable {
     public String getCity() {
         return city;
     }
+
     public String getCountry() {
         return country;
     }
+
     public String getAirport() {
         return airport;
     }
+
     public ZoneId getZoneName() {
         return zoneName;
     }
@@ -45,14 +49,14 @@ public class Location implements Serializable {
 
     @Override
     public boolean equals(Object compare) {
-        if(compare.getClass() == getClass()) {                  // Check if object being passed is a Object of this Class.
-            Location compareThis = (Location)compare;           // Type Cast explicitly to LOCATION type.
+        if (compare.getClass() == getClass()) {                  // Check if object being passed is a Object of this Class.
+            Location compareThis = (Location) compare;           // Type Cast explicitly to LOCATION type.
             return (city.equals(compareThis.getCity()) &&
                     zoneName.equals(compareThis.getZoneName()) &&
                     country.equals(compareThis.getCountry()) &&
                     airport.equals(compareThis.getAirport()));
         }
-        return  false;
+        return false;
     }
 
     // PRIVATE HELPER METHOD

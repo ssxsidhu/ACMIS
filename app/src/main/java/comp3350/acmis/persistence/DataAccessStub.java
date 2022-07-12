@@ -12,7 +12,6 @@ import comp3350.acmis.business.BookingManager;
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
-import comp3350.acmis.objects.Route;
 import comp3350.acmis.objects.User;
 
 public class DataAccessStub implements DataAccess {
@@ -29,7 +28,7 @@ public class DataAccessStub implements DataAccess {
         this.dbName = dbName;
         allUsers = new ArrayList<>();
         allLocations = new ArrayList<>();
-        allFlights =  new ArrayList<Flight>();
+        allFlights = new ArrayList<Flight>();
         allBookings = new ArrayList<>();
     }
 
@@ -37,18 +36,18 @@ public class DataAccessStub implements DataAccess {
         this(Main.dbName);
         allUsers = new ArrayList<>();
         allLocations = new ArrayList<>();
-        allFlights =  new ArrayList<Flight>();
+        allFlights = new ArrayList<Flight>();
         allBookings = new ArrayList<>();
     }
 
     public void open(String dbName) {
-        User user,defaultUser;
+        User user, defaultUser;
 
         bookingManager = new BookingManager();
 
-        defaultUser = new User("John","Braico", User.Gender.MALE,"braico","somePassword","jbraico@cs.umanitoba.ca","2041234567");
+        defaultUser = new User("John", "Braico", User.Gender.MALE, "braico", "somePassword", "jbraico@cs.umanitoba.ca", "2041234567");
         allUsers.add(defaultUser);
-        user = new User("Julie","smith", User.Gender.FEMALE,"jsmith","j&smith$","jmith@gmail.com","2048889999");
+        user = new User("Julie", "smith", User.Gender.FEMALE, "jsmith", "j&smith$", "jmith@gmail.com", "2048889999");
         allUsers.add(user);
 
         Location winnipeg = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
@@ -269,11 +268,11 @@ public class DataAccessStub implements DataAccess {
 //        bookingManager.createBooking("braico", new Route(winToMn),null,2);
 //        bookingManager.createBooking("braico", new Route(torToVan),null,2);
 
-        System.out.println("Opened " +dbType +" database " +dbName);
+        System.out.println("Opened " + dbType + " database " + dbName);
     }
 
-    public void close(){
-        System.out.println("Closed " +dbType +" database " +dbName);
+    public void close() {
+        System.out.println("Closed " + dbType + " database " + dbName);
     }
 
     public String getAllFlights(ArrayList<Flight> resultList) {
@@ -301,21 +300,21 @@ public class DataAccessStub implements DataAccess {
     public User getUserObject(String username) {
         User result = null;
         for (int i = 0; i < allUsers.size(); i++) {
-            if(Objects.equals(allUsers.get(i).getUsername(), username)) {
+            if (Objects.equals(allUsers.get(i).getUsername(), username)) {
                 return result = allUsers.get(i);
             }
         }
         return null;
     }
 
-    public String getUserBookings( User user,ArrayList<Booking> userBookings) {
-        for(int i=0; i<allBookings.size();i++){
-            if(allBookings.get(i).getBooker() == user){
+    public String getUserBookings(User user, ArrayList<Booking> userBookings) {
+        for (int i = 0; i < allBookings.size(); i++) {
+            if (allBookings.get(i).getBooker() == user) {
                 userBookings.add(allBookings.get(i));
             }
         }
 
-        if(userBookings.isEmpty())
+        if (userBookings.isEmpty())
             return "no bookings found";
         else
             return null;
