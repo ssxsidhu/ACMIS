@@ -1,4 +1,6 @@
-//
+//This method is used to created a booking for a user.
+//It uses the user's name and a route instance to create a booking
+//the booking is then added to the database
 
 package comp3350.acmis.business;
 
@@ -43,7 +45,6 @@ public class BookingManager {
 
         Route validFlights = new Route();
 
-        // This is meant for ITERATION 1 ONLY. For Further Iterations a general case solution will be applied to route searching problems. For now 1 stopOver routes are being processed.
         ArrayList <Flight> tempSrc = new ArrayList<>();
         ArrayList <Flight> tempDest = new ArrayList<>();
         ArrayList <Flight> stopOver = new ArrayList<>();
@@ -122,9 +123,8 @@ public class BookingManager {
                     return "You have already booked this flight for your account";
                 }
             }
-
             if(returnRoute == null)
-            newBooking = new Booking(bookerObject, departRoute,numPassengers);
+                newBooking = new Booking(bookerObject, departRoute,numPassengers);
             else
                 newBooking = new Booking(bookerObject,departRoute,returnRoute,numPassengers);
             //adding the booking to the master booking.
@@ -135,8 +135,8 @@ public class BookingManager {
         }
         return null;
     }
-
-
-
-
+    //for testing purposes
+    public DataAccess getData() {
+        return data;
+    }
 }

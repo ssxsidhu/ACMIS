@@ -64,4 +64,9 @@ public class Booking {
     public boolean checkForReturn(){
         return routeReturn!=null;
     }
+
+    //Setter
+    public void setNewUser(User u){
+        booker = u;
+    }
 }
