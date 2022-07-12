@@ -38,13 +38,12 @@ public class Route implements Serializable {
     public boolean isEmpty() {
         return route.isEmpty();
     }
-
     public ArrayList<Flight> getRoute() {
         return route;
     }
-
     public String getFlightsCSV() {
         String ret = "";
+
         for (int i = 0; i < route.size(); i++) {
             ret += route.get(i).getFlightId() + "";
 
@@ -52,7 +51,10 @@ public class Route implements Serializable {
                 ret += ",";
             }
         }
+
+        if (ret.equals("")) {
+            ret = null;
+        }
         return ret;
     }
-
 }

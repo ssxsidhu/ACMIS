@@ -14,19 +14,19 @@ public class Booking {
 
     // Instance Variable
     private User booker;                    // Person Booking the flight
-    private Route routeDepart,routeReturn = null;                    // The Route being taken for reaching from A->B
+    private Route routeDepart, routeReturn = null;                    // The Route being taken for reaching from A->B
     private int bookingId;
     private int numPassengers;
 
     // Constructor()
-    public Booking(User booker, Route routeDepart) {
-        this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
-        this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
-        bookingId = bookingSeq;
-        bookingSeq++;
-    }
+//    public Booking(User booker, Route routeDepart) {
+//        this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
+//        this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
+//        bookingId = bookingSeq;
+//        bookingSeq++;
+//    }
 
-    // Constructor with number of passengers.
+
     public Booking(User booker, Route routeDepart, int numP) {
         this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
         this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
@@ -81,8 +81,8 @@ public class Booking {
     }
 
     // SETTER
-    public void setNewUser(User newUser) {
-        booker = newUser;
-    }
+//    public void setNewUser(User newUser) {
+//        booker = newUser;
+//    }
 
 }
