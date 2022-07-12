@@ -19,7 +19,6 @@ public class Route implements Serializable {
 
     // Constructor 1 --> Single or Direct Flight
     public Route(Flight directFlight) {
-
         route = new ArrayList<>();
         route.add(Objects.requireNonNull(directFlight, "Flight cannot be null"));
     }
@@ -41,6 +40,7 @@ public class Route implements Serializable {
     public ArrayList<Flight> getRoute() {
         return route;
     }
+
     public String getFlightsCSV() {
         String ret = "";
 
