@@ -18,6 +18,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDate;
+import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZoneOffset;
 
@@ -71,7 +72,7 @@ public class bookDetailsFragment extends Fragment {
 
         //calender constraints setting
         CalendarConstraints.Builder constraints = new CalendarConstraints.Builder();
-        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         constraints.setStart(startDate);
         calendar.set(2022, 12, Calendar.DATE);
         constraints.setEnd(calendar.getTimeInMillis());
@@ -82,7 +83,7 @@ public class bookDetailsFragment extends Fragment {
     }
 
     private void pickDepartDate(View view){
-        long today = MaterialDatePicker.todayInUtcMilliseconds();
+        long today = Instant.now().toEpochMilli();
         MaterialDatePicker<Long> materialDatePicker = setCalender("Select Departure Date",today);
         pickDepart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +95,7 @@ public class bookDetailsFragment extends Fragment {
 
         materialDatePicker.addOnPositiveButtonClickListener(selection -> {
             pickDepart.setText(String.format(Locale.CANADA, "Depart %s", materialDatePicker.getHeaderText()));
-            departDate = Instant.ofEpochMilli(selection).atZone(ZoneId.of("America/Winnipeg")).toLocalDate();
+            departDate = Instant.ofEpochMilli(selection).atZone(ZoneId.systemDefault()).toLocalDate();
             System.out.println("in book fragment"+departDate+", "+returnDate);
             pickReturn.setEnabled(true);
             if(returnDate!=null && returnDate.isBefore(departDate)){

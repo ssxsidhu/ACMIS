@@ -21,6 +21,7 @@ import java.util.Locale;
 
 import comp3350.acmis.R;
 import comp3350.acmis.business.BookingManager;
+import comp3350.acmis.business.RouteManager;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
 
@@ -30,6 +31,7 @@ public class SearchResults extends AppCompatActivity {
     private LocalDate departDate, returnDate;
     private Route selectedDepartRoute;
     private Boolean showReturnFlightRslts;
+    private RouteManager routeManager =  new RouteManager();
     private BookingManager bookingManager = new BookingManager();
     private ArrayList<Route> flightsAvailable = new ArrayList<>();
     private int numOfPassengers;
@@ -46,7 +48,8 @@ public class SearchResults extends AppCompatActivity {
         numOfPassengers=1;
 
         //checks if there are flights available
-        String checkFlights = bookingManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable,numOfPassengers);
+        String checkFlights = routeManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable);
+//        String checkFlights = bookingManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable,numOfPassengers);
         if (checkFlights != null) {
             Messages.noFlightsMessage(this);
         } else {
