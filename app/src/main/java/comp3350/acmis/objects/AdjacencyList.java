@@ -47,12 +47,14 @@ public class AdjacencyList {
 
         Node temp = source;
         while(temp.getNext()!=null) {                                       // Iterate until the last Node and extract Locations and push to List in Params.
-
-            copyHere.add(temp.getLoc());
+            if(!copyHere.contains(temp.getLoc())) {
+                copyHere.add(temp.getLoc());
+            }
             temp = temp.getNext();
         }
 
-        copyHere.add(temp.getLoc());                                        // Make sure we dont miss last Location. Structure of Iteration does not add last node to List in Params
+        if(!copyHere.contains(temp.getLoc()))
+            copyHere.add(temp.getLoc());                                        // Make sure we dont miss last Location. Structure of Iteration does not add last node to List in Params
         return null;
     }
     public boolean contains(Location thisLoc) {
@@ -108,9 +110,9 @@ public class AdjacencyList {
         } else {
             while (temp.getNext() != null) {    // Iterate until last Node and then Add addThis
                 temp = temp.getNext();
-
-                temp.setNext(addThis);          // Add After the Last Node.
             }
+                          // Add After the Last Node.
+            temp.setNext(addThis);
         }
 
         size++;
