@@ -24,8 +24,7 @@ public class MyGraph {
     // SETTERS
     public String addNode(Location newLocation)
     {
-        Node newNode = new Node(newLocation);              // Create the Node, Create a Corresponding Adjacency List to that Node and push it into ArrayList.
-        sourceNodes.add(new AdjacencyList(newNode));
+        sourceNodes.add(new AdjacencyList(newLocation));
         numSourceNodes++;
 
         return null;

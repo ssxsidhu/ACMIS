@@ -78,10 +78,11 @@ public class RouteManager {
     private void depthFirst(MyGraph graph, Location source, Location dest, ArrayList<Location> visited, ArrayList<Location> path, ArrayList<ArrayList<Location>> allPaths) {
         // BASE CASE
         if(source.equals(dest)) {
+            System.out.println(path);
             return;
         }
 
-        visited.add(source);            // Add this so we don't come back to source for checking every time and thus prevent dead loop.
+        visited.add(source);                                        // Add this so we don't come back to source for checking every time and thus prevent dead loop.
         ArrayList<Location> neighbors = new ArrayList<>();          // These are the neighbors of the source Node. CHECK ALL NEIGHBORS FOR A PATH TO DEST
         graph.getNeighborCities(source,neighbors);                  // Initialise all neighbors of the source node into this list.
 
