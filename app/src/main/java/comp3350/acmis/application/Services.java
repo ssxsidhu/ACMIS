@@ -13,12 +13,12 @@ public class Services {
     public static DataAccess createDataAccess(String dbName) {
         if (dataAccessService == null) {
 
-//            if (Main.getDBPathName().equals("UF")) {
-//                dataAccessService = new DataAccessStub(dbName);
-//            }
-//            else {
+            if (Main.getDBPathName().equals("UF")) {
+                dataAccessService = new DataAccessStub(dbName);
+            }
+            else {
                 dataAccessService = new DataAccessObject(dbName);
-//            }
+            }
             dataAccessService.open(Main.getDBPathName()); //getDBPathName()
         }
         return dataAccessService;
