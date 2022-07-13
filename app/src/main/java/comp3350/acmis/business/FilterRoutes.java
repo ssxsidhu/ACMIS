@@ -9,17 +9,20 @@ import comp3350.acmis.objects.Route;
 public class FilterRoutes {
     private ArrayList<Route> allPossibleRoutes;
     private BookingManager bookingManager;
+    private RouteManager routeManager;
     private Location depart,dest;
 
     public FilterRoutes(Location departure, Location destination){
         allPossibleRoutes = new ArrayList<>();
         bookingManager = new BookingManager();
+        routeManager = new RouteManager();
         depart = departure;
         dest = destination;
     }
 
     public String getFilteredRoutes(ArrayList<Route> flightsAvailable, LocalDate dateFilter){
-        String result = bookingManager.searchRoute(depart,dest,allPossibleRoutes);
+//        String result = bookingManager.searchRoute(depart,dest,allPossibleRoutes);
+        String result = routeManager.searchRoute(depart,dest,allPossibleRoutes);
         AccessRouteFlights accessRouteFlights;
         if(result==null){
             for(int i=0;i<allPossibleRoutes.size();i++){

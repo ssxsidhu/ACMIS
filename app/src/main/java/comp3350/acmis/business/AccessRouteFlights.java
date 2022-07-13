@@ -1,7 +1,6 @@
 package comp3350.acmis.business;
 
 
-
 import org.threeten.bp.Duration;
 import org.threeten.bp.LocalDate;
 
@@ -12,7 +11,7 @@ import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
 
-public class AccessRouteFlights  {
+public class AccessRouteFlights {
     private ArrayList<Flight> currRouteFlights;
     private Flight currConnectFlight;
 
@@ -24,19 +23,19 @@ public class AccessRouteFlights  {
     public long calculateLayover(Flight flightArrival, Flight flightDeparture) {
         if (flightArrival != null && flightDeparture != null) {
             return Duration.between(flightArrival.getArrivalDateTime(), flightDeparture.getDepartureDateTime()).toMillis();
-        }else{
+        } else {
             throw new NullPointerException();
         }
     }
 
     public String toStringDuration(long durationInMillis) {
-        if(durationInMillis > 0){
+        if (durationInMillis > 0) {
             Duration duration = Duration.ofMillis(durationInMillis);
             long hours = duration.toHours();
-            System.out.println(hours+"gasgahqjt");
+            System.out.println(hours + "gasgahqjt");
             long minutes = duration.minusHours(hours).toMinutes();
             return hours + "h " + minutes + "m";
-        }else{
+        } else {
             throw new IllegalArgumentException("duration cannot be negative");
         }
 
@@ -69,7 +68,7 @@ public class AccessRouteFlights  {
     public String getCurrLayoverTime() {
         int currentFlightPos = currRouteFlights.indexOf(currConnectFlight);
         long layover = 0;
-        if (currRouteFlights.size()>currentFlightPos+1) {
+        if (currRouteFlights.size() > currentFlightPos + 1) {
             layover = calculateLayover(currConnectFlight, currRouteFlights.get(currentFlightPos + 1));
         }
         return toStringDuration(layover);
@@ -78,19 +77,23 @@ public class AccessRouteFlights  {
     public Location getConnectSource() {
         return currConnectFlight.getSource();
     }
+
     public Location getConnectDestination() {
         return currConnectFlight.getDestination();
     }
+
     public int getConnectSeats() {
         return currConnectFlight.getSeats();
     }
-    public int getNumStops(){
-        return currRouteFlights.size()-1;
+
+    public int getNumStops() {
+        return currRouteFlights.size() - 1;
     }
 
     public String getConnectDuration() {
         return toStringDuration(currConnectFlight.getDuration().toMillis());
     }
+
     public String getConnectArrivalTime() {
         return currConnectFlight.getArrivalDateTime().toLocalTime().toString();
     }
@@ -99,7 +102,7 @@ public class AccessRouteFlights  {
         return currConnectFlight.getDepartureDateTime().toLocalTime().toString();
     }
 
-    public LocalDate getConnectDepartureDate(){
-         return currConnectFlight.getDepartureDateTime().toLocalDate();
+    public LocalDate getConnectDepartureDate() {
+        return currConnectFlight.getDepartureDateTime().toLocalDate();
     }
 }

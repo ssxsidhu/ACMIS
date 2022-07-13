@@ -45,10 +45,7 @@ public class AdjacencyList {
     }
 
     public String getSourceCity() {
-        if (size != 0)
             return source.getLoc().getCity();
-        else
-            return "CANNOT FETCH FROM EMPTY LIST";
     }
 
     public String copyList(ArrayList<Location> copyHere) {                      // Deep Copy of our List. We are returning ONLY LOCATIONS

@@ -32,8 +32,6 @@ public class SearchResults extends AppCompatActivity {
     private LocalDate departDate, returnDate;
     private Route selectedDepartRoute;
     private Boolean showReturnFlightRslts;
-    private RouteManager routeManager = new RouteManager();
-    private BookingManager bookingManager = new BookingManager();
     private ArrayList<Route> flightsAvailable = new ArrayList<>();
 
     @Override
@@ -45,8 +43,6 @@ public class SearchResults extends AppCompatActivity {
 
         Utils.setStatusBarColor(getWindow(), getBaseContext());
 
-        //checks if there are flights available
-//        String checkFlights = routeManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable);
         FilterRoutes filterRoutes = new FilterRoutes(selectedDeparture, selectedDestination);
         String checkFlights = filterRoutes.getFilteredRoutes(flightsAvailable, departDate);
         if (checkFlights != null) {
