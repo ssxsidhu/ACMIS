@@ -44,6 +44,7 @@ public class Route implements Serializable {
         return route;
     }
 
+    // METHOD MEANT TO REPLACE getRoute()
     public String getRoutes(ArrayList<Flight> copyHere) {
 
         if (copyHere != null) {         // GUARD CONDITION --> Do Something Only if list in params is not NULL

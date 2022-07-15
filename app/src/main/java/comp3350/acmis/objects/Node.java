@@ -19,21 +19,31 @@ public class Node {
 
     // CONSTRUCTOR 1  -- This constructor is Necessary for the Linked Nodes that Arise from the Source Nodes in a List. The List will store the Source Node as Root Node and the nodes connected to that Root Node will be the linked Nodes
     public Node(Location newData, Flight newFlight) {
-        loc = newData;
-        flight = newFlight;
-        weightToNode = newFlight.getDuration();
-        next = null;
+
+        if (newData != null && newFlight == null) {
+            loc = newData;
+            flight = newFlight;
+            weightToNode = newFlight.getDuration();
+            next = null;
+        } else {
+            throw new NullPointerException("Flight and Location Cannot be NULL !");
+        }
     }
 
     // CONSTRUCTOR 2 -- This constructor is Necessary for Populating a List with ONLY NODES. This List would contain the Source Node as Root Node and the Other Connected Nodes as its Linked Nodes
     public Node(Location newData) {
-        loc = newData;
-        flight = null;
-        weightToNode = null;
-        next = null;
+
+        if (newData != null) {
+            loc = newData;
+            flight = null;
+            weightToNode = null;
+            next = null;
+        } else {
+            throw new NullPointerException("Location cannot be NULL !");
+        }
     }
 
-    // SETTERS --> May Not even need these methods.
+    // SETTER
     public void setNext(Node next) {
         this.next = next;
     }
