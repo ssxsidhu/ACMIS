@@ -38,13 +38,6 @@ public class Node {
         this.next = next;
     }
 
-    public Duration getWeightToNode() {
-        return weightToNode;
-    }
-
-    public void setWeightToNode(Duration weightToNode) {
-        this.weightToNode = weightToNode;
-    }
 
     // GETTERS
     public Node getNext() {
@@ -59,7 +52,7 @@ public class Node {
         return weightToNode;
     }
 
-    // TO STRING
+    @Override
     @NonNull
     public String toString() {
 
@@ -68,7 +61,7 @@ public class Node {
         if (flight != null)
             returnThis = returnThis + loc + flight + weightToNode;              // REPRESENTATION ||LOCATION FLIGHT WEIGHT||
         else
-            returnThis = returnThis + loc;                              // REPRESENTATION ||LOCATION||
+            returnThis = returnThis + loc;                                      // REPRESENTATION ||LOCATION||
 
         returnThis += "||";
         return returnThis;
