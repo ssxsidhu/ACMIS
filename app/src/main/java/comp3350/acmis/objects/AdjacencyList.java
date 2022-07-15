@@ -57,6 +57,7 @@ public class AdjacencyList {
             throw new NullPointerException();
         }
 
+        copyHere.clear();
         Node temp = source;
         while (temp.getNext() != null) {                                       // Iterate until the last Node and extract Locations and push to List in Params.
             if (!copyHere.contains(temp.getLoc())) {
@@ -72,25 +73,29 @@ public class AdjacencyList {
 
     public boolean contains(Location thisLoc) {
 
-        boolean exists = false;
-        Node temp = source;
-        while (temp.getNext() != null && !exists) {                             // Iterate until we find the Destination in the Adjacency List or until the List runs out.
+        if (thisLoc != null) {
+            boolean exists = false;
+            Node temp = source;
+            while (temp.getNext() != null && !exists) {                             // Iterate until we find the Destination in the Adjacency List or until the List runs out.
 
-            if (temp.getLoc().equals(thisLoc)) {
-                exists = true;
+                if (temp.getLoc().equals(thisLoc)) {
+                    exists = true;
+                }
+                temp = temp.getNext();
             }
-            temp = temp.getNext();
+
+            if (temp.getLoc().equals(thisLoc))                        // Check for last Node. Iteration DOES NOT CHECK FOR LAST NODE. Hence checking here.
+                exists = true;
+
+            return exists;
+
+        } else {
+            throw new NullPointerException("Location Cannot be NULL !");
         }
-
-        if (temp.getLoc().equals(thisLoc))                        // Check for last Node. Iteration DOES NOT CHECK FOR LAST NODE. Hence checking here.
-            exists = true;
-
-        return exists;
     }
 
-
-    // TO STRING
     @NonNull
+    @Override
     public String toString() {
 
         Node temp = source;
@@ -108,7 +113,8 @@ public class AdjacencyList {
             temp = temp.getNext();
         }
 
-        returnThis += temp;                                                   // Concat Last Node to list. ITERATION DOES NOT CHECK FOR LAST NODE.
+        if (temp != null)
+            returnThis += temp;                                                   // Concat Last Node to list. ITERATION DOES NOT CHECK FOR LAST NODE.
         return returnThis;
     }
 

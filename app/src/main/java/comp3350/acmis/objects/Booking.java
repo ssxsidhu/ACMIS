@@ -11,12 +11,13 @@ public class Booking {
     // Static VARIABLE
     private static int bookingSeq;                 // Assign Unique Booking ID for every Booking
 
-    // Instance Variable
+    // INSTANCE VARIABLES
     private User booker;                           // Person Booking the flight
     private Route routeDepart, routeReturn = null; // The Route being taken for reaching from A->B
     private int bookingId;
     private int numPassengers;
 
+    // CONSTRUCTOR
     public Booking(User booker, Route routeDepart, int numP) {
         this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
         this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
@@ -25,6 +26,7 @@ public class Booking {
         bookingSeq++;
     }
 
+    // CONSTRUCTOR for Bookings with a return Route.
     public Booking(User booker, Route routeDepart, Route routeReturn, int numP) {
         this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
         this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
@@ -34,6 +36,7 @@ public class Booking {
         bookingSeq++;
     }
 
+    // SETTER
     public boolean incrementPassengers() {
         double checkPassengers = (double) numPassengers + 1;
         boolean ret = false;
