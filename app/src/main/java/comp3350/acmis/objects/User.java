@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class User {
 
-    // Instance Variables
+    // INSTANCE VARIABLES
     private final int userID;
     private final String firstName;
     private final String lastName;
@@ -18,24 +18,23 @@ public class User {
     private long phoneNumber;
 
     private static int userSequence = 0;
-    //need this one for BOOKINGS
-//    private ArrayList<Booking> bookings;
 
-    //constructor
+    // CONSTRUCTOR
     public User(String firstName, String lastName, Gender whichGender, String username, String password, String email, String phoneNumber) {
         this.firstName = errorCheck(firstName, "First name");
         this.lastName = errorCheck(lastName, "Last name");
         this.gender = Objects.requireNonNull(whichGender, "Gender cannot be null");
         this.username = errorCheck(username, "Username");
-
         this.password = Objects.requireNonNull(password, "password cannot be null");
+
+        // CHECK FOR VALID CHARACTER @. EVERY EMAIL ADDRESS HAS @
         if (email.contains("@")) {
             this.email = Objects.requireNonNull(email, "email cannot be null");
         } else {
             throw new IllegalArgumentException("Email must contain the character: @ ");
         }
 
-
+        // CHECK FOR VALID PHONE NUMBER. EVERY PHONE NUMBER AS EXACTLY 10 DIGITS
         if (phoneNumber.length() != 10) {
             throw new IllegalArgumentException("Phone number should contain 10 digits");
         } else {
@@ -43,25 +42,6 @@ public class User {
         }
 
         this.userID = userSequence;
-        userSequence++;
-    }
-
-    public User(int userID, String firstName, String lastName, Gender whichGender, String username, String password, String email, String phoneNumber) {
-        this.firstName = errorCheck(firstName, "First name");
-        this.lastName = errorCheck(lastName, "Last name");
-        this.gender = Objects.requireNonNull(whichGender, "Gender cannot be null");
-        this.username = errorCheck(username, "Username");
-
-        this.password = Objects.requireNonNull(password, "password cannot be null");
-        this.email = Objects.requireNonNull(email, "email cannot be null");
-
-        if (phoneNumber.length() != 10) {
-            throw new IllegalArgumentException("Phone number should contain 10 digits");
-        } else {
-            this.phoneNumber = Long.parseLong(Objects.requireNonNull(phoneNumber, "Phone number should not be null"));
-        }
-
-        this.userID = userID;
         userSequence++;
     }
 
@@ -94,7 +74,6 @@ public class User {
         return email;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -108,7 +87,8 @@ public class User {
         return Objects.hash(firstName, lastName, gender, username, password, email, phoneNumber);
     }
 
-    //Error checking in constructor
+    // PRIVATE HELPER METHOD
+    // Helps Check for valid Input In Constructor when creating a User
     private String errorCheck(String value, String message) {
         if (value.trim().equals("")) {
             throw new IllegalArgumentException(message + " can not be empty");
@@ -116,6 +96,7 @@ public class User {
         return Objects.requireNonNull(value, message + " cannot be null").trim();
     }
 
+    // ENCAPSULATE GENDER IN ENUM CLASS
     public enum Gender {
         MALE,
         FEMALE,
