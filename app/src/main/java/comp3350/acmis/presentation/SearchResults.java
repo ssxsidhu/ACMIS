@@ -5,15 +5,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.appbar.MaterialToolbar;
+
 import org.threeten.bp.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Locale;
+
 import comp3350.acmis.R;
 import comp3350.acmis.business.BookingManager;
 import comp3350.acmis.business.FilterRoutes;
@@ -27,8 +32,8 @@ public class SearchResults extends AppCompatActivity {
     private LocalDate departDate, returnDate;
     private Route selectedDepartRoute;
     private Boolean showReturnFlightRslts;
-    private RouteManager routeManager =  new RouteManager();
-    private BookingManager bookingManager =  new BookingManager();
+    private RouteManager routeManager = new RouteManager();
+    private BookingManager bookingManager = new BookingManager();
     private ArrayList<Route> flightsAvailable = new ArrayList<>();
 
     @Override
@@ -42,22 +47,22 @@ public class SearchResults extends AppCompatActivity {
 
         //checks if there are flights available
 //        String checkFlights = routeManager.searchRoute(selectedDeparture, selectedDestination, flightsAvailable);
-        FilterRoutes filterRoutes = new FilterRoutes(selectedDeparture,selectedDestination);
-        String checkFlights = filterRoutes.getFilteredRoutes(flightsAvailable,departDate);
+        FilterRoutes filterRoutes = new FilterRoutes(selectedDeparture, selectedDestination);
+        String checkFlights = filterRoutes.getFilteredRoutes(flightsAvailable, departDate);
         if (checkFlights != null) {
             Messages.noFlightsMessage(this);
         } else {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
             final RecyclerView recyclerView = this.findViewById(R.id.list_search_results);
             recyclerView.setLayoutManager(linearLayoutManager);
-            recyclerView.setAdapter(new SearchResultsCardsAdapter(flightsAvailable,false,new SearchResultsCardsAdapter.OnItemClickListener() {
+            recyclerView.setAdapter(new SearchResultsCardsAdapter(flightsAvailable, false, new SearchResultsCardsAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(Route item) {
                     Intent i = new Intent(getBaseContext(), RouteDetails.class);
                     i.putExtra("selectedRoute", item);
-                    i.putExtra("returnDate",returnDate);
-                    i.putExtra("selectedDepartRoute",selectedDepartRoute);
-                    i.putExtra("numPassengers",getIntent().getIntExtra("numPassengers",1));
+                    i.putExtra("returnDate", returnDate);
+                    i.putExtra("selectedDepartRoute", selectedDepartRoute);
+                    i.putExtra("numPassengers", getIntent().getIntExtra("numPassengers", 1));
                     startActivity(i);
                 }
             }));
@@ -69,11 +74,10 @@ public class SearchResults extends AppCompatActivity {
 
         if (!showReturnFlightRslts) {
             searchTitle.setText(String.format(Locale.CANADA, "Departing %s", Utils.getFormattedDate(departDate)));
-        }
-        else {
+        } else {
             searchTitle.setText(String.format(Locale.CANADA, "Returning %s", Utils.getFormattedDate(departDate)));
         }
-        searchLocationTitle.setText(String.format(Locale.CANADA,"From %s", selectedDeparture.getCity()));
+        searchLocationTitle.setText(String.format(Locale.CANADA, "From %s", selectedDeparture.getCity()));
 
     }
 
@@ -88,7 +92,7 @@ public class SearchResults extends AppCompatActivity {
         searchDepartAirport.setText(selectedDeparture.getAirport());
         searchDestAirport.setText(selectedDestination.getAirport());
 
-        if(returnDate!=null)
+        if (returnDate != null)
             searchDirection.setImageResource(R.drawable.ic_round_u_turn_right_24);
 
         materialToolbar.setNavigationOnClickListener(new View.OnClickListener() {

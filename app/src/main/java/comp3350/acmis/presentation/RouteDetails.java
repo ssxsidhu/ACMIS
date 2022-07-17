@@ -22,7 +22,7 @@ import comp3350.acmis.business.AccessRouteFlights;
 import comp3350.acmis.objects.Route;
 
 public class RouteDetails extends AppCompatActivity {
-    private Route route,selectedDepartRoute;
+    private Route route, selectedDepartRoute;
     private LocalDate returnDate;
     private Boolean contButtonVisibility;
 
@@ -38,11 +38,11 @@ public class RouteDetails extends AppCompatActivity {
         TextView totalDuration = findViewById(R.id.total_duration);
         totalDuration.setText(routeDetails.getRouteTotalDuration());
 
-        Utils.setStatusBarColor(getWindow(),getBaseContext());
+        Utils.setStatusBarColor(getWindow(), getBaseContext());
 
-        Utils.setStatusBarColor(getWindow(),getBaseContext());
+        Utils.setStatusBarColor(getWindow(), getBaseContext());
         MaterialToolbar materialToolbar = findViewById(R.id.details_top_app_bar);
-        materialToolbar.setSubtitle("Departing "+Utils.getFormattedDate(routeDetails.getConnectDepartureDate()));
+        materialToolbar.setSubtitle("Departing " + Utils.getFormattedDate(routeDetails.getConnectDepartureDate()));
 
         materialToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,56 +52,54 @@ public class RouteDetails extends AppCompatActivity {
         });
 
         TextView totalCost = findViewById(R.id.details_total_cost);
-        totalCost.setText(String.format(Locale.CANADA,"CA $%d", routeDetails.getRouteTotalCost()));
+        totalCost.setText(String.format(Locale.CANADA, "CA $%d", routeDetails.getRouteTotalCost()));
 
-        if(contButtonVisibility) {
+        if (contButtonVisibility) {
             LinearLayout continueButtonLayout = findViewById(R.id.route_details_continue_layout);
             continueButtonLayout.setVisibility(View.VISIBLE);
             Button continueButton = findViewById(R.id.details_continue);
             continueButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(returnDate==null) {
+                    if (returnDate == null) {
                         Intent i = new Intent(getBaseContext(), OrderSummary.class);
                         i.putExtra("selectedDepartRoute", route);
-                        i.putExtra("numPassengers",getIntent().getIntExtra("numPassengers",1));
+                        i.putExtra("numPassengers", getIntent().getIntExtra("numPassengers", 1));
                         startActivity(i);
-                    }
-                    else if(selectedDepartRoute == null) {
-                        Intent i =  new Intent(getBaseContext(), SearchResults.class);
-                        i.putExtra("showReturnView",true);
+                    } else if (selectedDepartRoute == null) {
+                        Intent i = new Intent(getBaseContext(), SearchResults.class);
+                        i.putExtra("showReturnView", true);
                         routeDetails.setConnectFlightPos(0);
-                        i.putExtra("selectedDestination",routeDetails.getConnectSource());
-                        i.putExtra("departDate",returnDate);
+                        i.putExtra("selectedDestination", routeDetails.getConnectSource());
+                        i.putExtra("departDate", returnDate);
                         routeDetails.setConnectFlightPos(routeDetails.getNumStops());
-                        i.putExtra("selectedDeparture",routeDetails.getConnectDestination());
-                        i.putExtra("returnDate",returnDate);
-                        i.putExtra("selectedDepartRoute",route);
-                        i.putExtra("numPassengers",getIntent().getIntExtra("numPassengers",1));
+                        i.putExtra("selectedDeparture", routeDetails.getConnectDestination());
+                        i.putExtra("returnDate", returnDate);
+                        i.putExtra("selectedDepartRoute", route);
+                        i.putExtra("numPassengers", getIntent().getIntExtra("numPassengers", 1));
                         startActivity(i);
-                    }
-                    else{
+                    } else {
                         Intent i = new Intent(getBaseContext(), OrderSummary.class);
                         i.putExtra("selectedDepartRoute", selectedDepartRoute);
-                        i.putExtra("selectedReturnRoute",route);
-                        i.putExtra("numPassengers",getIntent().getIntExtra("numPassengers",1));
+                        i.putExtra("selectedReturnRoute", route);
+                        i.putExtra("numPassengers", getIntent().getIntExtra("numPassengers", 1));
                         startActivity(i);
                     }
                 }
             });
         }
 
-        RouteDetailsAdapter adapter = new RouteDetailsAdapter(getBaseContext(),routeDetails);
+        RouteDetailsAdapter adapter = new RouteDetailsAdapter(getBaseContext(), routeDetails);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
         final RecyclerView recyclerView = this.findViewById(R.id.list_route_details);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
     }
 
-    private void recieveData(){
+    private void recieveData() {
         Intent i = getIntent();
-        route =(Route) i.getSerializableExtra("selectedRoute");
-        contButtonVisibility = i.getBooleanExtra("continueButtonVisibility",true);
+        route = (Route) i.getSerializableExtra("selectedRoute");
+        contButtonVisibility = i.getBooleanExtra("continueButtonVisibility", true);
         returnDate = (LocalDate) i.getSerializableExtra("returnDate");
         selectedDepartRoute = (Route) i.getSerializableExtra("selectedDepartRoute");
     }

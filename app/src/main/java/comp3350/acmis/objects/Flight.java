@@ -35,25 +35,25 @@ public class Flight implements Serializable {
     //constructor
     public Flight(Location source, Location destination, ZonedDateTime departureDateandTime, int seats, double dur, int cost) {
         this.departureDateandTime = Objects.requireNonNull(departureDateandTime);
-        this.duration = calculateDuration(errorCheck(dur,"Duration"));
-        this.arrivalDateandTime =Objects.requireNonNull( departureDateandTime.plus(duration).withZoneSameInstant(destination.getZoneName()));
-        this.seats = (int) errorCheck(seats,"Seats");
-        this.cost = (int) errorCheck(cost,"Cost");
+        this.duration = calculateDuration(errorCheck(dur, "Duration"));
+        this.arrivalDateandTime = Objects.requireNonNull(departureDateandTime.plus(duration).withZoneSameInstant(destination.getZoneName()));
+        this.seats = (int) errorCheck(seats, "Seats");
+        this.cost = (int) errorCheck(cost, "Cost");
         this.source = Objects.requireNonNull(source, "Source cannot be null");
         this.destination = Objects.requireNonNull(destination, "Destination cannot be null");
         this.flightId = flightSequence;
         flightSequence++;
     }
 
-    public Flight(int flightId, Location source, Location destination, ZonedDateTime departureDateandTime, int seats, double dur, int cost){
+    public Flight(int flightId, Location source, Location destination, ZonedDateTime departureDateandTime, int seats, double dur, int cost) {
         this.departureDateandTime = Objects.requireNonNull(departureDateandTime);
 
         this.duration = calculateDuration(dur);
         this.arrivalDateandTime = departureDateandTime.plus(duration).withZoneSameInstant(destination.getZoneName());
         this.seats = seats;
         this.cost = cost;
-        this.source = Objects.requireNonNull(source,"Source cannot be null");
-        this.destination = Objects.requireNonNull(destination,"Destination cannot be null");
+        this.source = Objects.requireNonNull(source, "Source cannot be null");
+        this.destination = Objects.requireNonNull(destination, "Destination cannot be null");
 
         this.flightId = flightId;
         flightSequence++;
@@ -65,7 +65,7 @@ public class Flight implements Serializable {
         String[] separation = String.valueOf(duration).split("\\.");
         int hours = Integer.parseInt(separation[0]);
         double temp = (Integer.parseInt(separation[1]));
-        double mins = (temp/10) * 60;
+        double mins = (temp / 10) * 60;
         return Duration.ofHours(hours).plusMinutes((long) mins);
     }
 
@@ -77,7 +77,7 @@ public class Flight implements Serializable {
     //when a user books this flight, he/she chooses the # of seats to be booked
     //those # of seats are to be reserved in the flight.
     public boolean bookSeat(int bookedSeats) {
-        if(bookedSeats<=0){
+        if (bookedSeats <= 0) {
             throw new IllegalArgumentException("Cannot book 0 or negative seats");
         }
 
@@ -92,27 +92,35 @@ public class Flight implements Serializable {
     public static int getFlightSequence() {
         return flightSequence;
     }
+
     public int getFlightId() {
         return flightId;
     }
+
     public Location getSource() {
         return source;
     }
+
     public Location getDestination() {
         return destination;
     }
+
     public int getSeats() {
         return seats;
     }
+
     public int getCost() {
         return cost;
     }
+
     public Duration getDuration() {
         return duration;
     }
+
     public ZonedDateTime getArrivalDateTime() {
-        return arrivalDateandTime ;
+        return arrivalDateandTime;
     }
+
     public ZonedDateTime getDepartureDateTime() {
         return departureDateandTime;
     }
@@ -122,9 +130,22 @@ public class Flight implements Serializable {
         Flight.flightSequence = flightSequence;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Flight flight = (Flight) o;
+        return seats == flight.seats && cost == flight.cost && Objects.equals(source, flight.source) && Objects.equals(destination, flight.destination) && Objects.equals(departureDateandTime, flight.departureDateandTime) && Objects.equals(arrivalDateandTime, flight.arrivalDateandTime) && Objects.equals(duration, flight.duration);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(source, destination, departureDateandTime, arrivalDateandTime, seats, duration, cost);
+    }
+
     //Error checking in constructor
     private double errorCheck(double value, String message) {
-        if (value<=0) {
+        if (value <= 0) {
             throw new IllegalArgumentException(message + " value cannot be 0 or negative");
         }
         return value;

@@ -49,24 +49,43 @@ public class Booking {
     public User getBooker() {
         return booker;
     }
+
     public int getBookingId() {
         return bookingId;
     }
+
     public Route getRouteDepart() {
         return routeDepart;
     }
-    public Route getRouteReturn(){
-        return  routeReturn;
+
+    public Route getRouteReturn() {
+        return routeReturn;
     }
+
     public int getNumPassengers() {
         return numPassengers;
     }
-    public boolean checkForReturn(){
-        return routeReturn!=null;
+
+    public boolean checkForReturn() {
+        return routeReturn != null;
     }
 
     //Setter
-    public void setNewUser(User u){
+    public void setNewUser(User u) {
         booker = u;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Booking booking = (Booking) o;
+        return numPassengers == booking.numPassengers && Objects.equals(booker, booking.booker) && Objects.equals(routeDepart, booking.routeDepart) && Objects.equals(routeReturn, booking.routeReturn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(booker, routeDepart, routeReturn, numPassengers);
     }
 }

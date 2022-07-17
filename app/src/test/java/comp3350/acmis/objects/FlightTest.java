@@ -74,7 +74,7 @@ public class FlightTest {
         //valid date and time departure
         setUp();
         //time only
-        Assert.assertTrue( testFlight.getDepartureDateTime()!=null);
+        Assert.assertTrue(testFlight.getDepartureDateTime() != null);
         tearDown();
     }
 
@@ -92,7 +92,7 @@ public class FlightTest {
         //valid date and time departure
         setUp();
         //time only
-        Assert.assertTrue(testFlight.getArrivalDateTime()!=null);
+        Assert.assertTrue(testFlight.getArrivalDateTime() != null);
 
         tearDown();
     }

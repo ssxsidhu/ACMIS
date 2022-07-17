@@ -14,8 +14,7 @@ public class Services {
 
             if (Main.getDBPathName().equals("UF")) {
                 dataAccessService = new DataAccessStub(dbName);
-            }
-            else {
+            } else {
                 dataAccessService = new DataAccessObject(dbName);
             }
             dataAccessService.open(Main.getDBPathName());

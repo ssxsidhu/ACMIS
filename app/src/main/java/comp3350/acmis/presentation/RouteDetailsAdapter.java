@@ -1,7 +1,6 @@
 package comp3350.acmis.presentation;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
 import comp3350.acmis.R;
 import comp3350.acmis.business.AccessRouteFlights;
-import comp3350.acmis.objects.Route;
 
 public class RouteDetailsAdapter extends RecyclerView.Adapter<RouteDetailsAdapter.Viewholder> {
 
@@ -43,9 +39,9 @@ public class RouteDetailsAdapter extends RecyclerView.Adapter<RouteDetailsAdapte
     @Override
     public void onBindViewHolder(@NonNull RouteDetailsAdapter.Viewholder holder, int position) {
         routeDetails.setConnectFlightPos(position);
-        if(position>0){
+        if (position > 0) {
             holder.routeLayoverLayout.setVisibility(View.VISIBLE);
-            holder.routeLayoverTime.setText(String.format(Locale.CANADA,"%s layover", routeDetails.getCurrLayoverTime()));
+            holder.routeLayoverTime.setText(String.format(Locale.CANADA, "%s layover", routeDetails.getCurrLayoverTime()));
         }
         holder.detailsDepartTime.setText(routeDetails.getConnectDepartureTime());
         holder.detailsArriveTime.setText(routeDetails.getConnectArrivalTime());
@@ -54,7 +50,7 @@ public class RouteDetailsAdapter extends RecyclerView.Adapter<RouteDetailsAdapte
         holder.detailsDepartCity.setText(routeDetails.getConnectSource().getCity());
         holder.detailsArriveCity.setText(routeDetails.getConnectDestination().getCity());
         holder.detailsDuration.setText(routeDetails.getConnectDuration());
-        if(position == routeDetails.getNumStops())
+        if (position == routeDetails.getNumStops())
             holder.verticalStopImage.setImageResource(R.drawable.vertical_stop_to_dest_shape);
         else
             holder.verticalStopImage.setImageResource(R.drawable.vertical_stop_to_stop_shape);
@@ -65,16 +61,17 @@ public class RouteDetailsAdapter extends RecyclerView.Adapter<RouteDetailsAdapte
     public int getItemCount() {
         // this method is used for showing number
         // of card items in recycler view.
-        return routeDetails.getNumStops()+1;
+        return routeDetails.getNumStops() + 1;
     }
 
 
     // View holder class for initializing of
     // your views such as TextView and Imageview.
     public class Viewholder extends RecyclerView.ViewHolder {
-        TextView detailsDepartTime,detailsArriveTime,detailsDepartAirport,detailsArriveAirport,detailsDepartCity,detailsArriveCity,detailsDuration,routeLayoverTime;
+        TextView detailsDepartTime, detailsArriveTime, detailsDepartAirport, detailsArriveAirport, detailsDepartCity, detailsArriveCity, detailsDuration, routeLayoverTime;
         LinearLayout routeLayoverLayout;
         ImageView verticalStopImage;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             detailsDepartTime = itemView.findViewById(R.id.details_depart_time);

@@ -37,6 +37,7 @@ public class Route implements Serializable {
     public boolean isEmpty() {
         return route.isEmpty();
     }
+
     public ArrayList<Flight> getRoute() {
         return route;
     }
