@@ -58,5 +58,14 @@
         <item name="android:minWidth">48dp</item>
         <item name="android:minHeight">48dp</item>
     </style>
+    
+    
+    <style name="searchTransition" parent="Theme.ACMIS">
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowEnterTransition">@transition/search_enter_transition</item>
+        <item name="android:windowReenterTransition">@transition/search_enter_transition</item>
+    </style>
 
 </resources>

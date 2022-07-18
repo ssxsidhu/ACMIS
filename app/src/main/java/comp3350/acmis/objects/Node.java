@@ -12,8 +12,8 @@ import org.threeten.bp.Duration;
 public class Node {
 
     // INSTANCE VARIABLES
-    private Location loc;                       // The location that is being represented as a Node.
-    private Flight flight;                      // The flight that connects this Node to some bode
+    private final Location loc;                       // The location that is being represented as a Node.
+    private final Flight flight;                      // The flight that connects this Node to some bode
     private Duration weightToNode;                // This variable basically extracts weight from the Location. The weight is from THAT NODE to THIS NODE
     private Node next;
 

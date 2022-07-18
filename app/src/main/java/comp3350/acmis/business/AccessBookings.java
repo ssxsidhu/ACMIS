@@ -17,8 +17,8 @@ import comp3350.acmis.objects.User;
 import comp3350.acmis.persistence.DataAccess;
 
 public class AccessBookings {
-    private DataAccess dataAccess;
-    private String username;
+    private final DataAccess dataAccess;
+    private final String username;
 
     public AccessBookings(String user) {
         dataAccess = Services.getDataAccess(Main.dbName);

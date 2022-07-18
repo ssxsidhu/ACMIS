@@ -18,7 +18,7 @@ import comp3350.acmis.persistence.DataAccess;
 
 public class BookingManager {
 
-    private DataAccess data;
+    private final DataAccess data;
 
     // Constructor
     public BookingManager() {

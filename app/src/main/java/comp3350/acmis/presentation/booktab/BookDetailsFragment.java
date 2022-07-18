@@ -1,15 +1,29 @@
-package comp3350.acmis.presentation;
+package comp3350.acmis.presentation.booktab;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Slide;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
+import android.transition.TransitionManager;
+import android.transition.TransitionSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
@@ -24,19 +38,26 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
+import java.util.zip.Inflater;
 
 import comp3350.acmis.R;
 import comp3350.acmis.objects.Location;
+import comp3350.acmis.presentation.Messages;
+import comp3350.acmis.presentation.PropagatingTransition;
+import comp3350.acmis.presentation.searchroutes.SearchResults;
+import spencerstudios.com.bungeelib.Bungee;
 
-public class bookDetailsFragment extends Fragment {
+public class BookDetailsFragment extends Fragment {
 
 
     private int selectedNumPassengers = 1;
     private LocalDate departDate, returnDate;
     private Button pickReturn, pickDepart, searchFlightsButton;
+    private ViewGroup viewGroup;
 
-    public bookDetailsFragment() {
+    public BookDetailsFragment() {
         // Required empty public constructor
     }
 
@@ -48,7 +69,9 @@ public class bookDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_book_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_book_details, container, false);
+        viewGroup = container;
+        return view;
     }
 
 
@@ -60,7 +83,7 @@ public class bookDetailsFragment extends Fragment {
         pickDepartDate(view);
         pickReturnDate(view);
         pickNumPassengers(view);
-        searchFlights();
+        searchFlights(view);
     }
 
     private MaterialDatePicker<Long> setCalender(String titleText, long startDate) {
@@ -87,8 +110,8 @@ public class bookDetailsFragment extends Fragment {
         pickDepart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(getParentFragmentManager().findFragmentByTag("MATERIAL_DATE_PICKER_DEPART") ==null)
                 materialDatePicker.show(getParentFragmentManager(), "MATERIAL_DATE_PICKER_DEPART");
-
             }
         });
 
@@ -115,13 +138,13 @@ public class bookDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 MaterialDatePicker<Long> materialDatePicker = setCalender("Select Return Date", departDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli());
-                materialDatePicker.show(getParentFragmentManager(), "MATERIAL_DATE_PICKER_RETURN");
+                if(getParentFragmentManager().findFragmentByTag("MATERIAL_DATE_PICKER_RETURN") ==null)
+                    materialDatePicker.show(getParentFragmentManager(), "MATERIAL_DATE_PICKER_RETURN");
                 materialDatePicker.addOnPositiveButtonClickListener(selection -> {
                     pickReturn.setText(String.format(Locale.CANADA, "Return %s", materialDatePicker.getHeaderText()));
                     Calendar utc = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
                     utc.setTimeInMillis(selection);
                     returnDate = LocalDate.parse(calendarToDate(utc, "yyyy-MM-dd"));
-                    ;
                     searchFlightsButton.setEnabled(true);
                 });
             }
@@ -201,7 +224,7 @@ public class bookDetailsFragment extends Fragment {
         return roundTripSwitch.isChecked();
     }
 
-    private void searchFlights() {
+    private void searchFlights(View view1) {
         searchFlightsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -222,6 +245,11 @@ public class bookDetailsFragment extends Fragment {
         i.putExtra("departDate", departDate);
         i.putExtra("returnDate", returnDate);
         i.putExtra("numPassengers", selectedNumPassengers);
-        requireActivity().startActivity(i);
+        requireActivity().startActivity(i,ActivityOptions.makeSceneTransitionAnimation(requireActivity()).toBundle());
+//        requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+//        Bungee.slideRight(requireContext());
     }
+
+
+
 }

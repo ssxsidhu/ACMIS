@@ -1,4 +1,4 @@
-package comp3350.acmis.presentation;
+package comp3350.acmis.presentation.managetab;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,11 +19,13 @@ import comp3350.acmis.R;
 import comp3350.acmis.business.AccessRouteFlights;
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Route;
+import comp3350.acmis.presentation.searchroutes.RouteDetails;
+import comp3350.acmis.presentation.searchroutes.SearchResultsCardsAdapter;
 
 public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> {
 
-    private Context mContext;
-    private ArrayList<Booking> displayList;
+    private final Context mContext;
+    private final ArrayList<Booking> displayList;
 
     // Constructor
     public CardsAdapter(Context context, ArrayList<Booking> userBookings) {
@@ -83,9 +85,11 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
     // View holder class for initializing of
     // your views such as TextView and Imageview.
     public class Viewholder extends RecyclerView.ViewHolder {
-        private RecyclerView recyclerView;
-        private TextView cityDepart, cityDest, numPassengers;
-        private ImageView directionImage;
+        private final RecyclerView recyclerView;
+        private final TextView cityDepart;
+        private final TextView cityDest;
+        private final TextView numPassengers;
+        private final ImageView directionImage;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);

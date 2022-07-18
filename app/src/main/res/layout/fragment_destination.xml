@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.DestinationFragment">
+    tools:context=".presentation.booktab.DestinationFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/menu_destination"

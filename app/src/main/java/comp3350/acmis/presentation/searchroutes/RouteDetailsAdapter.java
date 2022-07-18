@@ -1,4 +1,4 @@
-package comp3350.acmis.presentation;
+package comp3350.acmis.presentation.searchroutes;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,13 +18,11 @@ import comp3350.acmis.business.AccessRouteFlights;
 
 public class RouteDetailsAdapter extends RecyclerView.Adapter<RouteDetailsAdapter.Viewholder> {
 
-    private Context context;
-    private AccessRouteFlights routeDetails;
+    private final AccessRouteFlights routeDetails;
     //temporary
 
     // Constructor
     public RouteDetailsAdapter(Context context, AccessRouteFlights accessRouteFlights) {
-        this.context = context;
         routeDetails = accessRouteFlights;
     }
 

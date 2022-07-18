@@ -1,4 +1,4 @@
-package comp3350.acmis.presentation;
+package comp3350.acmis.presentation.managetab;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,12 +22,6 @@ import comp3350.acmis.objects.Booking;
  */
 public class FragmentManage extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    //future use
-    private String mParam1;
-    private String mParam2;
     private ArrayList<Booking> myBookingList;
     private AccessBookings accessBookings;
 
@@ -46,8 +40,7 @@ public class FragmentManage extends Fragment {
     public static FragmentManage newInstance(String param1, String param2) {
         FragmentManage fragment = new FragmentManage();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,10 +48,6 @@ public class FragmentManage extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override

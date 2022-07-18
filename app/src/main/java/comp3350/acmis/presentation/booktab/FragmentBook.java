@@ -1,4 +1,4 @@
-package comp3350.acmis.presentation;
+package comp3350.acmis.presentation.booktab;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -24,23 +24,14 @@ import comp3350.acmis.R;
 import comp3350.acmis.business.AccessLocations;
 import comp3350.acmis.objects.Location;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentBook#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentBook extends Fragment {
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     private Location selectedDeparture, selectedDestination;
     private DepartureFragment departureFragment;
     private DestinationFragment destinationFragment;
-    private bookDetailsFragment bookDetailsFragment;
+    private BookDetailsFragment bookDetailsFragment;
     private FragmentManager fragmentManager;
     private ImageView arrow;
-
 
     public FragmentBook() {
         // Required empty public constructor
@@ -50,8 +41,6 @@ public class FragmentBook extends Fragment {
     public static FragmentBook newInstance(String param1, String param2) {
         FragmentBook fragment = new FragmentBook();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,7 +51,7 @@ public class FragmentBook extends Fragment {
         setHasOptionsMenu(true);
         departureFragment = new DepartureFragment();
         destinationFragment = new DestinationFragment();
-        bookDetailsFragment = new bookDetailsFragment();
+        bookDetailsFragment = new BookDetailsFragment();
         fragmentManager = getParentFragmentManager();
 
     }
@@ -135,11 +124,6 @@ public class FragmentBook extends Fragment {
 
         fragmentManager.setFragmentResultListener("selectedDeparture", getViewLifecycleOwner(), (requestKey, result) -> {
             selectedDeparture = (Location) result.getSerializable(requestKey);
-//            setAirportDeparture.setText(selectedDeparture.getAirport());
-//            setCityDeparture.setText(String.format("%s, %s", selectedDeparture.getCity(), selectedDeparture.getCountry()));
-//            chooseDeparture.setVisibility(View.INVISIBLE);
-//            linearLayoutDeparture.setVisibility(View.VISIBLE);
-//            arrow.setVisibility(View.VISIBLE);
             chooseDestination.setEnabled(true);
             if (!useFragmentResults(view, selectedDeparture, chooseDeparture, linearLayoutDeparture, args))
                 chooseDestinationListener.onClick(view);
@@ -148,15 +132,6 @@ public class FragmentBook extends Fragment {
 
         fragmentManager.setFragmentResultListener("selectedDestination", getViewLifecycleOwner(), (requestKey, result) -> {
             selectedDestination = (Location) result.getSerializable(requestKey);
-//            setAirportDestination.setText(selectedDestination.getAirport());
-//            setCityDestination.setText(String.format("%s, %s", selectedDestination.getCity(), selectedDestination.getCountry()));
-//            chooseDestination.setVisibility(View.INVISIBLE);
-//            linearLayoutDestination.setVisibility(View.VISIBLE);
-//            arrow.setVisibility(View.VISIBLE);
-//            if (selectedDeparture != null && selectedDestination != null) {
-//                bookDetailsFragment.setArguments(args);
-//                callFragment(bookDetailsFragment);
-//            }
             useFragmentResults(view, selectedDestination, chooseDestination, linearLayoutDestination, args);
         });
 

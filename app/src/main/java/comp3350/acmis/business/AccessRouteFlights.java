@@ -12,11 +12,12 @@ import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
 
 public class AccessRouteFlights {
-    private ArrayList<Flight> currRouteFlights;
+    private final ArrayList<Flight> currRouteFlights;
     private Flight currConnectFlight;
 
     public AccessRouteFlights(Route route) {
         currRouteFlights = Objects.requireNonNull(route).getRoute();
+        if(currRouteFlights.size()!=0)
         currConnectFlight = currRouteFlights.get(0);
     }
 
@@ -32,7 +33,6 @@ public class AccessRouteFlights {
         if (durationInMillis > 0) {
             Duration duration = Duration.ofMillis(durationInMillis);
             long hours = duration.toHours();
-            System.out.println(hours + "gasgahqjt");
             long minutes = duration.minusHours(hours).toMinutes();
             return hours + "h " + minutes + "m";
         } else {

@@ -1,4 +1,4 @@
-package comp3350.acmis.presentation;
+package comp3350.acmis.presentation.searchroutes;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +15,12 @@ import java.util.Locale;
 import comp3350.acmis.R;
 import comp3350.acmis.business.AccessRouteFlights;
 import comp3350.acmis.objects.Route;
+import comp3350.acmis.presentation.Utils;
 
 public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResultsCardsAdapter.Viewholder> {
 
 
-    private ArrayList<Route> displayList;
-    private AccessRouteFlights routeFlightDetails;
+    private final ArrayList<Route> displayList;
     private final OnItemClickListener listener;
     private boolean isRouteOrderSelected = false;
 
@@ -47,7 +47,7 @@ public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResult
 
     @Override
     public void onBindViewHolder(@NonNull SearchResultsCardsAdapter.Viewholder holder, int position) {
-        routeFlightDetails = new AccessRouteFlights(displayList.get(position));
+        AccessRouteFlights routeFlightDetails = new AccessRouteFlights(displayList.get(position));
 
         routeFlightDetails.setConnectFlightPos(0);
         holder.departTime.setText(routeFlightDetails.getConnectDepartureTime());
@@ -101,8 +101,15 @@ public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResult
     // View holder class for initializing of
     // your views such as TextView and Imageview.
     public class Viewholder extends RecyclerView.ViewHolder {
-        private TextView departTime, arriveTime, departAirport, destAirport, flightDuration, flightPrice, stopNames, routeDate;
-        private ImageView numStops;
+        private final TextView departTime;
+        private final TextView arriveTime;
+        private final TextView departAirport;
+        private final TextView destAirport;
+        private final TextView flightDuration;
+        private final TextView flightPrice;
+        private final TextView stopNames;
+        private final TextView routeDate;
+        private final ImageView numStops;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);

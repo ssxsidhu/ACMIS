@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class AdjacencyList {
 
     // INSTANCE VARIABLES
-    private Node source;                    // This is the Node from which Flights Originate. There will be several such Nodes stored in a list in some class.
+    private final Node source;                    // This is the Node from which Flights Originate. There will be several such Nodes stored in a list in some class.
     private int size;                       // Stores number of nodes but also denotes the total stopovers in a Route.
 
     // CONSTRUCTOR

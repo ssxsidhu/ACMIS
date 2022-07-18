@@ -14,13 +14,13 @@
         android:theme="@style/Theme.ACMIS"
         tools:targetApi="31" >
         <activity
-            android:name=".presentation.OrderSummary"
+            android:name=".presentation.searchroutes.OrderSummary"
             android:exported="false" />
         <activity
-            android:name=".presentation.RouteDetails"
+            android:name=".presentation.searchroutes.RouteDetails"
             android:exported="false" />
         <activity
-            android:name=".presentation.SearchResults"
+            android:name=".presentation.searchroutes.SearchResults"
             android:exported="false" />
         <activity
             android:name=".presentation.MainActivity"

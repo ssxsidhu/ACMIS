@@ -13,9 +13,9 @@ public class User {
     private final String lastName;
     private final Gender gender;
     private final String username;
-    private String password;
-    private String email;
-    private long phoneNumber;
+    private final String password;
+    private final String email;
+    private final long phoneNumber;
 
     private static int userSequence = 0;
     //need this one for BOOKINGS

@@ -6,9 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
+    android:id="@+id/book_details"
     android:gravity="top"
     android:orientation="vertical"
-    tools:context=".presentation.bookDetailsFragment">
+    tools:context=".presentation.booktab.BookDetailsFragment">
 
     <LinearLayout
         android:layout_width="wrap_content"

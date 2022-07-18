@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import comp3350.acmis.presentation.booktab.FragmentBook;
+import comp3350.acmis.presentation.managetab.FragmentManage;
+
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     public ViewPagerAdapter(FragmentManager fm) {
