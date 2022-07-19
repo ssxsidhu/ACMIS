@@ -4,6 +4,8 @@
 
 package comp3350.acmis.objects;
 
+import org.threeten.bp.ZonedDateTime;
+
 import java.util.Objects;
 
 public class Booking {
@@ -16,6 +18,37 @@ public class Booking {
     private Route routeDepart, routeReturn = null; // The Route being taken for reaching from A->B
     private int bookingId;
     private int numPassengers;
+    private ZonedDateTime departTime;
+    private ZonedDateTime arrivalTime;
+
+    // *******************************************************************************************************
+    public Booking(User booker, Route routeDepart, int numP, ZonedDateTime newDepart) {
+        this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
+        this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
+        departTime = newDepart;
+        numPassengers = numP;
+        bookingId = bookingSeq;
+        bookingSeq++;
+    }
+    public Booking(User booker, Route routeDepart, int numP, ZonedDateTime newDepart, ZonedDateTime newArrival) {
+        this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
+        this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
+        departTime = newDepart;
+        numPassengers = numP;
+        bookingId = bookingSeq;
+        bookingSeq++;
+    }
+    public Booking(User booker, Route routeDepart, Route routeReturn, int numP, ZonedDateTime newDepart, ZonedDateTime newArrival) {
+        this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
+        this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
+        this.routeReturn = routeReturn;
+        departTime = newDepart;
+        arrivalTime = newArrival;
+        numPassengers = numP;
+        bookingId = bookingSeq;
+        bookingSeq++;
+    }
+    // *******************************************************************************************************
 
     // CONSTRUCTOR
     public Booking(User booker, Route routeDepart, int numP) {
@@ -73,6 +106,10 @@ public class Booking {
         return routeReturn != null;
     }
 
+    public ZonedDateTime getDepartTime() {return departTime;}
+
+    public ZonedDateTime getArrivalTime() {return arrivalTime;}
+
     //Setter
     public void setNewUser(User u) {
         booker = u;
@@ -91,4 +128,5 @@ public class Booking {
     public int hashCode() {
         return Objects.hash(booker, routeDepart, routeReturn, numPassengers);
     }
+
 }

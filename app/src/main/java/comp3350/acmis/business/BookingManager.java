@@ -37,7 +37,6 @@ public class BookingManager {
         returnRoutes.clear();
         ArrayList<Route> validRoutes = new ArrayList<>();
 
-
         ArrayList<Flight> allDBFlights = new ArrayList<>();
         data.getAllFlights(allDBFlights);
         ArrayList<Location> allDBLocations = new ArrayList<>();
@@ -105,8 +104,6 @@ public class BookingManager {
     }       // validRoutes List should have stopOver FLights in the beginning and Direct Flights towards the end.
 
 
-
-
     //creating booking
     public String createBooking(String username, Route departRoute,Route returnRoute, int numPassengers) {
         User bookerObject = data.getUserObject(Objects.requireNonNull(username));
@@ -139,4 +136,5 @@ public class BookingManager {
     public DataAccess getData() {
         return data;
     }
+
 }

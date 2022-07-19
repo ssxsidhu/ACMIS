@@ -14,7 +14,7 @@ import comp3350.acmis.persistence.DataAccess;
 public class RouteManager {
 
     // INSTANCE VARIABLES
-    private MyGraph graph;                  // This is the Graph storing all the Connections..
+    private MyGraph graph;                  // This is the Graph storing all the Connections...
     private DataAccess dataAccess;
     private ArrayList<Flight> flightList = new ArrayList<>();
     private ArrayList<Location> locationList = new ArrayList<>();
@@ -121,4 +121,7 @@ public class RouteManager {
 
         return returnThis;
     }
+
+    public filterTime()
+    {}
 }

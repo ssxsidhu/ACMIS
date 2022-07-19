@@ -5,6 +5,8 @@ package comp3350.acmis.objects;
 
 import androidx.annotation.NonNull;
 
+import org.threeten.bp.ZonedDateTime;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -71,5 +73,13 @@ public class Route implements Serializable {
             ret = null;
         }
         return ret;
+    }
+
+    public ZonedDateTime getDepartTime() {
+        return route.get(0).getDepartureDateTime();
+    }
+
+    public ZonedDateTime getArrivalTime() {
+        return route.get(route.size()-1).getArrivalDateTime();
     }
 }

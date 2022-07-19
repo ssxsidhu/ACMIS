@@ -17,8 +17,8 @@ public class User {
     private String password;
     private String email;
     private long phoneNumber;
-    private ArrayList<Booking> bookingList;
 
+    private ArrayList<Booking> bookingList;
 
     private static int userSequence = 0;
 
@@ -90,6 +90,31 @@ public class User {
         }
 
         return returnThis;
+    }
+
+    public String getBookings(ArrayList<Booking> copyHere) {
+
+        if(copyHere!=null) {
+            copyHere.clear();
+            copyHere.addAll(bookingList);
+        }
+        else {
+            throw new NullPointerException("Array Passed to Copy List is NULL !");
+        }
+
+        return null;
+    }
+
+    public String addBooking(Booking addThis) {
+
+        if(addThis!=null) {
+            bookingList.add(addThis);
+        }
+        else {
+            throw new NullPointerException("Booking cannot be NULL !");
+        }
+
+        return null;
     }
 
     @Override
