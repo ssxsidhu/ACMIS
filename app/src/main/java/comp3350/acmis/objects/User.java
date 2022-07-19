@@ -3,6 +3,7 @@
 
 package comp3350.acmis.objects;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class User {
@@ -16,6 +17,8 @@ public class User {
     private String password;
     private String email;
     private long phoneNumber;
+    private ArrayList<Booking> bookingList;
+
 
     private static int userSequence = 0;
 
@@ -26,6 +29,8 @@ public class User {
         this.gender = Objects.requireNonNull(whichGender, "Gender cannot be null");
         this.username = errorCheck(username, "Username");
         this.password = Objects.requireNonNull(password, "password cannot be null");
+
+        bookingList = new ArrayList<>();
 
         // CHECK FOR VALID CHARACTER @. EVERY EMAIL ADDRESS HAS @
         if (email.contains("@")) {
@@ -72,6 +77,19 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public boolean contains(Object o)
+    {
+        boolean returnThis = false;
+        for(int i=0;i<bookingList.size();i++) {
+
+            if(bookingList.get(i).equals(o)) {
+                returnThis = true;
+            }
+        }
+
+        return returnThis;
     }
 
     @Override
