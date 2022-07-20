@@ -28,7 +28,7 @@ public class FilterRoutes {
         if(result==null){
             for(int i=0;i<allPossibleRoutes.size();i++){
                 accessRouteFlights = new AccessRouteFlights(allPossibleRoutes.get(i));
-                //for easy testing
+                //for easy testing commenting it out
 //                if(accessRouteFlights.getConnectDepartureDate().equals(dateFilter))
                 {
                     flightsAvailable.add(allPossibleRoutes.get(i));
