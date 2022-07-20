@@ -19,32 +19,35 @@ public class Node {
 
     // CONSTRUCTOR 1  -- This constructor is Necessary for the Linked Nodes that Arise from the Source Nodes in a List. The List will store the Source Node as Root Node and the nodes connected to that Root Node will be the linked Nodes
     public Node(Location newData, Flight newFlight) {
-        loc = newData;
-        flight = newFlight;
-        weightToNode = newFlight.getDuration();
-        next = null;
+
+        if (newData != null && newFlight == null) {
+            loc = newData;
+            flight = newFlight;
+            weightToNode = newFlight.getDuration();
+            next = null;
+        } else {
+            throw new NullPointerException("Flight and Location Cannot be NULL !");
+        }
     }
 
     // CONSTRUCTOR 2 -- This constructor is Necessary for Populating a List with ONLY NODES. This List would contain the Source Node as Root Node and the Other Connected Nodes as its Linked Nodes
     public Node(Location newData) {
-        loc = newData;
-        flight = null;
-        weightToNode = null;
-        next = null;
+
+        if (newData != null) {
+            loc = newData;
+            flight = null;
+            weightToNode = null;
+            next = null;
+        } else {
+            throw new NullPointerException("Location cannot be NULL !");
+        }
     }
 
-    // SETTERS --> May Not even need these methods.
+    // SETTER
     public void setNext(Node next) {
         this.next = next;
     }
 
-    public Duration getWeightToNode() {
-        return weightToNode;
-    }
-
-    public void setWeightToNode(Duration weightToNode) {
-        this.weightToNode = weightToNode;
-    }
 
     // GETTERS
     public Node getNext() {
@@ -59,7 +62,7 @@ public class Node {
         return weightToNode;
     }
 
-    // TO STRING
+    @Override
     @NonNull
     public String toString() {
 
@@ -68,7 +71,7 @@ public class Node {
         if (flight != null)
             returnThis = returnThis + loc + flight + weightToNode;              // REPRESENTATION ||LOCATION FLIGHT WEIGHT||
         else
-            returnThis = returnThis + loc;                              // REPRESENTATION ||LOCATION||
+            returnThis = returnThis + loc;                                      // REPRESENTATION ||LOCATION||
 
         returnThis += "||";
         return returnThis;

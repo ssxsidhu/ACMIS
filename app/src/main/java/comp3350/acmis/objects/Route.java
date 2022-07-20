@@ -3,6 +3,8 @@
 
 package comp3350.acmis.objects;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -40,6 +42,18 @@ public class Route implements Serializable {
 
     public ArrayList<Flight> getRoute() {
         return route;
+    }
+
+    // METHOD MEANT TO REPLACE getRoute()
+    public String getRoutes(ArrayList<Flight> copyHere) {
+
+        if (copyHere != null) {         // GUARD CONDITION --> Do Something Only if list in params is not NULL
+            copyHere.clear();
+            copyHere.addAll(route);
+            return null;
+        } else {
+            throw new NullPointerException("Array List to store Flights is NULL !");
+        }
     }
 
     public String getFlightsCSV() {

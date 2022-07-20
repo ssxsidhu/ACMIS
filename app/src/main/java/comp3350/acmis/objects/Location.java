@@ -19,7 +19,7 @@ public class Location implements Serializable {
     // CONSTRUCTOR
     public Location(String city, ZoneId zoneName, String country, String airport) {
         this.city = errorCheck(city, "City");
-        this.zoneName = zoneName;
+        this.zoneName = Objects.requireNonNull(zoneName);
         this.country = errorCheck(country, "Country");
         this.airport = errorCheck(airport, "Airport");
     }
