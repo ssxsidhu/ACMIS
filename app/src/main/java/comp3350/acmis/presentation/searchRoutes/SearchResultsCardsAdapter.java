@@ -1,4 +1,4 @@
-package comp3350.acmis.presentation.searchroutes;
+package comp3350.acmis.presentation.searchRoutes;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +54,7 @@ public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResult
         holder.departAirport.setText(routeFlightDetails.getConnectSource().getAirport());
         if (isRouteOrderSelected) {
             holder.routeDate.setVisibility(View.VISIBLE);
-            holder.routeDate.setText(String.format(Locale.CANADA, "   %s, %d", Utils.getFormattedDate(routeFlightDetails.getConnectDepartureDate()), routeFlightDetails.getConnectDepartureDate().getYear()));
+            holder.routeDate.setText(String.format(Locale.CANADA, "   %s, %d", Utils.getFormattedDate(routeFlightDetails.getConnectDepartureZdt().toLocalDate()), routeFlightDetails.getConnectDepartureZdt().getYear()));
             holder.flightPrice.setVisibility(View.GONE);
         }
 

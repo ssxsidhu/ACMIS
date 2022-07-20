@@ -1,4 +1,4 @@
-package comp3350.acmis.presentation.booktab;
+package comp3350.acmis.presentation.bookTab;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

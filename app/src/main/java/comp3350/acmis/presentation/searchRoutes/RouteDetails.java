@@ -1,4 +1,4 @@
-package comp3350.acmis.presentation.searchroutes;
+package comp3350.acmis.presentation.searchRoutes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,7 +43,7 @@ public class RouteDetails extends AppCompatActivity {
 
         Utils.setStatusBarColor(getWindow(), getBaseContext());
         MaterialToolbar materialToolbar = findViewById(R.id.details_top_app_bar);
-        materialToolbar.setSubtitle("Departing " + Utils.getFormattedDate(routeDetails.getConnectDepartureDate()));
+        materialToolbar.setSubtitle("Departing " + Utils.getFormattedDate(routeDetails.getConnectDepartureZdt().toLocalDate()));
 
         materialToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

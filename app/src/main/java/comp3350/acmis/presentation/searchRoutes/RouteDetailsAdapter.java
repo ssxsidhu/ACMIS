@@ -1,4 +1,4 @@
-package comp3350.acmis.presentation.searchroutes;
+package comp3350.acmis.presentation.searchRoutes;
 
 import android.content.Context;
 import android.view.LayoutInflater;

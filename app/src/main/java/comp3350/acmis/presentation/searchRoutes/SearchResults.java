@@ -1,32 +1,18 @@
-package comp3350.acmis.presentation.searchroutes;
+package comp3350.acmis.presentation.searchRoutes;
 
 import android.content.Intent;
-import android.graphics.Rect;
-import android.os.Build;
 import android.os.Bundle;
-import android.transition.AutoTransition;
 import android.transition.CircularPropagation;
-import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
-import android.transition.TransitionListenerAdapter;
 import android.transition.TransitionManager;
 import android.transition.TransitionSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,7 +33,6 @@ import comp3350.acmis.business.FilterRoutes;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
 import comp3350.acmis.presentation.Messages;
-import comp3350.acmis.presentation.PropagatingTransition;
 import comp3350.acmis.presentation.Utils;
 
 public class SearchResults extends AppCompatActivity {
@@ -140,45 +125,6 @@ public class SearchResults extends AppCompatActivity {
         returnDate = (LocalDate) i.getSerializableExtra("returnDate");
         selectedDepartRoute = (Route) i.getSerializableExtra("selectedDepartRoute");
         showReturnFlightRslts = i.getBooleanExtra("showReturnView", false);
-    }
-
-
-    private void letsExplodeIt() {
-
-        findViewById(R.id.window_image).startAnimation(AnimationUtils.loadAnimation(this,R.anim.zoom_out));
-        TransitionSet transition1 = new TransitionSet();
-        transition1.addTransition(new Fade(Fade.IN).addTarget(findViewById(R.id.search_results_title_layout)));
-        transition1.addTransition(new Slide(Gravity.START).addTarget(findViewById(R.id.search_results_title_layout)));
-//        transition1.addTransition(new Slide(Gravity.START).addTarget(findViewById(R.id.search_results_top_app_bar)));
-        transition1.addTransition(new Slide(Gravity.BOTTOM).addTarget(findViewById(R.id.list_search_results)).setStartDelay(250));
-        transition1.addTransition(new Fade(Fade.IN).addTarget(findViewById(R.id.search_results_text)).setStartDelay(200));
-//        new PropagatingTransition(findViewById(R.id.header_layout_results),findViewById(R.id.window_image),transition1).start();
-        transition1.setInterpolator(new AccelerateDecelerateInterpolator());
-        transition1.setDuration(1000);
-        transition1.setPropagation(new CircularPropagation());
-
-        ArrayList<View> targets = new ArrayList<>();
-//
-        ViewGroup sceneRoot = findViewById(R.id.header_layout_results);
-        for(int i = 0; i<sceneRoot.getChildCount();i++){
-            targets.add(sceneRoot.getChildAt(i));
-        }
-
-        for(int i=0;i<targets.size();i++){
-            targets.get(i).setVisibility(View.INVISIBLE);
-        }
-//        Transition transition = new Explode();
-//        transition.excludeTarget(findViewById(R.id.search_results_scroll),true);
-//
-//        new PropagatingTransition(findViewById(R.id.search_results),findViewById(R.id.window_image),transition).start();
-
-        TransitionManager.beginDelayedTransition(sceneRoot,transition1);
-
-        for(int i=0;i<targets.size();i++){
-            if(targets.get(i).getId()!= R.id.book_button && targets.get(i).getId()!= R.id.no_results_found)
-                targets.get(i).setVisibility(View.VISIBLE);
-        }
-
     }
 
 

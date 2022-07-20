@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".presentation.managetab.FragmentManage">
+    tools:context=".presentation.manageTab.FragmentManage">
 
     <TextView
         android:id="@+id/header_title_manage_tab"

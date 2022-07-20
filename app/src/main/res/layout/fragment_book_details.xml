@@ -9,7 +9,7 @@
     android:id="@+id/book_details"
     android:gravity="top"
     android:orientation="vertical"
-    tools:context=".presentation.booktab.BookDetailsFragment">
+    tools:context=".presentation.bookTab.BookDetailsFragment">
 
     <LinearLayout
         android:layout_width="wrap_content"

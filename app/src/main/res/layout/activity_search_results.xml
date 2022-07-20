@@ -8,7 +8,7 @@
     android:id="@+id/search_results"
     android:transitionGroup="false"
     android:orientation="vertical"
-    tools:context=".presentation.searchroutes.SearchResults">
+    tools:context=".presentation.searchRoutes.SearchResults">
 
 
     <androidx.core.widget.NestedScrollView
@@ -29,7 +29,7 @@
                 android:layout_marginStart="-45dp"
                 android:layout_marginEnd="-45dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/image" />
+                android:src="@mipmap/window_image" />
 
             <LinearLayout
                 android:id="@+id/search_results_title_layout"

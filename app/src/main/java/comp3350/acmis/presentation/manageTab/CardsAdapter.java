@@ -1,4 +1,4 @@
-package comp3350.acmis.presentation.managetab;
+package comp3350.acmis.presentation.manageTab;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,8 +19,8 @@ import comp3350.acmis.R;
 import comp3350.acmis.business.AccessRouteFlights;
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Route;
-import comp3350.acmis.presentation.searchroutes.RouteDetails;
-import comp3350.acmis.presentation.searchroutes.SearchResultsCardsAdapter;
+import comp3350.acmis.presentation.searchRoutes.RouteDetails;
+import comp3350.acmis.presentation.searchRoutes.SearchResultsCardsAdapter;
 
 public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> {
 

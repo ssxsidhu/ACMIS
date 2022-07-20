@@ -1,4 +1,4 @@
-package comp3350.acmis.presentation.managetab;
+package comp3350.acmis.presentation.manageTab;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

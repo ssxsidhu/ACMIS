@@ -3,6 +3,7 @@ package comp3350.acmis.business;
 
 import org.threeten.bp.Duration;
 import org.threeten.bp.LocalDate;
+import org.threeten.bp.ZonedDateTime;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -102,7 +103,13 @@ public class AccessRouteFlights {
         return currConnectFlight.getDepartureDateTime().toLocalTime().toString();
     }
 
-    public LocalDate getConnectDepartureDate() {
-        return currConnectFlight.getDepartureDateTime().toLocalDate();
+    public ZonedDateTime getConnectDepartureZdt() {
+        return currConnectFlight.getDepartureDateTime();
     }
+
+    public ZonedDateTime getConnectArrivalZdt(){
+        return currConnectFlight.getArrivalDateTime();
+    }
+
+
 }

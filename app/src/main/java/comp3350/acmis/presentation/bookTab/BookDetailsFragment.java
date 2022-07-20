@@ -1,29 +1,16 @@
-package comp3350.acmis.presentation.booktab;
+package comp3350.acmis.presentation.bookTab;
 
-import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.transition.Explode;
-import android.transition.Fade;
-import android.transition.Slide;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
-import android.transition.TransitionManager;
-import android.transition.TransitionSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
@@ -38,16 +25,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.TimeZone;
-import java.util.zip.Inflater;
 
 import comp3350.acmis.R;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.presentation.Messages;
-import comp3350.acmis.presentation.PropagatingTransition;
-import comp3350.acmis.presentation.searchroutes.SearchResults;
-import spencerstudios.com.bungeelib.Bungee;
+import comp3350.acmis.presentation.searchRoutes.SearchResults;
 
 public class BookDetailsFragment extends Fragment {
 
