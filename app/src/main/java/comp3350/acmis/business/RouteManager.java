@@ -14,10 +14,11 @@ import comp3350.acmis.persistence.DataAccess;
 public class RouteManager {
 
     // INSTANCE VARIABLES
-    private MyGraph graph;                  // This is the Graph storing all the Connections..
-    private DataAccess dataAccess;
+    private final MyGraph graph;                  // This is the Graph storing all the Connections..
+    private final DataAccess dataAccess;
     private ArrayList<Flight> flightList = new ArrayList<>();
     private ArrayList<Location> locationList = new ArrayList<>();
+    ArrayList<ArrayList<Location>> allPossiblePaths = new ArrayList<ArrayList<Location>>();
 
     // CONSTRUCTOR
     public RouteManager() {
@@ -36,10 +37,10 @@ public class RouteManager {
         ArrayList<Route> directRoutes = new ArrayList<>();
         ArrayList<Route> connectedRoutes = new ArrayList<>();
 
-        checkDirectRoute(source,dest,returnThis);
-        checkConnectedRoutes(source,dest,returnThis);
+        checkDirectRoute(source, dest, returnThis);
+        checkConnectedRoutes(source, dest, returnThis);
 
-        if(returnThis.isEmpty())
+        if (returnThis.isEmpty())
             return "No flights found";
         return null;
     }
@@ -66,32 +67,36 @@ public class RouteManager {
             return null;
         }
     }
+
     private String checkConnectedRoutes(Location source, Location dest, ArrayList<Route> returnThis) {
         ArrayList<Location> visited = new ArrayList<>();
         ArrayList<Location> path = new ArrayList<>();
-        ArrayList<ArrayList<Location>> allPossiblePaths = new ArrayList<ArrayList<Location>>();
-        depthFirst(graph,source,dest,visited,path,allPossiblePaths);
+        depthFirst(graph, source, dest, visited, path);
+
+
         return null;
     }
 
+
+
     // PRIVATE HELPER METHOD        //https://thealgorists.com/Algo/AllPathsBetweenTwoNodes
-    private void depthFirst(MyGraph graph, Location source, Location dest, ArrayList<Location> visited, ArrayList<Location> path, ArrayList<ArrayList<Location>> allPaths) {
+    private void depthFirst(MyGraph graph, Location source, Location dest, ArrayList<Location> visited, ArrayList<Location> path) {
         // BASE CASE
-        if(source.equals(dest)) {
-            System.out.println(path);
+        if (source.equals(dest)) {
+
+            allPossiblePaths.add((ArrayList<Location>) path.clone());
             return;
         }
 
         visited.add(source);                                        // Add this so we don't come back to source for checking every time and thus prevent dead loop.
         ArrayList<Location> neighbors = new ArrayList<>();          // These are the neighbors of the source Node. CHECK ALL NEIGHBORS FOR A PATH TO DEST
-        graph.getNeighborCities(source,neighbors);                  // Initialise all neighbors of the source node into this list.
+        graph.getNeighborCities(source, neighbors);                  // Initialise all neighbors of the source node into this list.
 
-        ArrayList<ArrayList<Location>> allPathsCopy = new ArrayList<ArrayList<Location>>(allPaths);
 
         for (int i = 0; i < neighbors.size(); i++) {                       // Iterate over each Neighbor and perform tasks...
             if (!visited.contains(neighbors.get(i))) {
                 path.add(neighbors.get(i));
-                depthFirst(graph, neighbors.get(i), dest, visited, path, allPathsCopy);
+                depthFirst(graph, neighbors.get(i), dest, visited, path);
                 path.remove(neighbors.get(i));
             }
         }
@@ -113,7 +118,6 @@ public class RouteManager {
             Flight temp = flightList.get(index);                        // This is the Current Flight the Iteration is checking for.
             if(temp.getSource().equals(source) &&
                 temp.getDestination().equals(destination)) {            // If found simply make returnThis NON-NULL and Loop Breaks.
-
                 returnThis=temp;
             }
             index++;

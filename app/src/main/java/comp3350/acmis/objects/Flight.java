@@ -21,15 +21,15 @@ public class Flight implements Serializable {
     private static int flightSequence = 1;
 
     // Instance Variables
-    private int flightId;
-    private Location source;
-    private Location destination;
-    private ZonedDateTime departureDateandTime;
-    private ZonedDateTime arrivalDateandTime;
+    private final int flightId;
+    private final Location source;
+    private final Location destination;
+    private final ZonedDateTime departureDateandTime;
+    private final ZonedDateTime arrivalDateandTime;
 
     private int seats; // space in the flight
-    private Duration duration; //weight of flight from one place to another
-    private int cost; //cost of the flight - monetary value.
+    private final Duration duration; //weight of flight from one place to another
+    private final int cost; //cost of the flight - monetary value.
 
 
     //constructor
