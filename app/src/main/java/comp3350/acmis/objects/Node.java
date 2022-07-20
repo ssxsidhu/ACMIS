@@ -20,7 +20,7 @@ public class Node {
     // CONSTRUCTOR 1  -- This constructor is Necessary for the Linked Nodes that Arise from the Source Nodes in a List. The List will store the Source Node as Root Node and the nodes connected to that Root Node will be the linked Nodes
     public Node(Location newData, Flight newFlight) {
 
-        if (newData != null && newFlight == null) {
+        if (newData != null && newFlight != null) {
             loc = newData;
             flight = newFlight;
             weightToNode = newFlight.getDuration();
