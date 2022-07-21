@@ -17,9 +17,6 @@ public class User {
     private final String password;
     private final String email;
     private final long phoneNumber;
-
-    private ArrayList<Booking> bookingList;
-
     private static int userSequence = 0;
 
     // CONSTRUCTOR
@@ -30,7 +27,6 @@ public class User {
         this.username = errorCheck(username, "Username");
         this.password = Objects.requireNonNull(password, "password cannot be null");
 
-        bookingList = new ArrayList<>();
 
         // CHECK FOR VALID CHARACTER @. EVERY EMAIL ADDRESS HAS @
         if (email.contains("@")) {
@@ -96,44 +92,6 @@ public class User {
 
     public String getEmail() {
         return email;
-    }
-
-    public boolean contains(Object o)
-    {
-        boolean returnThis = false;
-        for(int i=0;i<bookingList.size();i++) {
-
-            if(bookingList.get(i).equals(o)) {
-                returnThis = true;
-            }
-        }
-
-        return returnThis;
-    }
-
-    public String getBookings(ArrayList<Booking> copyHere) {
-
-        if(copyHere!=null) {
-            copyHere.clear();
-            copyHere.addAll(bookingList);
-        }
-        else {
-            throw new NullPointerException("Array Passed to Copy List is NULL !");
-        }
-
-        return null;
-    }
-
-    public String addBooking(Booking addThis) {
-
-        if(addThis!=null) {
-            bookingList.add(addThis);
-        }
-        else {
-            throw new NullPointerException("Booking cannot be NULL !");
-        }
-
-        return null;
     }
 
     @Override

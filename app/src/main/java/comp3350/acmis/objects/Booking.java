@@ -16,40 +16,9 @@ public class Booking {
     // INSTANCE VARIABLES
     private User booker;                           // Person Booking the flight
     private final Route routeDepart;
-    private Route routeReturn = null; // The Route being taken for reaching from A->B
+    private Route routeReturn = null;              // The Route being taken for reaching from A->B
     private final int bookingId;
     private int numPassengers;
-    private ZonedDateTime departTime;
-    private ZonedDateTime arrivalTime;
-
-    // *******************************************************************************************************
-    public Booking(User booker, Route routeDepart, int numP, ZonedDateTime newDepart) {
-        this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
-        this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
-        departTime = newDepart;
-        numPassengers = numP;
-        bookingId = bookingSeq;
-        bookingSeq++;
-    }
-    public Booking(User booker, Route routeDepart, int numP, ZonedDateTime newDepart, ZonedDateTime newArrival) {
-        this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
-        this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
-        departTime = newDepart;
-        numPassengers = numP;
-        bookingId = bookingSeq;
-        bookingSeq++;
-    }
-    public Booking(User booker, Route routeDepart, Route routeReturn, int numP, ZonedDateTime newDepart, ZonedDateTime newArrival) {
-        this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
-        this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
-        this.routeReturn = routeReturn;
-        departTime = newDepart;
-        arrivalTime = newArrival;
-        numPassengers = numP;
-        bookingId = bookingSeq;
-        bookingSeq++;
-    }
-    // *******************************************************************************************************
 
     // CONSTRUCTOR
     public Booking(User booker, Route routeDepart, int numP) {
@@ -107,9 +76,6 @@ public class Booking {
         return routeReturn != null;
     }
 
-    public ZonedDateTime getDepartTime() {return departTime;}
-
-    public ZonedDateTime getArrivalTime() {return arrivalTime;}
 
     //Setter
     public void setNewUser(User u) {
