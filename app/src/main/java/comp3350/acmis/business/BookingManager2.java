@@ -1,10 +1,10 @@
 package comp3350.acmis.business;
 
+import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.ZonedDateTime;
 
 import java.util.ArrayList;
 
-import comp3350.acmis.business.RouteManager;
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Route;
 import comp3350.acmis.objects.User;
@@ -31,14 +31,12 @@ public class BookingManager2 {
 
             // Check if List is Empty. If Yes then No Booking Exist for this User.
             if(userBookings.isEmpty()) {
-                thisUser.addBooking(new Booking(thisUser, thisRoute, numPassengers, thisRoute.getDepartTime(), thisRoute.getArrivalTime()));
+                thisUser.addBooking(new Booking(thisUser, thisRoute, numPassengers));
             }
             else {
                 // Retrieve All Bookings for This User. Check if Date and Time Conflict Occurs. If Yes IllegalStateException. If No Create Booking.
                 boolean conflict = false;
                 int index = 0;
-                AccessRouteFlights accessRouteFlights = new AccessRouteFlights(thisRoute);
-                ZonedDateTime depart = accessRouteFlights.
 
                 while(index<userBookings.size()&&!conflict) {   // Check if Time Conflict Occurs. If Within an existing Range then Throw Illegal State Exception.
 
@@ -47,7 +45,7 @@ public class BookingManager2 {
                     }
 
                 if(!conflict) {
-
+                    thisUser.addBooking(new Booking(thisUser, thisRoute, numPassengers));
                 }
                 else {
                         throw new IllegalStateException("Time Conflict ! Departure Time of Requested booking conflicts with Departure and Arrival Time of Existing Booking");

@@ -75,11 +75,4 @@ public class Route implements Serializable {
         return ret;
     }
 
-    public ZonedDateTime getDepartTime() {
-        return route.get(0).getDepartureDateTime();
-    }
-
-    public ZonedDateTime getArrivalTime() {
-        return route.get(route.size()-1).getArrivalDateTime();
-    }
 }
