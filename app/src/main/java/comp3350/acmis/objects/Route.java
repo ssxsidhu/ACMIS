@@ -14,7 +14,7 @@ import java.util.Objects;
 public class Route implements Serializable {
 
     // INSTANCE VARIABLE -  What makes up a route for now ? Either a direct flight or a one stop over flight
-    private ArrayList<Flight> route;
+    private final ArrayList<Flight> route;
 
     // DEFAULT CONSTRUCTOR
     public Route() {

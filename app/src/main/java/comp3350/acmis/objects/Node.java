@@ -12,15 +12,15 @@ import org.threeten.bp.Duration;
 public class Node {
 
     // INSTANCE VARIABLES
-    private Location loc;                       // The location that is being represented as a Node.
-    private Flight flight;                      // The flight that connects this Node to some bode
+    private final Location loc;                       // The location that is being represented as a Node.
+    private final Flight flight;                      // The flight that connects this Node to some bode
     private Duration weightToNode;                // This variable basically extracts weight from the Location. The weight is from THAT NODE to THIS NODE
     private Node next;
 
     // CONSTRUCTOR 1  -- This constructor is Necessary for the Linked Nodes that Arise from the Source Nodes in a List. The List will store the Source Node as Root Node and the nodes connected to that Root Node will be the linked Nodes
     public Node(Location newData, Flight newFlight) {
 
-        if (newData != null && newFlight == null) {
+        if (newData != null && newFlight != null) {
             loc = newData;
             flight = newFlight;
             weightToNode = newFlight.getDuration();

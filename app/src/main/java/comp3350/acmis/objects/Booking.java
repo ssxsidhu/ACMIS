@@ -15,8 +15,9 @@ public class Booking {
 
     // INSTANCE VARIABLES
     private User booker;                           // Person Booking the flight
-    private Route routeDepart, routeReturn = null; // The Route being taken for reaching from A->B
-    private int bookingId;
+    private final Route routeDepart;
+    private Route routeReturn = null; // The Route being taken for reaching from A->B
+    private final int bookingId;
     private int numPassengers;
     private ZonedDateTime departTime;
     private ZonedDateTime arrivalTime;

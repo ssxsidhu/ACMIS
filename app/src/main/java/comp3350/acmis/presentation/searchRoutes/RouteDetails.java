@@ -1,4 +1,4 @@
-package comp3350.acmis.presentation;
+package comp3350.acmis.presentation.searchRoutes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +20,7 @@ import java.util.Locale;
 import comp3350.acmis.R;
 import comp3350.acmis.business.AccessRouteFlights;
 import comp3350.acmis.objects.Route;
+import comp3350.acmis.presentation.Utils;
 
 public class RouteDetails extends AppCompatActivity {
     private Route route, selectedDepartRoute;
@@ -42,7 +43,7 @@ public class RouteDetails extends AppCompatActivity {
 
         Utils.setStatusBarColor(getWindow(), getBaseContext());
         MaterialToolbar materialToolbar = findViewById(R.id.details_top_app_bar);
-        materialToolbar.setSubtitle("Departing " + Utils.getFormattedDate(routeDetails.getConnectDepartureDate()));
+        materialToolbar.setSubtitle("Departing " + Utils.getFormattedDate(routeDetails.getConnectDepartureZdt().toLocalDate()));
 
         materialToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

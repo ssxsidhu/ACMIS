@@ -15,8 +15,8 @@ import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.User;
 
 public class DataAccessStub implements DataAccess {
-    private String dbName;
-    private String dbType = "stub";
+    private final String dbName;
+    private final String dbType = "stub";
     private ArrayList<User> allUsers;
     private ArrayList<Flight> allFlights;
     private ArrayList<Location> allLocations;//tp store city,country,airport and other rdata later

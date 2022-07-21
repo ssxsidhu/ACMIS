@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class MyGraph {
 
     // INSTANCE VARIABLES
-    private ArrayList<AdjacencyList> sourceNodes;         // Stores all the sourceNodes of a graph in a list;
+    private final ArrayList<AdjacencyList> sourceNodes;         // Stores all the sourceNodes of a graph in a list;
     private int numSourceNodes;
     private int numEdges;
 

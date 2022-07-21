@@ -15,8 +15,8 @@ import comp3350.acmis.objects.User;
 import comp3350.acmis.persistence.DataAccess;
 
 public class AccessBookings {
-    private DataAccess dataAccess;
-    private String username;
+    private final DataAccess dataAccess;
+    private final String username;
 
     // CONSTRUCTOR
     public AccessBookings(String user) {

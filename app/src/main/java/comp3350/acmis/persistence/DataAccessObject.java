@@ -1,6 +1,6 @@
-/**
- * This code is not used in the first iteration. It is provided as
- * an example of usage of HSQLDB (for iteration 2).
+/*
+  This code is not used in the first iteration. It is provided as
+  an example of usage of HSQLDB (for iteration 2).
  */
 
 package comp3350.acmis.persistence;
@@ -27,13 +27,13 @@ public class DataAccessObject implements DataAccess {
     private Connection c1;
     private ResultSet rs1, rs2, rs3, rs4;
 
-    private String dbName;
+    private final String dbName;
     private String dbType;
 
     private String cmdString;
     private int updateCount;
     private String result;
-    private static String EOF = "  ";
+    private static final String EOF = "  ";
 
     public DataAccessObject(String dbName) {
         this.dbName = dbName;
@@ -253,7 +253,7 @@ public class DataAccessObject implements DataAccess {
                 numPassengers = rs1.getInt("numPassengers");
 
                 departureFlights = rs1.getString("routeDepart");
-                String departureList[] = departureFlights.split(",");
+                String[] departureList = departureFlights.split(",");
                 for (int i = 0; i < departureList.length; i++) {
                     String currentFlightID = departureList[i];
 
@@ -308,7 +308,7 @@ public class DataAccessObject implements DataAccess {
 
                 returnFlights = rs1.getString("routeReturn");
                 if (returnFlights != null) {
-                    String returnList[] = returnFlights.split(",");
+                    String[] returnList = returnFlights.split(",");
                     for (int i = 0; i < departureList.length; i++) {
                         String currentFlightID = returnList[i];
 

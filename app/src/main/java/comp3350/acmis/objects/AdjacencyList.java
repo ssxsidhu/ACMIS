@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class AdjacencyList {
 
     // INSTANCE VARIABLES
-    private Node source;                    // This is the Node from which Flights Originate. There will be several such Nodes stored in a list in some class.
+    private final Node source;                    // This is the Node from which Flights Originate. There will be several such Nodes stored in a list in some class.
     private int size;                       // Stores number of nodes but also denotes the total stopovers in a Route.
 
     // CONSTRUCTOR
@@ -45,10 +45,7 @@ public class AdjacencyList {
     }
 
     public String getSourceCity() {
-        if (size != 0)
             return source.getLoc().getCity();
-        else
-            return "CANNOT FETCH FROM EMPTY LIST";
     }
 
     public String copyList(ArrayList<Location> copyHere) {                      // Deep Copy of our List. We are returning ONLY LOCATIONS
