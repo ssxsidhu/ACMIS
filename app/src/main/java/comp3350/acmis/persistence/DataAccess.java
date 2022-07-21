@@ -1,5 +1,7 @@
 package comp3350.acmis.persistence;
 
+import org.threeten.bp.ZonedDateTime;
+
 import java.util.ArrayList;
 
 import comp3350.acmis.objects.Booking;
@@ -12,13 +14,18 @@ public interface DataAccess {
 
     void close();
 
-    String getAllFlights(ArrayList<Flight> resultList); //done
+    String getAllFlights(ArrayList<Flight> resultList);
 
-    String getLocations(ArrayList<Location> resultList); //done
+    String getLocations(ArrayList<Location> resultList);
 
     String addBooking(Booking newBooking);
 
-    User getUserObject(String username); //done
+    User getUserObject(String username);
 
     String getUserBookings(User user, ArrayList<Booking> userBookings);
+
+    String cancelBooking(int bookingID);
+
+    String getFlights(Location source, Location dest, ZonedDateTime departureDate, ArrayList<Location> resultList);
+
 }
