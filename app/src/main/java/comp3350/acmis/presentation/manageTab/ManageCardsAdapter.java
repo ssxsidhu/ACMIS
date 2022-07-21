@@ -22,27 +22,27 @@ import comp3350.acmis.objects.Route;
 import comp3350.acmis.presentation.searchRoutes.RouteDetails;
 import comp3350.acmis.presentation.searchRoutes.SearchResultsCardsAdapter;
 
-public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> {
+public class ManageCardsAdapter extends RecyclerView.Adapter<ManageCardsAdapter.Viewholder> {
 
     private final Context mContext;
     private final ArrayList<Booking> displayList;
 
     // Constructor
-    public CardsAdapter(Context context, ArrayList<Booking> userBookings) {
+    public ManageCardsAdapter(Context context, ArrayList<Booking> userBookings) {
         mContext = context;
         displayList = userBookings;
     }
 
     @NonNull
     @Override
-    public CardsAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ManageCardsAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // to inflate the layout for each item of recycler view.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.manage_card_view, parent, false);
         return new Viewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardsAdapter.Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull ManageCardsAdapter.Viewholder holder, int position) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         holder.recyclerView.setLayoutManager(linearLayoutManager);
         ArrayList<Route> bookedRouteList = new ArrayList<>();

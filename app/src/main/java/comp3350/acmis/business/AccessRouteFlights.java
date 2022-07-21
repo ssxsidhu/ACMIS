@@ -111,5 +111,4 @@ public class AccessRouteFlights {
         return currConnectFlight.getArrivalDateTime();
     }
 
-
 }

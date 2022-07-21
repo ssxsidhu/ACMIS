@@ -29,22 +29,6 @@ public class FragmentManage extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ManageFragment.
-     */
-    public static FragmentManage newInstance(String param1, String param2) {
-        FragmentManage fragment = new FragmentManage();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +58,7 @@ public class FragmentManage extends Fragment {
 //
 //        myBookingList.add(new Booking(defaultUser,r1,r2,2));
 
-        CardsAdapter adapter = new CardsAdapter(requireActivity().getBaseContext(), myBookingList);
+        ManageCardsAdapter adapter = new ManageCardsAdapter(requireActivity().getBaseContext(), myBookingList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         RecyclerView cards = view.findViewById(R.id.list_items_manage_tab);
         cards.setLayoutManager(linearLayoutManager);

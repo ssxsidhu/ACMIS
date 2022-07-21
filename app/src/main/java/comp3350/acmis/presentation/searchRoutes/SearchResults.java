@@ -2,15 +2,7 @@ package comp3350.acmis.presentation.searchRoutes;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.transition.CircularPropagation;
-import android.transition.Fade;
-import android.transition.Slide;
-import android.transition.TransitionManager;
-import android.transition.TransitionSet;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import org.threeten.bp.LocalDate;
 
@@ -53,6 +46,7 @@ public class SearchResults extends AppCompatActivity {
         receiveData();
         Utils.setStatusBarColor(getWindow(), getBaseContext());
 
+        setSortView();
         FilterRoutes filterRoutes = new FilterRoutes(selectedDeparture, selectedDestination);
         String checkFlights = filterRoutes.getFilteredRoutes(flightsAvailable, departDate);
         if (checkFlights != null) {
@@ -127,6 +121,17 @@ public class SearchResults extends AppCompatActivity {
         showReturnFlightRslts = i.getBooleanExtra("showReturnView", false);
     }
 
+
+    private void setSortView(){
+        ExtendedFloatingActionButton sortButton = findViewById(R.id.sort_button);
+        sortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SortFragment sortFragment =  new SortFragment();
+                sortFragment.show(getSupportFragmentManager(),"SortBottomSheet");
+            }
+        });
+    }
 
 
 }
