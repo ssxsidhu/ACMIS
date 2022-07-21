@@ -40,7 +40,7 @@ public class RouteManager {
         allPossiblePaths.clear();
         allConnectedRoutes.clear();
 
-        checkDirectRoute(source, dest, returnThis);
+      //  checkDirectRoute(source, dest, returnThis);
         checkConnectedRoutes(source, dest);
         if(!allPossiblePaths.isEmpty()) {
             buildRoute();
