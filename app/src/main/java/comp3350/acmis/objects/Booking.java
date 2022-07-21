@@ -4,6 +4,8 @@
 
 package comp3350.acmis.objects;
 
+import org.threeten.bp.ZonedDateTime;
+
 import java.util.Objects;
 
 public class Booking {
@@ -14,7 +16,7 @@ public class Booking {
     // INSTANCE VARIABLES
     private User booker;                           // Person Booking the flight
     private final Route routeDepart;
-    private Route routeReturn = null; // The Route being taken for reaching from A->B
+    private Route routeReturn = null;              // The Route being taken for reaching from A->B
     private final int bookingId;
     private int numPassengers;
 
@@ -74,6 +76,7 @@ public class Booking {
         return routeReturn != null;
     }
 
+
     //Setter
     public void setNewUser(User u) {
         booker = u;
@@ -92,4 +95,5 @@ public class Booking {
     public int hashCode() {
         return Objects.hash(booker, routeDepart, routeReturn, numPassengers);
     }
+
 }

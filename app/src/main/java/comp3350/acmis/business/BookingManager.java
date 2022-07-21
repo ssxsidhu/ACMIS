@@ -29,84 +29,6 @@ public class BookingManager {
         data = Services.getDataAccess(name);
     }
 
-    // Return List of Routes
-    // travelling from one point to another there can be a multiple ways.
-    // all the different routes are stored in a list and the list is returned.
-    public String searchRoute(Location srcCity, Location destCity, ArrayList<Route> returnRoutes){
-
-        returnRoutes.clear();
-        ArrayList<Route> validRoutes = new ArrayList<>();
-
-
-        ArrayList<Flight> allDBFlights = new ArrayList<>();
-        data.getAllFlights(allDBFlights);
-        ArrayList<Location> allDBLocations = new ArrayList<>();
-        data.getLocations(allDBLocations);
-
-        Route validFlights = new Route();
-
-        ArrayList <Flight> tempSrc = new ArrayList<>();
-        ArrayList <Flight> tempDest = new ArrayList<>();
-        ArrayList <Flight> stopOver = new ArrayList<>();
-
-        // Check for StopOvers and Direct Routes. But First Populate both lists.
-        for (int i = 0; i < allDBFlights.size(); i++) {
-            // Fill up both lists. At the moment tempSrc has all Flights that begin at srcCity and tempDest has all flights that end at destCity
-            if(allDBFlights.get(i).getDestination().getCity().equals(destCity.getCity()))   {tempDest.add(allDBFlights.get(i));}
-            if(allDBFlights.get(i).getSource().getCity().equals(srcCity.getCity()))   {tempSrc.add(allDBFlights.get(i));}
-        }
-
-        // Check for StopOvers.
-        for (int i = 0; i < tempSrc.size(); i++) {
-            for (int j = 0; j < tempDest.size(); j++) {
-
-                // Get Flights with Stop Overs.
-                if(tempSrc.get(i).getDestination().getCity().equals(tempDest.get(j).getSource().getCity())) {
-                    stopOver.add(tempSrc.get(i));
-                    stopOver.add(tempDest.get(j));
-
-//                    validRoutes.add(new Route(stopOver));
-                    stopOver.clear();
-                }
-            }
-        }
-
-        // Check For Direct Routes.
-        for (int i = 0; i < allDBFlights.size(); i++) {
-
-            if(allDBFlights.get(i).getSource().getCity().equals(srcCity.getCity()) &&
-               allDBFlights.get(i).getDestination().getCity().equals(destCity.getCity())) {
-                {
-                    validRoutes.add(new Route(allDBFlights.get(i)));
-                }
-
-            }
-        }
-//        Location winnipeg = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada","YWG");
-//        Location toronto = new Location("Toronto", ZoneId.of("America/Toronto"), "Canada","YYZ");
-//        Location vancouver = new Location("Vancouver", ZoneId.of("America/Vancouver"), "Canada","YVR");
-//
-//        Flight winToTor = new Flight(winnipeg,toronto,  ZonedDateTime.of(2022,6,13,5,30,0,0,winnipeg.getZoneName()), 150, 2.6, 750);
-//        Flight torToVan = new Flight(toronto,vancouver, ZonedDateTime.of(2022,6,14,13,15,0,0,toronto.getZoneName()), 300, 5.0, 1200);
-//
-//        Route route = new Route();
-//        route.addToRoute(winToTor);
-//        route.addToRoute(torToVan);
-//
-//        validRoutes.add(route);
-
-        returnRoutes.addAll(validRoutes);
-        if(validRoutes.size()>0){
-            return null;
-        }
-        else{
-            return "no_flights_found";
-        }
-    }       // validRoutes List should have stopOver FLights in the beginning and Direct Flights towards the end.
-
-
-
-
     //creating booking
     public String createBooking(String username, Route departRoute,Route returnRoute, int numPassengers) {
         User bookerObject = data.getUserObject(Objects.requireNonNull(username));
@@ -139,4 +61,5 @@ public class BookingManager {
     public DataAccess getData() {
         return data;
     }
+
 }
