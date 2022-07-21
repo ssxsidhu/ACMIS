@@ -325,7 +325,7 @@ public class DataAccessStub implements DataAccess {
         return null;
     }
 
-    public String getNextFlight(Location source, Location dest, ZonedDateTime departureDate, ArrayList<Location> resultList) {
+    public String getFlights(Location source, Location dest, ZonedDateTime departureDate, ArrayList<Location> resultList) {
 
 
         return null;
