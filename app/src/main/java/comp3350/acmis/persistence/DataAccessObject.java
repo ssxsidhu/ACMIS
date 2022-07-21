@@ -379,6 +379,25 @@ public class DataAccessObject implements DataAccess {
         return result;
     }
 
+    public String cancelBooking(int bookingID) {
+        result = null;
+        try {
+            cmdString = "Delete from Bookings where bookingID = " + bookingID;
+            updateCount = st1.executeUpdate(cmdString);
+            result = checkWarning(st1, updateCount);
+
+        } catch (Exception e) {
+            processSQLError(e);
+        }
+
+        return null;
+    }
+
+    public String getFlights(Location source, Location dest, ZonedDateTime departureDate, ArrayList<Location> resultList) {
+
+        return null;
+    }
+
     public String checkWarning(Statement st, int updateCount) {
         String result = null;
         try {
