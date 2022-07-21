@@ -3,6 +3,7 @@
 
 package comp3350.acmis.objects;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class User {
@@ -16,7 +17,6 @@ public class User {
     private final String password;
     private final String email;
     private final long phoneNumber;
-
     private static int userSequence = 0;
 
     // CONSTRUCTOR
@@ -26,6 +26,7 @@ public class User {
         this.gender = Objects.requireNonNull(whichGender, "Gender cannot be null");
         this.username = errorCheck(username, "Username");
         this.password = Objects.requireNonNull(password, "password cannot be null");
+
 
         // CHECK FOR VALID CHARACTER @. EVERY EMAIL ADDRESS HAS @
         if (email.contains("@")) {
