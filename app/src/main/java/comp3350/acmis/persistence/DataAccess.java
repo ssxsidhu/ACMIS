@@ -24,8 +24,8 @@ public interface DataAccess {
 
     String getUserBookings(User user, ArrayList<Booking> userBookings);
 
-    String cancelBooking(int bookingID);
+    String cancelBooking(int bookingId);
 
-    String getFlights(Location source, Location dest, ZonedDateTime departureDate, ArrayList<Location> resultList);
+    String getFlights(Location source, Location dest, ZonedDateTime departureDate, ArrayList<Flight> resultList);
 
 }

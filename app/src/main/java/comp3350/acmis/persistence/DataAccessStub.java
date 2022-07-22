@@ -21,7 +21,6 @@ public class DataAccessStub implements DataAccess {
     private ArrayList<Flight> allFlights;
     private ArrayList<Location> allLocations;//tp store city,country,airport and other rdata later
     private ArrayList<Booking> allBookings;
-    private BookingManager bookingManager;
 
 
     public DataAccessStub(String dbName) {
@@ -42,8 +41,6 @@ public class DataAccessStub implements DataAccess {
 
     public void open(String dbName) {
         User user, defaultUser;
-
-        bookingManager = new BookingManager();
 
         defaultUser = new User("John", "Braico", User.Gender.MALE, "braico", "somePassword", "jbraico@cs.umanitoba.ca", "2041234567");
         allUsers.add(defaultUser);
@@ -312,11 +309,11 @@ public class DataAccessStub implements DataAccess {
             return null;
     }
 
-    public String cancelBooking(int bookingID) {
+    public String cancelBooking(int bookingId) {
         boolean removed = false;
 
         for (int i = 0; i < allBookings.size() && !removed; i++) {
-            if (allBookings.get(i).getBookingId() == bookingID) {
+            if (allBookings.get(i).getBookingId() == bookingId) {
                 allBookings.remove(i);
                 removed = true;
             }
@@ -325,10 +322,27 @@ public class DataAccessStub implements DataAccess {
         return null;
     }
 
-    public String getFlights(Location source, Location dest, ZonedDateTime departureDate, ArrayList<Location> resultList) {
+    public String getFlights(Location source, Location dest, ZonedDateTime departureDate, ArrayList<Flight> resultList) {
+        Flight currentFlight;
+        int currentDay;
+        int currentMonth;
+        int currentYear;
 
+        for (int i = 0; i < allFlights.size(); i++) {
+            currentFlight = allFlights.get(i);
+            currentDay = currentFlight.getDepartureDateTime().getDayOfMonth();
+            currentMonth = currentFlight.getDepartureDateTime().getMonthValue();
+            currentYear = currentFlight.getDepartureDateTime().getYear();
+
+            if (currentFlight.getSource().equals(source)      &&
+                currentFlight.getDestination().equals(dest)   &&
+                currentDay == departureDate.getDayOfMonth()   &&
+                currentMonth == departureDate.getMonthValue() &&
+                currentYear == departureDate.getYear()) {
+                    resultList.add(currentFlight);
+            }
+        }
 
         return null;
     }
-
 }
