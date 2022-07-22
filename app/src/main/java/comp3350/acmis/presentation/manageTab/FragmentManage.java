@@ -46,12 +46,6 @@ public class FragmentManage extends Fragment {
         displayBookingList(view);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        displayBookingList(requireView());
-    }
-
     private void displayBookingList(View view){
         ManageCardsAdapter adapter = new ManageCardsAdapter(requireActivity().getBaseContext(), myBookingList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);

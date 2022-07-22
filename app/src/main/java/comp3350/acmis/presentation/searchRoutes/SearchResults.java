@@ -52,17 +52,7 @@ public class SearchResults extends AppCompatActivity {
         if (checkFlights != null) {
             Messages.noFlightsMessage(this);
         } else {
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
-            final RecyclerView recyclerView = this.findViewById(R.id.list_search_results);
-            recyclerView.setLayoutManager(linearLayoutManager);
-            recyclerView.setAdapter(new SearchResultsCardsAdapter(flightsAvailable, false, item -> {
-                Intent i = new Intent(getBaseContext(), RouteDetails.class);
-                i.putExtra("selectedRoute", item);
-                i.putExtra("returnDate", returnDate);
-                i.putExtra("selectedDepartRoute", selectedDepartRoute);
-                i.putExtra("numPassengers", getIntent().getIntExtra("numPassengers", 1));
-                startActivity(i);
-            }));
+            displaySearchResults();
         }
 
         setAppBarLayout();
@@ -128,10 +118,26 @@ public class SearchResults extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SortFragment sortFragment =  new SortFragment();
+                Bundle args = new Bundle();
+                args.putSerializable("availableRouteList",flightsAvailable);
+                sortFragment.setArguments(args);
                 sortFragment.show(getSupportFragmentManager(),"SortBottomSheet");
             }
         });
     }
 
 
+    private void displaySearchResults(){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
+        final RecyclerView recyclerView = this.findViewById(R.id.list_search_results);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(new SearchResultsCardsAdapter(flightsAvailable, false, item -> {
+            Intent i = new Intent(getBaseContext(), RouteDetails.class);
+            i.putExtra("selectedRoute", item);
+            i.putExtra("returnDate", returnDate);
+            i.putExtra("selectedDepartRoute", selectedDepartRoute);
+            i.putExtra("numPassengers", getIntent().getIntExtra("numPassengers", 1));
+            startActivity(i);
+        }));
+    }
 }

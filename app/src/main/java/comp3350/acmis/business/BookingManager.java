@@ -87,9 +87,9 @@ public class BookingManager {
         if (bookerObject != null && departRoute != null) {
 
             if(returnRoute == null)
-                newBooking = new Booking(bookerObject, departRoute,numPassengers);
+                newBooking = new Booking(bookerObject, departRoute,numPassengers,true);
             else
-                newBooking = new Booking(bookerObject,departRoute,returnRoute,numPassengers);
+                newBooking = new Booking(bookerObject,departRoute,returnRoute,numPassengers,true);
             //adding the booking to the master booking.
             data.addBooking(newBooking);
         }

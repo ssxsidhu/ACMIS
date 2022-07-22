@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import comp3350.acmis.R;
 import comp3350.acmis.business.AccessRouteFlights;
@@ -26,11 +28,13 @@ public class ManageCardsAdapter extends RecyclerView.Adapter<ManageCardsAdapter.
 
     private final Context mContext;
     private final ArrayList<Booking> displayList;
+    private Map<Route,Integer> routeToBooking;
 
     // Constructor
     public ManageCardsAdapter(Context context, ArrayList<Booking> userBookings) {
         mContext = context;
         displayList = userBookings;
+        routeToBooking =  new HashMap<>();
     }
 
     @NonNull
@@ -48,9 +52,11 @@ public class ManageCardsAdapter extends RecyclerView.Adapter<ManageCardsAdapter.
         ArrayList<Route> bookedRouteList = new ArrayList<>();
         Booking currBooking = displayList.get(position);
         bookedRouteList.add(currBooking.getRouteDepart());
+        routeToBooking.put(currBooking.getRouteDepart(),currBooking.getBookingId());
 
         if (currBooking.checkForReturn()) {
             bookedRouteList.add(currBooking.getRouteReturn());
+            routeToBooking.put(currBooking.getRouteReturn(),currBooking.getBookingId());
             holder.directionImage.setImageResource(R.drawable.ic_round_u_turn_right_24);
         }
         AccessRouteFlights accessRouteFlights = new AccessRouteFlights(currBooking.getRouteDepart());
@@ -69,7 +75,7 @@ public class ManageCardsAdapter extends RecyclerView.Adapter<ManageCardsAdapter.
                 i.putExtra("selectedRoute", item);
                 i.putExtra("continueButtonVisibility", false);
                 i.putExtra("cancelButtonVisibility",true);
-                i.putExtra("bookingId",currBooking.getBookingId());
+                i.putExtra("bookingId",routeToBooking.get(item));
                 mContext.startActivity(i);
             }
         }));

@@ -11,32 +11,39 @@ import java.util.Objects;
 public class Booking {
 
     // Static VARIABLE
-    private static int bookingSeq;                 // Assign Unique Booking ID for every Booking
+    private static int bookingSeq  = 0;                 // Assign Unique Booking ID for every Booking
 
     // INSTANCE VARIABLES
     private User booker;                           // Person Booking the flight
     private final Route routeDepart;
     private Route routeReturn = null;              // The Route being taken for reaching from A->B
-    private final int bookingId;
+    private int bookingId;
     private int numPassengers;
 
     // CONSTRUCTOR
-    public Booking(User booker, Route routeDepart, int numP) {
+    public Booking(User booker, Route routeDepart, int numP,boolean realBooking) {
         this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
         this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
         numPassengers = numP;
-        bookingId = bookingSeq;
-        bookingSeq++;
+        if(realBooking) {
+            bookingId = bookingSeq;
+            bookingSeq++;
+        }
     }
 
+    public void setBookingId(int bookingId){
+        this.bookingId = bookingId;
+    }
     // CONSTRUCTOR for Bookings with a return Route.
-    public Booking(User booker, Route routeDepart, Route routeReturn, int numP) {
+    public Booking(User booker, Route routeDepart, Route routeReturn, int numP, boolean realBooking) {
         this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
         this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
         this.routeReturn = routeReturn;
         numPassengers = numP;
-        bookingId = bookingSeq;
-        bookingSeq++;
+        if(realBooking) {
+            bookingId = bookingSeq;
+            bookingSeq++;
+        }
     }
 
     // SETTER
