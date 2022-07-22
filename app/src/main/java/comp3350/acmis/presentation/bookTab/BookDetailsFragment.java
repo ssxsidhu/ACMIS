@@ -163,7 +163,7 @@ public class BookDetailsFragment extends Fragment {
                     selectedNumPassengers++;
                     setNumPassengers(passengerButton);
                 } else
-                    Messages.snackBar(view, "Maximum Number of passengers reached for this account");
+                    Messages.makeToast(requireActivity().getApplicationContext(), "Maximum Number of passengers reached for this account");
                 subtractButton.setEnabled(selectedNumPassengers != 1);
             }
         });

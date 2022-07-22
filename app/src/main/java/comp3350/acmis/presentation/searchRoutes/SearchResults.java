@@ -2,15 +2,7 @@ package comp3350.acmis.presentation.searchRoutes;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.transition.CircularPropagation;
-import android.transition.Fade;
-import android.transition.Slide;
-import android.transition.TransitionManager;
-import android.transition.TransitionSet;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import org.threeten.bp.LocalDate;
 
@@ -53,22 +46,13 @@ public class SearchResults extends AppCompatActivity {
         receiveData();
         Utils.setStatusBarColor(getWindow(), getBaseContext());
 
+        setSortView();
         FilterRoutes filterRoutes = new FilterRoutes(selectedDeparture, selectedDestination);
         String checkFlights = filterRoutes.getFilteredRoutes(flightsAvailable, departDate);
         if (checkFlights != null) {
             Messages.noFlightsMessage(this);
         } else {
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
-            final RecyclerView recyclerView = this.findViewById(R.id.list_search_results);
-            recyclerView.setLayoutManager(linearLayoutManager);
-            recyclerView.setAdapter(new SearchResultsCardsAdapter(flightsAvailable, false, item -> {
-                Intent i = new Intent(getBaseContext(), RouteDetails.class);
-                i.putExtra("selectedRoute", item);
-                i.putExtra("returnDate", returnDate);
-                i.putExtra("selectedDepartRoute", selectedDepartRoute);
-                i.putExtra("numPassengers", getIntent().getIntExtra("numPassengers", 1));
-                startActivity(i);
-            }));
+            displaySearchResults();
         }
 
         setAppBarLayout();
@@ -128,5 +112,32 @@ public class SearchResults extends AppCompatActivity {
     }
 
 
+    private void setSortView(){
+        ExtendedFloatingActionButton sortButton = findViewById(R.id.sort_button);
+        sortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SortFragment sortFragment =  new SortFragment();
+                Bundle args = new Bundle();
+                args.putSerializable("availableRouteList",flightsAvailable);
+                sortFragment.setArguments(args);
+                sortFragment.show(getSupportFragmentManager(),"SortBottomSheet");
+            }
+        });
+    }
 
+
+    private void displaySearchResults(){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
+        final RecyclerView recyclerView = this.findViewById(R.id.list_search_results);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(new SearchResultsCardsAdapter(flightsAvailable, false, item -> {
+            Intent i = new Intent(getBaseContext(), RouteDetails.class);
+            i.putExtra("selectedRoute", item);
+            i.putExtra("returnDate", returnDate);
+            i.putExtra("selectedDepartRoute", selectedDepartRoute);
+            i.putExtra("numPassengers", getIntent().getIntExtra("numPassengers", 1));
+            startActivity(i);
+        }));
+    }
 }

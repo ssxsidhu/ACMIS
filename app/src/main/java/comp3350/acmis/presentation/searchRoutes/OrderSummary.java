@@ -52,6 +52,7 @@ public class OrderSummary extends AppCompatActivity {
 
         //set textview showing search results to invisible
         findViewById(R.id.search_results_text).setVisibility(View.INVISIBLE);
+        findViewById(R.id.sort_button).setVisibility(View.INVISIBLE);
 
         routeLocationTitle.setText(String.format(Locale.CANADA, "From %s", journeyDetails.getConnectSource().getCity()));
 
@@ -88,7 +89,7 @@ public class OrderSummary extends AppCompatActivity {
                 else
                     result = bookingManager.createBooking("braico", orderRoute.get(0), orderRoute.get(1), numPassengers);
                 if (result != null) {
-                    Messages.snackBar(view, result);
+                    Messages.makeToast(getApplicationContext(),result);
                 } else {
                     Intent i1 = new Intent(getBaseContext(), MainActivity.class);
                     startActivity(i1);

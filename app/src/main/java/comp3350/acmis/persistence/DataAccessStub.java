@@ -21,7 +21,6 @@ public class DataAccessStub implements DataAccess {
     private ArrayList<Flight> allFlights;
     private ArrayList<Location> allLocations;//tp store city,country,airport and other rdata later
     private ArrayList<Booking> allBookings;
-    private BookingManager bookingManager;
 
 
     public DataAccessStub(String dbName) {
@@ -42,8 +41,6 @@ public class DataAccessStub implements DataAccess {
 
     public void open(String dbName) {
         User user, defaultUser;
-
-        bookingManager = new BookingManager();
 
         defaultUser = new User("John", "Braico", User.Gender.MALE, "braico", "somePassword", "jbraico@cs.umanitoba.ca", "2041234567");
         allUsers.add(defaultUser);

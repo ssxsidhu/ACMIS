@@ -24,4 +24,6 @@
     <string name="return_flight">Return</string>
     <string name="continue_button">Continue</string>
     <string name="flights_available">Flights Available</string>
+    <string name="sort">Sort</string>
+    <string name="sort_by">Sort by</string>
 </resources>

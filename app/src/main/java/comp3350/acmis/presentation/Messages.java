@@ -2,7 +2,9 @@ package comp3350.acmis.presentation;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -11,9 +13,9 @@ import comp3350.acmis.R;
 
 public class Messages {
 
-    public static void snackBar(View view, String message) {
-        Snackbar mySnackbar = Snackbar.make(view, message, BaseTransientBottomBar.LENGTH_LONG);
-        mySnackbar.show();
+    public static void makeToast(Context context, String message) {
+        Toast toast = Toast.makeText(context,message,Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     public static void noFlightsMessage(Activity owner) {

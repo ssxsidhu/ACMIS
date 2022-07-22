@@ -241,6 +241,7 @@ public class DataAccessObject implements DataAccess {
         Route routeDepart = new Route();
         Route routeReturn = new Route();
         int numPassengers = -1;
+        int bookingId = -1;
         Location source = null, dest = null;
         Flight flight = null;
         String departureFlights = EOF, returnFlights = EOF;
@@ -251,7 +252,7 @@ public class DataAccessObject implements DataAccess {
             rs1 = st1.executeQuery(cmdString);
             while (rs1.next()) {
                 numPassengers = rs1.getInt("numPassengers");
-
+                bookingId = rs1.getInt("bookingId");
                 departureFlights = rs1.getString("routeDepart");
                 String[] departureList = departureFlights.split(",");
                 for (int i = 0; i < departureList.length; i++) {
@@ -363,10 +364,11 @@ public class DataAccessObject implements DataAccess {
                 }
 
                 if (routeReturn.getRoute().size() != 0) {
-                    booking = new Booking(user, routeDepart, routeReturn, numPassengers);
+                    booking = new Booking(user, routeDepart, routeReturn, numPassengers,false);
                 } else {
-                    booking = new Booking(user, routeDepart, null, numPassengers);
+                    booking = new Booking(user, routeDepart, null, numPassengers,false);
                 }
+                booking.setBookingId(bookingId);
 
                 userBookings.add(booking);
                 routeDepart = new Route();

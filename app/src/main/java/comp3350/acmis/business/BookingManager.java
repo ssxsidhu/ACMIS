@@ -44,33 +44,6 @@ public class BookingManager {
         data.getLocations(allDBLocations);
 
         Route validFlights = new Route();
-
-        ArrayList <Flight> tempSrc = new ArrayList<>();
-        ArrayList <Flight> tempDest = new ArrayList<>();
-        ArrayList <Flight> stopOver = new ArrayList<>();
-
-        // Check for StopOvers and Direct Routes. But First Populate both lists.
-        for (int i = 0; i < allDBFlights.size(); i++) {
-            // Fill up both lists. At the moment tempSrc has all Flights that begin at srcCity and tempDest has all flights that end at destCity
-            if(allDBFlights.get(i).getDestination().getCity().equals(destCity.getCity()))   {tempDest.add(allDBFlights.get(i));}
-            if(allDBFlights.get(i).getSource().getCity().equals(srcCity.getCity()))   {tempSrc.add(allDBFlights.get(i));}
-        }
-
-        // Check for StopOvers.
-        for (int i = 0; i < tempSrc.size(); i++) {
-            for (int j = 0; j < tempDest.size(); j++) {
-
-                // Get Flights with Stop Overs.
-                if(tempSrc.get(i).getDestination().getCity().equals(tempDest.get(j).getSource().getCity())) {
-                    stopOver.add(tempSrc.get(i));
-                    stopOver.add(tempDest.get(j));
-
-//                    validRoutes.add(new Route(stopOver));
-                    stopOver.clear();
-                }
-            }
-        }
-
         // Check For Direct Routes.
         for (int i = 0; i < allDBFlights.size(); i++) {
 
@@ -110,23 +83,13 @@ public class BookingManager {
     //creating booking
     public String createBooking(String username, Route departRoute,Route returnRoute, int numPassengers) {
         User bookerObject = data.getUserObject(Objects.requireNonNull(username));
-        ArrayList<Booking> userBookings = new ArrayList<>();
         Booking newBooking;
-
-        //get the user's all the bookings
-        //check if the flight is already booked
-        //add a booking only if the flight is not booked already
         if (bookerObject != null && departRoute != null) {
-            data.getUserBookings(bookerObject,userBookings);
-            for (int i = 0; i < userBookings.size(); i++) {
-                if (departRoute.getRoute().get(0).getFlightId() == userBookings.get(i).getRouteDepart().getRoute().get(0).getFlightId()) {
-                    return "You have already booked this flight for your account";
-                }
-            }
+
             if(returnRoute == null)
-                newBooking = new Booking(bookerObject, departRoute,numPassengers);
+                newBooking = new Booking(bookerObject, departRoute,numPassengers,true);
             else
-                newBooking = new Booking(bookerObject,departRoute,returnRoute,numPassengers);
+                newBooking = new Booking(bookerObject,departRoute,returnRoute,numPassengers,true);
             //adding the booking to the master booking.
             data.addBooking(newBooking);
         }
@@ -135,8 +98,14 @@ public class BookingManager {
         }
         return null;
     }
+
+    public String cancelBooking(int bookingId){
+        return data.cancelBooking(bookingId);
+    }
+
     //for testing purposes
     public DataAccess getData() {
         return data;
     }
+
 }
