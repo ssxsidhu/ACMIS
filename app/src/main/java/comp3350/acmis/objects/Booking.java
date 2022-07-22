@@ -11,8 +11,8 @@ import java.util.Objects;
 public class Booking {
 
     // Static VARIABLE
-    private static int bookingSeq  = 0;                 // Assign Unique Booking ID for every Booking
-
+    private static int bookingSeq = 1;             // Assign Unique Booking ID for every Booking
+    
     // INSTANCE VARIABLES
     private User booker;                           // Person Booking the flight
     private final Route routeDepart;
