@@ -25,10 +25,8 @@ import comp3350.acmis.application.Main;
 
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
 
-//    private Fragment fragmentBook,fragmentManage;
 
     private boolean doubleBackToExitPressedOnce = false;
-
     private NavigationBarView mBottomNavigation;
     private ViewPager viewPager;
     private ViewPagerAdapter mViewPagerAdapter;
@@ -37,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+
+
 
         if (!Main.getDBPathName().equals("UF")) {
             copyDatabaseToDevice();
@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         viewPager = findViewById(R.id.view_pager);
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mViewPagerAdapter);
+
+        setCurrentPage();
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -88,6 +90,10 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                 break;
         }
         return true;
+    }
+
+    public void setCurrentPage(){
+        viewPager.setCurrentItem(getIntent().getIntExtra("tabPosition",0));
     }
 
     private void copyDatabaseToDevice() {

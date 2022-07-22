@@ -68,6 +68,8 @@ public class ManageCardsAdapter extends RecyclerView.Adapter<ManageCardsAdapter.
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.putExtra("selectedRoute", item);
                 i.putExtra("continueButtonVisibility", false);
+                i.putExtra("cancelButtonVisibility",true);
+                i.putExtra("bookingId",currBooking.getBookingId());
                 mContext.startActivity(i);
             }
         }));

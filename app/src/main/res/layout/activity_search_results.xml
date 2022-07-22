@@ -166,7 +166,7 @@
         android:id="@+id/book_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/search_results_scroll"
+        android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:padding="@dimen/activity_horizontal_margin"
         android:text="@string/book_flight"
