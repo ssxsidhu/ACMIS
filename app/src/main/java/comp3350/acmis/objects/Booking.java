@@ -4,6 +4,8 @@
 
 package comp3350.acmis.objects;
 
+import org.threeten.bp.ZonedDateTime;
+
 import java.util.Objects;
 
 public class Booking {
@@ -11,12 +13,14 @@ public class Booking {
     // Static VARIABLE
     private static int bookingSeq;                 // Assign Unique Booking ID for every Booking
 
-    // Instance Variable
+    // INSTANCE VARIABLES
     private User booker;                           // Person Booking the flight
-    private Route routeDepart, routeReturn = null; // The Route being taken for reaching from A->B
-    private int bookingId;
+    private final Route routeDepart;
+    private Route routeReturn = null;              // The Route being taken for reaching from A->B
+    private final int bookingId;
     private int numPassengers;
 
+    // CONSTRUCTOR
     public Booking(User booker, Route routeDepart, int numP) {
         this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
         this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
@@ -25,6 +29,7 @@ public class Booking {
         bookingSeq++;
     }
 
+    // CONSTRUCTOR for Bookings with a return Route.
     public Booking(User booker, Route routeDepart, Route routeReturn, int numP) {
         this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
         this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
@@ -34,6 +39,7 @@ public class Booking {
         bookingSeq++;
     }
 
+    // SETTER
     public boolean incrementPassengers() {
         double checkPassengers = (double) numPassengers + 1;
         boolean ret = false;
@@ -70,6 +76,7 @@ public class Booking {
         return routeReturn != null;
     }
 
+
     //Setter
     public void setNewUser(User u) {
         booker = u;
@@ -88,4 +95,5 @@ public class Booking {
     public int hashCode() {
         return Objects.hash(booker, routeDepart, routeReturn, numPassengers);
     }
+
 }

@@ -14,7 +14,7 @@ import comp3350.acmis.objects.Location;
 import comp3350.acmis.persistence.DataAccess;
 
 public class AccessLocations {
-    private DataAccess dataAccess;
+    private final DataAccess dataAccess;
     private List<Location> locations;
 
 

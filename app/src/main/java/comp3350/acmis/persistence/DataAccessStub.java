@@ -15,8 +15,8 @@ import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.User;
 
 public class DataAccessStub implements DataAccess {
-    private String dbName;
-    private String dbType = "stub";
+    private final String dbName;
+    private final String dbType = "stub";
     private ArrayList<User> allUsers;
     private ArrayList<Flight> allFlights;
     private ArrayList<Location> allLocations;//tp store city,country,airport and other rdata later
@@ -47,21 +47,22 @@ public class DataAccessStub implements DataAccess {
 
         defaultUser = new User("John", "Braico", User.Gender.MALE, "braico", "somePassword", "jbraico@cs.umanitoba.ca", "2041234567");
         allUsers.add(defaultUser);
-        user = new User("Julie", "smith", User.Gender.FEMALE, "jsmith", "j&smith$", "jmith@gmail.com", "2048889999");
+        user = new User("Julie", "Smith", User.Gender.FEMALE, "jsmith", "j&smith$", "jmith@gmail.com", "2048889999");
         allUsers.add(user);
 
         Location winnipeg = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
         allLocations.add(winnipeg);
-        Location montreal = new Location("Montreal", ZoneId.of("America/Montreal"), "Canada", "YUL");
-        allLocations.add(montreal);
-        Location toronto = new Location("Toronto", ZoneId.of("America/Toronto"), "Canada", "YYZ");
-        allLocations.add(toronto);
         Location vancouver = new Location("Vancouver", ZoneId.of("America/Vancouver"), "Canada", "YVR");
         allLocations.add(vancouver);
-        Location calgary = new Location("Calgary", ZoneId.of("America/Edmonton"), "Canada", "YYC");
-        allLocations.add(calgary);
+        Location toronto = new Location("Toronto", ZoneId.of("America/Toronto"), "Canada", "YYZ");
+        allLocations.add(toronto);
         Location regina = new Location("Regina", ZoneId.of("America/Regina"), "Canada", "YQR");
         allLocations.add(regina);
+        Location calgary = new Location("Calgary", ZoneId.of("America/Edmonton"), "Canada", "YYC");
+        allLocations.add(calgary);
+        Location montreal = new Location("Montreal", ZoneId.of("America/Montreal"), "Canada", "YUL");
+        allLocations.add(montreal);
+
 
         allFlights.add(new Flight(montreal, calgary, ZonedDateTime.of(2022, 8, 6, 5, 0, 0, 0, montreal.getZoneName()), 175, 4.75, 120));
         allFlights.add(new Flight(montreal, calgary, ZonedDateTime.of(2022, 8, 24, 17, 30, 0, 0, montreal.getZoneName()), 125, 4.75, 300));
@@ -264,10 +265,6 @@ public class DataAccessStub implements DataAccess {
         allFlights.add(new Flight(winnipeg, vancouver, ZonedDateTime.of(2022, 8, 22, 6, 0, 0, 0, winnipeg.getZoneName()), 150, 2.5, 240));
         allFlights.add(new Flight(regina, toronto, ZonedDateTime.of(2022, 7, 15, 17, 0, 0, 0, regina.getZoneName()), 200, 4.2, 300));
 
-
-//        bookingManager.createBooking("braico", new Route(winToMn),null,2);
-//        bookingManager.createBooking("braico", new Route(torToVan),null,2);
-
         System.out.println("Opened " + dbType + " database " + dbName);
     }
 
@@ -277,11 +274,6 @@ public class DataAccessStub implements DataAccess {
 
     public String getAllFlights(ArrayList<Flight> resultList) {
         resultList.addAll(allFlights);
-        return null;
-    }
-
-    public String insertFlight(Flight newFlight) {
-        allFlights.add(newFlight);
         return null;
     }
 
@@ -318,6 +310,25 @@ public class DataAccessStub implements DataAccess {
             return "no bookings found";
         else
             return null;
+    }
+
+    public String cancelBooking(int bookingID) {
+        boolean removed = false;
+
+        for (int i = 0; i < allBookings.size() && !removed; i++) {
+            if (allBookings.get(i).getBookingId() == bookingID) {
+                allBookings.remove(i);
+                removed = true;
+            }
+        }
+
+        return null;
+    }
+
+    public String getFlights(Location source, Location dest, ZonedDateTime departureDate, ArrayList<Location> resultList) {
+
+
+        return null;
     }
 
 }
