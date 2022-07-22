@@ -393,9 +393,59 @@ public class DataAccessObject implements DataAccess {
         return null;
     }
 
-    public String getFlights(Location source, Location dest, ZonedDateTime departureDate, ArrayList<Location> resultList) {
+    public String getFlights(Location source, Location dest, ZonedDateTime departureDate, ArrayList<Flight> resultList) {
+        Flight flight;
+        int id, year, month, day, hour, minute, seats, cost;
+        double duration = -1;
+        id = -1;
+        year = -1;
+        month = -1;
+        day = -1;
+        hour = -1;
+        minute = -1;
+        seats = -1;
+        cost = -1;
+        int yearToFind = departureDate.getYear();
+        int monthToFind = departureDate.getDayOfMonth();
+        int dayToFind = departureDate.getDayOfMonth();
+        int sourceLocId = -1;
+        int destLocId = -1;
 
-        return null;
+        ArrayList<Location> locations = new ArrayList<>();
+        getLocations(locations);
+        for (int i = 0; i < locations.size(); i++) {
+            if (locations.get(i).getAirport().equals(source.getAirport())) {
+                sourceLocId = i;
+            }
+            else if (locations.get(i).getAirport().equals(dest.getAirport())) {
+                destLocId = i;
+            }
+        }
+
+        result = null;
+        try {
+            cmdString = "Select * from Flights where startLocation = " + sourceLocId + "endLocation = " + destLocId +"year = " + yearToFind + " and month = " + monthToFind + " and day = " + dayToFind;
+            rs1 = st1.executeQuery(cmdString);
+            while (rs1.next()) {
+                id = rs1.getInt("flightID");
+                year = rs1.getInt("year");
+                month = rs1.getInt("month");
+                day = rs1.getInt("day");
+                hour = rs1.getInt("hour");
+                minute = rs1.getInt("minute");
+                seats = rs1.getInt("seats");
+                cost = rs1.getInt("cost");
+                duration = rs1.getDouble("duration");
+
+
+                flight = new Flight(id, source, dest, ZonedDateTime.of(year, month, day, hour, minute, 0, 0, source.getZoneName()), seats, duration, cost);
+                resultList.add(flight);
+            }
+            rs1.close();
+        } catch (Exception e) {
+            result = processSQLError(e);
+        }
+        return result;
     }
 
     public String checkWarning(Statement st, int updateCount) {
