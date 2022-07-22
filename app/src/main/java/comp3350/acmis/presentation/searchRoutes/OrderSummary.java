@@ -1,4 +1,4 @@
-package comp3350.acmis.presentation;
+package comp3350.acmis.presentation.searchRoutes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,17 +21,21 @@ import comp3350.acmis.R;
 import comp3350.acmis.business.AccessRouteFlights;
 import comp3350.acmis.business.BookingManager;
 import comp3350.acmis.objects.Route;
+import comp3350.acmis.presentation.MainActivity;
+import comp3350.acmis.presentation.Messages;
+import comp3350.acmis.presentation.Utils;
 
 public class OrderSummary extends AppCompatActivity {
 
-    private ArrayList<Route> orderRoute = new ArrayList<>();
-    private BookingManager bookingManager = new BookingManager();
+    private final ArrayList<Route> orderRoute = new ArrayList<>();
+    private final BookingManager bookingManager = new BookingManager();
     private AccessRouteFlights journeyDetails;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
+
         Utils.setStatusBarColor(getWindow(), getBaseContext());
         orderRoute.add((Route) getIntent().getSerializableExtra("selectedDepartRoute"));
         Route returnRoute = (Route) getIntent().getSerializableExtra("selectedReturnRoute");

@@ -16,12 +16,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/md_theme_dark_shadow"
-            app:subtitleTextColor="@color/design_default_color_background"
-            app:subtitleCentered="true"
-            app:subtitle="subtitle"
-            app:subtitleTextAppearance="?attr/textAppearanceTitleLarge"
+            app:navigationIcon="@drawable/ic_round_close_24"
             app:navigationIconTint="@color/design_default_color_background"
-            app:navigationIcon="@drawable/ic_round_close_24" />
+            app:subtitle="subtitle"
+            app:subtitleCentered="true"
+            app:subtitleTextAppearance="?attr/textAppearanceTitleLarge"
+            app:subtitleTextColor="@color/design_default_color_background" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -38,19 +38,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
             android:text="  Total Duration:"
+            android:textSize="20sp"
             app:drawableLeftCompat="@drawable/ic_outline_timer_24" />
 
         <TextView
             android:id="@+id/total_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="5dp"
             android:text="Duration"
-             />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -58,30 +57,31 @@
         android:id="@+id/list_route_details"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="@dimen/activity_vertical_margin" />
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_weight="1" />
 
     <LinearLayout
         android:id="@+id/route_details_continue_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:padding="10dp">
-    <TextView
-        android:id="@+id/details_total_cost"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        style="@style/TextAppearance.Material3.HeadlineMedium"
-        android:text="$Cost"/>
+        android:padding="10dp"
+        android:visibility="gone">
 
-    <Button
-        android:id="@+id/details_continue"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.3"
-        android:textSize="20sp"
-        android:text="@string/continue_button" />
+        <TextView
+            android:id="@+id/details_total_cost"
+            style="@style/TextAppearance.Material3.HeadlineMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="$Cost" />
+
+        <Button
+            android:id="@+id/details_continue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/continue_button"
+            android:textSize="20sp" />
     </LinearLayout>
 
 </LinearLayout>

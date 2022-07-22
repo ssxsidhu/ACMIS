@@ -3,8 +3,6 @@
 
 package comp3350.acmis.business;
 
-import androidx.annotation.NonNull;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,9 +15,10 @@ import comp3350.acmis.objects.User;
 import comp3350.acmis.persistence.DataAccess;
 
 public class AccessBookings {
-    private DataAccess dataAccess;
-    private String username;
+    private final DataAccess dataAccess;
+    private final String username;
 
+    // CONSTRUCTOR
     public AccessBookings(String user) {
         dataAccess = Services.getDataAccess(Main.dbName);
         username = Objects.requireNonNull(user);
@@ -27,8 +26,9 @@ public class AccessBookings {
 
     public String getMyBookings(ArrayList<Booking>myBookings) {
 
-        User user = dataAccess.getUserObject(username);
+        User user = dataAccess.getUserObject(username);                 // For easier Readability.
         String result;
+
         if (user != null) {
             if(myBookings!=null) {
                 myBookings.clear();
@@ -39,6 +39,7 @@ public class AccessBookings {
         } else {
             return "No user found";
         }
+
         Collections.sort(myBookings, new Comparator<Booking>() {
             @Override
             public int compare(Booking booking, Booking t1) {

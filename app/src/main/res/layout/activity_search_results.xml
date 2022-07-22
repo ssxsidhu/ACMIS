@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.SearchResults"
     android:background="@color/md_theme_dark_onSurface"
-    android:orientation="vertical">
+    android:id="@+id/search_results"
+    android:transitionGroup="false"
+    android:orientation="vertical"
+    tools:context=".presentation.searchRoutes.SearchResults">
 
 
     <androidx.core.widget.NestedScrollView
@@ -15,21 +17,24 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:id="@+id/header_layout_results"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/window_image"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/window_seat" />
+                android:layout_height="410dp"
+                android:layout_marginTop="-30dp"
+                android:layout_marginStart="-45dp"
+                android:layout_marginEnd="-45dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/window_image" />
 
             <LinearLayout
                 android:id="@+id/search_results_title_layout"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="80dp"
                 android:orientation="vertical">
@@ -58,12 +63,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/search_results_title_layout"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginTop="70dp"
                 android:gravity="center"
-                android:text="@string/search_results"
+                android:text="@string/flights_available"
                 android:textColor="@color/design_default_color_background"
                 android:textSize="25sp"
                 android:textStyle="bold" />
+
+            <View
+                android:layout_width="200dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="200dp"
+                android:layout_below="@id/search_results_text"
+                android:background="@drawable/bg_horizontal_dotted_line" />
+
+
 
             <TextView
                 android:id="@+id/no_results_found"
@@ -81,10 +95,11 @@
                 android:id="@+id/list_search_results"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:focusable="false"
                 android:layout_below="@id/search_results_text"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:choiceMode="singleChoice" />
+                android:choiceMode="singleChoice"
+                android:focusable="false"
+                android:layoutAnimation="@anim/layout_animation_from_bottom" />
 
         </RelativeLayout>
 
@@ -100,42 +115,43 @@
         app:subtitleCentered="true"
         app:subtitleTextAppearance="?attr/textAppearanceTitleLarge"
         app:subtitleTextColor="@color/design_default_color_background">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="14dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="14dp">
 
             <TextView
                 android:id="@+id/search_depart_airport"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
                 android:layout_weight="0.3"
                 android:gravity="end"
+                android:text="City depart"
                 android:textColor="@color/md_theme_dark_onSurface"
-                android:layout_marginEnd="5dp"
-                android:textSize="22sp"
-                android:text="City depart" />
+                android:textSize="22sp" />
 
             <ImageView
                 android:id="@+id/search_direction_image"
                 android:layout_width="wrap_content"
-                android:layout_weight="0"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
+                android:layout_weight="0"
                 android:src="@drawable/ic_round_arrow_forward_24"
                 app:tint="@color/md_theme_dark_onSurface" />
 
 
             <TextView
                 android:id="@+id/search_arrive_airport"
-                android:layout_weight="0.3"
-                android:gravity="start"
-                android:textColor="@color/md_theme_dark_onSurface"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textSize="22sp"
-                android:text="City dest" />
+                android:layout_weight="0.3"
+                android:gravity="start"
+                android:text="City dest"
+                android:textColor="@color/md_theme_dark_onSurface"
+                android:textSize="22sp" />
 
         </LinearLayout>
     </com.google.android.material.appbar.MaterialToolbar>
@@ -149,6 +165,6 @@
         android:padding="@dimen/activity_horizontal_margin"
         android:text="@string/book_flight"
         android:textSize="20sp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </RelativeLayout>

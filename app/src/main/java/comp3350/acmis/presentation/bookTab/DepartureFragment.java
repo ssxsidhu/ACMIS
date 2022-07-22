@@ -1,4 +1,4 @@
-package comp3350.acmis.presentation;
+package comp3350.acmis.presentation.bookTab;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,15 +20,15 @@ import comp3350.acmis.objects.Location;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DestinationFragment} factory method to
+ * Use the {@link DepartureFragment} factory method to
  * create an instance of this fragment.
  */
-public class DestinationFragment extends Fragment {
+public class DepartureFragment extends Fragment {
 
     private ArrayList<Location> locationList;
-    private Location selectedDeparture;
+    private Location selectedDestination;
 
-    public DestinationFragment() {
+    public DepartureFragment() {
         // Required empty public constructor
     }
 
@@ -42,29 +42,33 @@ public class DestinationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_destination, container, false);
+        return inflater.inflate(R.layout.fragment_departure, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+
         if (getArguments() != null) {
             locationList = (ArrayList<Location>) getArguments().getSerializable("locationList");
-            selectedDeparture = (Location) getArguments().getSerializable("selectedDeparture");
+            selectedDestination = (Location) getArguments().getSerializable("selectedDestination");
         }
 
         ArrayList<Location> duplicateList = new ArrayList<>(locationList);
-        duplicateList.remove(selectedDeparture);
-        ArrayAdapter<Location> adapter = new ArrayAdapter<>(getActivity(), R.layout.drop_down_menu_item, R.id.menu_text_view, duplicateList);
-        AutoCompleteTextView ddDestination = (AutoCompleteTextView) view.findViewById(R.id.auto_destination);
-        ddDestination.setThreshold(1);
-        ddDestination.setAdapter(adapter);
+        duplicateList.remove(selectedDestination);
 
-        TextInputLayout textInputLayout_destination = view.findViewById(R.id.menu_destination);
-        ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_destination.getEditText())).setOnItemClickListener((adapterView, view12, position, id) -> {
+        ArrayAdapter<Location> adapter = new ArrayAdapter<>(getActivity(), R.layout.drop_down_menu_item, R.id.menu_text_view, duplicateList);
+        AutoCompleteTextView ddDeparture = (AutoCompleteTextView) view.findViewById(R.id.auto_departure);
+        ddDeparture.setThreshold(1);
+        ddDeparture.setAdapter(adapter);
+
+        TextInputLayout textInputLayout_departure = view.findViewById(R.id.menu_departure);
+
+        ((AutoCompleteTextView) Objects.requireNonNull(textInputLayout_departure.getEditText())).setOnItemClickListener((adapterView, view1, position, id) -> {
             Bundle result = new Bundle();
-            ddDestination.getText().clear();
-            result.putSerializable("selectedDestination", adapter.getItem(position));
-            getParentFragmentManager().setFragmentResult("selectedDestination", result);
+            ddDeparture.getText().clear();
+            result.putSerializable("selectedDeparture", adapter.getItem(position));
+            getParentFragmentManager().setFragmentResult("selectedDeparture", result);
         });
     }
+
 }
