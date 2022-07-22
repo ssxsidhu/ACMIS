@@ -312,11 +312,11 @@ public class DataAccessStub implements DataAccess {
             return null;
     }
 
-    public String cancelBooking(int bookingID) {
+    public String cancelBooking(int bookingId) {
         boolean removed = false;
 
         for (int i = 0; i < allBookings.size() && !removed; i++) {
-            if (allBookings.get(i).getBookingId() == bookingID) {
+            if (allBookings.get(i).getBookingId() == bookingId) {
                 allBookings.remove(i);
                 removed = true;
             }

@@ -379,10 +379,10 @@ public class DataAccessObject implements DataAccess {
         return result;
     }
 
-    public String cancelBooking(int bookingID) {
+    public String cancelBooking(int bookingId) {
         result = null;
         try {
-            cmdString = "Delete from Bookings where bookingID = " + bookingID;
+            cmdString = "Delete from Bookings where bookingID = " + bookingId;
             updateCount = st1.executeUpdate(cmdString);
             result = checkWarning(st1, updateCount);
 
