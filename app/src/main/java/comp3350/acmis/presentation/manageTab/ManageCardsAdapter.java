@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import comp3350.acmis.R;
 import comp3350.acmis.business.AccessRouteFlights;
@@ -22,35 +24,39 @@ import comp3350.acmis.objects.Route;
 import comp3350.acmis.presentation.searchRoutes.RouteDetails;
 import comp3350.acmis.presentation.searchRoutes.SearchResultsCardsAdapter;
 
-public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> {
+public class ManageCardsAdapter extends RecyclerView.Adapter<ManageCardsAdapter.Viewholder> {
 
     private final Context mContext;
     private final ArrayList<Booking> displayList;
+    private Map<Route,Integer> routeToBooking;
 
     // Constructor
-    public CardsAdapter(Context context, ArrayList<Booking> userBookings) {
+    public ManageCardsAdapter(Context context, ArrayList<Booking> userBookings) {
         mContext = context;
         displayList = userBookings;
+        routeToBooking =  new HashMap<>();
     }
 
     @NonNull
     @Override
-    public CardsAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ManageCardsAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // to inflate the layout for each item of recycler view.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.manage_card_view, parent, false);
         return new Viewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardsAdapter.Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull ManageCardsAdapter.Viewholder holder, int position) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         holder.recyclerView.setLayoutManager(linearLayoutManager);
         ArrayList<Route> bookedRouteList = new ArrayList<>();
         Booking currBooking = displayList.get(position);
         bookedRouteList.add(currBooking.getRouteDepart());
+        routeToBooking.put(currBooking.getRouteDepart(),currBooking.getBookingId());
 
         if (currBooking.checkForReturn()) {
             bookedRouteList.add(currBooking.getRouteReturn());
+            routeToBooking.put(currBooking.getRouteReturn(),currBooking.getBookingId());
             holder.directionImage.setImageResource(R.drawable.ic_round_u_turn_right_24);
         }
         AccessRouteFlights accessRouteFlights = new AccessRouteFlights(currBooking.getRouteDepart());
@@ -68,6 +74,8 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Viewholder> 
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.putExtra("selectedRoute", item);
                 i.putExtra("continueButtonVisibility", false);
+                i.putExtra("cancelButtonVisibility",true);
+                i.putExtra("bookingId",routeToBooking.get(item));
                 mContext.startActivity(i);
             }
         }));
