@@ -22,8 +22,8 @@ public class FilterRoutes {
     }
 
     public String getFilteredRoutes(ArrayList<Route> flightsAvailable, LocalDate dateFilter){
-        String result = bookingManager.searchRoute(depart,dest,allPossibleRoutes);
-//        String result = routeManager.searchRoute(depart,dest,allPossibleRoutes);
+//        String result = bookingManager.searchRoute(depart,dest,allPossibleRoutes);
+        String result = routeManager.searchRoute(depart,dest,allPossibleRoutes);
         AccessRouteFlights accessRouteFlights;
         if(result==null){
             for(int i=0;i<allPossibleRoutes.size();i++){

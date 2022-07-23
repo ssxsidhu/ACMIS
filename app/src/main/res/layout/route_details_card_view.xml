@@ -18,13 +18,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:padding="15dp">
+            android:paddingHorizontal="15dp"
+            android:paddingTop="5dp">
 
             <LinearLayout
                 android:id="@+id/route_layover_time_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="60dp"
+                android:layout_marginStart="47dp"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="5dp"
                 android:visibility="gone"

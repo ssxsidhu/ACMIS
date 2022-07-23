@@ -5,6 +5,8 @@ import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
 
 import comp3350.acmis.application.Main;
@@ -62,10 +64,11 @@ public class DataAccessStub implements DataAccess {
 
 
         allFlights.add(new Flight(montreal, calgary, ZonedDateTime.of(2022, 8, 6, 5, 0, 0, 0, montreal.getZoneName()), 175, 4.75, 120));
+        allFlights.add(new Flight(calgary, regina, ZonedDateTime.of(2022, 8, 6, 20, 0, 0, 0, calgary.getZoneName()), 200, 1.5, 140));
+        allFlights.add(new Flight(montreal, regina, ZonedDateTime.of(2022, 8, 6, 8, 0, 0, 0, regina.getZoneName()), 175, 4.75, 120));
         allFlights.add(new Flight(montreal, calgary, ZonedDateTime.of(2022, 8, 24, 17, 30, 0, 0, montreal.getZoneName()), 125, 4.75, 300));
         allFlights.add(new Flight(toronto, calgary, ZonedDateTime.of(2022, 7, 1, 17, 30, 0, 0, toronto.getZoneName()), 200, 3.25, 100));
         allFlights.add(new Flight(vancouver, winnipeg, ZonedDateTime.of(2022, 8, 5, 5, 30, 0, 0, vancouver.getZoneName()), 150, 2.5, 220));
-        allFlights.add(new Flight(calgary, regina, ZonedDateTime.of(2022, 8, 10, 13, 0, 0, 0, calgary.getZoneName()), 200, 1.5, 140));
         allFlights.add(new Flight(winnipeg, toronto, ZonedDateTime.of(2022, 7, 25, 20, 30, 0, 0, winnipeg.getZoneName()), 100, 2.3, 200));
         allFlights.add(new Flight(toronto, winnipeg, ZonedDateTime.of(2022, 7, 8, 22, 0, 0, 0, toronto.getZoneName()), 125, 2.3, 100));
         allFlights.add(new Flight(calgary, vancouver, ZonedDateTime.of(2022, 7, 3, 9, 30, 0, 0, calgary.getZoneName()), 200, 2.0, 120));
@@ -342,6 +345,13 @@ public class DataAccessStub implements DataAccess {
                     resultList.add(currentFlight);
             }
         }
+
+        Collections.sort(resultList, new Comparator<Flight>() {
+            @Override
+            public int compare(Flight f1, Flight f2) {
+                return (f1.getDepartureDateTime().isBefore(f2.getDepartureDateTime()) ? 1 : -1);
+            }
+        });
 
         return null;
     }

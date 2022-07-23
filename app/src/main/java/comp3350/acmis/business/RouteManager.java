@@ -1,6 +1,10 @@
 package comp3350.acmis.business;
 
 
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
+
 import java.util.ArrayList;
 
 import comp3350.acmis.application.Main;
@@ -43,7 +47,8 @@ public class RouteManager {
       //  checkDirectRoute(source, dest, returnThis);
         checkConnectedRoutes(source, dest);
         if(!allPossiblePaths.isEmpty()) {
-            buildRoute();
+
+            buildRoute(source);
             returnThis.addAll(allConnectedRoutes);                       // Direct and Connected Routes are added to param list now.
         }
 
@@ -79,7 +84,6 @@ public class RouteManager {
         ArrayList<Location> visited = new ArrayList<>();
         ArrayList<Location> path = new ArrayList<>();
         depthFirst(graph, source, dest, visited, path);
-
         return null;
     }
 
@@ -130,20 +134,47 @@ public class RouteManager {
         return returnThis;
     }
 
-    private String buildRoute()
+    private String buildRoute(Location src)
     {
-        for(int i=0;i<allPossiblePaths.size();i++) {                    // Iterate Over Every List Contained inside this List
 
+        ZonedDateTime dateTime = ZonedDateTime.of(2022, 8, 6, 5, 0, 0, 0, ZoneId.of("America/Montreal"));
+        for(int i=0;i<allPossiblePaths.size();i++) {                    // Iterate Over Every List Contained inside this List
+            allPossiblePaths.get(i).add(0,src);
             Route addThis = new Route();           // Store Flights connecting Locations here
             ArrayList<Location> locList = allPossiblePaths.get(i);      // Store Location list in every index in Above List here. This list is what we will work on to Connect using flights
+            ArrayList<Flight> flightList = new ArrayList<>();
+            ZonedDateTime dateTime1 =null;
 
-            while (locList.size()!=1) {                                 // Iterate until only one loc remains. Logic is that get flight from index 0 to index 1. Then delete index 0.
-                                                                        // Do this until list size is one. This should give us all connecting flights.
-                Flight connectLocs = getFlight(locList.get(0),locList.get(1));
-                addThis.addToRoute(connectLocs);
+            if (locList.size() <= 3 && locList.size() > 1) {
+                dataAccess.getFlights(locList.get(0), locList.get(1), dateTime, flightList);
+                if(!flightList.isEmpty()) {
+                    addThis.addToRoute(flightList.get(0));
+                    dateTime1 = flightList.get(0).getArrivalDateTime();
+                }
+                boolean today = true;
+                flightList.clear();
                 locList.remove(0);
+                while (locList.size() != 1 && !addThis.isEmpty() && today) {                                 // Iterate until only one loc remains. Logic is that get flight from index 0 to index 1. Then delete index 0.
+                    // Do this until list size is one. This should give us all connecting flights.
+                    dataAccess.getFlights(locList.get(0), locList.get(1), dateTime, flightList);
+                    if(!flightList.isEmpty() ) {
+                        boolean added = false;
+                        for(int j=0; j<flightList.size() && !added;j++)
+                        if(flightList.get(j).getDepartureDateTime().isAfter(dateTime1)) {
+                            addThis.addToRoute(flightList.get(j));
+                            dateTime1 = flightList.get(j).getArrivalDateTime();
+                            flightList.clear();
+                            locList.remove(0);
+                            added = true;
+                        }
+                    }
+                    else{
+                        today = false;
+                    }
+                }
+                if(today && !addThis.isEmpty())
+                allConnectedRoutes.add(addThis);
             }
-            allConnectedRoutes.add(addThis);
         }
 
         return null;

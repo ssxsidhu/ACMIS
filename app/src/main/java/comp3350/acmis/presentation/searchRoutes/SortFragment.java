@@ -1,5 +1,6 @@
 package comp3350.acmis.presentation.searchRoutes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,8 +18,11 @@ import androidx.annotation.Nullable;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import comp3350.acmis.R;
+import comp3350.acmis.business.AccessRouteFlights;
 import comp3350.acmis.objects.Route;
 
 public class SortFragment extends BottomSheetDialogFragment {
@@ -45,12 +49,22 @@ public class SortFragment extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
 
+        Collections.sort(routeList,new Comparator<Route>() {
+            @Override
+            public int compare(Route r1, Route r2) {
+                AccessRouteFlights accessRoute1 = new AccessRouteFlights(r1);
+                AccessRouteFlights accessRoute2 = new AccessRouteFlights(r2);
+
+                return accessRoute1.getRouteTotalCost() - accessRoute2.getRouteTotalCost();
+
+            }
+        });
+
         sortListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i){
-                    case 0 :
-                }
+                ((SearchResults)getActivity()).onResume();
+                getFragmentManager().beginTransaction().remove(SortFragment.this).commit();
             }
         });
 

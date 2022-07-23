@@ -126,7 +126,6 @@ public class SearchResults extends AppCompatActivity {
         });
     }
 
-
     private void displaySearchResults(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
         final RecyclerView recyclerView = this.findViewById(R.id.list_search_results);
@@ -139,5 +138,17 @@ public class SearchResults extends AppCompatActivity {
             i.putExtra("numPassengers", getIntent().getIntExtra("numPassengers", 1));
             startActivity(i);
         }));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        displaySearchResults();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

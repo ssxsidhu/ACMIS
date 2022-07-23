@@ -39,7 +39,7 @@ public class RouteDetailsAdapter extends RecyclerView.Adapter<RouteDetailsAdapte
         routeDetails.setConnectFlightPos(position);
         if (position > 0) {
             holder.routeLayoverLayout.setVisibility(View.VISIBLE);
-            holder.routeLayoverTime.setText(String.format(Locale.CANADA, "%s layover", routeDetails.getCurrLayoverTime()));
+            holder.routeLayoverTime.setText(String.format(Locale.CANADA, "%s layover", routeDetails.getCurrLayoverTime(position-1,position)));
         }
         holder.detailsDepartTime.setText(routeDetails.getConnectDepartureTime());
         holder.detailsArriveTime.setText(routeDetails.getConnectArrivalTime());

@@ -31,7 +31,7 @@ public class AccessRouteFlights {
     }
 
     public String toStringDuration(long durationInMillis) {
-        if (durationInMillis > 0) {
+        if (durationInMillis >= 0) {
             Duration duration = Duration.ofMillis(durationInMillis);
             long hours = duration.toHours();
             long minutes = duration.minusHours(hours).toMinutes();
@@ -66,12 +66,11 @@ public class AccessRouteFlights {
         return toStringDuration(totalFlying + totalLayover);
     }
 
-    public String getCurrLayoverTime() {
-        int currentFlightPos = currRouteFlights.indexOf(currConnectFlight);
+    public String getCurrLayoverTime(int flightCurrIndex , int flightNextIndex) {
         long layover = 0;
-        if (currRouteFlights.size() > currentFlightPos + 1) {
-            layover = calculateLayover(currConnectFlight, currRouteFlights.get(currentFlightPos + 1));
-        }
+        if(currRouteFlights.size() > flightNextIndex)
+        layover = calculateLayover(currRouteFlights.get(flightCurrIndex), currRouteFlights.get(flightNextIndex));
+
         return toStringDuration(layover);
     }
 
