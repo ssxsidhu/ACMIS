@@ -45,6 +45,7 @@ public class SearchResults extends AppCompatActivity {
 
         receiveData();
         Utils.setStatusBarColor(getWindow(), getBaseContext());
+        findViewById(R.id.dotted_bottom_line).setVisibility(View.VISIBLE);
 
         setSortView();
         FilterRoutes filterRoutes = new FilterRoutes(selectedDeparture, selectedDestination);
@@ -52,6 +53,7 @@ public class SearchResults extends AppCompatActivity {
         if (checkFlights != null) {
             Messages.noFlightsMessage(this);
         } else {
+            findViewById(R.id.dotted_bottom_line).setVisibility(View.VISIBLE);
             displaySearchResults();
         }
 

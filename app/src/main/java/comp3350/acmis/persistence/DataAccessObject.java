@@ -165,7 +165,7 @@ public class DataAccessObject implements DataAccess {
     }
 
     public String addBooking(Booking newBooking) {
-        int userID = newBooking.getBooker().getUserID();
+        int userId = newBooking.getBooker().getUserId();
         int numPassengers = newBooking.getNumPassengers();
         String routeDepart = newBooking.getRouteDepart().getFlightsCSV();
         String routeReturn = null;
@@ -178,7 +178,7 @@ public class DataAccessObject implements DataAccess {
         try {
             cmdString = "Insert into Bookings values (" +
                     "NULL" + ", " +
-                    userID + ", " +
+                    userId + ", " +
                     routeDepart + ", " +
                     routeReturn + ", " +
                     numPassengers +
@@ -250,7 +250,7 @@ public class DataAccessObject implements DataAccess {
 
         result = null;
         try {
-            cmdString = "Select * from Bookings where userID = " + user.getUserID();
+            cmdString = "Select * from Bookings where userID = " + user.getUserId();
             rs1 = st1.executeQuery(cmdString);
             while (rs1.next()) {
                 numPassengers = rs1.getInt("numPassengers");
@@ -410,7 +410,7 @@ public class DataAccessObject implements DataAccess {
         seats = -1;
         cost = -1;
         int yearToFind = departureDate.getYear();
-        int monthToFind = departureDate.getDayOfMonth();
+        int monthToFind = departureDate.getMonthValue();
         int dayToFind = departureDate.getDayOfMonth();
         int sourceLocId = -1;
         int destLocId = -1;
@@ -428,7 +428,7 @@ public class DataAccessObject implements DataAccess {
 
         result = null;
         try {
-            cmdString = "Select * from Flights where startLocation = " + sourceLocId + "endLocation = " + destLocId +"year = " + yearToFind + " and month = " + monthToFind + " and day = " + dayToFind;
+            cmdString = "Select * from Flights where startLocation = " + sourceLocId + " and endLocation = " + destLocId +" and year = " + yearToFind + " and month = " + monthToFind + " and day = " + dayToFind;
             rs1 = st1.executeQuery(cmdString);
             while (rs1.next()) {
                 id = rs1.getInt("flightID");
