@@ -1,6 +1,7 @@
 package comp3350.acmis.business;
 
 import org.threeten.bp.LocalDate;
+import org.threeten.bp.ZoneId;
 
 import java.util.ArrayList;
 import comp3350.acmis.objects.Location;
@@ -23,7 +24,7 @@ public class FilterRoutes {
 
     public String getFilteredRoutes(ArrayList<Route> flightsAvailable, LocalDate dateFilter){
 //        String result = bookingManager.searchRoute(depart,dest,allPossibleRoutes);
-        String result = routeManager.searchRoute(depart,dest,allPossibleRoutes);
+        String result = routeManager.searchRoute(depart,dest,allPossibleRoutes,dateFilter.atStartOfDay(depart.getZoneName()));
         AccessRouteFlights accessRouteFlights;
         if(result==null){
             for(int i=0;i<allPossibleRoutes.size();i++){

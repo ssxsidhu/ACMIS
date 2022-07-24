@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Flight;
@@ -443,6 +445,14 @@ public class DataAccessObject implements DataAccess {
                 flight = new Flight(id, source, dest, ZonedDateTime.of(year, month, day, hour, minute, 0, 0, source.getZoneName()), seats, duration, cost);
                 resultList.add(flight);
             }
+
+            Collections.sort(resultList, new Comparator<Flight>() {
+                @Override
+                public int compare(Flight f1, Flight f2) {
+                    return (f1.getDepartureDateTime().isBefore(f2.getDepartureDateTime()) ? -1 : 1);
+                }
+            });
+
             rs1.close();
         } catch (Exception e) {
             result = processSQLError(e);

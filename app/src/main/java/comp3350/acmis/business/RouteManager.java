@@ -1,8 +1,6 @@
 package comp3350.acmis.business;
 
 
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
 
 import java.util.ArrayList;
@@ -20,9 +18,8 @@ public class RouteManager {
     // INSTANCE VARIABLES
     private final MyGraph graph;                  // This is the Graph storing all the Connections..
     private final DataAccess dataAccess;
-    private ArrayList<Flight> flightList = new ArrayList<>();
-    private ArrayList<Location> locationList = new ArrayList<>();
-    
+    private ArrayList<Flight> flightList;
+    private ArrayList<Location> locationList;
     private ArrayList<ArrayList<Location>> allPossiblePaths = new ArrayList<ArrayList<Location>>();
     private ArrayList<Route> allConnectedRoutes = new ArrayList<>();
 
@@ -39,16 +36,15 @@ public class RouteManager {
     }
 
     // Return a list of ALL POSSIBLE ROUTES because that's how it works.
-    public String searchRoute(Location source, Location dest, ArrayList<Route> returnThis) {
+    public String searchRoute(Location source, Location dest, ArrayList<Route> returnThis, ZonedDateTime departureDate) {
 
         allPossiblePaths.clear();
         allConnectedRoutes.clear();
 
-      //  checkDirectRoute(source, dest, returnThis);
+        //  checkDirectRoute(source, dest, returnThis);
         checkConnectedRoutes(source, dest);
-        if(!allPossiblePaths.isEmpty()) {
-
-            buildRoute(source);
+        if (!allPossiblePaths.isEmpty()) {
+            buildRoute(source, departureDate);
             returnThis.addAll(allConnectedRoutes);                       // Direct and Connected Routes are added to param list now.
         }
 
@@ -134,49 +130,52 @@ public class RouteManager {
         return returnThis;
     }
 
-    private String buildRoute(Location src)
-    {
 
-        ZonedDateTime dateTime = ZonedDateTime.of(2022, 8, 6, 5, 0, 0, 0, ZoneId.of("America/Montreal"));
-        for(int i=0;i<allPossiblePaths.size();i++) {                    // Iterate Over Every List Contained inside this List
-            allPossiblePaths.get(i).add(0,src);
+    private void buildRoute(Location src, ZonedDateTime firstDepartDate) {
+
+        for (int i = 0; i < allPossiblePaths.size(); i++) {                    // Iterate Over Every List Contained inside this List
+            allPossiblePaths.get(i).add(0, src);
             Route addThis = new Route();           // Store Flights connecting Locations here
             ArrayList<Location> locList = allPossiblePaths.get(i);      // Store Location list in every index in Above List here. This list is what we will work on to Connect using flights
             ArrayList<Flight> flightList = new ArrayList<>();
-            ZonedDateTime dateTime1 =null;
 
-            if (locList.size() <= 3 && locList.size() > 1) {
-                dataAccess.getFlights(locList.get(0), locList.get(1), dateTime, flightList);
-                if(!flightList.isEmpty()) {
-                    addThis.addToRoute(flightList.get(0));
-                    dateTime1 = flightList.get(0).getArrivalDateTime();
-                }
+            if (locList.size() <= 4 && locList.size() > 1) {
                 boolean today = true;
-                flightList.clear();
-                locList.remove(0);
-                while (locList.size() != 1 && !addThis.isEmpty() && today) {                                 // Iterate until only one loc remains. Logic is that get flight from index 0 to index 1. Then delete index 0.
+                boolean checkedTwoDays = false;
+                boolean noConnectedFlight = false;
+                int originalRouteSize = locList.size();
+                ZonedDateTime checkDateTime = firstDepartDate;
+                do {
+                    // Iterate until only one loc remains. Logic is that get flight from index 0 to index 1. Then delete index 0.
                     // Do this until list size is one. This should give us all connecting flights.
-                    dataAccess.getFlights(locList.get(0), locList.get(1), dateTime, flightList);
-                    if(!flightList.isEmpty() ) {
+                    dataAccess.getFlights(locList.get(0), locList.get(1), checkDateTime, flightList);
+                    if (!flightList.isEmpty() && !noConnectedFlight) {
                         boolean added = false;
-                        for(int j=0; j<flightList.size() && !added;j++)
-                        if(flightList.get(j).getDepartureDateTime().isAfter(dateTime1)) {
-                            addThis.addToRoute(flightList.get(j));
-                            dateTime1 = flightList.get(j).getArrivalDateTime();
-                            flightList.clear();
-                            locList.remove(0);
-                            added = true;
+                        for (int j = 0; j < flightList.size() && !added; j++) {
+                            if (flightList.get(j).getDepartureDateTime().isAfter(checkDateTime)) {
+                                if (originalRouteSize != 2) {
+                                    addThis.addToRoute(flightList.get(j));
+                                    checkDateTime = flightList.get(j).getArrivalDateTime();
+                                    added = true;
+                                } else
+                                    allConnectedRoutes.add(new Route(flightList.get(j)));//for direct multiple flights
+                                noConnectedFlight = false;
+                            } else
+                                noConnectedFlight = true;
                         }
-                    }
-                    else{
+                        locList.remove(0);
+                        flightList.clear();
+                    } else if (today) {
                         today = false;
+                        checkDateTime = checkDateTime.plusDays(1);
+                    } else {
+                        checkedTwoDays = true;
                     }
-                }
-                if(today && !addThis.isEmpty())
-                allConnectedRoutes.add(addThis);
+                } while (locList.size() != 1 && !addThis.isEmpty() && !checkedTwoDays);
+
+                if (!checkedTwoDays && !addThis.isEmpty() && !noConnectedFlight)
+                    allConnectedRoutes.add(addThis);
             }
         }
-
-        return null;
     }
 }

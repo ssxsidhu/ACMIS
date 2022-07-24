@@ -70,22 +70,22 @@ public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResult
         switch (routeFlightDetails.getNumStops()) {
             case 1:
                 stopShape = R.drawable.one_stop_shape;
-                numStops = "1 Stop";
+                numStops = "1 Stop: ";
                 break;
             case 2:
                 stopShape = R.drawable.two_stop_shape;
-                numStops = "2 Stops";
+                numStops = "2 Stops: ";
                 break;
             case 3:
                 stopShape = R.drawable.three_stop_shape;
-                numStops = "3 Stops";
+                numStops = "3 Stops: ";
                 break;
             default:
                 stopShape = R.drawable.no_stop_shape;
                 numStops = "No Stops";
         }
         holder.numStops.setImageResource(stopShape);
-        holder.stopNames.setText(numStops);
+        holder.stopNames.setText(String.format("%s%s", numStops, routeFlightDetails.stopNames()));
         holder.bind(displayList.get(position), listener);
     }
 

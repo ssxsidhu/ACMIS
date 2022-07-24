@@ -110,4 +110,13 @@ public class AccessRouteFlights {
         return currConnectFlight.getArrivalDateTime();
     }
 
+    public String stopNames(){
+        StringBuilder names = new StringBuilder();
+        for (int i=1; i<currRouteFlights.size();i++){
+            if(i!=1)
+                names.append(", ");
+            names.append(currRouteFlights.get(i).getSource().getAirport()).append(" (").append(toStringDuration(calculateLayover(currRouteFlights.get(i - 1), currRouteFlights.get(i)))).append(")");
+        }
+        return names.toString();
+    }
 }
