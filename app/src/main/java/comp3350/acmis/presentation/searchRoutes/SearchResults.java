@@ -45,6 +45,7 @@ public class SearchResults extends AppCompatActivity {
 
         receiveData();
         Utils.setStatusBarColor(getWindow(), getBaseContext());
+        findViewById(R.id.dotted_bottom_line).setVisibility(View.VISIBLE);
 
         setSortView();
         FilterRoutes filterRoutes = new FilterRoutes(selectedDeparture, selectedDestination);
@@ -52,6 +53,7 @@ public class SearchResults extends AppCompatActivity {
         if (checkFlights != null) {
             Messages.noFlightsMessage(this);
         } else {
+            findViewById(R.id.dotted_bottom_line).setVisibility(View.VISIBLE);
             displaySearchResults();
         }
 
@@ -126,7 +128,6 @@ public class SearchResults extends AppCompatActivity {
         });
     }
 
-
     private void displaySearchResults(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
         final RecyclerView recyclerView = this.findViewById(R.id.list_search_results);
@@ -139,5 +140,17 @@ public class SearchResults extends AppCompatActivity {
             i.putExtra("numPassengers", getIntent().getIntExtra("numPassengers", 1));
             startActivity(i);
         }));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        displaySearchResults();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

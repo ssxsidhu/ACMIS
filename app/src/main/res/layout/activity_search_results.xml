@@ -78,10 +78,12 @@
                 android:textStyle="bold" />
 
             <View
+                android:id="@+id/dotted_bottom_line"
                 android:layout_width="200dp"
                 android:layout_height="2dp"
                 android:layout_below="@id/search_results_text"
                 android:layout_marginStart="200dp"
+                android:visibility="gone"
                 android:background="@drawable/bg_horizontal_dotted_line" />
 
 

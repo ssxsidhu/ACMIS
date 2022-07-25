@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Flight;
@@ -163,7 +165,7 @@ public class DataAccessObject implements DataAccess {
     }
 
     public String addBooking(Booking newBooking) {
-        int userID = newBooking.getBooker().getUserID();
+        int userId = newBooking.getBooker().getUserId();
         int numPassengers = newBooking.getNumPassengers();
         String routeDepart = newBooking.getRouteDepart().getFlightsCSV();
         String routeReturn = null;
@@ -176,7 +178,7 @@ public class DataAccessObject implements DataAccess {
         try {
             cmdString = "Insert into Bookings values (" +
                     "NULL" + ", " +
-                    userID + ", " +
+                    userId + ", " +
                     routeDepart + ", " +
                     routeReturn + ", " +
                     numPassengers +
@@ -248,7 +250,7 @@ public class DataAccessObject implements DataAccess {
 
         result = null;
         try {
-            cmdString = "Select * from Bookings where userID = " + user.getUserID();
+            cmdString = "Select * from Bookings where userID = " + user.getUserId();
             rs1 = st1.executeQuery(cmdString);
             while (rs1.next()) {
                 numPassengers = rs1.getInt("numPassengers");
@@ -408,7 +410,7 @@ public class DataAccessObject implements DataAccess {
         seats = -1;
         cost = -1;
         int yearToFind = departureDate.getYear();
-        int monthToFind = departureDate.getDayOfMonth();
+        int monthToFind = departureDate.getMonthValue();
         int dayToFind = departureDate.getDayOfMonth();
         int sourceLocId = -1;
         int destLocId = -1;
@@ -426,7 +428,7 @@ public class DataAccessObject implements DataAccess {
 
         result = null;
         try {
-            cmdString = "Select * from Flights where startLocation = " + sourceLocId + "endLocation = " + destLocId +"year = " + yearToFind + " and month = " + monthToFind + " and day = " + dayToFind;
+            cmdString = "Select * from Flights where startLocation = " + sourceLocId + " and endLocation = " + destLocId +" and year = " + yearToFind + " and month = " + monthToFind + " and day = " + dayToFind;
             rs1 = st1.executeQuery(cmdString);
             while (rs1.next()) {
                 id = rs1.getInt("flightID");
@@ -443,6 +445,14 @@ public class DataAccessObject implements DataAccess {
                 flight = new Flight(id, source, dest, ZonedDateTime.of(year, month, day, hour, minute, 0, 0, source.getZoneName()), seats, duration, cost);
                 resultList.add(flight);
             }
+
+            Collections.sort(resultList, new Comparator<Flight>() {
+                @Override
+                public int compare(Flight f1, Flight f2) {
+                    return (f1.getDepartureDateTime().isBefore(f2.getDepartureDateTime()) ? -1 : 1);
+                }
+            });
+
             rs1.close();
         } catch (Exception e) {
             result = processSQLError(e);
