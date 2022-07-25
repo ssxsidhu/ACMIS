@@ -27,4 +27,5 @@
     <string name="sort">Sort</string>
     <string name="sort_by">Sort by</string>
     <string name="no_bookings_found">No Booking Found</string>
+    <string name="cancel_booking">Cancel booking</string>
 </resources>

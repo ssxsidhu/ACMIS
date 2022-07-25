@@ -45,7 +45,7 @@ public class SearchResults extends AppCompatActivity {
         setTheme(R.style.searchTransition);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
-        findViewById(R.id.window_image).startAnimation(AnimationUtils.loadAnimation(this,R.anim.zoom_out));
+        findViewById(R.id.window_image).startAnimation(AnimationUtils.loadAnimation(this, R.anim.zoom_out));
 
         receiveData();
         Utils.setStatusBarColor(getWindow(), getBaseContext());
@@ -64,7 +64,7 @@ public class SearchResults extends AppCompatActivity {
         } else {
             searchTitle.setText(String.format(Locale.CANADA, "Returning %s", Utils.getFormattedDate(departDate)));
         }
-        searchLocationTitle.setText(String.format(Locale.CANADA, "From %s %s", selectedDeparture.getCity(),selectedDeparture.getAirport()));
+        searchLocationTitle.setText(String.format(Locale.CANADA, "From %s %s", selectedDeparture.getCity(), selectedDeparture.getAirport()));
     }
 
     private void setAppBarLayout() {
@@ -111,10 +111,10 @@ public class SearchResults extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            AccessRoutes accessRoutes = new AccessRoutes(selectedDeparture,selectedDestination);
+            AccessRoutes accessRoutes = new AccessRoutes(selectedDeparture, selectedDestination);
 
-            synchronized (this){
-                while(accessRoutes.getAvailableRoutes(flightsAvailable, departDate)!=null){
+            synchronized (this) {
+                while (accessRoutes.getAvailableRoutes(flightsAvailable, departDate) != null) {
                     try {
                         wait();
                     } catch (InterruptedException e) {
@@ -124,6 +124,7 @@ public class SearchResults extends AppCompatActivity {
                 return null;
             }
         }
+
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
@@ -131,6 +132,7 @@ public class SearchResults extends AppCompatActivity {
             if (flightsAvailable.isEmpty()) {
                 Messages.noFlightsMessage(SearchResults.this);
             } else {
+//                new SortRoutes().leastStops(flightsAvailable);
                 displaySearchResults();
             }
         }
@@ -146,25 +148,25 @@ public class SearchResults extends AppCompatActivity {
         returnDate = (LocalDate) i.getSerializableExtra("returnDate");
         selectedDepartRoute = (Route) i.getSerializableExtra("selectedDepartRoute");
         showReturnFlightRslts = i.getBooleanExtra("showReturnView", false);
-        flightsAvailable =  (ArrayList<Route>) i.getSerializableExtra("flights");
+        flightsAvailable = (ArrayList<Route>) i.getSerializableExtra("flights");
     }
 
 
-    private void setSortView(){
+    private void setSortView() {
         ExtendedFloatingActionButton sortButton = findViewById(R.id.sort_button);
         sortButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SortFragment sortFragment =  new SortFragment();
+                SortFragment sortFragment = new SortFragment();
                 Bundle args = new Bundle();
-                args.putSerializable("availableRouteList",flightsAvailable);
+                args.putSerializable("availableRouteList", flightsAvailable);
                 sortFragment.setArguments(args);
-                sortFragment.show(getSupportFragmentManager(),"SortBottomSheet");
+                sortFragment.show(getSupportFragmentManager(), "SortBottomSheet");
             }
         });
     }
 
-    private void displaySearchResults(){
+    private void displaySearchResults() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
         final RecyclerView recyclerView = this.findViewById(R.id.list_search_results);
         recyclerView.setVisibility(View.VISIBLE);
@@ -182,13 +184,12 @@ public class SearchResults extends AppCompatActivity {
     }
 
 
-
     @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onResume() {
         super.onResume();
-        if(searchResultsCardsAdapter!=null)
-        searchResultsCardsAdapter.notifyDataSetChanged();
+        if (searchResultsCardsAdapter != null)
+            searchResultsCardsAdapter.notifyDataSetChanged();
     }
 
     @Override
