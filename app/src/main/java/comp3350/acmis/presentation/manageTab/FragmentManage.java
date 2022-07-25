@@ -43,7 +43,15 @@ public class FragmentManage extends Fragment {
         myBookingList = new ArrayList<>();
         accessBookings = new AccessBookings("braico");
         accessBookings.getMyBookings(myBookingList);
-        displayBookingList(view);
+        if(!myBookingList.isEmpty()){
+            view.findViewById(R.id.no_bookings_found).setVisibility(View.GONE);
+            displayBookingList(view);
+        }
+        else {
+            view.findViewById(R.id.no_bookings_found).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.list_items_manage_tab).setVisibility(View.GONE);
+        }
+
     }
 
     private void displayBookingList(View view){

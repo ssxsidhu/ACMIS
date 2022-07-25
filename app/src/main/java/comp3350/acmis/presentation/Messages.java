@@ -21,6 +21,7 @@ public class Messages {
     public static void noFlightsMessage(Activity owner) {
         owner.findViewById(R.id.no_results_found).setVisibility(View.VISIBLE);
         owner.findViewById(R.id.search_results_text).setVisibility(View.INVISIBLE);
+        owner.findViewById(R.id.dotted_bottom_line).setVisibility(View.INVISIBLE);
     }
 
     public static void warning(Activity owner, String message) {

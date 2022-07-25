@@ -24,6 +24,7 @@
             android:startDelay="200">
             <targets>
                 <target android:targetId="@id/search_results_text"/>
+                <target android:targetId="@+id/dotted_bottom_line"/>
             </targets>
         </fade>
 

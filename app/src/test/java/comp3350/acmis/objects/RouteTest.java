@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
 
+import java.util.ArrayList;
+
 public class RouteTest {
     Location winnipeg, toronto, calgary;
     Flight testFlight2, testFlight1, testFlight;
@@ -44,7 +46,9 @@ public class RouteTest {
         //valid flight added to the route
         setUp();
         Assert.assertFalse(testRoute.isEmpty());
-        Assert.assertEquals(testFlight, testRoute.getRoute().get(0));
+        ArrayList<Flight> flights = new ArrayList<>();
+        testRoute.getRoute(flights);
+        Assert.assertEquals(testFlight, flights.get(0));
 
         tearDown();
     }
@@ -72,7 +76,7 @@ public class RouteTest {
         testRoute.addToRoute(testFlight2);
 
         //route list contains 3 connecting flights
-        Assert.assertEquals(3, testRoute.getRoute().size());
+        Assert.assertEquals(3, testRoute.getRouteSize());
 
 
     }
@@ -91,7 +95,7 @@ public class RouteTest {
         testRoute.addToRoute(testFlight1);
         testRoute.addToRoute(testFlight2);
         //flight sequence starts at 1
-        Assert.assertEquals(2, testRoute.getRoute().size());
+        Assert.assertEquals(2, testRoute.getRouteSize());
         Assert.assertEquals("1,2", testRoute.getFlightsCSV());
 
     }
