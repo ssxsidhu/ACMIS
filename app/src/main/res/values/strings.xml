@@ -7,7 +7,7 @@
     <string name="choose_destination">Flying to?</string>
     <string name="fatalError">Fatal Error</string>
     <string name="warning">Warning!</string>
-    <string name="no_flights_found">No Flights Found</string>
+    <string name="no_flights_found">No Flight Found</string>
     <string name="search_results">Search Results</string>
     <string name="book_flight">Book Flight</string>
     <string name="search_flights">Search Flights</string>
@@ -23,7 +23,8 @@
     <string name="round_trip">Round Trip?</string>
     <string name="return_flight">Return</string>
     <string name="continue_button">Continue</string>
-    <string name="flights_available">Flights Available</string>
+    <string name="flights_available">Available Flights</string>
     <string name="sort">Sort</string>
     <string name="sort_by">Sort by</string>
+    <string name="no_bookings_found">No Booking Found</string>
 </resources>

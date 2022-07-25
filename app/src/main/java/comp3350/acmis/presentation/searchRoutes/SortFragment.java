@@ -1,17 +1,12 @@
 package comp3350.acmis.presentation.searchRoutes;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +17,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import comp3350.acmis.R;
-import comp3350.acmis.business.AccessRouteFlights;
+import comp3350.acmis.business.UseRouteFlights;
 import comp3350.acmis.objects.Route;
 
 public class SortFragment extends BottomSheetDialogFragment {
@@ -52,8 +47,8 @@ public class SortFragment extends BottomSheetDialogFragment {
         Collections.sort(routeList,new Comparator<Route>() {
             @Override
             public int compare(Route r1, Route r2) {
-                AccessRouteFlights accessRoute1 = new AccessRouteFlights(r1);
-                AccessRouteFlights accessRoute2 = new AccessRouteFlights(r2);
+                UseRouteFlights accessRoute1 = new UseRouteFlights(r1);
+                UseRouteFlights accessRoute2 = new UseRouteFlights(r2);
 
                 return accessRoute1.getRouteTotalCost() - accessRoute2.getRouteTotalCost();
 
@@ -63,7 +58,7 @@ public class SortFragment extends BottomSheetDialogFragment {
         sortListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ((SearchResults)getActivity()).onResume();
+//                ((SearchResults)getActivity()).onResume();
                 getFragmentManager().beginTransaction().remove(SortFragment.this).commit();
             }
         });

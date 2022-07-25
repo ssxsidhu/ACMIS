@@ -9,13 +9,8 @@
     android:id="@+id/search_results"
     android:transitionGroup="false"
     android:orientation="vertical"
+    android:animateLayoutChanges="true"
     tools:context=".presentation.searchRoutes.SearchResults">
-
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_weight="0.7">-->
-
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/search_results_scroll"
@@ -41,8 +36,8 @@
             <LinearLayout
                 android:id="@+id/search_results_title_layout"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginStart="5dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="80dp"
                 android:orientation="vertical">
 
@@ -52,7 +47,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.8"
                     android:text="Title"
-                    android:textAppearance="?attr/textAppearanceHeadline3"
+                    android:textAppearance="?attr/textAppearanceHeadline4"
                     android:textColor="@color/design_default_color_background" />
 
                 <TextView
@@ -83,7 +78,6 @@
                 android:layout_height="2dp"
                 android:layout_below="@id/search_results_text"
                 android:layout_marginStart="200dp"
-                android:visibility="gone"
                 android:background="@drawable/bg_horizontal_dotted_line" />
 
 
@@ -91,13 +85,13 @@
                 android:id="@+id/no_results_found"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/window_image"
-                android:layout_marginTop="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/md_theme_dark_outline"
                 android:gravity="center"
                 android:text="@string/no_flights_found"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                android:visibility="invisible" />
+                android:textSize="30sp"
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_search_results"
@@ -107,7 +101,20 @@
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:choiceMode="singleChoice"
                 android:focusable="false"
+                android:visibility="gone"
                 android:layoutAnimation="@anim/layout_animation_from_bottom" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progress_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="270dp"
+                android:layout_marginTop="250dp"
+                android:layout_below="@id/search_results_text"
+                app:indicatorSize="70dp"
+                android:visibility="gone"
+                android:indeterminate="true" />
+
 
         </RelativeLayout>
 

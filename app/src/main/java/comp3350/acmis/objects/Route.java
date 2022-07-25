@@ -4,6 +4,7 @@
 package comp3350.acmis.objects;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.viewmodel.CreationExtras;
 
 import org.threeten.bp.ZonedDateTime;
 
@@ -42,12 +43,12 @@ public class Route implements Serializable {
         return route.isEmpty();
     }
 
-    public ArrayList<Flight> getRoute() {
-        return route;
+    public int getRouteSize(){
+        return  route.size();
     }
 
     // METHOD MEANT TO REPLACE getRoute()
-    public String getRoutes(ArrayList<Flight> copyHere) {
+    public String getRoute(ArrayList<Flight> copyHere) {
 
         if (copyHere != null) {         // GUARD CONDITION --> Do Something Only if list in params is not NULL
             copyHere.clear();

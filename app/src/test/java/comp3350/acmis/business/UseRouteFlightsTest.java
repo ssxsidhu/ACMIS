@@ -12,8 +12,8 @@ import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
 
-public class AccessRouteFlightsTest {
-    AccessRouteFlights test;
+public class UseRouteFlightsTest {
+    UseRouteFlights test;
     Location winnipeg, montreal, toronto;
     Flight torToWn, winToMn;
     Route testingR;
@@ -32,7 +32,7 @@ public class AccessRouteFlightsTest {
         testingR.addToRoute(torToWn);
         testingR.addToRoute(winToMn);
 
-        test = new AccessRouteFlights(testingR);
+        test = new UseRouteFlights(testingR);
     }
 
     @After
@@ -44,7 +44,7 @@ public class AccessRouteFlightsTest {
     public void testNullRoute() {
         //null route passed to the access route flights
         try {
-            test = new AccessRouteFlights(null);
+            test = new UseRouteFlights(null);
             Assert.fail("Expected a NullPointerException");
         } catch (NullPointerException unused) {
         }

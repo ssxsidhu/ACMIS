@@ -365,7 +365,8 @@ public class DataAccessObject implements DataAccess {
                     }
                 }
 
-                if (routeReturn.getRoute().size() != 0) {
+
+                if (routeReturn.getRouteSize() != 0) {
                     booking = new Booking(user, routeDepart, routeReturn, numPassengers,false);
                 } else {
                     booking = new Booking(user, routeDepart, null, numPassengers,false);

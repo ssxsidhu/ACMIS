@@ -11,41 +11,56 @@ import java.util.Objects;
 import comp3350.acmis.application.Main;
 import comp3350.acmis.application.Services;
 import comp3350.acmis.objects.Booking;
+import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.User;
 import comp3350.acmis.persistence.DataAccess;
 
 public class AccessBookings {
     private final DataAccess dataAccess;
     private final String username;
+    private ArrayList<Booking> userBookings;
 
     // CONSTRUCTOR
     public AccessBookings(String user) {
+        userBookings = new ArrayList<>();
         dataAccess = Services.getDataAccess(Main.dbName);
         username = Objects.requireNonNull(user);
     }
 
     public String getMyBookings(ArrayList<Booking>myBookings) {
 
-        User user = dataAccess.getUserObject(username);                 // For easier Readability.
-        String result;
+        String result = getBookingsFromDB();
+        Collections.sort(userBookings, new CompareBookings());
+        myBookings.addAll(userBookings);
+        return result;
+    }
 
+    private String getBookingsFromDB(){
+        User user = dataAccess.getUserObject(username);                 // For easier Readability.
         if (user != null) {
-            if(myBookings!=null) {
-                myBookings.clear();
-                result = dataAccess.getUserBookings(user, myBookings);
+            if(userBookings!=null) {
+                userBookings.clear();
+                return dataAccess.getUserBookings(user, userBookings);
             }else{
                 throw new NullPointerException();
             }
         } else {
             return "No user found";
         }
+    }
 
-        Collections.sort(myBookings, new Comparator<Booking>() {
-            @Override
-            public int compare(Booking booking, Booking t1) {
-                return booking.getRouteDepart().getRoute().get(0).getDepartureDateTime().compareTo(t1.getRouteDepart().getRoute().get(0).getDepartureDateTime());
-            }
-        });
-        return result;
+    private static class CompareBookings implements Comparator<Booking>{
+
+        @Override
+        public int compare(Booking b1, Booking b2) {
+            return (new UseRouteFlights(b1.getRouteDepart())).getConnectDepartureTime().compareTo((new UseRouteFlights(b2.getRouteDepart())).getConnectDepartureTime());
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            return false;
+        }
     }
 }
+
+

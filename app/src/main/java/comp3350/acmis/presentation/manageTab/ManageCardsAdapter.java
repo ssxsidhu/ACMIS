@@ -18,7 +18,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import comp3350.acmis.R;
-import comp3350.acmis.business.AccessRouteFlights;
+import comp3350.acmis.business.UseRouteFlights;
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Route;
 import comp3350.acmis.presentation.searchRoutes.RouteDetails;
@@ -59,11 +59,11 @@ public class ManageCardsAdapter extends RecyclerView.Adapter<ManageCardsAdapter.
             routeToBooking.put(currBooking.getRouteReturn(),currBooking.getBookingId());
             holder.directionImage.setImageResource(R.drawable.ic_round_u_turn_right_24);
         }
-        AccessRouteFlights accessRouteFlights = new AccessRouteFlights(currBooking.getRouteDepart());
+        UseRouteFlights useRouteFlights = new UseRouteFlights(currBooking.getRouteDepart());
 
-        holder.cityDepart.setText(accessRouteFlights.getConnectSource().getCity());
-        accessRouteFlights.setConnectFlightPos(accessRouteFlights.getNumStops());
-        holder.cityDest.setText(accessRouteFlights.getConnectDestination().getCity());
+        holder.cityDepart.setText(useRouteFlights.getConnectSource().getCity());
+        useRouteFlights.setConnectFlightPos(useRouteFlights.getNumStops());
+        holder.cityDest.setText(useRouteFlights.getConnectDestination().getCity());
 
         holder.numPassengers.setText(String.format(Locale.CANADA, "%d ", currBooking.getNumPassengers()));
 
