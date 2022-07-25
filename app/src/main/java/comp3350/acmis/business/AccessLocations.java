@@ -15,8 +15,6 @@ import comp3350.acmis.persistence.DataAccess;
 
 public class AccessLocations {
     private final DataAccess dataAccess;
-    private List<Location> locations;
-
 
     public AccessLocations() {
         dataAccess = Services.getDataAccess(Main.dbName);
