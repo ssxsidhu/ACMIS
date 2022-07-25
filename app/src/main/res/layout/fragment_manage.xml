@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
@@ -17,36 +17,35 @@
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_vertical_margin"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="3dp"
+        android:textAllCaps="true"
         android:textSize="25sp"
         android:text="@string/upcoming_flights"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_below="@id/header_title_manage_tab"
         android:layout_marginTop="2dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@+id/header_title_manage_tab"/>
 
-<!--    <ListView-->
-<!--        android:id="@+id/list_items_manage_tab"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_gravity="top"-->
-<!--        android:layout_weight="1"-->
-<!--        android:choiceMode="none"-->
-<!--        android:layout_marginTop="@dimen/activity_vertical_margin"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/header_title_manage_tab"/>-->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_items_manage_tab"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="top"
-        android:layout_weight="1"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_title_manage_tab"
-        />
+        android:layout_height="match_parent"
+        android:layout_below="@id/header_title_manage_tab"
+        android:layout_marginTop="20dp" />
+    <TextView
+        android:id="@+id/no_bookings_found"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:visibility="gone"
+        android:textColor="@color/md_theme_dark_outline"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/no_bookings_found"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

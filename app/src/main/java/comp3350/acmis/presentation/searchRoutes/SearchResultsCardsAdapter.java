@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import comp3350.acmis.R;
-import comp3350.acmis.business.AccessRouteFlights;
+import comp3350.acmis.business.UseRouteFlights;
 import comp3350.acmis.objects.Route;
 import comp3350.acmis.presentation.Utils;
 
@@ -47,7 +47,7 @@ public class SearchResultsCardsAdapter extends RecyclerView.Adapter<SearchResult
 
     @Override
     public void onBindViewHolder(@NonNull SearchResultsCardsAdapter.Viewholder holder, int position) {
-        AccessRouteFlights routeFlightDetails = new AccessRouteFlights(displayList.get(position));
+        UseRouteFlights routeFlightDetails = new UseRouteFlights(displayList.get(position));
 
         routeFlightDetails.setConnectFlightPos(0);
         holder.departTime.setText(routeFlightDetails.getConnectDepartureTime());

@@ -46,8 +46,6 @@ public class DataAccessStub implements DataAccess {
 
         defaultUser = new User("John", "Braico", User.Gender.MALE, "braico", "somePassword", "jbraico@cs.umanitoba.ca", "2041234567");
         allUsers.add(defaultUser);
-        user = new User("Julie", "Smith", User.Gender.FEMALE, "jsmith", "j&smith$", "jmith@gmail.com", "2048889999");
-        allUsers.add(user);
 
         Location winnipeg = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
         allLocations.add(winnipeg);

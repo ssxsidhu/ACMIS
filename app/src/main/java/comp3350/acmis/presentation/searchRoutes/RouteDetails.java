@@ -18,7 +18,7 @@ import org.threeten.bp.LocalDate;
 import java.util.Locale;
 
 import comp3350.acmis.R;
-import comp3350.acmis.business.AccessRouteFlights;
+import comp3350.acmis.business.UseRouteFlights;
 import comp3350.acmis.business.BookingManager;
 import comp3350.acmis.objects.Route;
 import comp3350.acmis.presentation.MainActivity;
@@ -37,7 +37,7 @@ public class RouteDetails extends AppCompatActivity {
 
         receiveData();
 
-        AccessRouteFlights routeDetails = new AccessRouteFlights(route);
+        UseRouteFlights routeDetails = new UseRouteFlights(route);
 
         TextView totalDuration = findViewById(R.id.total_duration);
         totalDuration.setText(routeDetails.getRouteTotalDuration());

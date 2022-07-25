@@ -29,42 +29,6 @@ public class BookingManager {
         data = Services.getDataAccess(name);
     }
 
-    // Return List of Routes
-    // travelling from one point to another there can be a multiple ways.
-    // all the different routes are stored in a list and the list is returned.
-    public String searchRoute(Location srcCity, Location destCity, ArrayList<Route> returnRoutes) {
-
-        returnRoutes.clear();
-        ArrayList<Route> validRoutes = new ArrayList<>();
-
-
-        ArrayList<Flight> allDBFlights = new ArrayList<>();
-        data.getAllFlights(allDBFlights);
-        ArrayList<Location> allDBLocations = new ArrayList<>();
-        data.getLocations(allDBLocations);
-
-        Route validFlights = new Route();
-        // Check For Direct Routes.
-        for (int i = 0; i < allDBFlights.size(); i++) {
-
-            if (allDBFlights.get(i).getSource().getCity().equals(srcCity.getCity()) &&
-                    allDBFlights.get(i).getDestination().getCity().equals(destCity.getCity())) {
-                {
-                    validRoutes.add(new Route(allDBFlights.get(i)));
-                }
-
-            }
-        }
-
-        returnRoutes.addAll(validRoutes);
-        if (validRoutes.size() > 0) {
-            return null;
-        } else {
-            return "no_flights_found";
-        }
-    }       // validRoutes List should have stopOver FLights in the beginning and Direct Flights towards the end.
-
-
     //creating booking
     public String createBooking(String username, Route departRoute, Route returnRoute, int numPassengers) {
         User bookerObject = data.getUserObject(Objects.requireNonNull(username));
