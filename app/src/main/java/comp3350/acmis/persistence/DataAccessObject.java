@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import comp3350.acmis.objects.Booking;
 import comp3350.acmis.objects.Flight;
@@ -163,7 +165,7 @@ public class DataAccessObject implements DataAccess {
     }
 
     public String addBooking(Booking newBooking) {
-        int userID = newBooking.getBooker().getUserID();
+        int userId = newBooking.getBooker().getUserId();
         int numPassengers = newBooking.getNumPassengers();
         String routeDepart = newBooking.getRouteDepart().getFlightsCSV();
         String routeReturn = null;
@@ -176,7 +178,7 @@ public class DataAccessObject implements DataAccess {
         try {
             cmdString = "Insert into Bookings values (" +
                     "NULL" + ", " +
-                    userID + ", " +
+                    userId + ", " +
                     routeDepart + ", " +
                     routeReturn + ", " +
                     numPassengers +
@@ -241,17 +243,18 @@ public class DataAccessObject implements DataAccess {
         Route routeDepart = new Route();
         Route routeReturn = new Route();
         int numPassengers = -1;
+        int bookingId = -1;
         Location source = null, dest = null;
         Flight flight = null;
         String departureFlights = EOF, returnFlights = EOF;
 
         result = null;
         try {
-            cmdString = "Select * from Bookings where userID = " + user.getUserID();
+            cmdString = "Select * from Bookings where userID = " + user.getUserId();
             rs1 = st1.executeQuery(cmdString);
             while (rs1.next()) {
                 numPassengers = rs1.getInt("numPassengers");
-
+                bookingId = rs1.getInt("bookingId");
                 departureFlights = rs1.getString("routeDepart");
                 String[] departureList = departureFlights.split(",");
                 for (int i = 0; i < departureList.length; i++) {
@@ -363,10 +366,11 @@ public class DataAccessObject implements DataAccess {
                 }
 
                 if (routeReturn.getRoute().size() != 0) {
-                    booking = new Booking(user, routeDepart, routeReturn, numPassengers);
+                    booking = new Booking(user, routeDepart, routeReturn, numPassengers,false);
                 } else {
-                    booking = new Booking(user, routeDepart, null, numPassengers);
+                    booking = new Booking(user, routeDepart, null, numPassengers,false);
                 }
+                booking.setBookingId(bookingId);
 
                 userBookings.add(booking);
                 routeDepart = new Route();
@@ -379,10 +383,10 @@ public class DataAccessObject implements DataAccess {
         return result;
     }
 
-    public String cancelBooking(int bookingID) {
+    public String cancelBooking(int bookingId) {
         result = null;
         try {
-            cmdString = "Delete from Bookings where bookingID = " + bookingID;
+            cmdString = "Delete from Bookings where bookingID = " + bookingId;
             updateCount = st1.executeUpdate(cmdString);
             result = checkWarning(st1, updateCount);
 
@@ -393,9 +397,67 @@ public class DataAccessObject implements DataAccess {
         return null;
     }
 
-    public String getFlights(Location source, Location dest, ZonedDateTime departureDate, ArrayList<Location> resultList) {
+    public String getFlights(Location source, Location dest, ZonedDateTime departureDate, ArrayList<Flight> resultList) {
+        Flight flight;
+        int id, year, month, day, hour, minute, seats, cost;
+        double duration = -1;
+        id = -1;
+        year = -1;
+        month = -1;
+        day = -1;
+        hour = -1;
+        minute = -1;
+        seats = -1;
+        cost = -1;
+        int yearToFind = departureDate.getYear();
+        int monthToFind = departureDate.getMonthValue();
+        int dayToFind = departureDate.getDayOfMonth();
+        int sourceLocId = -1;
+        int destLocId = -1;
 
-        return null;
+        ArrayList<Location> locations = new ArrayList<>();
+        getLocations(locations);
+        for (int i = 0; i < locations.size(); i++) {
+            if (locations.get(i).getAirport().equals(source.getAirport())) {
+                sourceLocId = i;
+            }
+            else if (locations.get(i).getAirport().equals(dest.getAirport())) {
+                destLocId = i;
+            }
+        }
+
+        result = null;
+        try {
+            cmdString = "Select * from Flights where startLocation = " + sourceLocId + " and endLocation = " + destLocId +" and year = " + yearToFind + " and month = " + monthToFind + " and day = " + dayToFind;
+            rs1 = st1.executeQuery(cmdString);
+            while (rs1.next()) {
+                id = rs1.getInt("flightID");
+                year = rs1.getInt("year");
+                month = rs1.getInt("month");
+                day = rs1.getInt("day");
+                hour = rs1.getInt("hour");
+                minute = rs1.getInt("minute");
+                seats = rs1.getInt("seats");
+                cost = rs1.getInt("cost");
+                duration = rs1.getDouble("duration");
+
+
+                flight = new Flight(id, source, dest, ZonedDateTime.of(year, month, day, hour, minute, 0, 0, source.getZoneName()), seats, duration, cost);
+                resultList.add(flight);
+            }
+
+            Collections.sort(resultList, new Comparator<Flight>() {
+                @Override
+                public int compare(Flight f1, Flight f2) {
+                    return (f1.getDepartureDateTime().isBefore(f2.getDepartureDateTime()) ? -1 : 1);
+                }
+            });
+
+            rs1.close();
+        } catch (Exception e) {
+            result = processSQLError(e);
+        }
+        return result;
     }
 
     public String checkWarning(Statement st, int updateCount) {

@@ -66,7 +66,7 @@ public class User {
     }
 
     // GETTERS
-    public int getUserID() {
+    public int getUserId() {
         return userID;
     }
 

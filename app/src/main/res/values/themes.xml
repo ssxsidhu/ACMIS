@@ -43,11 +43,6 @@
     <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
-    <style name="Divider">
-        <item name="android:layout_width">1dp</item>
-        <item name="android:layout_height">10dp</item>
-        <item name="android:background">?android:attr/listDivider</item>
-    </style>
 
     <style name="Widget.App.Button.OutlinedButton.IconOnly" parent="Widget.Material3.Button.OutlinedButton">
         <item name="iconPadding">0dp</item>
@@ -66,5 +61,12 @@
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowEnterTransition">@transition/search_enter_transition</item>
     </style>
+
+    <style name="ACMIS.Button.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+
 
 </resources>

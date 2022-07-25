@@ -19,20 +19,23 @@ import java.util.Locale;
 
 import comp3350.acmis.R;
 import comp3350.acmis.business.AccessRouteFlights;
+import comp3350.acmis.business.BookingManager;
 import comp3350.acmis.objects.Route;
+import comp3350.acmis.presentation.MainActivity;
+import comp3350.acmis.presentation.Messages;
 import comp3350.acmis.presentation.Utils;
 
 public class RouteDetails extends AppCompatActivity {
     private Route route, selectedDepartRoute;
     private LocalDate returnDate;
-    private Boolean contButtonVisibility;
+    private Boolean contButtonVisibility,cancelButtonVisibility;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_details);
 
-        recieveData();
+        receiveData();
 
         AccessRouteFlights routeDetails = new AccessRouteFlights(route);
 
@@ -90,6 +93,23 @@ public class RouteDetails extends AppCompatActivity {
             });
         }
 
+        if(cancelButtonVisibility){
+            Button cancelButton = findViewById(R.id.cancel_Booking_Button);
+            cancelButton.setVisibility(View.VISIBLE);
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String result = new BookingManager().cancelBooking(getIntent().getIntExtra("bookingId",-1));
+                    if(result == null)
+                        Messages.makeToast(getApplicationContext(),"Booking Canceled");
+                    else
+                        Messages.makeToast(getApplicationContext(),result);
+                    startActivity(new Intent(getBaseContext(), MainActivity.class).putExtra("tabPosition",1));
+                }
+            });
+        }
+
+
         RouteDetailsAdapter adapter = new RouteDetailsAdapter(getBaseContext(), routeDetails);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
         final RecyclerView recyclerView = this.findViewById(R.id.list_route_details);
@@ -97,10 +117,11 @@ public class RouteDetails extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void recieveData() {
+    private void receiveData() {
         Intent i = getIntent();
         route = (Route) i.getSerializableExtra("selectedRoute");
         contButtonVisibility = i.getBooleanExtra("continueButtonVisibility", true);
+        cancelButtonVisibility = i.getBooleanExtra("cancelButtonVisibility",false);
         returnDate = (LocalDate) i.getSerializableExtra("returnDate");
         selectedDepartRoute = (Route) i.getSerializableExtra("selectedDepartRoute");
     }
