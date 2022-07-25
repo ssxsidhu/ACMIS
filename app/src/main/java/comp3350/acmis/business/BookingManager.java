@@ -30,25 +30,24 @@ public class BookingManager {
     }
 
     //creating booking
-    public String createBooking(String username, Route departRoute,Route returnRoute, int numPassengers) {
+    public String createBooking(String username, Route departRoute, Route returnRoute, int numPassengers) {
         User bookerObject = data.getUserObject(Objects.requireNonNull(username));
         Booking newBooking;
         if (bookerObject != null && departRoute != null) {
 
-            if(returnRoute == null)
-                newBooking = new Booking(bookerObject, departRoute,numPassengers,true);
+            if (returnRoute == null)
+                newBooking = new Booking(bookerObject, departRoute, numPassengers, true);
             else
-                newBooking = new Booking(bookerObject,departRoute,returnRoute,numPassengers,true);
+                newBooking = new Booking(bookerObject, departRoute, returnRoute, numPassengers, true);
             //adding the booking to the master booking.
             data.addBooking(newBooking);
-        }
-        else {
+        } else {
             throw new NullPointerException("object not found");
         }
         return null;
     }
 
-    public String cancelBooking(int bookingId){
+    public String cancelBooking(int bookingId) {
         return data.cancelBooking(bookingId);
     }
 
@@ -56,5 +55,5 @@ public class BookingManager {
     public DataAccess getData() {
         return data;
     }
-
 }
+
