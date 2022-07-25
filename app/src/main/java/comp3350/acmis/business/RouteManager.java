@@ -53,28 +53,6 @@ public class RouteManager {
         return null;
     }
 
-    // PRIVATE HELPER METHOD
-    // This method checks for any direct routes between the source and destination. If not
-    private String checkDirectRoute(Location source, Location dest, ArrayList<Route> returnThis) {
-
-        ArrayList<Location> tempCities = new ArrayList<>();
-        graph.getNeighborCities(source, tempCities);
-        Flight temp = null;
-
-        for (int i = 0; i < tempCities.size(); i++) {           // Iterate through the list of all cities. If destination city exists there is possibly a direct route.
-            if (tempCities.get(i).equals(dest)) {
-                temp = getFlight(source, dest);
-                returnThis.add(new Route(temp));
-            }
-        }
-
-        if (temp == null)                                       // Check if there was a direct route we could find.
-            return "NO DIRECT ROUTES FOUND";
-        else {
-            returnThis.add(new Route(temp));
-            return null;
-        }
-    }
 
     private String checkConnectedRoutes(Location source, Location dest) {
         ArrayList<Location> visited = new ArrayList<>();
@@ -106,30 +84,6 @@ public class RouteManager {
         }
         visited.remove(source);
     }
-
-    //     PRIVATE HELPER METHOD
-//     This method iterates through the entire list of all flights in the data base.
-//     It extracts the particular flight that links the requested source and destination.
-//     The source and destination may be the true source and true destination or a stopover
-//     source or a stop over destination. The essential job of this method is to just return
-//     the particular flight linking 2 cities to the methods in the Route Manager Class.
-    private Flight getFlight(Location source, Location destination) {
-        Flight returnThis = null;
-        int index = 0;                                                   // Index variable for our Flight List
-
-        while (returnThis == null && index < flightList.size()) {            // Iterate until we find the particular flight linking the cities or until the list runs out.
-
-            Flight temp = flightList.get(index);                        // This is the Current Flight the Iteration is checking for.
-            if (temp.getSource().equals(source) &&
-                    temp.getDestination().equals(destination)) {            // If found simply make returnThis NON-NULL and Loop Breaks.
-                returnThis = temp;
-            }
-            index++;
-        }
-
-        return returnThis;
-    }
-
 
     private void buildRoute(Location src, ZonedDateTime firstDepartDate) {
 
