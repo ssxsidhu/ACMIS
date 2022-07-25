@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import comp3350.acmis.R;
-import comp3350.acmis.business.AccessRouteFlights;
+import comp3350.acmis.business.UseRouteFlights;
 import comp3350.acmis.business.BookingManager;
 import comp3350.acmis.objects.Route;
 import comp3350.acmis.presentation.MainActivity;
@@ -29,7 +29,7 @@ public class OrderSummary extends AppCompatActivity {
 
     private final ArrayList<Route> orderRoute = new ArrayList<>();
     private final BookingManager bookingManager = new BookingManager();
-    private AccessRouteFlights journeyDetails;
+    private UseRouteFlights journeyDetails;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class OrderSummary extends AppCompatActivity {
 
         int numPassengers = getIntent().getIntExtra("numPassengers", 1);
 
-        journeyDetails = new AccessRouteFlights(orderRoute.get(0));
+        journeyDetails = new UseRouteFlights(orderRoute.get(0));
 
         setAppBarLayout();
         TextView routeTitle = findViewById(R.id.search_results_title);
@@ -53,8 +53,10 @@ public class OrderSummary extends AppCompatActivity {
         //set textview showing search results to invisible
         findViewById(R.id.search_results_text).setVisibility(View.INVISIBLE);
         findViewById(R.id.sort_button).setVisibility(View.INVISIBLE);
+        findViewById(R.id.dotted_bottom_line).setVisibility(View.INVISIBLE);
+        findViewById(R.id.list_search_results).setVisibility(View.VISIBLE);
 
-        routeLocationTitle.setText(String.format(Locale.CANADA, "From %s", journeyDetails.getConnectSource().getCity()));
+        routeLocationTitle.setText(String.format(Locale.CANADA, "From %s %s", journeyDetails.getConnectSource().getCity(),journeyDetails.getConnectSource().getAirport()));
 
         journeyDetails.setConnectFlightPos(journeyDetails.getNumStops());
         String tripText;
@@ -68,14 +70,11 @@ public class OrderSummary extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
         final RecyclerView recyclerView = this.findViewById(R.id.list_search_results);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(new SearchResultsCardsAdapter(orderRoute, true, new SearchResultsCardsAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Route item) {
-                Intent i = new Intent(getBaseContext(), RouteDetails.class);
-                i.putExtra("selectedRoute", item);
-                i.putExtra("continueButtonVisibility", false);
-                startActivity(i);
-            }
+        recyclerView.setAdapter(new SearchResultsCardsAdapter(orderRoute, true, item -> {
+            Intent i = new Intent(getBaseContext(), RouteDetails.class);
+            i.putExtra("selectedRoute", item);
+            i.putExtra("continueButtonVisibility", false);
+            startActivity(i);
         }));
 
         Button bookButton = findViewById(R.id.book_button);
@@ -91,6 +90,7 @@ public class OrderSummary extends AppCompatActivity {
                 if (result != null) {
                     Messages.makeToast(getApplicationContext(),result);
                 } else {
+                    Messages.makeToast(getApplicationContext(),"Flight Booked");
                     Intent i1 = new Intent(getBaseContext(), MainActivity.class);
                     startActivity(i1);
                 }

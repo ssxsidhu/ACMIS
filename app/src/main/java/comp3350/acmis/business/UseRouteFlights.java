@@ -2,24 +2,23 @@ package comp3350.acmis.business;
 
 
 import org.threeten.bp.Duration;
-import org.threeten.bp.LocalDate;
 import org.threeten.bp.ZonedDateTime;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
 
-public class AccessRouteFlights {
+public class UseRouteFlights {
     private final ArrayList<Flight> currRouteFlights;
     private Flight currConnectFlight;
 
-    public AccessRouteFlights(Route route) {
-        currRouteFlights = Objects.requireNonNull(route).getRoute();
+    public UseRouteFlights(Route route) {
+        currRouteFlights =  new ArrayList<>();
+        route.getRoute(currRouteFlights);
         if(currRouteFlights.size()!=0)
-        currConnectFlight = currRouteFlights.get(0);
+            currConnectFlight = currRouteFlights.get(0);
     }
 
     public long calculateLayover(Flight flightArrival, Flight flightDeparture) {

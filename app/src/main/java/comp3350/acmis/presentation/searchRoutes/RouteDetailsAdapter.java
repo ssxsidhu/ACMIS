@@ -14,16 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Locale;
 
 import comp3350.acmis.R;
-import comp3350.acmis.business.AccessRouteFlights;
+import comp3350.acmis.business.UseRouteFlights;
 
 public class RouteDetailsAdapter extends RecyclerView.Adapter<RouteDetailsAdapter.Viewholder> {
 
-    private final AccessRouteFlights routeDetails;
+    private final UseRouteFlights routeDetails;
     //temporary
 
     // Constructor
-    public RouteDetailsAdapter(Context context, AccessRouteFlights accessRouteFlights) {
-        routeDetails = accessRouteFlights;
+    public RouteDetailsAdapter(Context context, UseRouteFlights useRouteFlights) {
+        routeDetails = useRouteFlights;
     }
 
     @NonNull

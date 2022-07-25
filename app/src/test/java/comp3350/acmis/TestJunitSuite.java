@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 
 import comp3350.acmis.business.AccessBookingsTest;
 import comp3350.acmis.business.AccessLocationsTest;
-import comp3350.acmis.business.AccessRouteFlightsTest;
+import comp3350.acmis.business.UseRouteFlightsTest;
 import comp3350.acmis.business.BookingManagerTest;
 import comp3350.acmis.objects.BookingTest;
 import comp3350.acmis.objects.FlightTest;
@@ -25,7 +25,7 @@ import comp3350.acmis.persistence.StubDBTest;
         AccessBookingsTest.class,
         BookingManagerTest.class,
         AccessLocationsTest.class,
-        AccessRouteFlightsTest.class,
+        UseRouteFlightsTest.class,
         StubDBTest.class
 })
 

@@ -1,13 +1,18 @@
 package comp3350.acmis.presentation.bookTab;
 
 import android.app.ActivityOptions;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import org.threeten.bp.LocalDate;
@@ -22,13 +28,18 @@ import org.threeten.bp.ZoneId;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
 import comp3350.acmis.R;
+import comp3350.acmis.application.Main;
+import comp3350.acmis.business.AccessRoutes;
 import comp3350.acmis.objects.Location;
+import comp3350.acmis.objects.Route;
+import comp3350.acmis.presentation.MainActivity;
 import comp3350.acmis.presentation.Messages;
 import comp3350.acmis.presentation.searchRoutes.SearchResults;
 
@@ -38,7 +49,6 @@ public class BookDetailsFragment extends Fragment {
     private int selectedNumPassengers = 1;
     private LocalDate departDate, returnDate;
     private Button pickReturn, pickDepart, searchFlightsButton;
-    private ViewGroup viewGroup;
 
     public BookDetailsFragment() {
         // Required empty public constructor
@@ -52,9 +62,7 @@ public class BookDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_book_details, container, false);
-        viewGroup = container;
-        return view;
+        return inflater.inflate(R.layout.fragment_book_details, container, false);
     }
 
 
@@ -144,7 +152,6 @@ public class BookDetailsFragment extends Fragment {
         DateFormat df = new SimpleDateFormat(dateFormat, locale);
         TimeZone timeZone = TimeZone.getTimeZone("UTC");
         df.setTimeZone(timeZone);
-
         Date d = calendar.getTime();
         return df.format(d);
     }
@@ -199,6 +206,7 @@ public class BookDetailsFragment extends Fragment {
                     searchFlightsButton.setEnabled(false);
                 } else {
                     returnDate = null;
+                    pickReturn.setText(requireContext().getString(R.string.return_flight));
                     pickReturn.setVisibility(View.GONE);
                     searchFlightsButton.setEnabled(true);
                 }
@@ -222,6 +230,11 @@ public class BookDetailsFragment extends Fragment {
             selectedDeparture = (Location) getArguments().get("selectedDeparture");
             selectedDestination = (Location) getArguments().get("selectedDestination");
         }
+
+//        ProgressDialog pd = ProgressDialog.show(requireContext(), "", "Loading flights...", true, false);
+//        CircularProgressIndicator progressIndicator = requireView().findViewById(R.id.progress_indicator);
+//        progressIndicator.setVisibility(View.VISIBLE);
+        Messages.makeToast(requireActivity().getApplicationContext(), "Database used: "+Main.dbName);
         Intent i = new Intent(requireActivity().getBaseContext(), SearchResults.class);
         i.putExtra("selectedDeparture", selectedDeparture);
         i.putExtra("selectedDestination", selectedDestination);
@@ -229,9 +242,10 @@ public class BookDetailsFragment extends Fragment {
         i.putExtra("returnDate", returnDate);
         i.putExtra("numPassengers", selectedNumPassengers);
         requireActivity().startActivity(i,ActivityOptions.makeSceneTransitionAnimation(requireActivity()).toBundle());
-//        requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-//        Bungee.slideRight(requireContext());
     }
+
+
+
 
 
 
