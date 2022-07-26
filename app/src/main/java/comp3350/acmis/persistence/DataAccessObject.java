@@ -169,7 +169,7 @@ public class DataAccessObject implements DataAccess {
         int numPassengers = newBooking.getNumPassengers();
         String routeDepart = newBooking.getRouteDepart().getFlightsCSV();
         String routeReturn = null;
-
+        System.out.println("HERE: " + routeDepart);
         if (newBooking.checkForReturn()) {
             routeReturn = newBooking.getRouteReturn().getFlightsCSV();
         }
@@ -183,6 +183,8 @@ public class DataAccessObject implements DataAccess {
                     routeReturn + ", " +
                     numPassengers +
                     ");";
+
+            System.out.print(cmdString + "\n");
 
             updateCount = st1.executeUpdate(cmdString);
             result = checkWarning(st1, updateCount);
