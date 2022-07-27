@@ -88,8 +88,8 @@ public class StubDBTest {
 
         ArrayList<Booking> allBookings = new ArrayList<>();
 
-        Booking booking1 = new Booking(user1, new Route(flight1),1);
-        Booking booking2 = new Booking(user1, new Route(flight2),10);
+        Booking booking1 = new Booking(user1, new Route(flight1),1,true);
+        Booking booking2 = new Booking(user1, new Route(flight2),10,true);
 
         db.addBooking(booking1);
         db.addBooking(booking2);

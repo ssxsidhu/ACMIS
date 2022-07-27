@@ -12,7 +12,7 @@ public class Services {
     public static DataAccess createDataAccess(String dbName) {
         if (dataAccessService == null) {
 
-            if (Main.getDBPathName().equals("UF")) {
+            if (Main.getDBPathName().equals("Stub")) {
                 dataAccessService = new DataAccessStub(dbName);
             } else {
                 dataAccessService = new DataAccessObject(dbName);

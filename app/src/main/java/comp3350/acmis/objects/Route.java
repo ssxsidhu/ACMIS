@@ -2,12 +2,7 @@
 //the route can be a direct flight or multiple flights connecting the source to the destination
 
 package comp3350.acmis.objects;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.viewmodel.CreationExtras;
-
 import org.threeten.bp.ZonedDateTime;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
