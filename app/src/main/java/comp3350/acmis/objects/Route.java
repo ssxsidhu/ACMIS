@@ -56,7 +56,7 @@ public class Route implements Serializable {
     }
 
     public String getFlightsCSV() {
-        String ret = "";
+        String ret = "'";
 
         for (int i = 0; i < route.size(); i++) {
             ret += route.get(i).getFlightId() + "";
@@ -65,8 +65,9 @@ public class Route implements Serializable {
                 ret += ",";
             }
         }
+        ret += "'";
 
-        if (ret.equals("")) {
+        if (ret.equals("''")) {
             ret = null;
         }
         return ret;
