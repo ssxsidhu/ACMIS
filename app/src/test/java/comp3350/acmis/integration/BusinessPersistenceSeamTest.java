@@ -1,6 +1,7 @@
-package comp3350.acmis.business.integration;
+package comp3350.acmis.integration;
 
 
 public class BusinessPersistenceSeamTest {
+
 
 }
