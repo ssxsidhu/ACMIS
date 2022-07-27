@@ -6,8 +6,8 @@ public class Main {
 
     //Comment either pair to choose which database you'd like to use
 
-//    //These are for the stub database
-//    public static final String dbName = "Stub";
+    //These are for the stub database
+//    public static final String dbName = "UF";
 //    private static String dbPathName = null;
 
     //These are for the HSQLDB database
