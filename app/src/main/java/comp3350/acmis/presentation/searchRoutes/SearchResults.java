@@ -26,6 +26,7 @@ import java.util.Locale;
 
 import comp3350.acmis.R;
 import comp3350.acmis.business.AccessRoutes;
+import comp3350.acmis.business.SortRoutes;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
 import comp3350.acmis.presentation.Messages;
@@ -132,7 +133,7 @@ public class SearchResults extends AppCompatActivity {
             if (flightsAvailable.isEmpty()) {
                 Messages.noFlightsMessage(SearchResults.this);
             } else {
-//                new SortRoutes().leastStops(flightsAvailable);
+                new SortRoutes().leastStops(flightsAvailable);
                 displaySearchResults();
             }
         }
