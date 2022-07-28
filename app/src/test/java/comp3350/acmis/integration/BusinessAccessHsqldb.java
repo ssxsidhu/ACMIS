@@ -1,43 +1,46 @@
 package comp3350.acmis.integration;
 
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 
 import comp3350.acmis.application.Services;
 import comp3350.acmis.business.AccessBookings;
 import comp3350.acmis.business.AccessLocations;
 import comp3350.acmis.objects.Booking;
-
 import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
 import comp3350.acmis.objects.User;
 import comp3350.acmis.persistence.DataAccess;
-import comp3350.acmis.persistence.DataAccessStub;
+import comp3350.acmis.persistence.DataAccessObject;
 
 
-public class BusinessPersistenceSeamTest  {
-
-    private AccessBookings testAccessBookings;
+public class BusinessAccessHsqldb {
     private DataAccess dataAccess;
+    private AccessBookings testAccessBookings;
+
 
 
     @Test
     public void testAccessBookings(){
 
-        ArrayList<Booking>myBookings = new ArrayList<>();
+        ArrayList<Booking> myBookings = new ArrayList<>();
         ArrayList<Flight>allFlights = new ArrayList<>();
         //close the data access to reset persistence.
 
         System.out.println("Starting Integration test of AccessBooking to persistence");
-        dataAccess = Services.createDataAccess(new DataAccessStub());
+        dataAccess = Services.createDataAccess(new DataAccessObject());
         Services.dataAccessOpen();
 
         testAccessBookings = new AccessBookings("braico");
+
+
+
 
         dataAccess.getAllFlights(allFlights);
         User u = dataAccess.getUserObject("braico");
@@ -112,7 +115,7 @@ public class BusinessPersistenceSeamTest  {
     @Test
     public void testAccessLocations(){
 
-        dataAccess = Services.createDataAccess(new DataAccessStub());
+        dataAccess = Services.createDataAccess(new DataAccessObject());
         Services.dataAccessOpen();
         ArrayList<Location>dbLocations = new ArrayList<>();
 
@@ -139,7 +142,7 @@ public class BusinessPersistenceSeamTest  {
 
     @Test
     public void testGetAllFlights(){
-        dataAccess = Services.createDataAccess(new DataAccessStub());
+        dataAccess = Services.createDataAccess(new DataAccessObject());
         Services.dataAccessOpen();
         ArrayList<Flight>dbFlights = new ArrayList<>();
 
