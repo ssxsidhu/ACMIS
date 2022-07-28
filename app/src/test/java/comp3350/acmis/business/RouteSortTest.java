@@ -46,6 +46,8 @@ public class RouteSortTest {
     @Test
     public void testLowestPrice() {
 
+        reset();
+        resetList();
         test.lowestPrice(testRoutes);
 
         // R1 should be at first place since it is lowest price. R5 should be last because its max price
