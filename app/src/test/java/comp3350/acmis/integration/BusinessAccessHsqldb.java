@@ -1,40 +1,40 @@
 package comp3350.acmis.integration;
 
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 
 import comp3350.acmis.application.Services;
 import comp3350.acmis.business.AccessBookings;
 import comp3350.acmis.business.AccessLocations;
 import comp3350.acmis.objects.Booking;
-
 import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
 import comp3350.acmis.objects.User;
 import comp3350.acmis.persistence.DataAccess;
-import comp3350.acmis.persistence.DataAccessStub;
+import comp3350.acmis.persistence.DataAccessObject;
 
 
-public class BusinessPersistenceSeamTest  {
-
-    private AccessBookings testAccessBookings;
+public class BusinessAccessHsqldb {
     private DataAccess dataAccess;
+    private AccessBookings testAccessBookings;
+
 
 
     @Test
     public void testAccessBookings(){
-
-        ArrayList<Booking>myBookings = new ArrayList<>();
+        Services.closeDataAccess();
+        ArrayList<Booking> myBookings = new ArrayList<>();
         ArrayList<Flight>allFlights = new ArrayList<>();
         //close the data access to reset persistence.
 
         System.out.println("Starting Integration test of AccessBooking to persistence");
-        dataAccess = Services.createDataAccess(new DataAccessStub());
+        dataAccess = Services.createDataAccess();
         Services.dataAccessOpen();
 
         testAccessBookings = new AccessBookings("braico");
@@ -47,9 +47,14 @@ public class BusinessPersistenceSeamTest  {
         //before extracting the list of bookings from the database
         assertEquals(0,myBookings.size());
         testAccessBookings.getMyBookings(myBookings);
-        //no bookings, user hasnt booked for any flights
-        assertEquals(0, myBookings.size());
 
+        for(int i=0; i<myBookings.size();i++){
+            dataAccess.cancelBooking(myBookings.get(i).getBookingId());
+        }
+        myBookings.clear();
+
+        testAccessBookings.getMyBookings(myBookings);
+        assertEquals(0,myBookings.size());
         //user searches for a flight from one place to another, adds the booking
         dataAccess.addBooking(new Booking(u, new Route(allFlights.get(0)), 10 , true));
 
@@ -69,15 +74,15 @@ public class BusinessPersistenceSeamTest  {
         assertEquals(4,myBookings.size());
 
         //suppose the user decides to get rid of some bookings...
-        dataAccess.cancelBooking(1);
+        dataAccess.cancelBooking(myBookings.get(0).getBookingId());
         //user cancels the booking and
         myBookings.clear();
         testAccessBookings.getMyBookings(myBookings);
         assertEquals(3,myBookings.size());
 
         //getting rid of couple more...
-        dataAccess.cancelBooking(2);
-        dataAccess.cancelBooking(3);
+        dataAccess.cancelBooking(myBookings.get(0).getBookingId());
+        dataAccess.cancelBooking(myBookings.get(1).getBookingId());
         myBookings.clear();
         testAccessBookings.getMyBookings(myBookings);
         assertEquals(1,myBookings.size());
@@ -112,7 +117,7 @@ public class BusinessPersistenceSeamTest  {
     @Test
     public void testAccessLocations(){
 
-        dataAccess = Services.createDataAccess(new DataAccessStub());
+        dataAccess = Services.createDataAccess(new DataAccessObject());
         Services.dataAccessOpen();
         ArrayList<Location>dbLocations = new ArrayList<>();
 
@@ -139,7 +144,7 @@ public class BusinessPersistenceSeamTest  {
 
     @Test
     public void testGetAllFlights(){
-        dataAccess = Services.createDataAccess(new DataAccessStub());
+        dataAccess = Services.createDataAccess(new DataAccessObject());
         Services.dataAccessOpen();
         ArrayList<Flight>dbFlights = new ArrayList<>();
 

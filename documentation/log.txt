@@ -159,12 +159,40 @@ July 11th,2022 : 5 hours, Braden, Vrushil, Sahilpreet and Prahalad
 July 12th, 2022 : 5 hours, Vrushil, Braden 
     - Updating the readMe
     - Looking for return flights from both databases just to make it easier for the markers.
+    
 July 12th, 2022 : 3 hours, Vrushil
     - Added testing for AccessLocation,AccessRouteFlights,AccessBookings
     - Reformatting its code.
     - Reformatted Presentation package. 
     - Removed all unused imports/dead code.
-
-
     
- 
+July 13th, 2022 : 3.5 hours, Prahalad, Sahilpreet
+    - Deep Clean Code - went through every line and removed unnecessary methods and variables
+    - Add getters and setters in all object classes
+    - Override equals and toString in object classes.
+    - Added Flights and Restructred Presentation Package (Sahil)
+    - RouteManager successfully stores Routes now        (Sahil)
+    - Added some animation when app starts	         (Sahil)
+    
+July 14th, 2022 : 3 hours, Prahalad
+    - Deep Clean part 2. Done samething in Business Classes and commented code
+    - Wrote only necessary constructors
+    - Reformatted Objects and Business Package
+    - Added Contains method in User Class
+
+July 17th, 2022 : 4.5 hours, Prahalad
+    - Rewrote BookingManager Class as BookingManager2 for implementation testing of different versions
+    - Added Constructors and Getters and Setters for Booking Object
+    - Rewrite RouteManager Implementation for RouteBuilding
+    
+July 18th, 2022 : 3.5 hours, Sahilpreet
+    - Cleaned Files and added Getters in GetAccessRoutesFlights
+    - Debugging and Code Breaking Changes
+    - Sort Display
+    
+July 20th, 2022 : 3.5 hours, Prahalad
+    - RolledBack all changes made in previous commits. Rollback above log primarily.
+    
+July 22nd, 2022 : 3 hours, Prahalad
+    - Implemented SortRoutes using Comparator Interface. 
+    - Write Skeletal Test Classes for SortRoute, RouteManager.
