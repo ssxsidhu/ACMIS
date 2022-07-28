@@ -34,8 +34,10 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+
 import comp3350.acmis.R;
 import comp3350.acmis.application.Main;
+import comp3350.acmis.application.Services;
 import comp3350.acmis.business.AccessRoutes;
 import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
@@ -234,7 +236,7 @@ public class BookDetailsFragment extends Fragment {
 //        ProgressDialog pd = ProgressDialog.show(requireContext(), "", "Loading flights...", true, false);
 //        CircularProgressIndicator progressIndicator = requireView().findViewById(R.id.progress_indicator);
 //        progressIndicator.setVisibility(View.VISIBLE);
-        Messages.makeToast(requireActivity().getApplicationContext(), "Database used: "+Main.dbName);
+        Messages.makeToast(requireActivity().getApplicationContext(), "Database used: "+ Services.getDbName());
         Intent i = new Intent(requireActivity().getBaseContext(), SearchResults.class);
         i.putExtra("selectedDeparture", selectedDeparture);
         i.putExtra("selectedDestination", selectedDestination);
