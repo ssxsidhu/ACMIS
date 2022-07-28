@@ -37,7 +37,7 @@ public class DataAccessStub implements DataAccess {
         return dbName;
     }
 
-    public void setDbPath(String dbPath){
+    public void setDbPath(String dbPath) {
 
     }
 
@@ -97,6 +97,7 @@ public class DataAccessStub implements DataAccess {
     }
 
     public String getUserBookings(User user, ArrayList<Booking> userBookings) {
+        userBookings.clear();
         for (int i = 0; i < allBookings.size(); i++) {
             if (allBookings.get(i).getBooker() == user) {
                 userBookings.add(allBookings.get(i));
@@ -134,12 +135,12 @@ public class DataAccessStub implements DataAccess {
             currentMonth = currentFlight.getDepartureDateTime().getMonthValue();
             currentYear = currentFlight.getDepartureDateTime().getYear();
 
-            if (currentFlight.getSource().equals(source)      &&
-                currentFlight.getDestination().equals(dest)   &&
-                currentDay == departureDate.getDayOfMonth()   &&
-                currentMonth == departureDate.getMonthValue() &&
-                currentYear == departureDate.getYear()) {
-                    resultList.add(currentFlight);
+            if (currentFlight.getSource().equals(source) &&
+                    currentFlight.getDestination().equals(dest) &&
+                    currentDay == departureDate.getDayOfMonth() &&
+                    currentMonth == departureDate.getMonthValue() &&
+                    currentYear == departureDate.getYear()) {
+                resultList.add(currentFlight);
             }
         }
 

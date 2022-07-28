@@ -4,8 +4,6 @@
 
 package comp3350.acmis.objects;
 
-import org.threeten.bp.ZonedDateTime;
-
 import java.util.Objects;
 
 public class Booking {
@@ -84,33 +82,24 @@ public class Booking {
         return routeReturn != null;
     }
 
-
     //Setter
     public void setNewUser(User u) {
         booker = u;
     }
-
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Booking booking = (Booking) o;
-//        return numPassengers == booking.numPassengers && Objects.equals(booker, booking.booker) && Objects.equals(routeDepart, booking.routeDepart) && Objects.equals(routeReturn, booking.routeReturn);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(booker, routeDepart, routeReturn, numPassengers);
-//    }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
-        return numPassengers == booking.numPassengers && Objects.equals(booker, booking.booker) && Objects.equals(routeDepart, booking.routeDepart) && Objects.equals(routeReturn, booking.routeReturn);
+        boolean ret = numPassengers == booking.numPassengers &&
+                      booker.getUsername().equals(booking.booker.getUsername()) &&
+                      routeDepart.getFlightsCSV().equals(booking.routeDepart.getFlightsCSV());
+
+        if (routeReturn != null && booking.routeReturn != null) {
+            ret = ret && routeReturn.getFlightsCSV().equals(booking.routeReturn.getFlightsCSV());
+        }
+        return ret;
     }
 
     @Override
