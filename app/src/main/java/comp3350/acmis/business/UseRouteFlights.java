@@ -16,10 +16,10 @@ public class UseRouteFlights {
     private long totalDuration;
 
     public UseRouteFlights(Route route) {
-        currRouteFlights =  new ArrayList<>();
+        currRouteFlights = new ArrayList<>();
         route.getRoute(currRouteFlights);
         totalDuration = 0;
-        if(currRouteFlights.size()!=0)
+        if (currRouteFlights.size() != 0)
             currConnectFlight = currRouteFlights.get(0);
     }
 
@@ -55,7 +55,7 @@ public class UseRouteFlights {
         return cost;
     }
 
-    public long getRawTotalDuration(){
+    public long getRawTotalDuration() {
         getRouteTotalDuration();
         return totalDuration;
     }
@@ -74,10 +74,10 @@ public class UseRouteFlights {
         return toStringDuration(totalFlying + totalLayover);
     }
 
-    public String getCurrLayoverTime(int flightCurrIndex , int flightNextIndex) {
+    public String getCurrLayoverTime(int flightCurrIndex, int flightNextIndex) {
         long layover = 0;
-        if(currRouteFlights.size() > flightNextIndex)
-        layover = calculateLayover(currRouteFlights.get(flightCurrIndex), currRouteFlights.get(flightNextIndex));
+        if (currRouteFlights.size() > flightNextIndex)
+            layover = calculateLayover(currRouteFlights.get(flightCurrIndex), currRouteFlights.get(flightNextIndex));
 
         return toStringDuration(layover);
     }
@@ -114,14 +114,14 @@ public class UseRouteFlights {
         return currConnectFlight.getDepartureDateTime();
     }
 
-    public ZonedDateTime getConnectArrivalZdt(){
+    public ZonedDateTime getConnectArrivalZdt() {
         return currConnectFlight.getArrivalDateTime();
     }
 
-    public String stopNames(){
+    public String stopNames() {
         StringBuilder names = new StringBuilder();
-        for (int i=1; i<currRouteFlights.size();i++){
-            if(i!=1)
+        for (int i = 1; i < currRouteFlights.size(); i++) {
+            if (i != 1)
                 names.append(", ");
             names.append(currRouteFlights.get(i).getSource().getAirport()).append(" (").append(toStringDuration(calculateLayover(currRouteFlights.get(i - 1), currRouteFlights.get(i)))).append(")");
         }

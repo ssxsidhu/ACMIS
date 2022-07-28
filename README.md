@@ -13,45 +13,46 @@ Sidhu, Sahilpreet Singh
 
    #### \> business
    
-   * AccessBookings
-   * AccessFlights
-   * AccessLocations
-   * BookingManager
-   * AccessRouteFlights (This will be used in the big user story in it3)
-   * RouteManager (This will be used in the big user story in it3)
+   * **AccessBookings** - Brings Bookings from persistence into business
+   * **AccessLocations** - Brings Locations from persistence into business
+   * **AccessRoutes** - Brings Routes from persistence into business
+   * **BookingManager** - Creates and cancels Bookings
+   * **RouteManager** - Creates a route from a departure location to a destination location. Includes direct and connectint flights
+   * **SortRoutes** - Sorts the routes in multiple ways
+   * **UseRouteFlights** - Used to access flights in a particular route 
    
    #### \> objects
-   * Booking
-   * Flight
-   * Location
-   * Route
-   * User
-   * AdjacencyList (Will be used in iteration 3 for connecting flights)
-   * MyGraph (Will be used in iteration 3 for connecting flights)
-   * Node (Will be used in iteration 3 for connecting flights)
+   * **AdjacencyList** - Used for implementing the Graph. Stores list of locations
+   * **Booking** - A Booking connects a User to their Flight
+   * **Flight** - A single flight from one location to another
+   * **Location** - A location with an airport
+   * **MyGraph** - Used to find connecting flights
+   * **Node** - Stores a location
+   * **Route** - A list of connecting flights
+   * **User** - User that uses the app
    
    #### \> persistence
-   * DataAccessStub
-   * DataAccessObject
-   * DataAccess
+   * **DataAccessStub** - Stub database implementation
+   * **DataAccessObject** - HSQLDB implementation
+   * **DataAccess** - Interface for Database classes 
    #### \> presentation
-   * bookDetailsFragment
-   * CardsAdapter
-   * DepartureFragment
-   * DestinationFragment
-   * FragmentBook
-   * FragmentManage
-   * FrontPageActivity
-   * MainActivity
-   * HomePageActivity
-   * Messages
-   * OrderSummary
-   * RouteDetails
-   * RouteDetailsAdapter
-   * SearchResultsCardsAdapter
-   * SearchResults
-   * Utils
-   * ViewPageAdapter
+   * **BookDetailsFragment** - Contains the details of flight the user wants, such as date, number of passengers, and search button
+   * **DepartureFragment** - Shows textbox where the User can choose the departure location
+   * **DestinationFragment** - Shows textbox where the User can choose the destination location
+   * **FragmentBook** - Contains the above three
+   * **FragmentManage** - Shows list of upcoming flights which the user has booked
+   * **ManageCardsAdapter** - Adapter to show the list of Bookings
+   * **OrderSummary** - Shows the flights which the user has selected to book
+   * **RouteDetails** - Shows the details of the Route such as where the flight is stopping
+   * **RouteDetailsAdapter** - Adapter to show the list of stops and their details
+   * **SearchResults** - Shows a list of search results from the depature location to the destination location
+   * **SearchResultsCardsAdapter** - Adapter to show the list of search results and breif details
+   * **SortFragment** - Shows a list of options can select to sort the flights from search result
+   * **FrontPageActivity** - Shows the starting animation on app launch
+   * **MainActivity** - Starts BookFragment and ManageFragment
+   * **Messages** - Gives feedback to user
+   * **Utils** - Contains function to set the colour of statuc bar and to get a formatted date
+   * **ViewPageAdapter** - Adapter for bottom navigation tabs
 
 ---
 
@@ -69,26 +70,14 @@ Users are able to search for flights by the takeoff and destination location. Th
 
 Users can also go to the manage flight screen by pressing the "Manage Flights" tab at the bottom. Here, users can look at the details of all of their upcoming flights. The flights here are sorted by their takeoff date and time.
 
-**New Feature added** : Users will be able to book round flights. Users will also be able to book for a number of passengers ie for the family members.
+Users will be able to book round flights. Users will also be able to book for a number of passengers ie for the family members.
+
+**New Feature Added:** Added connecting flights. Thus is a use wants to fly A->C, they are now also shown flights A->B->C. Added cancel booking feature. Users can cancel their already booked flights by pressing on the specific flight in the Manage Flights tab, then press Cancel Booking.
 
 ---
-
-*Note*:
-1. The flights in the database are within the months of July and August, for ease of marking. Just to make it easier for the marker, here are some of the sample round flights that can be searched for: 
-  **This can be tested for using the hsqldb.** 
-  1.first flight: Source:Regina Destination:Winnipeg date: 5th august,2022
-    return flight: Source:Winnipeg Destination:Regina date: 16th august,2022
-    
-  2.first flight: Source:Montreal Destination:Toronto date: 23rd July,2022
-    return flight: Source:Toronto Destination:Montreal date: 8th august,2022
-    
-  2.first flight: Source:Calgary Destination:Vancouver date: 16th July,2022
-    return flight: Source:Vancouver Destination:Calgary date: 19th august,2022.
-    
-2.Changing the stub database to the hsqldb or vice verca can be done in the main class. This is done by      commenting out the database name that is not used. 
-
-3. The MyGraph,Node and AdjacencyList classs in the Objects and the RouteManager in the Business class will be used in the next iteration for connecting flight Big user story.
- 
+## Testing Information.
+The testing is divided into unit tests, integration tests and acceptance tests. Every package has its own test suite that allows the marker to run tests for individual layers of the system. A file called "RunUnitTests" can be used to run all the unit tests for single components as well as accessMehthods. "RunIntegrationTests" can be used to run the tests for the different seams.
+---
 
 ## Android Versions
 Our app was tested on the the Nexus 7 emulator on AndoidStudio using with system image 6.0 (Marshmallow, API level 23). We also tested it on the Nexus 7 tablet.

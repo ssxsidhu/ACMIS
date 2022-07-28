@@ -36,7 +36,7 @@ public class DataAccessObject implements DataAccess {
     private int updateCount;
     private String result;
     private static final String EOF = "  ";
-    private String dbPath ;
+    private String dbPath;
 
 
     public DataAccessObject() {
@@ -44,7 +44,7 @@ public class DataAccessObject implements DataAccess {
         this.dbPath = "database/acmisHSQLDB";
     }
 
-    public void setDbPath(String dbPath){
+    public void setDbPath(String dbPath) {
         this.dbPath = dbPath;
     }
 
@@ -227,9 +227,9 @@ public class DataAccessObject implements DataAccess {
                 email = rs1.getString("email");
                 phoneNumber = rs1.getString("phoneNumber");
 
-                if (gender.equals("MALE")) {
+                if (gender.equals("Male")) {
                     finalGender = User.Gender.MALE;
-                } else if (gender.equals("FEMALE")) {
+                } else if (gender.equals("Female")) {
                     finalGender = User.Gender.FEMALE;
                 } else {
                     finalGender = User.Gender.OTHER;
@@ -254,6 +254,8 @@ public class DataAccessObject implements DataAccess {
         Location source = null, dest = null;
         Flight flight = null;
         String departureFlights = EOF, returnFlights = EOF;
+
+        userBookings.clear();
 
         result = null;
         try {
@@ -374,9 +376,9 @@ public class DataAccessObject implements DataAccess {
 
 
                 if (routeReturn.getRouteSize() != 0) {
-                    booking = new Booking(user, routeDepart, routeReturn, numPassengers,false);
+                    booking = new Booking(user, routeDepart, routeReturn, numPassengers, false);
                 } else {
-                    booking = new Booking(user, routeDepart, null, numPassengers,false);
+                    booking = new Booking(user, routeDepart, null, numPassengers, false);
                 }
                 booking.setBookingId(bookingId);
 
@@ -428,15 +430,14 @@ public class DataAccessObject implements DataAccess {
         for (int i = 0; i < locations.size(); i++) {
             if (locations.get(i).getAirport().equals(source.getAirport())) {
                 sourceLocId = i;
-            }
-            else if (locations.get(i).getAirport().equals(dest.getAirport())) {
+            } else if (locations.get(i).getAirport().equals(dest.getAirport())) {
                 destLocId = i;
             }
         }
 
         result = null;
         try {
-            cmdString = "Select * from Flights where startLocation = " + sourceLocId + " and endLocation = " + destLocId +" and year = " + yearToFind + " and month = " + monthToFind + " and day = " + dayToFind;
+            cmdString = "Select * from Flights where startLocation = " + sourceLocId + " and endLocation = " + destLocId + " and year = " + yearToFind + " and month = " + monthToFind + " and day = " + dayToFind;
             rs1 = st1.executeQuery(cmdString);
             while (rs1.next()) {
                 id = rs1.getInt("flightID");

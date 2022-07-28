@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         setContentView(R.layout.main_activity);
 
         Main.startUp();
-        if(!Objects.equals(Services.getDbName(), "Stub"))
-        copyDatabaseToDevice();
+        if (!Objects.equals(Services.getDbName(), "Stub"))
+            copyDatabaseToDevice();
         Services.dataAccessOpen();
 
         mBottomNavigation = findViewById(R.id.bottom_navigation);
@@ -92,8 +92,8 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         return true;
     }
 
-    public void setCurrentPage(){
-        viewPager.setCurrentItem(getIntent().getIntExtra("tabPosition",0));
+    public void setCurrentPage() {
+        viewPager.setCurrentItem(getIntent().getIntExtra("tabPosition", 0));
     }
 
     private void copyDatabaseToDevice() {

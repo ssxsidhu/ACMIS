@@ -16,7 +16,10 @@ import org.junit.runners.Suite;
         BookingManagerTest.class,
         AccessLocationsTest.class,
         UseRouteFlightsTest.class,
+        RouteManagerTest.class,
+        RouteSortTest.class,
         RouteManagerTest.class
+
 })
 
 

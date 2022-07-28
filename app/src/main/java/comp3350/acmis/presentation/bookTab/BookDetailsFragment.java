@@ -1,18 +1,13 @@
 package comp3350.acmis.presentation.bookTab;
 
 import android.app.ActivityOptions;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,17 +15,13 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import org.threeten.bp.LocalDate;
-import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.ZoneId;
-import org.threeten.bp.ZoneOffset;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -38,12 +29,8 @@ import java.util.TimeZone;
 
 
 import comp3350.acmis.R;
-import comp3350.acmis.application.Main;
 import comp3350.acmis.application.Services;
-import comp3350.acmis.business.AccessRoutes;
 import comp3350.acmis.objects.Location;
-import comp3350.acmis.objects.Route;
-import comp3350.acmis.presentation.MainActivity;
 import comp3350.acmis.presentation.Messages;
 import comp3350.acmis.presentation.searchRoutes.SearchResults;
 
@@ -78,7 +65,7 @@ public class BookDetailsFragment extends Fragment {
         pickDepartDate(view);
         pickReturnDate(view);
         pickNumPassengers(view);
-        searchFlights(view);
+        searchFlights();
     }
 
     private MaterialDatePicker<Long> setCalender(String titleText, long startDate) {
@@ -100,13 +87,13 @@ public class BookDetailsFragment extends Fragment {
     }
 
     private void pickDepartDate(View view) {
-        long startDay = LocalDate.of(2022,8,1).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli();
-        MaterialDatePicker<Long> materialDatePicker = setCalender("Select Departure Date", startDay);
+        long today = MaterialDatePicker.todayInUtcMilliseconds();
+        MaterialDatePicker<Long> materialDatePicker = setCalender("Select Departure Date", today);
         pickDepart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(getParentFragmentManager().findFragmentByTag("MATERIAL_DATE_PICKER_DEPART") ==null)
-                materialDatePicker.show(getParentFragmentManager(), "MATERIAL_DATE_PICKER_DEPART");
+                if (getParentFragmentManager().findFragmentByTag("MATERIAL_DATE_PICKER_DEPART") == null)
+                    materialDatePicker.show(getParentFragmentManager(), "MATERIAL_DATE_PICKER_DEPART");
             }
         });
 
@@ -133,7 +120,7 @@ public class BookDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 MaterialDatePicker<Long> materialDatePicker = setCalender("Select Return Date", departDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli());
-                if(getParentFragmentManager().findFragmentByTag("MATERIAL_DATE_PICKER_RETURN") ==null)
+                if (getParentFragmentManager().findFragmentByTag("MATERIAL_DATE_PICKER_RETURN") == null)
                     materialDatePicker.show(getParentFragmentManager(), "MATERIAL_DATE_PICKER_RETURN");
                 materialDatePicker.addOnPositiveButtonClickListener(selection -> {
                     pickReturn.setText(String.format(Locale.CANADA, "Return %s", materialDatePicker.getHeaderText()));
@@ -219,7 +206,7 @@ public class BookDetailsFragment extends Fragment {
         return roundTripSwitch.isChecked();
     }
 
-    private void searchFlights(View view1) {
+    private void searchFlights() {
         searchFlightsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -235,19 +222,15 @@ public class BookDetailsFragment extends Fragment {
             selectedDestination = (Location) getArguments().get("selectedDestination");
         }
 
-        Messages.makeToast(requireActivity().getApplicationContext(), "Database used: "+ Services.getDbName());
+        Messages.makeToast(requireActivity().getApplicationContext(), "Database used: " + Services.getDbName());
         Intent i = new Intent(requireActivity().getBaseContext(), SearchResults.class);
         i.putExtra("selectedDeparture", selectedDeparture);
         i.putExtra("selectedDestination", selectedDestination);
         i.putExtra("departDate", departDate);
         i.putExtra("returnDate", returnDate);
         i.putExtra("numPassengers", selectedNumPassengers);
-        requireActivity().startActivity(i,ActivityOptions.makeSceneTransitionAnimation(requireActivity()).toBundle());
+        requireActivity().startActivity(i, ActivityOptions.makeSceneTransitionAnimation(requireActivity()).toBundle());
     }
-
-
-
-
 
 
 }

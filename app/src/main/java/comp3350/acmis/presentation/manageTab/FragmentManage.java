@@ -43,18 +43,17 @@ public class FragmentManage extends Fragment {
         myBookingList = new ArrayList<>();
         accessBookings = new AccessBookings("braico");
         accessBookings.getMyBookings(myBookingList);
-        if(!myBookingList.isEmpty()){
+        if (!myBookingList.isEmpty()) {
             view.findViewById(R.id.no_bookings_found).setVisibility(View.GONE);
             displayBookingList(view);
-        }
-        else {
+        } else {
             view.findViewById(R.id.no_bookings_found).setVisibility(View.VISIBLE);
             view.findViewById(R.id.list_items_manage_tab).setVisibility(View.GONE);
         }
 
     }
 
-    private void displayBookingList(View view){
+    private void displayBookingList(View view) {
         ManageCardsAdapter adapter = new ManageCardsAdapter(requireActivity().getBaseContext(), myBookingList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         RecyclerView cards = view.findViewById(R.id.list_items_manage_tab);

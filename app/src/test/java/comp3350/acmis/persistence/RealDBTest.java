@@ -16,8 +16,7 @@ import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
 import comp3350.acmis.objects.User;
 
-
-public class StubDBTest {
+public class RealDBTest {
 
     private DataAccess db;
 
@@ -28,11 +27,10 @@ public class StubDBTest {
     private ArrayList<Flight> allFlights = new ArrayList<>();
     private ArrayList<Booking> allBookings = new ArrayList<>();
 
-
     @Before
     public void setUp() {
         Services.closeDataAccess();
-        db = Services.createDataAccess(new DataAccessStub());
+        db = Services.createDataAccess();
         Services.dataAccessOpen();
     }
 
@@ -81,33 +79,31 @@ public class StubDBTest {
 
     @Test
     public void testValidBookings() {
-        User user1 = db.getUserObject("bileskib");
-        db.getUserBookings(user1, allBookings);
         db.getAllFlights(allFlights);
+
+        User user2 = db.getUserObject("bileskib");
+        db.getUserBookings(user2, allBookings);
 
         for (int i = 0; i < allBookings.size(); i++) {
             db.cancelBooking(allBookings.get(i).getBookingId());
         }
-        db.getUserBookings(user1, allBookings);
+        db.getUserBookings(user2, allBookings);
         Assert.assertEquals(0, allBookings.size());
 
-        Booking booking1 = new Booking(user1, new Route(allFlights.get(50)), 1, false);
-        Booking booking2 = new Booking(user1, new Route(allFlights.get(100)), 10, false);
+        Booking booking1 = new Booking(user2, new Route(allFlights.get(50)), 1, false);
+        Booking booking2 = new Booking(user2, new Route(allFlights.get(100)), 10, false);
 
         db.addBooking(booking1);
         db.addBooking(booking2);
-        db.getUserBookings(user1, allBookings);
+        db.getUserBookings(user2, allBookings);
 
         Assert.assertEquals(2, allBookings.size());
-        System.out.println(booking1.getBooker().getFirstName());
-        System.out.println(allBookings.get(0).getBooker().getFirstName());
-
         Assert.assertTrue(booking1.equals(allBookings.get(0)));
     }
 
     @Test
     public void testNoBookings() {
-        User user2 = new User("Braden", "Bileski", User.Gender.MALE, "bradenbm", "somePassword", "bradenbm@cs.umanitoba.ca", "2041234567");
+        User user2 = new User("Prahalad", "Iyer", User.Gender.MALE, "iverp", "somePassword", "email@example.com", "2041234567");
         ArrayList<Booking> allBookings = new ArrayList<>();
 
         db.getUserBookings(user2, allBookings);

@@ -8,22 +8,49 @@ import comp3350.acmis.objects.Route;
 
 public class SortRoutes {
 
-    public void lowestPrice(ArrayList<Route> sortThis) {
-        Collections.sort(sortThis, new RouteCostCompare());
+    public String lowestPrice(ArrayList<Route> sortThis) {
+        if (!sortThis.isEmpty()) {
+            Collections.sort(sortThis, new RouteCostCompare());
+        } else if (sortThis.isEmpty())
+            throw new IllegalStateException("List is Empty !");
+        else if (sortThis == null) {
+            throw new NullPointerException("List is Null !");
+        }
+        return null;
     }
 
-    public void leastStops(ArrayList<Route> sortThis) {
-        Collections.sort(sortThis, new RouteStopCompare());
+    public String leastStops(ArrayList<Route> sortThis) {
+        if (!sortThis.isEmpty()) {
+            Collections.sort(sortThis, new RouteStopCompare());
+        } else if (sortThis.isEmpty())
+            throw new IllegalStateException("List is Empty !");
+        else if (sortThis == null) {
+            throw new NullPointerException("List is Null !");
+        }
+        return null;
     }
 
-    public void earliestDepart(ArrayList<Route> sortThis) {
-        Collections.sort(sortThis, new RouteDepartCompare());
+    public String earliestDepart(ArrayList<Route> sortThis) {
+        if (!sortThis.isEmpty()) {
+            Collections.sort(sortThis, new RouteDepartCompare());
+        } else if (sortThis.isEmpty())
+            throw new IllegalStateException("List is Empty !");
+        else if (sortThis == null) {
+            throw new NullPointerException("List is Null !");
+        }
+        return null;
     }
 
-    public void lowestDuration(ArrayList<Route> sortThis) {
-        Collections.sort(sortThis, new RouteDurationCompare());
+    public String lowestDuration(ArrayList<Route> sortThis) {
+        if (!sortThis.isEmpty()) {
+            Collections.sort(sortThis, new RouteDurationCompare());
+        } else if (sortThis.isEmpty())
+            throw new IllegalStateException("List is Empty !");
+        else if (sortThis == null) {
+            throw new NullPointerException("List is Null !");
+        }
+        return null;
     }
-
 
     private static class RouteCostCompare implements Comparator<Route> {
 
@@ -39,7 +66,7 @@ public class SortRoutes {
 
         @Override
         public int compare(Route r1, Route r2) {
-             return Integer.compare(new UseRouteFlights(r1).getNumStops(),new UseRouteFlights(r2).getNumStops());
+            return Integer.compare(new UseRouteFlights(r1).getNumStops(), new UseRouteFlights(r2).getNumStops());
         }
     }
 
@@ -53,7 +80,7 @@ public class SortRoutes {
     private static class RouteDurationCompare implements Comparator<Route> {
         @Override
         public int compare(Route r1, Route r2) {
-            return Long.compare(new UseRouteFlights(r1).getRawTotalDuration(),new UseRouteFlights(r2).getRawTotalDuration());
+            return Long.compare(new UseRouteFlights(r1).getRawTotalDuration(), new UseRouteFlights(r2).getRawTotalDuration());
         }
     }
 }

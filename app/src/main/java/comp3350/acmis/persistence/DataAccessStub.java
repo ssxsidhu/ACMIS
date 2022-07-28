@@ -37,15 +37,15 @@ public class DataAccessStub implements DataAccess {
         return dbName;
     }
 
-    public void setDbPath(String dbPath){
+    public void setDbPath(String dbPath) {
 
     }
 
     public void open() {
-        User defaultUser;
-
-        defaultUser = new User("John", "Braico", User.Gender.MALE, "braico", "somePassword", "jbraico@cs.umanitoba.ca", "2041234567");
+        User defaultUser = new User("John", "Braico", User.Gender.MALE, "braico", "somePassword", "jbraico@cs.umanitoba.ca", "2041234567");
         allUsers.add(defaultUser);
+        User testUser = new User("Braden", "Bileski", User.Gender.MALE, "bileskib", "somePassword", "bileskib@myumanitoba.ca", "2048887777");
+        allUsers.add(testUser);
 
         Location winnipeg = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
         allLocations.add(winnipeg);
@@ -97,6 +97,7 @@ public class DataAccessStub implements DataAccess {
     }
 
     public String getUserBookings(User user, ArrayList<Booking> userBookings) {
+        userBookings.clear();
         for (int i = 0; i < allBookings.size(); i++) {
             if (allBookings.get(i).getBooker() == user) {
                 userBookings.add(allBookings.get(i));
@@ -128,18 +129,18 @@ public class DataAccessStub implements DataAccess {
         int currentMonth;
         int currentYear;
 
-        for (int i = 0; i < allFlights.size(); i++) {
+               for (int i = 0; i < allFlights.size(); i++) {
             currentFlight = allFlights.get(i);
             currentDay = currentFlight.getDepartureDateTime().getDayOfMonth();
             currentMonth = currentFlight.getDepartureDateTime().getMonthValue();
             currentYear = currentFlight.getDepartureDateTime().getYear();
 
-            if (currentFlight.getSource().equals(source)      &&
-                currentFlight.getDestination().equals(dest)   &&
-                currentDay == departureDate.getDayOfMonth()   &&
-                currentMonth == departureDate.getMonthValue() &&
-                currentYear == departureDate.getYear()) {
-                    resultList.add(currentFlight);
+            if (currentFlight.getSource().equals(source) &&
+                    currentFlight.getDestination().equals(dest) &&
+                    currentDay == departureDate.getDayOfMonth() &&
+                    currentMonth == departureDate.getMonthValue() &&
+                    currentYear == departureDate.getYear()) {
+                resultList.add(currentFlight);
             }
         }
 
@@ -153,6 +154,8 @@ public class DataAccessStub implements DataAccess {
         return null;
     }
 
+    //private helper method split into two methods because of "code too large" error
+    //Only inserting flights below this to keep above code organized
     private void insertFlights() {
         allFlights.add(new Flight(allLocations.get(0), allLocations.get(5), ZonedDateTime.of(2022, 8, 1, 16, 30, 0, 0, allLocations.get(0).getZoneName()), 175, 2.6, 200));
         allFlights.add(new Flight(allLocations.get(0), allLocations.get(4), ZonedDateTime.of(2022, 8, 1, 20, 0, 0, 0, allLocations.get(0).getZoneName()), 200, 2.0, 100));

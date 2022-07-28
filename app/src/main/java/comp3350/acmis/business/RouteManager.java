@@ -5,7 +5,6 @@ import org.threeten.bp.ZonedDateTime;
 
 import java.util.ArrayList;
 
-import comp3350.acmis.application.Main;
 import comp3350.acmis.application.Services;
 import comp3350.acmis.objects.Flight;
 import comp3350.acmis.objects.Location;
