@@ -14,7 +14,7 @@ import comp3350.acmis.R;
 public class Messages {
 
     public static void makeToast(Context context, String message) {
-        Toast toast = Toast.makeText(context,message,Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
         toast.show();
     }
 

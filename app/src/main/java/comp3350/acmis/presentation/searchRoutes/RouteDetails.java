@@ -29,7 +29,7 @@ import comp3350.acmis.presentation.Utils;
 public class RouteDetails extends AppCompatActivity {
     private Route route, selectedDepartRoute;
     private LocalDate returnDate;
-    private Boolean contButtonVisibility,cancelButtonVisibility;
+    private Boolean contButtonVisibility, cancelButtonVisibility;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,18 +94,18 @@ public class RouteDetails extends AppCompatActivity {
             });
         }
 
-        if(cancelButtonVisibility){
+        if (cancelButtonVisibility) {
             Button cancelButton = findViewById(R.id.cancel_Booking_Button);
             cancelButton.setVisibility(View.VISIBLE);
             cancelButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String result = new BookingManager().cancelBooking(getIntent().getIntExtra("bookingId",-1));
-                    if(result == null)
-                        Messages.makeToast(getApplicationContext(),"Booking Canceled");
+                    String result = new BookingManager().cancelBooking(getIntent().getIntExtra("bookingId", -1));
+                    if (result == null)
+                        Messages.makeToast(getApplicationContext(), "Booking Canceled");
                     else
-                        Messages.makeToast(getApplicationContext(),result);
-                    startActivity(new Intent(getBaseContext(), MainActivity.class).putExtra("tabPosition",1));
+                        Messages.makeToast(getApplicationContext(), result);
+                    startActivity(new Intent(getBaseContext(), MainActivity.class).putExtra("tabPosition", 1));
                 }
             });
         }
@@ -121,7 +121,7 @@ public class RouteDetails extends AppCompatActivity {
         Intent i = getIntent();
         route = (Route) i.getSerializableExtra("selectedRoute");
         contButtonVisibility = i.getBooleanExtra("continueButtonVisibility", true);
-        cancelButtonVisibility = i.getBooleanExtra("cancelButtonVisibility",false);
+        cancelButtonVisibility = i.getBooleanExtra("cancelButtonVisibility", false);
         returnDate = (LocalDate) i.getSerializableExtra("returnDate");
         selectedDepartRoute = (Route) i.getSerializableExtra("selectedDepartRoute");
     }
