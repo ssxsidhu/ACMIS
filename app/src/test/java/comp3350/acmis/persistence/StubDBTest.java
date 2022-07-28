@@ -25,9 +25,8 @@ public class StubDBTest {
     @Before
     public void setUp() {
         Main.startUp();
-        Services.getDataAccess(Main.dbName);
-        db = new DataAccessStub(Main.dbName);
-        db.open(Main.dbName);
+        db = Services.createDataAccess(new DataAccessStub());
+        Services.dataAccessOpen();
     }
 
     @After

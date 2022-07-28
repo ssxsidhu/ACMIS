@@ -9,33 +9,36 @@ import comp3350.acmis.persistence.DataAccessStub;
 public class Services {
     private static DataAccess dataAccessService = null;
 
-    public static DataAccess createDataAccess(String dbName) {
-        if (dataAccessService == null) {
-
-            if (Main.getDBPathName().equals("UF")) {
-                dataAccessService = new DataAccessStub(dbName);
-            } else {
-                dataAccessService = new DataAccessObject(dbName);
-            }
-            dataAccessService.open(Main.getDBPathName());
-        }
-        return dataAccessService;
+    public static void createDataAccess(){
+        if(dataAccessService == null)
+        dataAccessService =  new DataAccessObject();
     }
 
     public static DataAccess createDataAccess(DataAccess alternateDataAccessService) {
-        if (dataAccessService == null) {
-            dataAccessService = alternateDataAccessService;
-            dataAccessService.open(Main.getDBPathName());
-        }
+        dataAccessService = alternateDataAccessService;
         return dataAccessService;
     }
 
-    public static DataAccess getDataAccess(String dbName) {
+    public static void dataAccessOpen(){
+        dataAccessService.open();
+    }
+    public static String getDbName(){
+        if(dataAccessService != null)
+            return dataAccessService.getDBName();
+        return  null;
+    }
+
+    public static DataAccess getDataAccess() {
         if (dataAccessService == null) {
             System.out.println("Connection to data access has not been established.");
             System.exit(1);
         }
         return dataAccessService;
+    }
+
+    public static void setDbPath(String dbPath){
+        System.out.println("Setting DB path to: " +dbPath);
+        dataAccessService.setDbPath(dbPath);
     }
 
     public static void closeDataAccess() {

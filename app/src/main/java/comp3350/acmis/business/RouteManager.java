@@ -26,7 +26,7 @@ public class RouteManager {
     // CONSTRUCTOR
     public RouteManager() {
         graph = new MyGraph();
-        dataAccess = Services.getDataAccess(Main.dbName);
+        dataAccess = Services.getDataAccess();
         flightList = new ArrayList<>();
         locationList = new ArrayList<>();
         dataAccess.getAllFlights(flightList);

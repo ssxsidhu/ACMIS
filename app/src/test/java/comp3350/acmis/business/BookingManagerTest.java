@@ -47,7 +47,7 @@ public class BookingManagerTest {
         Main.startUp();
         System.out.println("Create Test Environment. Creating Test Data Base and Booking Manager...");
 
-        test = new BookingManager("DataAccessStubTest.java");
+//        test = new BookingManager("DataAccessStubTest.java");
 
         allUsers = new ArrayList<>();
         allFlights = new ArrayList<>();
