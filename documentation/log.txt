@@ -29,6 +29,13 @@ Big User Stories and their Developer Tasks:
 		- Track incoming and outgoing flights for each location            (Estimated Cost: 2 hours) (Actual Cost: 5 hours)
 			* Developers: Vrushil, Braden
 
+    As a User, I want to be able to cancel flights I have already booked (Priority: Medium) (Cost: 3 days)
+        - Creating a page to cancel a flight                  (Estimated Cost: 4 hours) (Actual Cost: 8 hours)
+            * Developers: Sahilpreet
+        - Display all flights to allow user to pick one from  (Estimated Cost: 2 hours) (Actual Cost: 2 hours)
+            * Developers: Sahilpreet, Vrushil
+        - Delete the user's booking from the database         (Estimated Cost: 4 hours) (Actual Cost: 4 hours)
+            * Developers: Braden
 
 Group Meetings:
 	June 1, 2022 : 1 Hour 
@@ -54,7 +61,7 @@ Group Meetings:
 		- Updating the teams on the new updates
 		- Requesting for the required functionality in appropriate classes
 		- Decided to start the testing process
-		- Braden, Prahlad, Sahilpreet, and Vrushil in attendance
+		- Braden, Prahalad, Sahilpreet, and Vrushil in attendance
 	June 14, 2022 : 1 Hour
 		- Teams linking their parts together
 		- Finalizing the main code base
@@ -63,6 +70,27 @@ Group Meetings:
 	June 16, 2022 : 2 Hours
 		- Final testing
 		- Braden, Sahilpreet, and Vrushil in attendance
+	June 25, 2022 : 2 Hours
+        - Preparation for iteration 2
+        - Braden, Sahilpreet, Vrushil, and Prahalad in attendance
+    July 2, 2022 : 2 Hours
+        - Discussed DB implementations
+        - Showed off our current progress
+        - Braden, Sahilpreet, Vrushil, and Prahalad in attendance
+    July 12, 2022 : 4 Hours
+        - Final testing
+        - Braden, Sahilpreet, Vrushil, and Prahalad in attendance
+    July 15, 2022 : 2.5 Hours
+        - Iteration 3 discussion and preparation
+        - Did the retrospective activity
+        - Braden, Sahilpreet, Vrushil, and Prahalad in attendance
+    July 21, 2022 : 3 Hours
+        - Showed off current work and discussed major changes
+        - Created acceptance test scripts
+        - Braden, Sahilpreet, Vrushil, and Prahalad in attendance
+    July 28, 2022 : 6 Hours
+        - Final testing and cleaning of code
+        - Braden, Sahilpreet, Vrushil, and Prahalad in attendance
 		
 DEVELOPER TASKS
 ===============
@@ -95,14 +123,14 @@ June 24, 2022 : 2-3 Hours, Prahalad
    
 June 25th, 2022 : 4 hours, Sahilpreet
    -Added a new fragment for getting the details of the flight from the user which includes:
-   		-Departure date the user is travelling on
-		-Return Date
-		-Number of passengers the user wants to add
+    -Departure date the user is travelling on
+    -Return Date
+    -Number of passengers the user wants to add
 	
 June 27h, 2022 : 2hours, Sahilpreet
--Added a details page for the route when the user clicks on an item from search results
--Created a custom shape to represent route
--Created a custom adapter to show the details of the route
+    -Added a details page for the route when the user clicks on an item from search results
+    -Created a custom shape to represent route
+    -Created a custom adapter to show the details of the route
 
 June 28th, 2022 : 3.5 Hours, Prahalad
    -Create Skeletal Code for Graph, Adjacency List and Nodes
@@ -110,9 +138,9 @@ June 28th, 2022 : 3.5 Hours, Prahalad
    -Integrate Depth First Search Idea into a Method to be used
    
 July 1st ,2022 : 5 hours, Sahil
--Created a order summary page to show the selected flight and book it
--Added a continue button in route details page which shows this page if the user wants a one-way booking or shows return flights if the user wants a round-trip
--Removed problems related to Law of demeter related problems from the adapters
+    -Created a order summary page to show the selected flight and book it
+    -Added a continue button in route details page which shows this page if the user wants a one-way booking or shows return flights if the user wants a round-trip
+    -Removed problems related to Law of demeter related problems from the adapters
 
 July 6th, 2022 : 5.5 Hours, Prahalad
    -Create Skeletal Code for RouteManager
@@ -141,8 +169,8 @@ July 8th, 2022 : 6 hours, Braden
    -Added datastub testing.
    
 July,8th 2022: 2 hours, Sahilpreet
--Created a custom Card adapter for manage flights tab which shows all the booked flights
--Shows a single Card if the flight booked is one-way , otherwise shows 2 nested cards for each flight if the flight is round-trip
+    -Created a custom Card adapter for manage flights tab which shows all the booked flights
+    -Shows a single Card if the flight booked is one-way , otherwise shows 2 nested cards for each flight if the flight is round-trip
 
 July 11th,2022 : 8 hours, Vrushil, Sahil, Prahalad, Braden
    -Performed Extensive Debugging on Route Manager and Database Interface
@@ -179,9 +207,16 @@ July 14th, 2022 : 3 hours, Prahalad
     - Wrote only necessary constructors
     - Reformatted Objects and Business Package
     - Added Contains method in User Class
+
 July 15th, 2022 : 4 hours, Vrushil
     - Learnt how to use espresso and how to record tests
     - Created the acceptance test scripts
+
+ July 15th, 2022 : 8 hours, Braden
+    - Wrote two new database methods in both stub and HSQLDB implementations
+    - Wrote new tests for both methods
+    - Wrote tests for HSQLDB implementation
+
 July 17th, 2022 : 4.5 hours, Prahalad
     - Rewrote BookingManager Class as BookingManager2 for implementation testing of different versions
     - Added Constructors and Getters and Setters for Booking Object
@@ -207,14 +242,10 @@ July 22nd, 2022 : 3 hours, Prahalad
 July 24th, 2022 : 5 hours, Vrushil 
     - Wrote integration tests, businesspersistence seam & businessHsqldb tests.
     - solved the booking id bug.
-    - reformatted all the code in the integration test.
-    
-    
+    - reformatted all the code in the integration test. 
 July 28th, 2022 : 8 hours, Vrushil, Braden, Sahilpreet and Prahalad
     - Final Review Process
     - Remove all Dead Code
     - Reformat all code
     - Write remaining tests
-    
-
-
+   

@@ -29,7 +29,7 @@ public class DataAccessStub implements DataAccess {
         this.dbName = "Stub";
         allUsers = new ArrayList<>();
         allLocations = new ArrayList<>();
-        allFlights = new ArrayList<Flight>();
+        allFlights = new ArrayList<>();
         allBookings = new ArrayList<>();
     }
 
@@ -129,7 +129,7 @@ public class DataAccessStub implements DataAccess {
         int currentMonth;
         int currentYear;
 
-               for (int i = 0; i < allFlights.size(); i++) {
+        for (int i = 0; i < allFlights.size(); i++) {
             currentFlight = allFlights.get(i);
             currentDay = currentFlight.getDepartureDateTime().getDayOfMonth();
             currentMonth = currentFlight.getDepartureDateTime().getMonthValue();
@@ -1091,6 +1091,5 @@ public class DataAccessStub implements DataAccess {
         allFlights.add(new Flight(allLocations.get(5), allLocations.get(3), ZonedDateTime.of(2022, 8, 31, 3, 30, 0, 0, allLocations.get(5).getZoneName()), 125, 4.75, 140));
         allFlights.add(new Flight(allLocations.get(5), allLocations.get(3), ZonedDateTime.of(2022, 8, 31, 4, 30, 0, 0, allLocations.get(5).getZoneName()), 150, 4.75, 300));
         allFlights.add(new Flight(allLocations.get(5), allLocations.get(3), ZonedDateTime.of(2022, 8, 31, 8, 0, 0, 0, allLocations.get(5).getZoneName()), 125, 4.75, 240));
-
     }
 }

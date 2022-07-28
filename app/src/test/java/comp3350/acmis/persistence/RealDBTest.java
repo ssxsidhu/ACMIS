@@ -36,6 +36,11 @@ public class RealDBTest {
 
     @After
     public void tearDown() {
+        User user1 = db.getUserObject("bileskib");
+        db.getUserBookings(user1, allBookings);
+        for (int i = 0; i < allBookings.size(); i++) {
+            db.cancelBooking(allBookings.get(i).getBookingId());
+        }
         Services.closeDataAccess();
     }
 
