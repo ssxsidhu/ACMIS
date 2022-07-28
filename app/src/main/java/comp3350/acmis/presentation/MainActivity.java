@@ -19,9 +19,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Objects;
 
 import comp3350.acmis.R;
 import comp3350.acmis.application.Main;
+import comp3350.acmis.application.Services;
 
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
 
@@ -36,12 +38,10 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-
-
-        if (!Main.getDBPathName().equals("UF")) {
-            copyDatabaseToDevice();
-        }
         Main.startUp();
+        if(!Objects.equals(Services.getDbName(), "Stub"))
+        copyDatabaseToDevice();
+        Services.dataAccessOpen();
 
         mBottomNavigation = findViewById(R.id.bottom_navigation);
         mBottomNavigation.setOnItemSelectedListener(this);
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 
             copyAssetsToDirectory(assetNames, dataDirectory);
 
-            Main.setDBPathName(dataDirectory.toString() + "/" + Main.dbName);
+            Services.setDbPath(dataDirectory.toString() + "/acmisHSQLDB");
 
         } catch (IOException ioe) {
             Messages.warning(this, "Unable to access application data: " + ioe.getMessage());

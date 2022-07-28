@@ -22,7 +22,7 @@ public class  AccessBookings {
     // CONSTRUCTOR
     public AccessBookings(String user) {
         userBookings = new ArrayList<>();
-        dataAccess = Services.getDataAccess(Main.dbName);
+        dataAccess = Services.getDataAccess();
         username = Objects.requireNonNull(user);
     }
 

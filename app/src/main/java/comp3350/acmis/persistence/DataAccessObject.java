@@ -36,12 +36,19 @@ public class DataAccessObject implements DataAccess {
     private int updateCount;
     private String result;
     private static final String EOF = "  ";
+    private String dbPath ;
 
-    public DataAccessObject(String dbName) {
-        this.dbName = dbName;
+
+    public DataAccessObject() {
+        this.dbName = "acmisHSQLDB";
+        this.dbPath = "database/acmisHSQLDB";
     }
 
-    public void open(String dbPath) {
+    public void setDbPath(String dbPath){
+        this.dbPath = dbPath;
+    }
+
+    public void open() {
         String url;
         try {
             // Setup for HSQL
@@ -169,7 +176,6 @@ public class DataAccessObject implements DataAccess {
         int numPassengers = newBooking.getNumPassengers();
         String routeDepart = newBooking.getRouteDepart().getFlightsCSV();
         String routeReturn = null;
-        System.out.println("HERE: " + routeDepart);
         if (newBooking.checkForReturn()) {
             routeReturn = newBooking.getRouteReturn().getFlightsCSV();
         }
@@ -184,7 +190,6 @@ public class DataAccessObject implements DataAccess {
                     numPassengers +
                     ");";
 
-            System.out.print(cmdString + "\n");
 
             updateCount = st1.executeUpdate(cmdString);
             result = checkWarning(st1, updateCount);
@@ -314,7 +319,7 @@ public class DataAccessObject implements DataAccess {
                 returnFlights = rs1.getString("routeReturn");
                 if (returnFlights != null) {
                     String[] returnList = returnFlights.split(",");
-                    for (int i = 0; i < departureList.length; i++) {
+                    for (int i = 0; i < returnList.length; i++) {
                         String currentFlightID = returnList[i];
 
                         try {
@@ -461,6 +466,11 @@ public class DataAccessObject implements DataAccess {
             result = processSQLError(e);
         }
         return result;
+    }
+
+
+    public String getDBName() {
+        return dbName;
     }
 
     public String checkWarning(Statement st, int updateCount) {

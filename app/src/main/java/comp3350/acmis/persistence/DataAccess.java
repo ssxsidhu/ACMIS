@@ -10,9 +10,11 @@ import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.User;
 
 public interface DataAccess {
-    void open(String string);
+    void open();
 
     void close();
+
+    void setDbPath(String DbPath);
 
     String getAllFlights(ArrayList<Flight> resultList);
 
@@ -27,5 +29,7 @@ public interface DataAccess {
     String cancelBooking(int bookingId);
 
     String getFlights(Location source, Location dest, ZonedDateTime departureDate, ArrayList<Flight> resultList);
+
+    String getDBName();
 
 }
