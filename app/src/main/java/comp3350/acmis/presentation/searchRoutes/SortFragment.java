@@ -31,8 +31,8 @@ public class SortFragment extends BottomSheetDialogFragment {
                 container, false);
 
         sortListView = view.findViewById(R.id.list_sort_options);
-        String[] sortOptions = {"Lowest price", "Number of stops", "Earliest departure time", "Lowest duration time"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireContext(), R.layout.sort_card_view, R.id.sort_text_view, sortOptions);
+        String[] sortOptions = {"Lowest price","Number of stops","Earliest departure time","Least duration time"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireContext(),R.layout.sort_card_view,R.id.sort_text_view,sortOptions);
         sortListView.setAdapter(adapter);
         routeList = (ArrayList<Route>) getArguments().getSerializable("availableRouteList");
 
