@@ -8,15 +8,21 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import comp3350.acmis.application.Main;
+import comp3350.acmis.application.Services;
 import comp3350.acmis.objects.Location;
+import comp3350.acmis.persistence.DataAccess;
+import comp3350.acmis.persistence.DataAccessStub;
 
 public class AccessLocationsTest {
     private AccessLocations testConn;
     private ArrayList<Location> availableLocations;
+    private DataAccess dataAccess;
 
     @Before
     public void setUp() {
-        Main.startUp();
+
+        dataAccess = Services.createDataAccess(new DataAccessStub());
+        Services.dataAccessOpen();
         testConn = new AccessLocations();
 
 
@@ -24,7 +30,7 @@ public class AccessLocationsTest {
 
     @After
     public void tearDown() {
-        Main.shutDown();
+        Services.closeDataAccess();
     }
 
     @Test
@@ -58,11 +64,11 @@ public class AccessLocationsTest {
         testConn.getLocations(availableLocations);
 
         Assert.assertEquals("Winnipeg", availableLocations.get(0).getCity());
-        Assert.assertEquals("Montreal", availableLocations.get(1).getCity());
+        Assert.assertEquals("Vancouver", availableLocations.get(1).getCity());
         Assert.assertEquals("Toronto", availableLocations.get(2).getCity());
-        Assert.assertEquals("Vancouver", availableLocations.get(3).getCity());
+        Assert.assertEquals("Regina", availableLocations.get(3).getCity());
         Assert.assertEquals("Calgary", availableLocations.get(4).getCity());
-        Assert.assertEquals("Regina", availableLocations.get(5).getCity());
+        Assert.assertEquals("Montreal", availableLocations.get(5).getCity());
 
         tearDown();
     }
