@@ -12,7 +12,7 @@ public class Booking {
 
     // Static VARIABLE
     private static int bookingSeq = 1;             // Assign Unique Booking ID for every Booking
-    
+
     // INSTANCE VARIABLES
     private User booker;                           // Person Booking the flight
     private final Route routeDepart;
@@ -21,26 +21,27 @@ public class Booking {
     private int numPassengers;
 
     // CONSTRUCTOR
-    public Booking(User booker, Route routeDepart, int numP,boolean realBooking) {
+    public Booking(User booker, Route routeDepart, int numP, boolean realBooking) {
         this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
         this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
         numPassengers = numP;
-        if(realBooking) {
+        if (realBooking) {
             bookingId = bookingSeq;
             bookingSeq++;
         }
     }
 
-    public void setBookingId(int bookingId){
+    public void setBookingId(int bookingId) {
         this.bookingId = bookingId;
     }
+
     // CONSTRUCTOR for Bookings with a return Route.
     public Booking(User booker, Route routeDepart, Route routeReturn, int numP, boolean realBooking) {
         this.booker = Objects.requireNonNull(booker, "Booker cannot be null");
         this.routeDepart = Objects.requireNonNull(routeDepart, "Route cannot be null");
         this.routeReturn = routeReturn;
         numPassengers = numP;
-        if(realBooking) {
+        if (realBooking) {
             bookingId = bookingSeq;
             bookingSeq++;
         }
@@ -90,6 +91,20 @@ public class Booking {
     }
 
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Booking booking = (Booking) o;
+//        return numPassengers == booking.numPassengers && Objects.equals(booker, booking.booker) && Objects.equals(routeDepart, booking.routeDepart) && Objects.equals(routeReturn, booking.routeReturn);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(booker, routeDepart, routeReturn, numPassengers);
+//    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -102,5 +117,4 @@ public class Booking {
     public int hashCode() {
         return Objects.hash(booker, routeDepart, routeReturn, numPassengers);
     }
-
 }

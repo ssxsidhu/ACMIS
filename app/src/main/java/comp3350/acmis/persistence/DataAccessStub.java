@@ -42,10 +42,10 @@ public class DataAccessStub implements DataAccess {
     }
 
     public void open() {
-        User defaultUser;
-
-        defaultUser = new User("John", "Braico", User.Gender.MALE, "braico", "somePassword", "jbraico@cs.umanitoba.ca", "2041234567");
+        User defaultUser = new User("John", "Braico", User.Gender.MALE, "braico", "somePassword", "jbraico@cs.umanitoba.ca", "2041234567");
         allUsers.add(defaultUser);
+        User testUser = new User("Braden", "Bileski", User.Gender.MALE, "bileskib", "somePassword", "bileskib@myumanitoba.ca", "2048887777");
+        allUsers.add(testUser);
 
         Location winnipeg = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
         allLocations.add(winnipeg);
@@ -153,6 +153,8 @@ public class DataAccessStub implements DataAccess {
         return null;
     }
 
+    //private helper method split into two methods because of "code too large" error
+    //Only inserting flights below this to keep above code organized
     private void insertFlights() {
         allFlights.add(new Flight(allLocations.get(0), allLocations.get(5), ZonedDateTime.of(2022, 8, 1, 16, 30, 0, 0, allLocations.get(0).getZoneName()), 175, 2.6, 200));
         allFlights.add(new Flight(allLocations.get(0), allLocations.get(4), ZonedDateTime.of(2022, 8, 1, 20, 0, 0, 0, allLocations.get(0).getZoneName()), 200, 2.0, 100));

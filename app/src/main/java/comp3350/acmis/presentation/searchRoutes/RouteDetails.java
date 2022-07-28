@@ -1,5 +1,6 @@
 package comp3350.acmis.presentation.searchRoutes;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -108,7 +109,6 @@ public class RouteDetails extends AppCompatActivity {
                 }
             });
         }
-
 
         RouteDetailsAdapter adapter = new RouteDetailsAdapter(getBaseContext(), routeDetails);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
