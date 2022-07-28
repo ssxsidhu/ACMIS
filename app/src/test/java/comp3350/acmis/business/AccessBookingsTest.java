@@ -24,7 +24,7 @@ public class AccessBookingsTest {
         Main.startUp();
         testConn = new AccessBookings("braico");
 
-        Services.getDataAccess(Main.dbName);
+        Services.getDataAccess();
 
     }
 

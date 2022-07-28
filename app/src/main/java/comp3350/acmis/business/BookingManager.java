@@ -22,11 +22,7 @@ public class BookingManager {
 
     // Constructor
     public BookingManager() {
-        data = Services.getDataAccess(Main.dbName);
-    }
-
-    public BookingManager(String name) {
-        data = Services.getDataAccess(name);
+        data = Services.getDataAccess();
     }
 
     //creating booking
