@@ -9,9 +9,10 @@ import comp3350.acmis.persistence.DataAccessStub;
 public class Services {
     private static DataAccess dataAccessService = null;
 
-    public static void createDataAccess(){
+    public static DataAccess createDataAccess(){
         if(dataAccessService == null)
         dataAccessService =  new DataAccessObject();
+        return dataAccessService;
     }
 
     public static DataAccess createDataAccess(DataAccess alternateDataAccessService) {

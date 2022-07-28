@@ -96,7 +96,7 @@ public class RouteTest {
         testRoute.addToRoute(testFlight2);
         //flight sequence starts at 1
         Assert.assertEquals(2, testRoute.getRouteSize());
-        Assert.assertEquals("1,2", testRoute.getFlightsCSV());
+        Assert.assertEquals("'1,2'", testRoute.getFlightsCSV());
 
     }
 
