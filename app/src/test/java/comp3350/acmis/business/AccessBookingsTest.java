@@ -46,7 +46,7 @@ public class AccessBookingsTest {
 
         setUp();
 
-        //valid access boooking connection is created.
+        //valid access booking connection is created.
         Assert.assertTrue(testConn != null);
 
         tearDown();

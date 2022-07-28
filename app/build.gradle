@@ -38,6 +38,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
     implementation files('libs\\hsqldb.jar')
+    testImplementation "org.mockito:mockito-core:3.+"
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.0-alpha07'
     annotationProcessor 'androidx.room:room-compiler:2.4.2'
     implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.1'

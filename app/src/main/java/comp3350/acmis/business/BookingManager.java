@@ -47,9 +47,5 @@ public class BookingManager {
         return data.cancelBooking(bookingId);
     }
 
-    //for testing purposes
-    public DataAccess getData() {
-        return data;
-    }
 }
 

@@ -129,7 +129,7 @@ public class DataAccessStub implements DataAccess {
         int currentMonth;
         int currentYear;
 
-        for (int i = 0; i < allFlights.size(); i++) {
+               for (int i = 0; i < allFlights.size(); i++) {
             currentFlight = allFlights.get(i);
             currentDay = currentFlight.getDepartureDateTime().getDayOfMonth();
             currentMonth = currentFlight.getDepartureDateTime().getMonthValue();
