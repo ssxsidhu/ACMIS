@@ -53,7 +53,7 @@ public class AccessBookings {
 
         @Override
         public int compare(Booking b1, Booking b2) {
-            return (new UseRouteFlights(b1.getRouteDepart())).getConnectDepartureTime().compareTo((new UseRouteFlights(b2.getRouteDepart())).getConnectDepartureTime());
+            return (new UseRouteFlights(b1.getRouteDepart())).getConnectDepartureZdt().compareTo((new UseRouteFlights(b2.getRouteDepart())).getConnectDepartureZdt());
         }
 
         @Override

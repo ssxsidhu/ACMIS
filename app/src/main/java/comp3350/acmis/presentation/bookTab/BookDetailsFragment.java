@@ -24,7 +24,9 @@ import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import org.threeten.bp.LocalDate;
+import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZoneOffset;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -98,8 +100,8 @@ public class BookDetailsFragment extends Fragment {
     }
 
     private void pickDepartDate(View view) {
-        long today = MaterialDatePicker.todayInUtcMilliseconds();
-        MaterialDatePicker<Long> materialDatePicker = setCalender("Select Departure Date", today);
+        long startDay = LocalDate.of(2022,8,1).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli();
+        MaterialDatePicker<Long> materialDatePicker = setCalender("Select Departure Date", startDay);
         pickDepart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -233,9 +235,6 @@ public class BookDetailsFragment extends Fragment {
             selectedDestination = (Location) getArguments().get("selectedDestination");
         }
 
-//        ProgressDialog pd = ProgressDialog.show(requireContext(), "", "Loading flights...", true, false);
-//        CircularProgressIndicator progressIndicator = requireView().findViewById(R.id.progress_indicator);
-//        progressIndicator.setVisibility(View.VISIBLE);
         Messages.makeToast(requireActivity().getApplicationContext(), "Database used: "+ Services.getDbName());
         Intent i = new Intent(requireActivity().getBaseContext(), SearchResults.class);
         i.putExtra("selectedDeparture", selectedDeparture);

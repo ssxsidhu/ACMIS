@@ -1,10 +1,8 @@
-package comp3350.acmis.presentation;
+package comp3350.acmis.acceptance;
 
 
-import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -39,6 +37,7 @@ import org.junit.runner.RunWith;
 import comp3350.acmis.R;
 import comp3350.acmis.application.Services;
 import comp3350.acmis.persistence.DataAccessStub;
+import comp3350.acmis.presentation.FrontPageActivity;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -82,7 +81,7 @@ public class RoundTripFlightTest {
                         isDisplayed()));
         materialAutoCompleteTextView2.perform(click());
 
-        onView(withText("Vancouver, Canada"))
+        onView(withText("Regina, Canada"))
                 .inRoot(RootMatchers.isPlatformPopup())
                 .perform(click());
 
@@ -107,7 +106,7 @@ public class RoundTripFlightTest {
                         isDisplayed()));
         materialButton.perform(click());
 
-        onView(withContentDescription("Saturday, July 30, 2022"))
+        onView(withContentDescription("Tuesday, August 9, 2022"))
                 .inRoot(RootMatchers.isDialog())
                 .perform(click());
         onView(withText("OK"))
@@ -125,7 +124,7 @@ public class RoundTripFlightTest {
                         isDisplayed()));
         materialButton3.perform(click());
 
-        onView(withContentDescription("Sunday, July 31, 2022"))
+        onView(withContentDescription("Friday, August 19, 2022"))
                 .inRoot(RootMatchers.isDialog())
                 .perform(click());
         onView(withText("OK"))
@@ -267,29 +266,50 @@ public class RoundTripFlightTest {
         textView.check(matches(withText("Winnipeg")));
 
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.card_city_arrive), withText("Vancouver"),
+                allOf(withId(R.id.card_city_arrive), withText("Regina"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView2.check(matches(withText("Vancouver")));
+        textView2.check(matches(withText("Regina")));
 
 
         ViewInteraction textView3 = onView(
-                allOf(withId(R.id.route_date), withText("   Sat, Jul 30, 2022"),
+                allOf(withId(R.id.route_date), withText("   Tue, Aug 9, 2022"),
                         withParent(withParent(withId(R.id.result_card))),
                         isDisplayed()));
-        textView3.check(matches(withText("   Sat, Jul 30, 2022")));
+        textView3.check(matches(withText("   Tue, Aug 9, 2022")));
 
         ViewInteraction textView4 = onView(
-                allOf(withId(R.id.route_date), withText("   Sun, Jul 31, 2022"),
+                allOf(withId(R.id.route_date), withText("   Fri, Aug 19, 2022"),
                         withParent(withParent(withId(R.id.result_card))),
                         isDisplayed()));
-        textView4.check(matches(withText("   Sun, Jul 31, 2022")));
+        textView4.check(matches(withText("   Fri, Aug 19, 2022")));
 
-        ViewInteraction textView5 = onView(
-                allOf(withId(R.id.route_date), withText("   Sun, Jul 31, 2022"),
-                        withParent(withParent(withId(R.id.result_card))),
+        ViewInteraction recyclerView3 = onView(
+                allOf(withId(R.id.card_view_list),
+                        childAtPosition(
+                                withClassName(is("android.widget.LinearLayout")),
+                                2)));
+        recyclerView3.perform(actionOnItemAtPosition(0, click()));
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatImageButton = onView(
+                allOf(childAtPosition(
+                                allOf(withId(R.id.details_top_app_bar),
+                                        childAtPosition(
+                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
+                                                0)),
+                                1),
                         isDisplayed()));
-        textView5.check(matches(withText("   Sun, Jul 31, 2022")));
+        appCompatImageButton.perform(click());
+
     }
 
     private static Matcher<View> childAtPosition(
