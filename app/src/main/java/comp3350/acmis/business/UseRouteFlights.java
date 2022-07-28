@@ -13,10 +13,12 @@ import comp3350.acmis.objects.Route;
 public class UseRouteFlights {
     private final ArrayList<Flight> currRouteFlights;
     private Flight currConnectFlight;
+    private long totalDuration;
 
     public UseRouteFlights(Route route) {
         currRouteFlights =  new ArrayList<>();
         route.getRoute(currRouteFlights);
+        totalDuration = 0;
         if(currRouteFlights.size()!=0)
             currConnectFlight = currRouteFlights.get(0);
     }
@@ -53,6 +55,11 @@ public class UseRouteFlights {
         return cost;
     }
 
+    public long getRawTotalDuration(){
+        getRouteTotalDuration();
+        return totalDuration;
+    }
+
     public String getRouteTotalDuration() {
         long totalFlying = currRouteFlights.get(0).getDuration().toMillis();
         long totalLayover = 0;
@@ -62,6 +69,8 @@ public class UseRouteFlights {
                 totalFlying += currRouteFlights.get(i).getDuration().toMillis();
             }
         }
+
+        totalDuration = totalFlying + totalLayover;
         return toStringDuration(totalFlying + totalLayover);
     }
 
