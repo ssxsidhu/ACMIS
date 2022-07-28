@@ -255,6 +255,8 @@ public class DataAccessObject implements DataAccess {
         Flight flight = null;
         String departureFlights = EOF, returnFlights = EOF;
 
+        userBookings.clear();
+
         result = null;
         try {
             cmdString = "Select * from Bookings where userID = " + user.getUserId();

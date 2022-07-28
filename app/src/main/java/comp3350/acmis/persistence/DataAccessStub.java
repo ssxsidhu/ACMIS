@@ -42,10 +42,10 @@ public class DataAccessStub implements DataAccess {
     }
 
     public void open() {
-        User defaultUser;
-
-        defaultUser = new User("John", "Braico", User.Gender.MALE, "braico", "somePassword", "jbraico@cs.umanitoba.ca", "2041234567");
+        User defaultUser = new User("John", "Braico", User.Gender.MALE, "braico", "somePassword", "jbraico@cs.umanitoba.ca", "2041234567");
         allUsers.add(defaultUser);
+        User testUser = new User("Braden", "Bileski", User.Gender.MALE, "bileskib", "somePassword", "bileskib@myumanitoba.ca", "2048887777");
+        allUsers.add(testUser);
 
         Location winnipeg = new Location("Winnipeg", ZoneId.of("America/Winnipeg"), "Canada", "YWG");
         allLocations.add(winnipeg);

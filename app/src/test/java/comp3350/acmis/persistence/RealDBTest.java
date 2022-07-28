@@ -29,13 +29,14 @@ public class RealDBTest {
 
     @Before
     public void setUp() {
+        Services.closeDataAccess();
         db = Services.createDataAccess();
-        db.open();
+        Services.dataAccessOpen();
     }
 
     @After
     public void tearDown() {
-        db.close();
+        Services.closeDataAccess();
     }
 
     @Test
@@ -80,26 +81,51 @@ public class RealDBTest {
 
     @Test
     public void testValidBookings() {
-        Flight flight1 = new Flight(montreal, calgary, ZonedDateTime.of(2022, 8, 6, 5, 0, 0, 0, montreal.getZoneName()), 175, 4.75, 120);
-        Flight flight2 = new Flight(montreal, calgary, ZonedDateTime.of(2022, 8, 6, 5, 0, 5, 0, montreal.getZoneName()), 175, 4.75, 120);
-        User user1 = new User("John","Braico", User.Gender.MALE,"braico","somePassword","jbraico@cs.umanitoba.ca","2041234567");
+        ArrayList<Flight> allFlights = new ArrayList<>();
+        db.getAllFlights(allFlights);
 
+
+        User user2 = db.getUserObject("bileskib");
         ArrayList<Booking> allBookings = new ArrayList<>();
+        db.getUserBookings(user2, allBookings);
 
-//        Booking booking1 = new Booking(user1, new Route(flight1),1,false);
-//        Booking booking2 = new Booking(user1, new Route(flight2),10,false);
+        for (int i = 0; i < allBookings.size(); i++) {
+            db.cancelBooking(allBookings.get(i).getBookingId());
+        }
+        db.getUserBookings(user2, allBookings);
+        Assert.assertEquals(0, allBookings.size());
 
-//        db.addBooking(booking1);
-//        db.addBooking(booking2);
-        db.getUserBookings(user1, allBookings);
+        Booking booking1 = new Booking(user2, new Route(allFlights.get(50)),1,false);
+        Booking booking2 = new Booking(user2, new Route(allFlights.get(100)),10,false);
+
+        db.addBooking(booking1);
+        db.addBooking(booking2);
+        db.getUserBookings(user2, allBookings);
 
         Assert.assertEquals(2, allBookings.size());
-//        Assert.assertTrue(booking1.equals(allBookings.get(0)));
+        System.out.println(booking1.getBooker().getFirstName());
+        System.out.println(allBookings.get(0).getBooker().getFirstName());
+
+//        Assert.assertTrue(booking1.getBooker().equals(allBookings.get(0).getBooker()));
+//
+//        Assert.assertTrue(booking1.getRouteDepart().equals(allBookings.get(0).getRouteDepart()));
+
+
+        Assert.assertTrue(booking1.equals(allBookings.get(0)));
+
+
+//        for (int i = 0; i < allBookings.size(); i++) {
+//            db.cancelBooking(allBookings.get(i).getBookingId());
+//        }
+//
+//        db.getUserBookings(user2, allBookings);
+//        Assert.assertEquals(0, allBookings.size());
+
     }
 
     @Test
     public void testNoBookings() {
-        User user2 = new User("Braden","Bileski", User.Gender.MALE,"bradenbm","somePassword","bradenbm@cs.umanitoba.ca","2041234567");
+        User user2 = new User("Prahalad","Iyer", User.Gender.MALE,"iverp","somePassword","email@example.com","2041234567");
         ArrayList<Booking> allBookings = new ArrayList<>();
 
         db.getUserBookings(user2, allBookings);

@@ -28,6 +28,10 @@ public class StubDBTest {
     private Location calgary = new Location("Calgary", ZoneId.of("America/Edmonton"), "Canada", "YYC");
     private Location montreal = new Location("Montreal", ZoneId.of("America/Montreal"), "Canada", "YUL");
 
+    private ArrayList<Flight> allFlights = new ArrayList<>();
+    private ArrayList<Booking> allBookings = new ArrayList<>();
+
+
     @Before
     public void setUp() {
         db = Services.createDataAccess(new DataAccessStub());
@@ -81,22 +85,27 @@ public class StubDBTest {
 
     @Test
     public void testValidBookings() {
-        Location montreal = new Location("Montreal", ZoneId.of("America/Montreal"), "Canada", "YUL");
-        Location calgary = new Location("Calgary", ZoneId.of("America/Edmonton"), "Canada", "YYC");
-        Flight flight1 = new Flight(montreal, calgary, ZonedDateTime.of(2022, 8, 6, 5, 0, 0, 0, montreal.getZoneName()), 175, 4.75, 120);
-        Flight flight2 = new Flight(montreal, calgary, ZonedDateTime.of(2022, 8, 6, 5, 0, 5, 0, montreal.getZoneName()), 175, 4.75, 120);
-        User user1 = new User("John","Braico", User.Gender.MALE,"braico","somePassword","jbraico@cs.umanitoba.ca","2041234567");
+        User user1 = db.getUserObject("bileskib");
+        db.getUserBookings(user1, allBookings);
+        db.getAllFlights(allFlights);
 
-        ArrayList<Booking> allBookings = new ArrayList<>();
+        for (int i = 0; i < allBookings.size(); i++) {
+            db.cancelBooking(allBookings.get(i).getBookingId());
+        }
+        db.getUserBookings(user1, allBookings);
+        Assert.assertEquals(0, allBookings.size());
 
-        Booking booking1 = new Booking(user1, new Route(flight1),1,true);
-        Booking booking2 = new Booking(user1, new Route(flight2),10,true);
+        Booking booking1 = new Booking(user1, new Route(allFlights.get(50)),1,false);
+        Booking booking2 = new Booking(user1, new Route(allFlights.get(100)),10,false);
 
         db.addBooking(booking1);
         db.addBooking(booking2);
         db.getUserBookings(user1, allBookings);
 
         Assert.assertEquals(2, allBookings.size());
+        System.out.println(booking1.getBooker().getFirstName());
+        System.out.println(allBookings.get(0).getBooker().getFirstName());
+
         Assert.assertTrue(booking1.equals(allBookings.get(0)));
     }
 
@@ -107,5 +116,37 @@ public class StubDBTest {
 
         db.getUserBookings(user2, allBookings);
         Assert.assertEquals(0, allBookings.size());
+    }
+
+    @Test
+    public void testCancelSpecific() {
+        User user1 = db.getUserObject("bileskib");
+        db.getAllFlights(allFlights);
+
+        db.getUserBookings(user1, allBookings);
+        for (int i = 0; i < allBookings.size(); i++) {
+            db.cancelBooking(allBookings.get(i).getBookingId());
+        }
+        db.getUserBookings(user1, allBookings);
+        Assert.assertEquals(0, allBookings.size());
+
+        Booking booking1 = new Booking(user1, new Route(allFlights.get(50)),1,false);
+        Booking booking2 = new Booking(user1, new Route(allFlights.get(100)),2,false);
+        Booking booking3 = new Booking(user1, new Route(allFlights.get(150)),3,false);
+        db.addBooking(booking1);
+        db.addBooking(booking2);
+        db.addBooking(booking3);
+        db.getUserBookings(user1, allBookings);
+
+        Assert.assertEquals(3, allBookings.size());
+
+        db.cancelBooking(booking2.getBookingId());
+        db.getUserBookings(user1, allBookings);
+
+
+        Assert.assertEquals(2, allBookings.size());
+
+
+
     }
 }
