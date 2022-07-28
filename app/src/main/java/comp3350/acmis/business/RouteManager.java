@@ -4,6 +4,8 @@ package comp3350.acmis.business;
 import org.threeten.bp.ZonedDateTime;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import comp3350.acmis.application.Services;
 import comp3350.acmis.objects.Flight;
@@ -101,7 +103,7 @@ public class RouteManager {
                 do {
                     // Iterate until only one loc remains. Logic is that get flight from index 0 to index 1. Then delete index 0.
                     // Do this until list size is one. This should give us all connecting flights.
-                    dataAccess.getFlights(locList.get(0), locList.get(1), checkDateTime, flightList);
+                    getFlightFromDB(locList.get(0), locList.get(1), checkDateTime, flightList);
                     if (!flightList.isEmpty() && !noConnectedFlight) {
                         boolean added = false;
                         for (int j = 0; j < flightList.size() && !added; j++) {
@@ -130,5 +132,20 @@ public class RouteManager {
                     allConnectedRoutes.add(addThis);
             }
         }
+    }
+
+    //these are private because we dont need them anywhere else
+    private void getFlightFromDB(Location dept,Location dest,ZonedDateTime dateTime,ArrayList<Flight> flightList){
+        dataAccess.getFlights(dept,dest,dateTime,flightList);
+        sortFlights(flightList);
+    }
+
+    private void sortFlights(ArrayList<Flight> flightList){
+        Collections.sort(flightList, new Comparator<Flight>() {
+            @Override
+            public int compare(Flight f1, Flight f2) {
+                return (f1.getDepartureDateTime().isBefore(f2.getDepartureDateTime()) ? -1 : 1);
+            }
+        });
     }
 }
