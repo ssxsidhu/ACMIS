@@ -72,7 +72,7 @@ public class AccessBookingsTest {
 
         //user found in the database
         testConn = new AccessBookings("braico");
-        assertEquals("no bookings found", testConn.getMyBookings(new ArrayList<>()));
+        assertEquals("No user found", testConn.getMyBookings(new ArrayList<>()));
     }
 
     @Test
