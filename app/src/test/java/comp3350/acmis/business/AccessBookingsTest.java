@@ -12,12 +12,10 @@ import java.util.ArrayList;
 import comp3350.acmis.application.Main;
 import comp3350.acmis.application.Services;
 import comp3350.acmis.objects.Booking;
-import comp3350.acmis.persistence.DataAccess;
 
 public class AccessBookingsTest {
 
     private AccessBookings testConn;
-    private DataAccess dataAccess;
 
     @Before
     public void setUp() {
@@ -31,7 +29,6 @@ public class AccessBookingsTest {
     @After
     public void tearDown() {
         testConn = null;
-        dataAccess = null;
         Main.shutDown();
     }
 

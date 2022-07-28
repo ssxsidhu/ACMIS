@@ -40,8 +40,8 @@ public class Route implements Serializable {
         return route.isEmpty();
     }
 
-    public int getRouteSize(){
-        return  route.size();
+    public int getRouteSize() {
+        return route.size();
     }
 
     // METHOD MEANT TO REPLACE getRoute()

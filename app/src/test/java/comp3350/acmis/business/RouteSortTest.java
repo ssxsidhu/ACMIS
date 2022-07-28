@@ -1,3 +1,7 @@
+// This Test Class Does NOT Check for individual Comparators that were used to implement
+// the SortRoutes Class. This is because they are private and static. Also, if this class works,
+// The the comparators also worked.
+
 package comp3350.acmis.business;
 
 import org.junit.Assert;
@@ -46,6 +50,8 @@ public class RouteSortTest {
     @Test
     public void testLowestPrice() {
 
+        reset();
+        resetList();
         test.lowestPrice(testRoutes);
 
         // R1 should be at first place since it is lowest price. R5 should be last because its max price
