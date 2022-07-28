@@ -52,7 +52,6 @@ public class SortRoutes {
         return null;
     }
 
-
     private static class RouteCostCompare implements Comparator<Route> {
 
         @Override

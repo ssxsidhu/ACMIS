@@ -19,8 +19,6 @@ import comp3350.acmis.objects.User;
 
 public class BookingManagerTest {
 
-    public static BookingManager test;
-
     private static Location loc1;
     private static Location loc2;
     private static Location loc3;
@@ -32,22 +30,22 @@ public class BookingManagerTest {
     ArrayList<Location> allLocations;
     ArrayList<Booking> allBookings;
 
-    private static User defaultU, user1, user2, user3;
+    private static User user1;
+    private static User user2;
+    private static User user3;
 
     private static Flight flight1;
     private static Flight flight2;
     private static Flight flight3;
 
-    private static ArrayList<Route> temp;
-
-    private final static String NO_FLIGHTS = "no_flights_found";
+    private static BookingManager test;
 
     @Before
     public void setup() {
         Main.startUp();
         System.out.println("Create Test Environment. Creating Test Data Base and Booking Manager...");
 
-//        test = new BookingManager("DataAccessStubTest.java");
+        test = new BookingManager();
 
         allUsers = new ArrayList<>();
         allFlights = new ArrayList<>();

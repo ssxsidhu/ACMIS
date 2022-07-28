@@ -16,7 +16,7 @@ public class AdjacencyListTest extends TestCase {
 
     Location testLoc1, testLoc2, testLoc3, testLoc4, testLoc5;
     Flight flight1, flight2, flight3, flight4, flight5;
-    AdjacencyList testThis, testThis2;
+    AdjacencyList testThis;
 
     @Before
     public void setup() {

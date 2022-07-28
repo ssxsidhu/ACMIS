@@ -1,3 +1,7 @@
+// This Test Class Does NOT Check for individual Comparators that were used to implement
+// the SortRoutes Class. This is because they are private and static. Also, if this class works,
+// The the comparators also worked.
+
 package comp3350.acmis.business;
 
 import org.junit.Assert;

@@ -56,7 +56,7 @@ public class OrderSummary extends AppCompatActivity {
         findViewById(R.id.dotted_bottom_line).setVisibility(View.INVISIBLE);
         findViewById(R.id.list_search_results).setVisibility(View.VISIBLE);
 
-        routeLocationTitle.setText(String.format(Locale.CANADA, "From %s %s", journeyDetails.getConnectSource().getCity(),journeyDetails.getConnectSource().getAirport()));
+        routeLocationTitle.setText(String.format(Locale.CANADA, "From %s %s", journeyDetails.getConnectSource().getCity(), journeyDetails.getConnectSource().getAirport()));
 
         journeyDetails.setConnectFlightPos(journeyDetails.getNumStops());
         String tripText;
@@ -88,9 +88,9 @@ public class OrderSummary extends AppCompatActivity {
                 else
                     result = bookingManager.createBooking("braico", orderRoute.get(0), orderRoute.get(1), numPassengers);
                 if (result != null) {
-                    Messages.makeToast(getApplicationContext(),result);
+                    Messages.makeToast(getApplicationContext(), result);
                 } else {
-                    Messages.makeToast(getApplicationContext(),"Flight Booked");
+                    Messages.makeToast(getApplicationContext(), "Flight Booked");
                     Intent i1 = new Intent(getBaseContext(), MainActivity.class);
                     startActivity(i1);
                 }
