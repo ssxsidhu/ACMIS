@@ -12,6 +12,7 @@ GRANT DBA TO SA
 SET WRITE_DELAY 1
 SET SCHEMA PUBLIC
 INSERT INTO USERS VALUES(0, 'John', 'Braico', 'Male', 'braico', 'jbraico@cs.umanitoba.ca', 2041234567);
+INSERT INTO USERS VALUES(1, 'Braden', 'Bileski', 'Male', 'bileskib', 'bileskib@myumanitoba.ca', 2048887777);
 INSERT INTO LOCATIONS VALUES(0, 'Winnipeg', 'Canada', 'YWG', 'America/Winnipeg');
 INSERT INTO LOCATIONS VALUES(1, 'Vancouver', 'Canada', 'YVR', 'America/Vancouver');
 INSERT INTO LOCATIONS VALUES(2, 'Toronto', 'Canada', 'YYZ', 'America/Toronto');

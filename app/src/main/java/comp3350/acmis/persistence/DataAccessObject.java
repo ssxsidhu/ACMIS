@@ -227,9 +227,9 @@ public class DataAccessObject implements DataAccess {
                 email = rs1.getString("email");
                 phoneNumber = rs1.getString("phoneNumber");
 
-                if (gender.equals("MALE")) {
+                if (gender.equals("Male")) {
                     finalGender = User.Gender.MALE;
-                } else if (gender.equals("FEMALE")) {
+                } else if (gender.equals("Female")) {
                     finalGender = User.Gender.FEMALE;
                 } else {
                     finalGender = User.Gender.OTHER;

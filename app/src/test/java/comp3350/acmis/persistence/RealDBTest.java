@@ -16,8 +16,7 @@ import comp3350.acmis.objects.Location;
 import comp3350.acmis.objects.Route;
 import comp3350.acmis.objects.User;
 
-
-public class StubDBTest {
+public class RealDBTest {
 
     private DataAccess db;
 
@@ -30,7 +29,7 @@ public class StubDBTest {
 
     @Before
     public void setUp() {
-        db = Services.createDataAccess(new DataAccessStub());
+        db = Services.createDataAccess();
         db.open();
     }
 
@@ -81,23 +80,21 @@ public class StubDBTest {
 
     @Test
     public void testValidBookings() {
-        Location montreal = new Location("Montreal", ZoneId.of("America/Montreal"), "Canada", "YUL");
-        Location calgary = new Location("Calgary", ZoneId.of("America/Edmonton"), "Canada", "YYC");
         Flight flight1 = new Flight(montreal, calgary, ZonedDateTime.of(2022, 8, 6, 5, 0, 0, 0, montreal.getZoneName()), 175, 4.75, 120);
         Flight flight2 = new Flight(montreal, calgary, ZonedDateTime.of(2022, 8, 6, 5, 0, 5, 0, montreal.getZoneName()), 175, 4.75, 120);
         User user1 = new User("John","Braico", User.Gender.MALE,"braico","somePassword","jbraico@cs.umanitoba.ca","2041234567");
 
         ArrayList<Booking> allBookings = new ArrayList<>();
 
-        Booking booking1 = new Booking(user1, new Route(flight1),1,true);
-        Booking booking2 = new Booking(user1, new Route(flight2),10,true);
+//        Booking booking1 = new Booking(user1, new Route(flight1),1,false);
+//        Booking booking2 = new Booking(user1, new Route(flight2),10,false);
 
-        db.addBooking(booking1);
-        db.addBooking(booking2);
+//        db.addBooking(booking1);
+//        db.addBooking(booking2);
         db.getUserBookings(user1, allBookings);
 
         Assert.assertEquals(2, allBookings.size());
-        Assert.assertTrue(booking1.equals(allBookings.get(0)));
+//        Assert.assertTrue(booking1.equals(allBookings.get(0)));
     }
 
     @Test
