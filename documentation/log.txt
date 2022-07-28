@@ -242,4 +242,10 @@ July 22nd, 2022 : 3 hours, Prahalad
 July 24th, 2022 : 5 hours, Vrushil 
     - Wrote integration tests, businesspersistence seam & businessHsqldb tests.
     - solved the booking id bug.
-    - reformatted all the code in the integration test.
+    - reformatted all the code in the integration test. 
+July 28th, 2022 : 8 hours, Vrushil, Braden, Sahilpreet and Prahalad
+    - Final Review Process
+    - Remove all Dead Code
+    - Reformat all code
+    - Write remaining tests
+   

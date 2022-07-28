@@ -1,4 +1,4 @@
-package comp3350.acmis.presentation;
+package comp3350.acmis.acceptance;
 
 
 import static androidx.test.espresso.Espresso.onData;
@@ -22,7 +22,6 @@ import android.view.ViewParent;
 
 import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
-import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.matcher.RootMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -37,17 +36,26 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import comp3350.acmis.R;
+import comp3350.acmis.application.Services;
+import comp3350.acmis.persistence.DataAccessStub;
+import comp3350.acmis.presentation.FrontPageActivity;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class OneWayFlight {
+public class AddNumPassengerTest {
 
     @Rule
     public ActivityScenarioRule<FrontPageActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(FrontPageActivity.class);
 
     @Test
-    public void oneWayFlight() {
+    public void changeNumPassengerTest() {
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+
+        Services.createDataAccess(new DataAccessStub());
+        Services.dataAccessOpen();
 
         try {
             Thread.sleep(2000);
@@ -94,7 +102,7 @@ public class OneWayFlight {
                         isDisplayed()));
         materialButton.perform(click());
 
-        onView(withContentDescription("Thursday, July 28, 2022"))
+        onView(withContentDescription("Tuesday, August 9, 2022"))
                 .inRoot(RootMatchers.isDialog())
                 .perform(click());
         onView(withText("OK"))
@@ -102,6 +110,46 @@ public class OneWayFlight {
                 .perform(click());
 
         ViewInteraction materialButton3 = onView(
+                allOf(withId(R.id.add_button),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.book_details),
+                                        3),
+                                2),
+                        isDisplayed()));
+        materialButton3.perform(click());
+
+        ViewInteraction materialButton4 = onView(
+                allOf(withId(R.id.add_button),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.book_details),
+                                        3),
+                                2),
+                        isDisplayed()));
+        materialButton4.perform(click());
+
+        ViewInteraction materialButton5 = onView(
+                allOf(withId(R.id.add_button),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.book_details),
+                                        3),
+                                2),
+                        isDisplayed()));
+        materialButton5.perform(click());
+
+        ViewInteraction materialButton6 = onView(
+                allOf(withId(R.id.add_button),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.book_details),
+                                        3),
+                                2),
+                        isDisplayed()));
+        materialButton6.perform(click());
+
+        ViewInteraction materialButton7 = onView(
                 allOf(withId(R.id.search_flights_button), withText("Search Flights"),
                         childAtPosition(
                                 allOf(withId(R.id.book_details),
@@ -110,8 +158,11 @@ public class OneWayFlight {
                                                 0)),
                                 4),
                         isDisplayed()));
-        materialButton3.perform(click());
+        materialButton7.perform(click());
 
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
             Thread.sleep(700);
         } catch (InterruptedException e) {
@@ -123,16 +174,18 @@ public class OneWayFlight {
                         childAtPosition(
                                 withId(R.id.header_layout_results),
                                 5)));
-        recyclerView.perform(actionOnItemAtPosition(0, click()));
+        recyclerView.perform(actionOnItemAtPosition(1, click()));
 
-
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
             Thread.sleep(700);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        ViewInteraction materialButton4 = onView(
+        ViewInteraction materialButton8 = onView(
                 allOf(withId(R.id.details_continue), withText("Continue"),
                         childAtPosition(
                                 allOf(withId(R.id.route_details_continue_layout),
@@ -141,15 +194,18 @@ public class OneWayFlight {
                                                 3)),
                                 1),
                         isDisplayed()));
-        materialButton4.perform(click());
+        materialButton8.perform(click());
 
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
             Thread.sleep(700);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        ViewInteraction materialButton5 = onView(
+        ViewInteraction materialButton9 = onView(
                 allOf(withId(R.id.book_button), withText("Book Flight"),
                         childAtPosition(
                                 allOf(withId(R.id.search_results),
@@ -158,8 +214,11 @@ public class OneWayFlight {
                                                 0)),
                                 2),
                         isDisplayed()));
-        materialButton5.perform(click());
+        materialButton9.perform(click());
 
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
             Thread.sleep(700);
         } catch (InterruptedException e) {
@@ -176,12 +235,6 @@ public class OneWayFlight {
                         isDisplayed()));
         bottomNavigationItemView.perform(click());
 
-        ViewInteraction linearLayout2 = onView(
-                allOf(withParent(allOf(withId(R.id.card),
-                                withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
-                        isDisplayed()));
-        linearLayout2.check(matches(isDisplayed()));
-
         ViewInteraction textView = onView(
                 allOf(withId(R.id.card_city_depart), withText("Winnipeg"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
@@ -192,13 +245,45 @@ public class OneWayFlight {
                 allOf(withId(R.id.card_city_arrive), withText("Regina"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView2.check(matches(withText("Winnipeg")));
+        textView2.check(matches(withText("Regina")));
 
-        ViewInteraction linearLayout3 = onView(
-                allOf(withParent(allOf(withId(R.id.result_card),
-                                withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
+        ViewInteraction textView3 = onView(
+                allOf(withId(R.id.route_date), withText("   Tue, Aug 9, 2022"),
+                        withParent(withParent(withId(R.id.result_card))),
                         isDisplayed()));
-        linearLayout3.check(matches(isDisplayed()));
+        textView3.check(matches(withText("   Tue, Aug 9, 2022")));
+
+        ViewInteraction textView4 = onView(
+                allOf(withId(R.id.card_num_passengers), withText("5 "),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
+                        isDisplayed()));
+        textView4.check(matches(withText("5 ")));
+
+        ViewInteraction recyclerView2 = onView(
+                allOf(withId(R.id.card_view_list),
+                        childAtPosition(
+                                withClassName(is("android.widget.LinearLayout")),
+                                2)));
+        recyclerView2.perform(actionOnItemAtPosition(0, click()));
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatImageButton = onView(
+                allOf(childAtPosition(
+                                allOf(withId(R.id.details_top_app_bar),
+                                        childAtPosition(
+                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        appCompatImageButton.perform(click());
     }
 
     private static Matcher<View> childAtPosition(

@@ -19,6 +19,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZoneOffset;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -87,8 +88,8 @@ public class BookDetailsFragment extends Fragment {
     }
 
     private void pickDepartDate(View view) {
-        long today = MaterialDatePicker.todayInUtcMilliseconds();
-        MaterialDatePicker<Long> materialDatePicker = setCalender("Select Departure Date", today);
+        long startDay = LocalDate.of(2022,8,1).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli();
+        MaterialDatePicker<Long> materialDatePicker = setCalender("Select Departure Date", startDay);
         pickDepart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
