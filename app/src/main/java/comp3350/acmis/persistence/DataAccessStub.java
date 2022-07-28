@@ -144,12 +144,7 @@ public class DataAccessStub implements DataAccess {
             }
         }
 
-        Collections.sort(resultList, new Comparator<Flight>() {
-            @Override
-            public int compare(Flight f1, Flight f2) {
-                return (f1.getDepartureDateTime().isBefore(f2.getDepartureDateTime()) ? -1 : 1);
-            }
-        });
+
 
         return null;
     }
