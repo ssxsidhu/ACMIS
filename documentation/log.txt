@@ -172,14 +172,16 @@ July 13th, 2022 : 3.5 hours, Prahalad, Sahilpreet
     - Override equals and toString in object classes.
     - Added Flights and Restructred Presentation Package (Sahil)
     - RouteManager successfully stores Routes now        (Sahil)
-    - Added some animation when app starts	         (Sahil)
+    - Added some animation when app starts	         (Sahil)    
     
 July 14th, 2022 : 3 hours, Prahalad
     - Deep Clean part 2. Done samething in Business Classes and commented code
     - Wrote only necessary constructors
     - Reformatted Objects and Business Package
     - Added Contains method in User Class
-
+July 15th, 2022 : 4 hours, Vrushil
+    - Learnt how to use espresso and how to record tests
+    - Created the acceptance test scripts
 July 17th, 2022 : 4.5 hours, Prahalad
     - Rewrote BookingManager Class as BookingManager2 for implementation testing of different versions
     - Added Constructors and Getters and Setters for Booking Object
@@ -190,9 +192,21 @@ July 18th, 2022 : 3.5 hours, Sahilpreet
     - Debugging and Code Breaking Changes
     - Sort Display
     
+July 19th, 2022 : 4 hours, Vrushil
+    - Cleared the code in the Access classes.
+    - Reformated the code in the access classes.
+    - added testing for the Accesslocation and AccessRoutes
+    
 July 20th, 2022 : 3.5 hours, Prahalad
     - RolledBack all changes made in previous commits. Rollback above log primarily.
     
 July 22nd, 2022 : 3 hours, Prahalad
     - Implemented SortRoutes using Comparator Interface. 
     - Write Skeletal Test Classes for SortRoute, RouteManager.
+
+July 24th, 2022 : 5 hours, Vrushil 
+    - Wrote integration tests, businesspersistence seam & businessHsqldb tests.
+    - solved the booking id bug.
+    - reformatted all the code in the integration test.
+
+
