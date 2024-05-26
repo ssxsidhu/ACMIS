@@ -71,8 +71,10 @@ Users will be able to book round flights. Users will also be able to book for a 
 **New Feature Added:** Added connecting flights. Thus is a use wants to fly A->C, they are now also shown flights A->B->C. Added cancel booking feature. Users can cancel their already booked flights by pressing on the specific flight in the Manage Flights tab, then press Cancel Booking.
 
 ---
-## Testing Information.
+
+## Testing Information
 The testing is divided into unit tests, integration tests and acceptance tests. Every package has its own test suite that allows the marker to run tests for individual layers of the system. A file called "RunUnitTests" can be used to run all the unit tests for single components as well as accessMehthods. "RunIntegrationTests" can be used to run the tests for the different seams.
+
 ---
 
 ## Android Versions
