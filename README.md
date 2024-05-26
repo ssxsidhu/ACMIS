@@ -56,10 +56,6 @@ Sidhu, Sahilpreet Singh
 
 ---
 
-## Private Github Repo:
-* https://github.com/ssxsidhu/ACMIS
-
----
 ## log.txt
 * Located in: /documentation/log.txt
 
