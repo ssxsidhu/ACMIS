@@ -5,10 +5,8 @@ Asif, Mahamud Hasan
 Iyer, Prahalad  
 Patel, Vrushil Kiritkumar  
 Sidhu, Sahilpreet Singh  
-
----
-
-[![Presentation](https://img.youtube.com/vi/Qx4PtDHEiw0/0.jpg)](https://youtu.be/Qx4PtDHEiw0)
+## Presentation
+[![Presentation](./documentation/presentation-thumbnail.png)](https://youtu.be/Qx4PtDHEiw0)
 
 
 ## Source Code Files:
