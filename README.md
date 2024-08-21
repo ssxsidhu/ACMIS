@@ -8,6 +8,9 @@ Sidhu, Sahilpreet Singh
 
 ---
 
+[![Presentation](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://youtu.be/Qx4PtDHEiw0)
+
+
 ## Source Code Files:
    ### comp3350.acmis
 
