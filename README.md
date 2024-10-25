@@ -6,7 +6,7 @@ Iyer, Prahalad
 Patel, Vrushil Kiritkumar  
 Sidhu, Sahilpreet Singh  
 ## Presentation
-[![Presentation](./documentation/presentation-thumbnail-2.png)](https://youtu.be/Qx4PtDHEiw0)
+[![Presentation](./documentation/presentation-thumbnail-2.png)]([https://youtu.be/Qx4PtDHEiw0](https://youtu.be/iZRiVIMKmls))
 
 
 ## Source Code Files:
